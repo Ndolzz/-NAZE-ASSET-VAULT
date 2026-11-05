@@ -1,11 +1,18 @@
 /**
- * Narration synthesis.
- * Supports CI demo synthesis via espeak-ng: each CC cue is synthesized
- * separately and measured, so caption timing follows actual speech exactly.
- * Production TTS audio can replace this stage (see docs/PIPELINE.md).
+ * Narration engines and narration-track assembly.
+ *
+ * Engines:
+ *   - "espeak-ng": CI demo synthesis, one audio file per CC cue, measured with
+ *     ffprobe, so caption timing follows actual speech exactly.
+ *   - "file": a user-supplied voice recording (per project). Cue durations are
+ *     estimated from the narration text, so CC sync is approximate; the
+ *     recording plays continuously in one piece.
+ *
+ * In both cases the final narration track is assembled at the exact timeline
+ * positions of the cues, so narration, burned-in CC, and SFX stay aligned even
+ * across scene boundaries (scene padding becomes silence, never drift).
  */
 import * as fs from "node:fs";
-import * as path from "node:path";
 import { run, probeDuration } from "../render/encoder";
 
 export interface NarrationConfig {
@@ -14,6 +21,7 @@ export interface NarrationConfig {
   voice?: string;
   speed?: number;
   pitch?: number;
+  /** Repository-relative path to the manual voice recording (engine "file"). */
   file?: string;
 }
 
@@ -26,6 +34,15 @@ export interface SynthesisResult {
   cues: SynthesizedCue[];
 }
 
+/** One audio block placed at an absolute timeline position. */
+export interface TrackSegment {
+  file: string;
+  /** Absolute start time on the video timeline (seconds). */
+  at: number;
+  /** Measured audio duration (seconds). */
+  duration: number;
+}
+
 export async function synthesizeCues(
   cueTexts: string[],
   config: NarrationConfig,
@@ -35,11 +52,13 @@ export async function synthesizeCues(
   const results: SynthesizedCue[] = [];
 
   if (config.engine !== "espeak-ng") {
-    throw new Error(`Narration engine "${(config as any).engine}" is not supported. Use "espeak-ng" (CI demo) or provide narration audio files named cue_0000.wav in the scene workdir.`);
+    throw new Error(
+      `Narration engine "${(config as { engine?: string }).engine}" is not supported here. Use "file" with a manual recording, or "espeak-ng" for CI demo synthesis.`
+    );
   }
 
   for (let i = 0; i < cueTexts.length; i++) {
-    const wav = path.join(workDir, `cue_${String(i).padStart(4, "0")}.wav`);
+    const wav = `${workDir}/cue_${String(i).padStart(4, "0")}.wav`;
     const args = [
       "-v",
       config.voice ?? config.language ?? "en",
@@ -61,19 +80,60 @@ export async function synthesizeCues(
   return { cues: results };
 }
 
-/** Concatenates cue wav files into narration.wav (48 kHz stereo). */
-export async function concatenateCues(cues: SynthesizedCue[], outFile: string): Promise<number> {
-  const listFile = outFile + ".concat.txt";
-  const lines = cues.map((c) => `file '${c.wavFile.replace(/'/g, "'\\''")}'`).join("\n");
-  fs.writeFileSync(listFile, lines, "utf-8");
+/**
+ * Relative speech weight of one cue text (letters + constant, punctuation
+ * adds a pause). Used to estimate cue durations for the manual-voice engine.
+ */
+export function cueWeight(text: string): number {
+  const letters = text.replace(/[^\p{L}\p{N}]/gu, "").length + 2;
+  const pause = /[.!?]$/.test(text.trim()) ? 6 : 0;
+  return letters + pause;
+}
+
+/**
+ * Concatenates audio segments into one narration track, inserting silence for
+ * the gaps between segment positions so the track matches the video timeline.
+ * Output: 48 kHz stereo PCM WAV.
+ */
+export async function assembleNarrationTrack(segments: TrackSegment[], outFile: string): Promise<string> {
+  if (segments.length === 0) {
+    throw new Error("No narration segments to assemble.");
+  }
+  const sorted = [...segments].sort((a, b) => a.at - b.at);
+
+  const inputs: string[] = [];
+  const chain: string[] = [];
+  const labels: string[] = [];
+  let cursor = 0;
+  let inputIndex = 0;
+
+  for (const seg of sorted) {
+    const gap = seg.at - cursor;
+    if (gap > 0.001) {
+      inputs.push("-f", "lavfi", "-t", gap.toFixed(3), "-i", "anullsrc=channel_layout=stereo:sample_rate=48000");
+      chain.push(`[${inputIndex}:a]anull[a${inputIndex}]`);
+      labels.push(`[a${inputIndex}]`);
+      inputIndex++;
+    } else if (gap < -0.001) {
+      throw new Error(`Narration segments overlap at t=${seg.at.toFixed(3)}s.`);
+    }
+    inputs.push("-i", seg.file);
+    chain.push(`[${inputIndex}:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=stereo[a${inputIndex}]`);
+    labels.push(`[a${inputIndex}]`);
+    inputIndex++;
+    cursor = seg.at + seg.duration;
+  }
+
+  const filterComplex =
+    chain.join(";") + ";" + labels.join("") + `concat=n=${labels.length}:v=0:a=1[aout]`;
+
   const { code, stderr } = await run("ffmpeg", [
     "-y",
-    "-f",
-    "concat",
-    "-safe",
-    "0",
-    "-i",
-    listFile,
+    ...inputs,
+    "-filter_complex",
+    filterComplex,
+    "-map",
+    "[aout]",
     "-ar",
     "48000",
     "-ac",
@@ -82,6 +142,8 @@ export async function concatenateCues(cues: SynthesizedCue[], outFile: string): 
     "pcm_s16le",
     outFile,
   ]);
-  if (code !== 0) throw new Error(`Cue concatenation failed: ${stderr.trim()}`);
-  return probeDuration(outFile);
+  if (code !== 0) {
+    throw new Error(`Narration track assembly failed: ${stderr.split("\n").slice(-6).join("\n")}`);
+  }
+  return outFile;
 }

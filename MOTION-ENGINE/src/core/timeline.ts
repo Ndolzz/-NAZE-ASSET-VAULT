@@ -56,15 +56,19 @@ export function planSceneCues(scenes: SceneDef[]): SceneCuePlan[] {
 }
 
 /**
- * Assembles the final timeline from per-scene measured cue durations.
- * Adds a short tail pad per scene so scenes breathe before the transition.
+ * Assembles the final timeline from per-scene cue durations.
+ * tailPad adds breathing room after each scene's last cue; leadPad offsets the
+ * very first cue. endPad appends silent time at the end of the video (used by
+ * the manual-voice engine, where cues run contiguously and the video needs an
+ * outro after the last word).
  */
 export function buildTimeline(
   scenes: SceneDef[],
   cueDurations: Map<string, number[]>,
   fps: number,
   tailPad = 0.35,
-  leadPad = 0.2
+  leadPad = 0.2,
+  endPad = 0
 ): Timeline {
   const timings: SceneTiming[] = [];
   const allCues: CaptionCue[] = [];
@@ -101,7 +105,7 @@ export function buildTimeline(
     cursor = end;
   });
 
-  const duration = Math.max(tailPad, cursor);
+  const duration = Math.max(tailPad, cursor) + endPad;
   return {
     scenes: timings,
     cues: allCues,

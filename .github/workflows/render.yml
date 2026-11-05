@@ -33,7 +33,7 @@ concurrency:
 
 jobs:
   render:
-    name: Render ${{ github.event_name == 'workflow_dispatch' && inputs.project || 'STYLE-SHOWCASE' }}
+    name: Render NAZE
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -59,11 +59,15 @@ jobs:
       - name: Tentukan proyek
         id: cfg
         run: |
-          PROJECT="${{ github.event_name == 'workflow_dispatch' && inputs.project || 'STYLE-SHOWCASE' }}"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PROJECTS="${{ inputs.project }}"
+          else
+            PROJECTS="STYLE-SHOWCASE DARK-WEB"
+          fi
           PROFILE="${{ github.event_name == 'workflow_dispatch' && inputs.profile || 'vertical-1080' }}"
-          echo "project=$PROJECT" >> "$GITHUB_OUTPUT"
+          echo "projects=$PROJECTS" >> "$GITHUB_OUTPUT"
           echo "profile=$PROFILE" >> "$GITHUB_OUTPUT"
-          echo "Proyek: $PROJECT | Profil: $PROFILE"
+          echo "Proyek: $PROJECTS | Profil: $PROFILE"
 
       - name: Render video
         working-directory: MOTION-ENGINE
@@ -72,25 +76,33 @@ jobs:
         run: |
           set -o pipefail
           echo "=== NAZE render mulai ==="
-          npx tsx src/cli.ts render "../PROJECTS/${{ steps.cfg.outputs.project }}" \
-            --out "${{ github.workspace }}/dist/${{ steps.cfg.outputs.project }}" \
-            --profile "${{ steps.cfg.outputs.profile }}" 2>&1 | tee "${{ github.workspace }}/render-output.log"
+          for PROJECT in ${{ steps.cfg.outputs.projects }}; do
+            echo "--- Render proyek: $PROJECT ---"
+            npx tsx src/cli.ts render "../PROJECTS/$PROJECT" \
+              --out "${{ github.workspace }}/dist/$PROJECT" \
+              --profile "${{ steps.cfg.outputs.profile }}" 2>&1 | tee "${{ github.workspace }}/render-output-$PROJECT.log"
+          done
 
       - name: Publikasikan log render saat gagal
         if: failure()
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          LOG="${{ github.workspace }}/render-output.log"
-          if [ ! -f "$LOG" ]; then echo "Log render tidak ditemukan."; exit 0; fi
+          cd "${{ github.workspace }}"
+          LOGS=$(ls render-output-*.log 2>/dev/null || true)
+          if [ -z "$LOGS" ]; then echo "Log render tidak ditemukan."; exit 0; fi
           {
             echo "## Log render NAZE (gagal)"
             echo ""
-            echo "Baris log terakhir (maks. 150):"
+            echo "Baris log terakhir (maks. 150 per berkas):"
             echo ""
-            echo '=== LOG-START ==='
-            tail -n 150 "$LOG"
-            echo '=== LOG-END ==='
+            for LOG in $LOGS; do
+              echo "### $LOG"
+              echo ""
+              echo '=== LOG-START ==='
+              tail -n 150 "$LOG"
+              echo '=== LOG-END ==='
+            done
           } >> "$GITHUB_STEP_SUMMARY"
           BRANCH="render-logs/${{ github.run_id }}-${{ github.run_attempt }}"
           API="https://api.github.com/repos/${{ github.repository }}"
@@ -101,58 +113,64 @@ jobs:
             "$API/git/refs" \
             -d "{\"ref\":\"refs/heads/$BRANCH\",\"sha\":\"${{ github.sha }}\"}")
           echo "Buat branch $BRANCH: HTTP $HTTP (422 = sudah ada, lanjut)"
-          CONTENT=$(base64 -w0 "$LOG")
-          cat > /tmp/log-commit.json <<EOF
-          {"message":"Log render gagal: run ${{ github.run_id }} attempt ${{ github.run_attempt }}","content":"$CONTENT","branch":"$BRANCH"}
+          for LOG in $LOGS; do
+            CONTENT=$(base64 -w0 "$LOG")
+            cat > /tmp/log-commit.json <<EOF
+          {"message":"Log render gagal: $LOG (run ${{ github.run_id }} attempt ${{ github.run_attempt }})","content":"$CONTENT","branch":"$BRANCH"}
           EOF
-          curl -s -X PUT \
-            -H "$AUTH" -H "$ACCEPT" -H "Content-Type: application/json" \
-            --data @/tmp/log-commit.json \
-            "$API/contents/RENDER-LOGS/run-${{ github.run_id }}-${{ github.run_attempt }}.log" | head -c 400
-          echo ""
+            curl -s -X PUT \
+              -H "$AUTH" -H "$ACCEPT" -H "Content-Type: application/json" \
+              --data @/tmp/log-commit.json \
+              "$API/contents/RENDER-LOGS/${{ github.run_id }}-${{ github.run_attempt }}-$LOG" | head -c 300
+            echo ""
+          done
 
       - name: Unggah log render (artifact diagnostik)
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: naze-render-log-${{ github.run_id }}
-          path: render-output.log
+          path: render-output-*.log
           if-no-files-found: warn
 
       - name: Inspeksi hasil dengan ffprobe
         run: |
           set -e
-          OUT="dist/${{ steps.cfg.outputs.project }}/${{ steps.cfg.outputs.project }}.mp4"
-          echo "== ffprobe: $OUT =="
-          ffprobe -v error -select_streams v:0 \
-            -show_entries stream=codec_name,width,height,pix_fmt,r_frame_rate,avg_frame_rate \
-            -of default=noprint_wrappers=1 "$OUT"
-          ffprobe -v error -select_streams a:0 \
-            -show_entries stream=codec_name,sample_rate,channels \
-            -of default=noprint_wrappers=1 "$OUT"
+          for PROJECT in ${{ steps.cfg.outputs.projects }}; do
+            OUT="dist/$PROJECT/$PROJECT.mp4"
+            echo "== ffprobe: $OUT =="
+            ffprobe -v error -select_streams v:0 \
+              -show_entries stream=codec_name,width,height,pix_fmt,r_frame_rate,avg_frame_rate \
+              -of default=noprint_wrappers=1 "$OUT"
+            ffprobe -v error -select_streams a:0 \
+              -show_entries stream=codec_name,sample_rate,channels \
+              -of default=noprint_wrappers=1 "$OUT"
+          done
           echo "== File output =="
-          ls -la "dist/${{ steps.cfg.outputs.project }}"
+          ls -la dist/*/
 
       - name: Verifikasi laporan render
         run: |
           node -e '
           const fs = require("fs");
-          const reportPath = "dist/${{ steps.cfg.outputs.project }}/render-report.json";
-          const report = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
-          const failed = report.validation.checks.filter((c) => !c.pass);
-          if (failed.length > 0) {
-            console.error("VALIDASI GAGAL:");
-            for (const c of failed) console.error(` - ${c.id}: ${c.detail}`);
-            process.exit(1);
+          for (const project of "${{ steps.cfg.outputs.projects }}".split(/\s+/).filter(Boolean)) {
+            const reportPath = `dist/${project}/render-report.json`;
+            const report = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
+            const failed = report.validation.checks.filter((c) => !c.pass);
+            if (failed.length > 0) {
+              console.error(`VALIDASI GAGAL: ${project}`);
+              for (const c of failed) console.error(` - ${c.id}: ${c.detail}`);
+              process.exit(1);
+            }
+            console.log(`${project}: validasi lolos ${report.validation.checks.length} pemeriksaan.`);
+            console.log(`${project}: durasi ${report.duration.toFixed(2)}s | ${report.frames} frame | ${report.illustrations.total} ilustrasi | engine narasi ${report.narrationEngine}`);
           }
-          console.log(`Validasi lolos: ${report.validation.checks.length} pemeriksaan.`);
-          console.log(`Durasi: ${report.duration.toFixed(2)}s | Frame: ${report.frames} | Ilustrasi: ${report.illustrations}`);
           '
 
       - name: Unggah artifact
         uses: actions/upload-artifact@v4
         with:
-          name: naze-render-${{ steps.cfg.outputs.project }}
+          name: naze-render-all
           path: |
             dist/**
             !dist/**/work/**

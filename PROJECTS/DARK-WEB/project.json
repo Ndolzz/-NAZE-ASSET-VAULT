@@ -1,19 +1,172 @@
 {
-  "project": "DARK WEB",
-  "brand": "NAZE",
-  "tagline": "EXPLORE BEYOND THE SCREEN",
-  "resolution": {
-    "width": 720,
-    "height": 1280
+  "schema": "naze-project/2.0",
+  "name": "DARK-WEB",
+  "style": {
+    "id": "dark-web-cyber",
+    "name": "18. Dark Web Cyber",
+    "tagline": "Identitas terminal hijau-neon, estetika HUD, glitch motion, atmosfer sinematik gelap.",
+    "palette": "custom",
+    "typography": {
+      "fontFiles": ["FONTS/GOOGLE/TECHNO/orbitron.ttf"],
+      "fontFamily": "NazeOrbitron",
+      "titleCase": "upper",
+      "titleWeight": "800",
+      "bodyWeight": "600",
+      "letterSpacing": 2,
+      "titleScale": 0.8
+    },
+    "illustrationKind": "conceptual",
+    "stroke": "none",
+    "shading": "gradient",
+    "texture": "scanlines",
+    "composition": "asymmetric",
+    "animation": { "intensity": 0.9, "signature": ["glitch", "holoFlicker", "rgbShift"] },
+    "transitions": ["zoomDissolve", "panelSwipe", "wipe"],
+    "topics": ["cyber", "hacker", "teknologi", "internet", "keamanan"]
   },
-  "fps": 30,
-  "duration_target": 39,
-  "format": "mp4",
-  "video_codec": "libx264",
-  "audio_codec": "aac",
-  "aspect_ratio": "9:16",
-  "visual_style": "dark futuristic cinematic",
-  "voice": "male natural",
-  "music": "dark electronic ambient",
-  "status": "READY_TO_RENDER"
+  "palette": {
+    "id": "dark-web-brand",
+    "name": "Dark Web Brand",
+    "background": "#050505",
+    "primary": "#00FF88",
+    "secondary": "#00D9FF",
+    "accent": "#FF3B3B",
+    "text": "#F5F7FA",
+    "dark": true
+  },
+  "profile": "vertical-1080",
+  "animationIntensity": 0.9,
+  "accentWords": true,
+  "burnInCc": true,
+  "narration": {
+    "engine": "file",
+    "file": "PROJECTS/DARK-WEB/AUDIO/VOICE/narration.mp3",
+    "language": "id"
+  },
+  "scenes": [
+    {
+      "id": "scene-1",
+      "title": "INTERNET TERSEMBUNYI",
+      "narration": "Pernah membayangkan ada bagian internet yang tidak bisa kamu temukan melalui Google?",
+      "subjects": [
+        { "kind": "object", "name": "globe" },
+        { "kind": "icon", "name": "scan" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/switch_001.wav", "volume": 0.45, "at": 0.5 },
+        { "file": "AUDIO/SFX/INTERFACE/tick_002.wav", "volume": 0.4, "at": 0.8 },
+        { "file": "AUDIO/SFX/DIGITAL/laser_1.ogg", "volume": 0.35, "at": 2.3 },
+        { "file": "AUDIO/SFX/INTERFACE/glitch_001.wav", "volume": 0.5, "at": 3.7 },
+        { "file": "AUDIO/SFX/DIGITAL/phaser_up_4.ogg", "volume": 0.45, "at": 3.9 },
+        { "file": "AUDIO/SFX/IMPACT/impact_metal_heavy_000.ogg", "volume": 0.8, "at": 5.2 },
+        { "file": "AUDIO/SFX/DIGITAL/power_up_1.ogg", "volume": 0.3, "at": 5.7 }
+      ]
+    },
+    {
+      "id": "scene-2",
+      "title": "DARK WEB",
+      "narration": "Namanya Dark Web. Sebuah bagian internet yang hanya bisa diakses dengan perangkat dan konfigurasi khusus.",
+      "subjects": [
+        { "kind": "character", "mood": "shocked" },
+        { "kind": "object", "name": "phone" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/IMPACT/impact_bell_heavy_000.ogg", "volume": 0.9, "at": 0.3 },
+        { "file": "AUDIO/SFX/IMPACT/impact_punch_heavy_000.ogg", "volume": 0.7, "at": 0.35 },
+        { "file": "AUDIO/SFX/INTERFACE/glitch_002.wav", "volume": 0.4, "at": 0.5 },
+        { "file": "AUDIO/SFX/DIGITAL/high_up.ogg", "volume": 0.5, "at": 1.7 },
+        { "file": "AUDIO/SFX/INTERFACE/maximize_003.wav", "volume": 0.5, "at": 2.6 },
+        { "file": "AUDIO/SFX/DIGITAL/low_three_tone.ogg", "volume": 0.45, "at": 4.4 },
+        { "file": "AUDIO/SFX/INTERFACE/toggle_001.wav", "volume": 0.4, "at": 6.0 }
+      ]
+    },
+    {
+      "id": "scene-3",
+      "title": "ANONIMITAS",
+      "narration": "Di dalamnya, identitas pengguna bisa disamarkan.",
+      "subjects": [
+        { "kind": "object", "name": "shield" },
+        { "kind": "character", "mood": "thinking" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/drop_001.wav", "volume": 0.5, "at": 0.3 },
+        { "file": "AUDIO/SFX/DIGITAL/high_up.ogg", "volume": 0.5, "at": 1.2 },
+        { "file": "AUDIO/SFX/DIGITAL/power_up_1.ogg", "volume": 0.35, "at": 1.5 },
+        { "file": "AUDIO/SFX/INTERFACE/maximize_004.wav", "volume": 0.5, "at": 1.7 },
+        { "file": "AUDIO/SFX/INTERFACE/tick_001.wav", "volume": 0.3, "at": 1.9 },
+        { "file": "AUDIO/SFX/INTERFACE/confirmation_001.wav", "volume": 0.5, "at": 3.7 }
+      ]
+    },
+    {
+      "id": "scene-4",
+      "title": "FORUM TERSEMBUNYI",
+      "narration": "Ada forum tersembunyi, komunitas anonim, hingga aktivitas ilegal.",
+      "subjects": [
+        { "kind": "object", "name": "phone" },
+        { "kind": "character", "mood": "neutral" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/switch_002.wav", "volume": 0.5, "at": 0.3 },
+        { "file": "AUDIO/SFX/INTERFACE/click_001.wav", "volume": 0.45, "at": 0.5 },
+        { "file": "AUDIO/SFX/DIGITAL/low_three_tone.ogg", "volume": 0.45, "at": 0.8 },
+        { "file": "AUDIO/SFX/INTERFACE/maximize_005.wav", "volume": 0.45, "at": 1.0 },
+        { "file": "AUDIO/SFX/DIGITAL/laser_1.ogg", "volume": 0.35, "at": 2.7 },
+        { "file": "AUDIO/SFX/INTERFACE/error_002.wav", "volume": 0.55, "at": 4.5 },
+        { "file": "AUDIO/SFX/INTERFACE/glitch_003.wav", "volume": 0.6, "at": 4.55 },
+        { "file": "AUDIO/SFX/DIGITAL/phaser_down_1.ogg", "volume": 0.45, "at": 5.5 }
+      ]
+    },
+    {
+      "id": "scene-5",
+      "title": "BUKAN SEKADAR ILEGAL",
+      "narration": "Tapi tidak semua isi Dark Web adalah kejahatan. Jurnalis, aktivis, dan orang-orang yang menjunjung privasi menggunakannya.",
+      "subjects": [
+        { "kind": "object", "name": "lightbulb" },
+        { "kind": "character", "mood": "happy" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/IMPACT/impact_soft_heavy_000.ogg", "volume": 0.6, "at": 0.3 },
+        { "file": "AUDIO/SFX/DIGITAL/low_down.ogg", "volume": 0.4, "at": 0.6 },
+        { "file": "AUDIO/SFX/INTERFACE/pluck_001.wav", "volume": 0.5, "at": 1.0 },
+        { "file": "AUDIO/SFX/INTERFACE/maximize_006.wav", "volume": 0.45, "at": 2.0 },
+        { "file": "AUDIO/SFX/INTERFACE/pluck_002.wav", "volume": 0.5, "at": 3.4 },
+        { "file": "AUDIO/SFX/INTERFACE/confirmation_001.wav", "volume": 0.5, "at": 4.8 },
+        { "file": "AUDIO/SFX/DIGITAL/pep_sound_1.ogg", "volume": 0.5, "at": 6.2 }
+      ]
+    },
+    {
+      "id": "scene-6",
+      "title": "SISI LAIN INTERNET",
+      "narration": "Ini adalah sisi lain internet yang tidak ingin diketahui orang.",
+      "subjects": [
+        { "kind": "object", "name": "globe" },
+        { "kind": "object", "name": "shield" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/IMPACT/impact_metal_heavy_001.ogg", "volume": 0.8, "at": 0.3 },
+        { "file": "AUDIO/SFX/INTERFACE/glitch_004.wav", "volume": 0.5, "at": 0.4 },
+        { "file": "AUDIO/SFX/INTERFACE/scratch_001.wav", "volume": 0.5, "at": 1.9 },
+        { "file": "AUDIO/SFX/DIGITAL/phaser_up_6.ogg", "volume": 0.5, "at": 3.5 },
+        { "file": "AUDIO/SFX/INTERFACE/select_001.wav", "volume": 0.45, "at": 4.3 },
+        { "file": "AUDIO/SFX/DIGITAL/zap_1.ogg", "volume": 0.4, "at": 5.0 }
+      ]
+    },
+    {
+      "id": "scene-7",
+      "title": "BEYOND THE SCREEN",
+      "narration": "Dark Web bukan sekadar tempat misterius. Explore beyond the screen.",
+      "subjects": [
+        { "kind": "object", "name": "rocket" },
+        { "kind": "character", "mood": "excited" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/IMPACT/impact_bell_heavy_001.ogg", "volume": 0.85, "at": 0.2 },
+        { "file": "AUDIO/SFX/IMPACT/impact_punch_heavy_001.ogg", "volume": 0.75, "at": 0.25 },
+        { "file": "AUDIO/SFX/DIGITAL/high_up.ogg", "volume": 0.6, "at": 1.0 },
+        { "file": "AUDIO/SFX/DIGITAL/three_tone_1.ogg", "volume": 0.45, "at": 1.9 },
+        { "file": "AUDIO/SFX/DIGITAL/pep_sound_1.ogg", "volume": 0.5, "at": 3.0 },
+        { "file": "AUDIO/SFX/INTERFACE/toggle_002.wav", "volume": 0.4, "at": 3.8 }
+      ]
+    }
+  ]
 }

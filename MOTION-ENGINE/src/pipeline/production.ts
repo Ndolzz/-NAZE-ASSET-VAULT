@@ -1,6 +1,12 @@
 /**
  * Production pipeline: nine stages from policy to validation.
  * Every stage logs progress so GitHub Actions output shows clear status.
+ *
+ * Narration engines:
+ *   - "file": manual voice recording per project (user-supplied); the track
+ *     plays continuously and CC cue durations are estimated from the text.
+ *   - "espeak-ng": CI demo synthesis, per-cue measurement, exact CC sync.
+ * In both cases the narration track is assembled at final timeline positions.
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -11,7 +17,7 @@ import {
   ExplicitOverride,
 } from "../core/policy";
 import { getProfile, DEFAULT_PROFILE } from "../render/profiles";
-import { resolveStyleMix, styleCount } from "../styles/registry";
+import { resolveStyleMix, styleCount, registerStyle } from "../styles/registry";
 import { resolvePalette, isBlueDominant, Palette } from "../color/palette";
 import { StyleDef } from "../styles/types";
 import { IllustrationManager } from "../illustration/manager";
@@ -22,7 +28,13 @@ import {
   SfxEvent,
 } from "../core/timeline";
 import { splitIntoCueTexts as splitCues } from "../captions/segmenter";
-import { synthesizeCues, concatenateCues, NarrationConfig } from "../audio/narration";
+import {
+  synthesizeCues,
+  assembleNarrationTrack,
+  cueWeight,
+  NarrationConfig,
+  TrackSegment,
+} from "../audio/narration";
 import { mixAudio } from "../audio/mixer";
 import { renderVideo } from "../render/renderer";
 import { toSrt, toVtt, cueCoverageOk } from "../captions/segmenter";
@@ -32,7 +44,8 @@ import { probeDuration } from "../render/encoder";
 interface ProjectFile {
   schema: "naze-project/2.0";
   name: string;
-  style: string | string[];
+  /** Style id, [primaryId, ...accentIds], or a full custom StyleDef object. */
+  style: string | string[] | StyleDef;
   palette: string | Palette;
   profile?: string;
   animationIntensity?: number;
@@ -40,7 +53,15 @@ interface ProjectFile {
   burnInCc?: boolean;
   /** Explicit background music; absent means no music (permanent policy). */
   musicFile?: string;
-  narration: { engine: string; language?: string; voice?: string; speed?: number; pitch?: number };
+  narration: {
+    engine: string;
+    language?: string;
+    voice?: string;
+    speed?: number;
+    pitch?: number;
+    /** Repository-relative path to the manual voice recording. */
+    file?: string;
+  };
   scenes: SceneDef[];
 }
 
@@ -66,6 +87,13 @@ export interface ProductionResult {
   profileId: string;
 }
 
+/** Manual-voice engines play cues contiguously; padding lives only at the head/tail. */
+const FILE_ENGINE_LEAD_PAD = 0.25;
+const FILE_ENGINE_END_PAD = 1.2;
+/** Synthesized engines insert breathing room between scenes. */
+const SYNTH_TAIL_PAD = 0.45;
+const SYNTH_LEAD_PAD = 0.25;
+
 export async function produceVideo(opts: ProduceOptions): Promise<ProductionResult> {
   const projectDir = path.resolve(opts.projectDir);
   const outDir = path.resolve(opts.outDir);
@@ -83,7 +111,15 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
   const projectPath = path.join(projectDir, "project.json");
   if (!fs.existsSync(projectPath)) throw new Error(`project.json tidak ditemukan di ${projectDir}`);
   const project: ProjectFile = JSON.parse(fs.readFileSync(projectPath, "utf-8"));
-  const styleMix = resolveStyleMix(project.style);
+  const styleField =
+    typeof project.style === "object" && !Array.isArray(project.style)
+      ? (() => {
+          const custom = project.style as StyleDef;
+          registerStyle(custom);
+          return custom.id;
+        })()
+      : project.style;
+  const styleMix = resolveStyleMix(styleField);
   const style: StyleDef = styleMix.primary;
   const palette = resolvePalette(project.palette);
   if (isBlueDominant(palette)) {
@@ -117,36 +153,107 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
     override
   );
 
-  // Stage 4: per-scue narration synthesis; CC timing follows measured speech
-  console.log("[STAGE 4/9] Membuat narasi dan mengukur durasi tiap cue CC...");
+  // Stage 4: narration + CC cue durations (manual voice or per-cue synthesis)
   const narrConfig: NarrationConfig = {
     engine: project.narration.engine as NarrationConfig["engine"],
     language: project.narration.language,
     voice: project.narration.voice,
     speed: project.narration.speed,
     pitch: project.narration.pitch,
+    file: project.narration.file,
   };
   const cueDurations = new Map<string, number[]>();
-  const cueFiles: string[] = [];
-  for (const scene of project.scenes) {
-    const cueTexts = splitCues(scene.narration ?? "");
-    if (cueTexts.length === 0) continue;
-    const synth = await synthesizeCues(cueTexts, narrConfig, path.join(workDir, scene.id));
-    cueDurations.set(
-      scene.id,
-      synth.cues.map((c) => c.duration)
+  let trackSegments: TrackSegment[] = [];
+  let timeline0: Timeline;
+
+  if (narrConfig.engine === "file") {
+    console.log("[STAGE 4/9] Memuat narasi manual dan menaksir durasi tiap cue CC...");
+    const narrFile = narrConfig.file
+      ? path.isAbsolute(narrConfig.file)
+        ? narrConfig.file
+        : path.resolve(opts.repoRoot, narrConfig.file)
+      : path.join(projectDir, "narration.mp3");
+    if (!fs.existsSync(narrFile)) {
+      throw new Error(`Berkas narasi manual tidak ditemukan: ${narrFile}`);
+    }
+    const scenesWithoutNarration = project.scenes.filter(
+      (s) => splitCues(s.narration ?? "").length === 0
     );
-    synth.cues.forEach((_, i) =>
-      cueFiles.push(path.join(workDir, scene.id, `cue_${String(i).padStart(4, "0")}.wav`))
+    if (scenesWithoutNarration.length > 0) {
+      throw new Error(
+        `Engine narasi "file" menuntut teks narasi pada setiap scene. Scene tanpa narasi: ${scenesWithoutNarration
+          .map((s) => s.id)
+          .join(", ")}.`
+      );
+    }
+    const speechDuration = await probeDuration(narrFile);
+    let totalWeight = 0;
+    for (const scene of project.scenes) {
+      totalWeight += splitCues(scene.narration ?? "").reduce((a, t) => a + cueWeight(t), 0);
+    }
+    if (totalWeight <= 0) {
+      throw new Error("Teks narasi kosong: tidak ada cue yang bisa ditaksir.");
+    }
+    for (const scene of project.scenes) {
+      const texts = splitCues(scene.narration ?? "");
+      const weights = texts.map((t) => cueWeight(t));
+      cueDurations.set(
+        scene.id,
+        weights.map((w) => (w / totalWeight) * speechDuration)
+      );
+      console.log(
+        `[STAGE 4/9] Scene ${scene.id}: ${texts.length} cue (taksiran dari berkas suara manual).`
+      );
+    }
+    timeline0 = buildTimeline(
+      project.scenes,
+      cueDurations,
+      profile.fps,
+      0,
+      FILE_ENGINE_LEAD_PAD,
+      FILE_ENGINE_END_PAD
     );
-    console.log(`[STAGE 4/9] Scene ${scene.id}: ${cueTexts.length} cue tersintesis.`);
+    trackSegments = [{ file: narrFile, at: FILE_ENGINE_LEAD_PAD, duration: speechDuration }];
+    console.warn(
+      "[POLICY] Sinkronisasi CC pada narasi manual adalah taksiran berbasis bobot teks; pastikan teks narasi sama dengan isi rekaman."
+    );
+  } else {
+    console.log("[STAGE 4/9] Membuat narasi dan mengukur durasi tiap cue CC...");
+    const cueFiles: string[] = [];
+    const cueMeasured: number[] = [];
+    for (const scene of project.scenes) {
+      const cueTexts = splitCues(scene.narration ?? "");
+      if (cueTexts.length === 0) continue;
+      const synth = await synthesizeCues(cueTexts, narrConfig, path.join(workDir, scene.id));
+      cueDurations.set(
+        scene.id,
+        synth.cues.map((c) => c.duration)
+      );
+      synth.cues.forEach((c) => {
+        cueFiles.push(c.wavFile);
+        cueMeasured.push(c.duration);
+      });
+      console.log(`[STAGE 4/9] Scene ${scene.id}: ${cueTexts.length} cue tersintesis.`);
+    }
+    timeline0 = buildTimeline(
+      project.scenes,
+      cueDurations,
+      profile.fps,
+      SYNTH_TAIL_PAD,
+      SYNTH_LEAD_PAD
+    );
+    // Align every cue to its final timeline position; scene padding becomes silence.
+    trackSegments = timeline0.cues.map((cue, i) => ({
+      file: cueFiles[i],
+      at: cue.start,
+      duration: cueMeasured[i],
+    }));
   }
 
   // Stage 5: audio mix - narration dominant, SFX synced, no auto music
   console.log("[STAGE 5/9] Mencampur audio: narasi dominan, SFX sinkron, tanpa musik otomatis...");
   const narrationFile = path.join(workDir, "narration.wav");
-  await concatenateCues(cueFiles.map((f) => ({ wavFile: f, duration: 0 })), narrationFile);
-  const timeline0 = buildTimeline(project.scenes, cueDurations, profile.fps, 0.45, 0.25);
+  await assembleNarrationTrack(trackSegments, narrationFile);
   const sfxResolved: SfxEvent[] = timeline0.sfx.map((e) => ({
     file: path.isAbsolute(e.file) ? e.file : path.resolve(opts.repoRoot, e.file),
     volume: e.volume,
@@ -166,7 +273,7 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
   const narrationDuration = await probeDuration(mixedAudio);
 
   // Stage 6: timeline assembly
-  console.log("[STAGE 6/9] Membangun timeline scene, keyframe, dan transisi...");
+  console.log("[STAGE 6/9] Timeline scene, keyframe, dan transisi siap.");
   const timeline: Timeline = timeline0;
 
   // Stage 7: native-resolution render
@@ -225,6 +332,7 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
         policyFile,
         policyVersion: policy.policyVersion,
         explicitOverride: opts.explicitOverride ?? null,
+        narrationEngine: narrConfig.engine,
         duration,
         frames,
         illustrations: illustrationStats,
