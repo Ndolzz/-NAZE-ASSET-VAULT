@@ -72,7 +72,10 @@ ilustrasi utama.
 
 Suara produksi dikirim manual lewat chat per proyek: simpan sebagai
 `PROJECTS/<NAMA>/AUDIO/VOICE/narration.mp3`, isi `narration.file`, dan render
-ulang tanpa perubahan kode.
+ulang tanpa perubahan kode. Karena chat hanya meneruskan transkripsi (bukan
+byte audio), praktik termudah adalah mengunggah berkas MP3 langsung ke
+repositori melalui antarmuka web GitHub pada jalur tersebut; push unggahan
+tersebut otomatis memicu render ulang.
 
 ## Audio
 
@@ -86,11 +89,11 @@ eksplisit.
 
 `.github/workflows/render.yml` merender melalui `workflow_dispatch` dengan
 input `project` dan `profile`, atau otomatis saat file proyek atau engine
-berubah: pada push, seluruh proyek (STYLE-SHOWCASE dan DARK-WEB) dirender
-berurutan, masing-masing dengan ffprobe, verifikasi laporan 12 titik, dan
-log diagnostik otomatis saat gagal (ringkasan langkah, cabang
-`render-logs/<run>`, artifact log). Hasil diunggah sebagai artifact
-`naze-render-all`.
+berubah: pada push, seluruh proyek (STYLE-SHOWCASE, DARK-WEB, dan
+AI-CYBERSECURITY) dirender berurutan, masing-masing dengan ffprobe,
+verifikasi laporan 12 titik, dan log diagnostik otomatis saat gagal
+(ringkasan langkah, cabang `render-logs/<run>`, artifact log). Hasil diunggah
+sebagai artifact `naze-render-all`.
 
 ## Validasi
 

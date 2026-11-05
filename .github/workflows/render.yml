@@ -62,7 +62,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             PROJECTS="${{ inputs.project }}"
           else
-            PROJECTS="STYLE-SHOWCASE DARK-WEB"
+            PROJECTS="STYLE-SHOWCASE DARK-WEB AI-CYBERSECURITY"
           fi
           PROFILE="${{ github.event_name == 'workflow_dispatch' && inputs.profile || 'vertical-1080' }}"
           echo "projects=$PROJECTS" >> "$GITHUB_OUTPUT"
