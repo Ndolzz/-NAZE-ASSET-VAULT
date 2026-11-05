@@ -25,7 +25,7 @@ on:
       - '.github/workflows/render.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: naze-render-${{ github.ref }}
@@ -70,9 +70,54 @@ jobs:
         env:
           NAZE_REPO_ROOT: ${{ github.workspace }}
         run: |
+          set -o pipefail
+          echo "=== NAZE render mulai ==="
           npx tsx src/cli.ts render "../PROJECTS/${{ steps.cfg.outputs.project }}" \
             --out "${{ github.workspace }}/dist/${{ steps.cfg.outputs.project }}" \
-            --profile "${{ steps.cfg.outputs.profile }}"
+            --profile "${{ steps.cfg.outputs.profile }}" 2>&1 | tee "${{ github.workspace }}/render-output.log"
+
+      - name: Publikasikan log render saat gagal
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          LOG="${{ github.workspace }}/render-output.log"
+          if [ ! -f "$LOG" ]; then echo "Log render tidak ditemukan."; exit 0; fi
+          {
+            echo "## Log render NAZE (gagal)"
+            echo ""
+            echo "Baris log terakhir (maks. 150):"
+            echo ""
+            echo '=== LOG-START ==='
+            tail -n 150 "$LOG"
+            echo '=== LOG-END ==='
+          } >> "$GITHUB_STEP_SUMMARY"
+          BRANCH="render-logs/${{ github.run_id }}-${{ github.run_attempt }}"
+          API="https://api.github.com/repos/${{ github.repository }}"
+          AUTH="Authorization: Bearer ${GH_TOKEN}"
+          ACCEPT="Accept: application/vnd.github+json"
+          HTTP=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            -H "$AUTH" -H "$ACCEPT" -H "Content-Type: application/json" \
+            "$API/git/refs" \
+            -d "{\"ref\":\"refs/heads/$BRANCH\",\"sha\":\"${{ github.sha }}\"}")
+          echo "Buat branch $BRANCH: HTTP $HTTP (422 = sudah ada, lanjut)"
+          CONTENT=$(base64 -w0 "$LOG")
+          cat > /tmp/log-commit.json <<EOF
+          {"message":"Log render gagal: run ${{ github.run_id }} attempt ${{ github.run_attempt }}","content":"$CONTENT","branch":"$BRANCH"}
+          EOF
+          curl -s -X PUT \
+            -H "$AUTH" -H "$ACCEPT" -H "Content-Type: application/json" \
+            --data @/tmp/log-commit.json \
+            "$API/contents/RENDER-LOGS/run-${{ github.run_id }}-${{ github.run_attempt }}.log" | head -c 400
+          echo ""
+
+      - name: Unggah log render (artifact diagnostik)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: naze-render-log-${{ github.run_id }}
+          path: render-output.log
+          if-no-files-found: warn
 
       - name: Inspeksi hasil dengan ffprobe
         run: |
