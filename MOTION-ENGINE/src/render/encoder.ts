@@ -49,6 +49,8 @@ export function buildEncodeArgs(opts: EncodeOptions): string[] {
     "cfr",
     "-c:a",
     "aac",
+    "-af",
+    "apad",
     "-b:a",
     "192k",
     "-ar",

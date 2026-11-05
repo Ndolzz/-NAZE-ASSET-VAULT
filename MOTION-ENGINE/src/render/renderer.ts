@@ -50,7 +50,8 @@ export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: n
   const fps = timeline.fps;
   const duration = timeline.duration;
   const totalFrames = Math.max(1, timeline.frameCount);
-  const { w, h } = profile;
+  const w = profile.width;
+  const h = profile.height;
 
   const kit: ComposerKit = {
     palette: opts.palette,
@@ -78,6 +79,15 @@ export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: n
   fs.mkdirSync(path.dirname(opts.outFile), { recursive: true });
   const ffmpeg = spawnFfmpeg(args);
   ffmpeg.stdin.on("error", () => undefined); // survive EPIPE on failure
+  // Attach the exit promise immediately so an early ffmpeg death can never
+  // leave the frame loop waiting forever on a stdin that will never drain.
+  const ffmpegClosed = new Promise<void>((resolve, reject) => {
+    ffmpeg.on("close", (code: number | null) => {
+      if (code === 0) resolve();
+      else reject(new Error(`ffmpeg exited with code ${code}.`));
+    });
+    ffmpeg.on("error", (err: Error) => reject(err));
+  });
 
   // Two reusable canvases for transition compositing.
   const canvasA = createCanvas(w, h);
@@ -118,23 +128,44 @@ export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: n
     }
   }
   ffmpeg.stdin.end();
-  await new Promise<void>((resolve, reject) => {
-    ffmpeg.on("close", (code: number | null) => {
-      if (code === 0) resolve();
-      else reject(new Error(`ffmpeg exited with code ${code}.`));
-    });
-    ffmpeg.on("error", reject);
-  });
+  await ffmpegClosed;
   console.log(`[RENDER] Encoded ${totalFrames} frames (${duration.toFixed(2)}s) -> ${opts.outFile}`);
   return { frames: totalFrames, duration };
 }
 
 function writeFrame(ffmpeg: any, ctx: any, w: number, h: number): Promise<void> {
+  // ffmpeg already finished (normally it reached -t early): nothing more to feed.
+  if (ffmpeg.exitCode !== null && ffmpeg.exitCode !== undefined) {
+    if (ffmpeg.exitCode === 0) return Promise.resolve();
+    return Promise.reject(new Error(`ffmpeg exited with code ${ffmpeg.exitCode} while encoding.`));
+  }
   const pixels = ctx.getImageData(0, 0, w, h).data;
   const view = Buffer.from(pixels.buffer, pixels.byteOffset, pixels.byteLength);
-  if ((ffmpeg.stdin as any).write(view)) return Promise.resolve();
+  const stdin = ffmpeg.stdin;
+  if (stdin.write(view)) return Promise.resolve();
   // Backpressure: wait until the encoder has drained its stdin buffer.
-  return new Promise<void>((resolve) => {
-    (ffmpeg.stdin as any).once("drain", () => resolve());
+  // If ffmpeg dies or stops reading instead, fail fast with a clear error.
+  return new Promise<void>((resolve, reject) => {
+    const cleanup = () => {
+      stdin.removeListener("drain", onDrain);
+      stdin.removeListener("error", onError);
+    };
+    const onDrain = () => {
+      cleanup();
+      resolve();
+    };
+    const onError = () => {
+      cleanup();
+      if (ffmpeg.exitCode === 0) {
+        resolve(); // ffmpeg reached -t and closed stdin after encoding everything.
+        return;
+      }
+      ffmpeg.once("close", (code: number | null) => {
+        if (code === 0) resolve();
+        else reject(new Error(`ffmpeg exited with code ${code} while encoding.`));
+      });
+    };
+    stdin.once("drain", onDrain);
+    stdin.once("error", onError);
   });
 }
