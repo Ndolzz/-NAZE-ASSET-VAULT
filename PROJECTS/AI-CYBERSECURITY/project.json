@@ -1,0 +1,170 @@
+{
+  "schema": "naze-project/2.0",
+  "name": "AI-CYBERSECURITY",
+  "style": {
+    "id": "ai-cyber-doc",
+    "name": "18. AI Cyber Documentary",
+    "tagline": "Dokumenter teknologi sinematik: ancaman siber bertenaga AI, grid HUD, kinetic typography tekanan tinggi.",
+    "palette": "custom",
+    "typography": {
+      "fontFiles": ["FONTS/GOOGLE/TECHNO/oxanium.ttf"],
+      "fontFamily": "NazeOxanium",
+      "titleCase": "upper",
+      "titleWeight": "800",
+      "bodyWeight": "600",
+      "letterSpacing": 1,
+      "titleScale": 0.72
+    },
+    "illustrationKind": "abstract",
+    "stroke": "none",
+    "shading": "gradient",
+    "texture": "grid",
+    "composition": "asymmetric",
+    "animation": { "intensity": 0.95, "signature": ["glitch", "dataStream", "hudScan"] },
+    "transitions": ["zoomDissolve", "panelSwipe", "shapeWipe"],
+    "topics": ["ai", "cyber", "keamanan", "teknologi", "dokumenter"]
+  },
+  "palette": {
+    "id": "ai-cyber-brand",
+    "name": "AI Cyber Brand",
+    "background": "#0B0B10",
+    "primary": "#FF3B47",
+    "secondary": "#A855F7",
+    "accent": "#FF9E1B",
+    "text": "#F5F7FA",
+    "dark": true
+  },
+  "profile": "vertical-1080",
+  "animationIntensity": 1,
+  "accentWords": true,
+  "burnInCc": true,
+  "narration": {
+    "engine": "file",
+    "file": "PROJECTS/speechma_audio_Remy Indonesian_at_7_44_16 PM_on_November_5th_2026.mp3",
+    "language": "id"
+  },
+  "scenes": [
+    {
+      "id": "scene-1",
+      "title": "AI IS THE NEW WEAPON",
+      "narration": "Pernah membayangkan jika kecerdasan buatan digunakan untuk meretas dunia digital? Sekarang, itu bukan lagi sekadar cerita fiksi ilmiah.",
+      "subjects": [
+        { "kind": "object", "name": "brain" },
+        { "kind": "object", "name": "globe" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/switch_001.wav", "volume": 0.45, "at": 0.2 },
+        { "file": "AUDIO/SFX/INTERFACE/tick_002.wav", "volume": 0.35, "at": 0.7 },
+        { "file": "AUDIO/SFX/DIGITAL/laser_1.ogg", "volume": 0.35, "at": 1.6 },
+        { "file": "AUDIO/SFX/INTERFACE/glitch_001.wav", "volume": 0.5, "at": 2.3 },
+        { "file": "AUDIO/SFX/DIGITAL/phaser_up_4.ogg", "volume": 0.45, "at": 2.9 },
+        { "file": "AUDIO/SFX/IMPACT/impact_metal_heavy_000.ogg", "volume": 0.7, "at": 3.4 }
+      ]
+    },
+    {
+      "id": "scene-2",
+      "title": "AUTOMATED ATTACKS",
+      "narration": "AI mulai mengubah cara serangan siber dilakukan. Lebih cepat, lebih otomatis, dan semakin sulit dikenali.",
+      "subjects": [
+        { "kind": "chart", "data": [35, 55, 78, 92, 99] },
+        { "kind": "object", "name": "gauge" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/DIGITAL/laser_3.ogg", "volume": 0.4, "at": 0.2 },
+        { "file": "AUDIO/SFX/INTERFACE/click_002.wav", "volume": 0.45, "at": 0.9 },
+        { "file": "AUDIO/SFX/DIGITAL/zap_1.ogg", "volume": 0.45, "at": 1.6 },
+        { "file": "AUDIO/SFX/DIGITAL/phaser_up_7.ogg", "volume": 0.4, "at": 2.3 },
+        { "file": "AUDIO/SFX/IMPACT/impact_punch_heavy_000.ogg", "volume": 0.6, "at": 2.8 }
+      ]
+    },
+    {
+      "id": "scene-3",
+      "title": "DIGITAL THREATS",
+      "narration": "Bayangkan sebuah sistem yang mampu membuat ribuan pesan phishing dengan bahasa yang meyakinkan. Bahkan, teknologi cloning suara dapat digunakan untuk meniru seseorang demi melakukan penipuan.",
+      "subjects": [
+        { "kind": "object", "name": "phone" },
+        { "kind": "character", "mood": "shocked" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/click_001.wav", "volume": 0.4, "at": 0.2 },
+        { "file": "AUDIO/SFX/INTERFACE/click_004.wav", "volume": 0.35, "at": 0.8 },
+        { "file": "AUDIO/SFX/INTERFACE/error_002.wav", "volume": 0.5, "at": 1.7 },
+        { "file": "AUDIO/SFX/INTERFACE/glitch_002.wav", "volume": 0.45, "at": 2.5 },
+        { "file": "AUDIO/SFX/DIGITAL/low_three_tone.ogg", "volume": 0.4, "at": 3.4 },
+        { "file": "AUDIO/SFX/DIGITAL/zap_three_tone_up.ogg", "volume": 0.4, "at": 4.2 },
+        { "file": "AUDIO/SFX/IMPACT/impact_glass_heavy_000.ogg", "volume": 0.55, "at": 5.0 }
+      ]
+    },
+    {
+      "id": "scene-4",
+      "title": "SCANNING FOR WEAKNESS",
+      "narration": "AI juga dapat membantu penyerang menganalisis sistem dan mencari celah keamanan.",
+      "subjects": [
+        { "kind": "object", "name": "gauge" },
+        { "kind": "object", "name": "brain" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/DIGITAL/laser_5.ogg", "volume": 0.35, "at": 0.15 },
+        { "file": "AUDIO/SFX/INTERFACE/tick_001.wav", "volume": 0.3, "at": 0.7 },
+        { "file": "AUDIO/SFX/DIGITAL/phase_jump_2.ogg", "volume": 0.4, "at": 1.3 },
+        { "file": "AUDIO/SFX/INTERFACE/error_003.wav", "volume": 0.5, "at": 1.9 }
+      ]
+    },
+    {
+      "id": "scene-5",
+      "title": "AI CYBER DEFENSE",
+      "narration": "Namun, AI bukan hanya digunakan untuk menyerang. Di sisi lain, para ahli keamanan siber memanfaatkannya untuk mendeteksi aktivitas mencurigakan, menganalisis malware, dan menemukan ancaman sebelum menyebabkan kerusakan lebih besar.",
+      "subjects": [
+        { "kind": "object", "name": "shield" },
+        { "kind": "character", "mood": "thinking" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/confirmation_001.wav", "volume": 0.45, "at": 0.2 },
+        { "file": "AUDIO/SFX/DIGITAL/power_up_3.ogg", "volume": 0.4, "at": 0.8 },
+        { "file": "AUDIO/SFX/INTERFACE/maximize_003.wav", "volume": 0.4, "at": 1.7 },
+        { "file": "AUDIO/SFX/INTERFACE/tick_004.wav", "volume": 0.3, "at": 2.6 },
+        { "file": "AUDIO/SFX/DIGITAL/laser_7.ogg", "volume": 0.35, "at": 3.5 },
+        { "file": "AUDIO/SFX/INTERFACE/confirmation_002.wav", "volume": 0.45, "at": 4.4 },
+        { "file": "AUDIO/SFX/DIGITAL/power_up_8.ogg", "volume": 0.4, "at": 5.2 },
+        { "file": "AUDIO/SFX/INTERFACE/pluck_001.wav", "volume": 0.4, "at": 5.9 },
+        { "file": "AUDIO/SFX/IMPACT/impact_soft_heavy_000.ogg", "volume": 0.5, "at": 6.3 }
+      ]
+    },
+    {
+      "id": "scene-6",
+      "title": "THE DIGITAL ARMS RACE",
+      "narration": "Inilah perlombaan baru di dunia digital. Penyerang terus mengembangkan metode baru, sementara sistem pertahanan juga terus belajar dan beradaptasi.",
+      "subjects": [
+        { "kind": "object", "name": "rocket" },
+        { "kind": "chart", "data": [50, 62, 58, 75, 80] }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/DIGITAL/power_up_10.ogg", "volume": 0.4, "at": 0.2 },
+        { "file": "AUDIO/SFX/IMPACT/impact_bell_heavy_001.ogg", "volume": 0.55, "at": 0.9 },
+        { "file": "AUDIO/SFX/DIGITAL/phaser_up_2.ogg", "volume": 0.45, "at": 1.6 },
+        { "file": "AUDIO/SFX/DIGITAL/phaser_down_2.ogg", "volume": 0.45, "at": 2.3 },
+        { "file": "AUDIO/SFX/DIGITAL/zap_2.ogg", "volume": 0.4, "at": 3.0 },
+        { "file": "AUDIO/SFX/IMPACT/impact_metal_medium_000.ogg", "volume": 0.5, "at": 3.7 }
+      ]
+    },
+    {
+      "id": "scene-7",
+      "title": "WHO WINS THE FUTURE?",
+      "narration": "Pada akhirnya, AI bukanlah ancaman atau penyelamat dengan sendirinya. Semuanya bergantung pada siapa yang menggunakannya dan untuk tujuan apa. Jadi, di masa depan, siapa yang akan lebih unggul? AI yang menyerang, atau AI yang melindungi? NAZ. Technology Beyond Imagination.",
+      "subjects": [
+        { "kind": "object", "name": "shield" },
+        { "kind": "object", "name": "globe" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/DIGITAL/low_down.ogg", "volume": 0.4, "at": 0.2 },
+        { "file": "AUDIO/SFX/INTERFACE/tick_001.wav", "volume": 0.3, "at": 1.2 },
+        { "file": "AUDIO/SFX/DIGITAL/tone_1.ogg", "volume": 0.35, "at": 2.4 },
+        { "file": "AUDIO/SFX/INTERFACE/select_003.wav", "volume": 0.4, "at": 3.6 },
+        { "file": "AUDIO/SFX/INTERFACE/question_002.wav", "volume": 0.45, "at": 4.8 },
+        { "file": "AUDIO/SFX/INTERFACE/question_003.wav", "volume": 0.4, "at": 6.0 },
+        { "file": "AUDIO/SFX/DIGITAL/pep_sound_1.ogg", "volume": 0.45, "at": 7.2 },
+        { "file": "AUDIO/SFX/DIGITAL/pep_sound_2.ogg", "volume": 0.35, "at": 8.0 }
+      ]
+    }
+  ]
+}
