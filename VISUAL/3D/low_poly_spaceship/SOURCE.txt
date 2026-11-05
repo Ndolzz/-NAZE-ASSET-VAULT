@@ -1,0 +1,4 @@
+Name: low_poly_spaceship
+Author: tbbk
+License: CC0
+Source: https://opengameart.org/content/low-poly-spaceship-0

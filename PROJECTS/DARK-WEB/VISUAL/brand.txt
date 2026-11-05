@@ -1,0 +1,19 @@
+NAZE BRAND IDENTITY
+
+BACKGROUND: #050505
+SURFACE: #101418
+PRIMARY: #00FF88
+SECONDARY: #00D9FF
+TEXT: #F5F7FA
+MUTED: #89949E
+
+DISPLAY FONT: Orbitron
+BODY FONT: Space Grotesk
+MONOSPACE FONT: JetBrains Mono
+
+STYLE:
+Dark futuristic
+Minimalist
+Cinematic
+High contrast
+Digital atmosphere

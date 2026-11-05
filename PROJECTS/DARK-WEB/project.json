@@ -1,0 +1,19 @@
+{
+  "project": "DARK WEB",
+  "brand": "NAZE",
+  "tagline": "EXPLORE BEYOND THE SCREEN",
+  "resolution": {
+    "width": 720,
+    "height": 1280
+  },
+  "fps": 30,
+  "duration_target": 39,
+  "format": "mp4",
+  "video_codec": "libx264",
+  "audio_codec": "aac",
+  "aspect_ratio": "9:16",
+  "visual_style": "dark futuristic cinematic",
+  "voice": "male natural",
+  "music": "dark electronic ambient",
+  "status": "READY_TO_RENDER"
+}

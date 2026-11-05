@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.zip
+*.log
+.DS_Store
+TEMP/
+**/TEMP/
+**/RENDER/
+**/EXPORT/
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Cache
+CATALOG/pixabay_cache/
+**/__pycache__/

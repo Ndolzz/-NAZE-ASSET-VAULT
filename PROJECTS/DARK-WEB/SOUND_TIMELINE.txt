@@ -1,0 +1,109 @@
+waktu | file | fungsi | durasi | volume | posisi terhadap narasi
+0.15s | switch_001.wav | saklar HUD | 0.66s | 0.45 | Pernah membayangkan… melalui Google?
+0.45s | tick_001.wav | penanda kata/ketikan | 0.04s | 0.3 | Pernah membayangkan… melalui Google?
+0.70s | maximize_001.wav | popup muncul | 0.24s | 0.3 | Pernah membayangkan… melalui Google?
+1.45s | tick_002.wav | penanda kata/ketikan | 0.02s | 0.45 | Pernah membayangkan… melalui Google?
+1.95s | tick_004.wav | penanda kata/ketikan | 0.05s | 0.45 | Pernah membayangkan… melalui Google?
+2.00s | scan.wav | data scan | 0.83s | 0.3 | Pernah membayangkan… melalui Google?
+2.95s | tick_001.wav | penanda kata/ketikan | 0.04s | 0.45 | Pernah membayangkan… melalui Google?
+3.00s | maximize_002.wav | popup muncul | 0.27s | 0.5 | Pernah membayangkan… melalui Google?
+3.30s | error_001.wav | notifikasi error | 0.18s | 0.5 | Pernah membayangkan… melalui Google?
+3.45s | tick_002.wav | penanda kata/ketikan | 0.02s | 0.45 | Pernah membayangkan… melalui Google?
+3.45s | glitch_001.wav | ledakan glitch | 0.02s | 0.65 | Pernah membayangkan… melalui Google?
+3.50s | rise.wav | riser ketegangan | 1.76s | 0.45 | Pernah membayangkan… melalui Google?
+4.75s | impact_metal_heavy_000.ogg | impact metal | 0.17s | 0.85 | jeda
+4.75s | boom.wav | bass impact | 1.36s | 0.6 | jeda
+5.10s | whoosh.wav | transisi sweep | 0.99s | 0.5 | jeda
+5.45s | rev.wav | reverse sweep | 0.80s | 0.4 | Namanya Dark Web.
+6.10s | impact_bell_heavy_000.ogg | impact berat/cinematic | 1.20s | 0.9 | Namanya Dark Web.
+6.10s | boom.wav | bass impact | 1.28s | 0.7 | Namanya Dark Web.
+6.10s | glitch_002.wav | ledakan glitch | 0.03s | 0.4 | Namanya Dark Web.
+6.95s | whoosh2.wav | whip pan | 0.64s | 0.5 | Sebuah bagian internet… konfigurasi khusus.
+7.10s | whoosh.wav | transisi sweep | 1.03s | 0.35 | Sebuah bagian internet… konfigurasi khusus.
+7.25s | maximize_003.wav | popup muncul | 0.22s | 0.55 | Sebuah bagian internet… konfigurasi khusus.
+7.60s | pluck_001.wav | penekanan kata | 0.11s | 0.4 | Sebuah bagian internet… konfigurasi khusus.
+8.60s | tick_004.wav | penanda kata/ketikan | 0.06s | 0.28 | Sebuah bagian internet… konfigurasi khusus.
+8.74s | tick_001.wav | penanda kata/ketikan | 0.04s | 0.28 | Sebuah bagian internet… konfigurasi khusus.
+8.88s | tick_002.wav | penanda kata/ketikan | 0.02s | 0.28 | Sebuah bagian internet… konfigurasi khusus.
+9.02s | tick_004.wav | penanda kata/ketikan | 0.05s | 0.28 | Sebuah bagian internet… konfigurasi khusus.
+9.16s | tick_001.wav | penanda kata/ketikan | 0.04s | 0.28 | Sebuah bagian internet… konfigurasi khusus.
+10.40s | tick_002.wav | penanda kata/ketikan | 0.02s | 0.28 | Sebuah bagian internet… konfigurasi khusus.
+10.40s | scan.wav | data scan | 0.95s | 0.35 | Sebuah bagian internet… konfigurasi khusus.
+10.45s | select_001.wav | seleksi teks | 0.06s | 0.45 | Sebuah bagian internet… konfigurasi khusus.
+10.54s | tick_004.wav | penanda kata/ketikan | 0.04s | 0.28 | Sebuah bagian internet… konfigurasi khusus.
+10.68s | tick_001.wav | penanda kata/ketikan | 0.04s | 0.28 | Sebuah bagian internet… konfigurasi khusus.
+10.82s | tick_002.wav | penanda kata/ketikan | 0.02s | 0.28 | Sebuah bagian internet… konfigurasi khusus.
+10.96s | tick_004.wav | penanda kata/ketikan | 0.05s | 0.28 | Sebuah bagian internet… konfigurasi khusus.
+11.80s | rise.wav | riser ketegangan | 1.66s | 0.45 | Sebuah bagian internet… konfigurasi khusus.
+12.38s | impact_soft_heavy_000.ogg | impact lembut | 0.47s | 0.6 | jeda
+12.40s | rev.wav | reverse sweep | 1.16s | 0.4 | jeda
+12.45s | whoosh2.wav | whip pan | 0.72s | 0.55 | jeda
+12.95s | drop_001.wav | scene masuk | 0.12s | 0.5 | Di dalamnya,
+14.15s | high_up.ogg | sapuan digital naik | 0.53s | 0.5 | identitas pengguna bisa disamarkan.
+14.20s | scan.wav | data scan | 0.75s | 0.3 | identitas pengguna bisa disamarkan.
+14.25s | maximize_004.wav | popup muncul | 0.41s | 0.5 | identitas pengguna bisa disamarkan.
+14.25s | tick_001.wav | penanda kata/ketikan | 0.04s | 0.3 | identitas pengguna bisa disamarkan.
+14.30s | power_up_1.ogg | power-up data | 1.20s | 0.35 | identitas pengguna bisa disamarkan.
+14.37s | tick_002.wav | penanda kata/ketikan | 0.02s | 0.3 | identitas pengguna bisa disamarkan.
+14.49s | tick_004.wav | penanda kata/ketikan | 0.05s | 0.3 | identitas pengguna bisa disamarkan.
+14.61s | tick_001.wav | penanda kata/ketikan | 0.04s | 0.3 | identitas pengguna bisa disamarkan.
+16.90s | switch_002.wav | saklar HUD | 0.59s | 0.5 | Ada forum tersembunyi,
+16.95s | click_001.wav | klik UI | 0.12s | 0.45 | Ada forum tersembunyi,
+17.15s | low_three_tone.ogg | nada interface | 1.07s | 0.45 | Ada forum tersembunyi,
+17.20s | maximize_005.wav | popup muncul | 0.51s | 0.45 | Ada forum tersembunyi,
+18.70s | toggle_001.wav | toggle elemen | 0.15s | 0.4 | komunitas anonim,
+19.80s | scan.wav | data scan | 1.13s | 0.3 | komunitas anonim,
+19.85s | laser_1.ogg | koneksi digital | 1.11s | 0.5 | jeda
+20.30s | error_002.wav | notifikasi error | 0.16s | 0.55 | hingga aktivitas ilegal.
+20.30s | glitch_003.wav | ledakan glitch | 0.01s | 0.8 | hingga aktivitas ilegal.
+20.30s | static.wav | noise statis | 1.40s | 0.35 | hingga aktivitas ilegal.
+20.32s | impact_metal_heavy_001.ogg | impact metal | 0.34s | 0.8 | hingga aktivitas ilegal.
+20.48s | glitch_004.wav | ledakan glitch | 0.03s | 0.5 | hingga aktivitas ilegal.
+20.50s | maximize_006.wav | popup muncul | 0.39s | 0.4 | hingga aktivitas ilegal.
+21.60s | rev.wav | reverse sweep | 1.17s | 0.45 | hingga aktivitas ilegal.
+21.87s | impact_soft_heavy_001.ogg | impact lembut | 0.59s | 0.6 | jeda
+22.00s | whoosh.wav | transisi sweep | 1.00s | 0.6 | jeda
+22.30s | whoosh.wav | transisi sweep | 0.94s | 0.5 | jeda
+22.40s | impact_bell_heavy_001.ogg | impact berat/cinematic | 1.20s | 0.85 | Tapi tidak semua Dark Web berisi kejahatan.
+22.40s | boom.wav | bass impact | 1.27s | 0.75 | Tapi tidak semua Dark Web berisi kejahatan.
+22.55s | glitch_001.wav | ledakan glitch | 0.03s | 0.45 | Tapi tidak semua Dark Web berisi kejahatan.
+23.45s | whoosh2.wav | whip pan | 0.64s | 0.35 | Tapi tidak semua Dark Web berisi kejahatan.
+24.20s | scratch_001.wav | goresan coret | 0.16s | 0.5 | Tapi tidak semua Dark Web berisi kejahatan.
+24.20s | impact_soft_heavy_002.ogg | impact lembut | 0.58s | 0.5 | Tapi tidak semua Dark Web berisi kejahatan.
+25.40s | pluck_002.wav | penekanan kata | 0.18s | 0.5 | Jurnalis,
+25.40s | tick_002.wav | penanda kata/ketikan | 0.02s | 0.3 | Jurnalis,
+26.65s | pluck_001.wav | penekanan kata | 0.09s | 0.5 | aktivis,
+27.70s | whoosh2.wav | whip pan | 0.68s | 0.4 | jeda
+27.80s | pluck_002.wav | penekanan kata | 0.12s | 0.5 | dan orang-orang … privasi … menggunakannya.
+27.85s | maximize_007.wav | popup muncul | 0.19s | 0.45 | dan orang-orang … privasi … menggunakannya.
+29.00s | high_up.ogg | sapuan digital naik | 0.50s | 0.6 | dan orang-orang … privasi … menggunakannya.
+29.00s | impact_soft_heavy_003.ogg | impact lembut | 0.52s | 0.5 | dan orang-orang … privasi … menggunakannya.
+29.00s | confirmation_001.wav | konfirmasi | 0.29s | 0.5 | dan orang-orang … privasi … menggunakannya.
+29.80s | rise.wav | riser ketegangan | 1.64s | 0.5 | dan orang-orang … privasi … menggunakannya.
+30.55s | glitch_002.wav | ledakan glitch | 0.03s | 0.7 | dan orang-orang … privasi … menggunakannya.
+30.60s | static.wav | noise statis | 0.50s | 0.5 | dan orang-orang … privasi … menggunakannya.
+30.80s | impact_metal_heavy_002.ogg | impact metal | 0.15s | 0.7 | dan orang-orang … privasi … menggunakannya.
+31.35s | switch_003.wav | saklar HUD | 0.52s | 0.5 | Dark Web bukan sekadar tempat misterius.
+31.50s | maximize_008.wav | popup muncul | 0.24s | 0.5 | Dark Web bukan sekadar tempat misterius.
+31.50s | scan.wav | data scan | 0.90s | 0.3 | Dark Web bukan sekadar tempat misterius.
+32.00s | tick_004.wav | penanda kata/ketikan | 0.06s | 0.26 | Dark Web bukan sekadar tempat misterius.
+32.14s | tick_001.wav | penanda kata/ketikan | 0.04s | 0.26 | Dark Web bukan sekadar tempat misterius.
+32.28s | tick_002.wav | penanda kata/ketikan | 0.02s | 0.26 | Dark Web bukan sekadar tempat misterius.
+32.42s | tick_004.wav | penanda kata/ketikan | 0.05s | 0.26 | Dark Web bukan sekadar tempat misterius.
+32.56s | tick_001.wav | penanda kata/ketikan | 0.04s | 0.26 | Dark Web bukan sekadar tempat misterius.
+33.90s | rev.wav | reverse sweep | 0.80s | 0.5 | Dark Web bukan sekadar tempat misterius.
+33.95s | whoosh.wav | transisi sweep | 1.04s | 0.5 | jeda
+34.30s | close_001.wav | penutup panel | 0.14s | 0.45 | jeda
+34.50s | tick_002.wav | penanda kata/ketikan | 0.02s | 0.26 | Ini adalah sisi lain internet … diketahui orang.
+34.60s | scan.wav | data scan | 1.00s | 0.3 | Ini adalah sisi lain internet … diketahui orang.
+34.64s | tick_004.wav | penanda kata/ketikan | 0.05s | 0.26 | Ini adalah sisi lain internet … diketahui orang.
+34.78s | tick_001.wav | penanda kata/ketikan | 0.04s | 0.26 | Ini adalah sisi lain internet … diketahui orang.
+34.92s | tick_002.wav | penanda kata/ketikan | 0.02s | 0.26 | Ini adalah sisi lain internet … diketahui orang.
+35.06s | tick_004.wav | penanda kata/ketikan | 0.05s | 0.26 | Ini adalah sisi lain internet … diketahui orang.
+36.60s | rise.wav | riser ketegangan | 1.66s | 0.55 | Ini adalah sisi lain internet … diketahui orang.
+37.80s | impact_bell_heavy_002.ogg | impact berat/cinematic | 0.70s | 0.9 | narasi selesai
+37.80s | boom.wav | bass impact | 1.30s | 0.9 | narasi selesai
+37.85s | impact_metal_heavy_003.ogg | impact metal | 0.26s | 0.5 | narasi selesai
+38.10s | whoosh2.wav | whip pan | 0.71s | 0.4 | narasi selesai
+38.60s | shimmer.wav | kilau akhir | 1.55s | 0.5 | narasi selesai
+38.80s | three_tone_1.ogg | nada interface | 0.76s | 0.35 | narasi selesai

@@ -1,0 +1,89 @@
+@@OLD
+const CY = '&HFFF000&', RED = '&HFF4A1A&';
+@@NEW
+const CY = '&HFFD900&', RED = '&HFF6600&';
+@@END
+@@OLD
+const pops = [];
+@@NEW
+function ext3d(st, lines, t0, t1, yBase, gap, ups) {
+  const sz0 = Math.min(...lines.map(l => fit(l, st, 170))), N = 10, TAU = Math.PI * 2;
+  const kfv = (keys, t) => { if (t <= keys[0][0]) return keys[0][1]; for (let i = 1; i < keys.length; i++) if (t <= keys[i][0]) { const [a, va] = keys[i - 1], [b, vb, ez] = keys[i]; return va + (vb - va) * EZ[ez || 'expo']((t - a) / (b - a)); } return keys.at(-1)[1]; };
+  const mix = (c0, c1, u) => c0.map((v, k) => v + (c1[k] - v) * u);
+  const bgr = c => '&H' + hex2(c[2]) + hex2(c[1]) + hex2(c[0]) + '&';
+  lines.forEach((str, i) => {
+    const ts0 = t0 + i * 0.12, yb = yBase + i * gap;
+    const S = [[ts0, 3.2], [ts0 + 0.85, 1, 'expo'], [t0 + 2.0, 1, 'lin'], [t0 + 2.75, 0.62, 'inOut'], [t1 - 0.3, 0.62, 'lin']];
+    const Y = [[ts0, yb], [t0 + 2.0, yb, 'lin'], [t0 + 2.75, ups[i], 'inOut'], [t1 - 0.3, ups[i], 'lin']];
+    const A = [[ts0, 0], [ts0 + 0.4, 1, 'out'], [t1 - 0.3, 1, 'lin'], [t1, 0, 'in']];
+    const FS = [[ts0, 60], [ts0 + 0.85, 2, 'expo']], BL = [[ts0, 14], [ts0 + 0.5, 0, 'out']];
+    for (let f = Math.ceil(ts0 * FPS); f < Math.floor(t1 * FPS); f++) {
+      const t = f / FPS, e = t + 1 / FPS, sc = kfv(S, t), y = kfv(Y, t), a = kfv(A, t), fsp = kfv(FS, t), bl = kfv(BL, t);
+      const sz = Math.round(sz0 * sc), ramp = clamp((t - ts0 - 0.6) / 0.8), lt = t - t0;
+      const fry = 14 * Math.sin(TAU * lt / 5.2 + i * 0.6) * ramp, frx = 5 * Math.sin(TAU * lt / 4.1) * ramp;
+      const ang = 0.62 + 0.45 * Math.sin(TAU * lt / 6.0), stp = 3.2 * sz / 170;
+      const ex = Math.cos(ang) * stp, ey = Math.sin(ang) * stp * 0.8;
+      const alp = `\\alpha&H${hex2((1 - a) * 255)}&`;
+      const base = (x, yy) => `\\an5\\pos(${x.toFixed(1)},${yy.toFixed(1)})\\org(${x.toFixed(1)},${yy.toFixed(1)})\\fs${sz}\\fsp${fsp.toFixed(1)}\\frx${frx.toFixed(2)}\\fry${fry.toFixed(2)}`;
+      D(29, t, e, st, `{${base(360, y)}\\1a&HFF&\\bord8\\3c&HFF6600&\\3a&H${hex2((1 - 0.45 * a) * 255)}&\\blur14}${str}`);
+      for (let k = N; k >= 1; k--) {
+        const col = bgr(mix([0, 20, 70], [0, 102, 255], (N - k) / (N - 1)));
+        D(30 + (N - k), t, e, st, `{${base(360 + ex * k, y + ey * k)}\\bord0\\blur${bl.toFixed(1)}\\1c${col}${alp}}${str}`);
+      }
+      const h = sz * 0.45;
+      [[y - h, y - sz * 0.12, [255, 255, 255]], [y - sz * 0.12, y + sz * 0.12, [207, 246, 255]], [y + sz * 0.12, y + h, [127, 233, 255]]].forEach(([c0, c1, rgb], b) =>
+        D(40 + b, t, e, st, `{${base(360, y)}\\bord1.4\\3c${CY}\\1c${bgr(rgb)}\\blur${bl.toFixed(1)}\\clip(0,${Math.round(c0)},${W},${Math.round(c1)})${alp}}${str}`));
+      const sp = ((lt - 1.0) % 3) / 0.7;
+      if (lt > 1.0 && sp >= 0 && sp <= 1) { const cxp = -80 + EZ.inOut(sp) * (W + 160); D(44, t, e, st, `{${base(360, y)}\\bord0\\1c&HFFFFFF&\\clip(${Math.round(cxp - 28)},${Math.round(y - sz * 0.5)},${Math.round(cxp + 28)},${Math.round(y + sz * 0.5)})${alp}}${str}`); }
+      if (i === lines.length - 1) D(28, t, e, st, `{${base(360, y + sz * 0.76)}\\fscy-100\\bord0\\blur2\\1c${CY}\\alpha&H${hex2((1 - 0.2 * a) * 255)}&\\clip(0,${Math.round(y + sz * 0.37)},${W},${Math.round(y + sz * 1.3)})}${str}`);
+    }
+  });
+}
+function solid(cx, cy, R, t0, t1) {
+  const ph = (1 + Math.sqrt(5)) / 2, nr = Math.hypot(1, ph);
+  const Vt = [[-1, ph, 0], [1, ph, 0], [-1, -ph, 0], [1, -ph, 0], [0, -1, ph], [0, 1, ph], [0, -1, -ph], [0, 1, -ph], [ph, 0, -1], [ph, 0, 1], [-ph, 0, -1], [-ph, 0, 1]].map(v => v.map(c => c / nr));
+  const Fc = [[0, 11, 5], [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11], [1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6], [7, 1, 8], [3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9], [4, 9, 5], [2, 4, 11], [6, 2, 10], [8, 6, 7], [9, 8, 1]];
+  const Ld = (v => { const l = Math.hypot(...v); return v.map(c => c / l); })([-0.5, -0.6, 0.62]);
+  const stops = [[0, [0, 12, 40]], [0.4, [0, 50, 150]], [0.7, [0, 102, 255]], [0.9, [0, 217, 255]], [1, [225, 250, 255]]];
+  const shade = b => { for (let i = 1; i < stops.length; i++) if (b <= stops[i][0]) { const [a, ca] = stops[i - 1], [c, cb] = stops[i], u = (b - a) / (c - a); return ca.map((v, k) => Math.round(v + (cb[k] - v) * u)); } return stops.at(-1)[1]; };
+  const bgr = c => '&H' + hex2(c[2]) + hex2(c[1]) + hex2(c[0]) + '&';
+  const norm = (a, b, c) => { const u = b.map((v, k) => v - a[k]), w = c.map((v, k) => v - a[k]); const n = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]]; const l = Math.hypot(...n) || 1; return n.map(v => v / l); };
+  for (let f = Math.ceil(t0 * FPS); f < Math.floor(t1 * FPS); f++) {
+    const t = f / FPS, e = t + 1 / FPS, lt = t - t0, grow = EZ.back(clamp(lt / 0.9));
+    const fa = Math.min(clamp((t1 - t) / 0.4), clamp(lt / 0.3));
+    const ang = 5 * EZ.expo(Math.min(1, lt / 2)) + 0.7 * lt, tl = 0.55 + 0.25 * Math.sin(lt * 0.9);
+    const ca = Math.cos(ang), sa = Math.sin(ang), cb = Math.cos(tl), sb = Math.sin(tl);
+    const P3 = Vt.map(([x, y, z]) => { const x1 = x * ca + z * sa, z1 = -x * sa + z * ca; return [x1, y * cb - z1 * sb, y * sb + z1 * cb]; });
+    const S2 = P3.map(([x, y, z]) => { const s = 4 / (4 - z) * R * grow; return [cx + x * s, cy + y * s]; });
+    const vis = [];
+    for (const fc of Fc) {
+      const [a, b, c] = fc.map(i => P3[i]);
+      let n = norm(a, b, c); const ctr = [(a[0] + b[0] + c[0]) / 3, (a[1] + b[1] + c[1]) / 3, (a[2] + b[2] + c[2]) / 3];
+      if (n[0] * ctr[0] + n[1] * ctr[1] + n[2] * ctr[2] < 0) n = n.map(v => -v);
+      if (n[2] <= 0.02) continue;
+      vis.push({ z: ctr[2], d: Math.max(0, n[0] * Ld[0] + n[1] * Ld[1] + n[2] * Ld[2]), pts: fc.map(i => S2[i]) });
+    }
+    if (!vis.length) continue;
+    vis.sort((p, q) => p.z - q.z);
+    const lay0 = 60, all = vis.flatMap(v => v.pts), mx = Math.min(...all.map(p => p[0])), my = Math.min(...all.map(p => p[1]));
+    D(lay0 - 2, t, e, 'Shp', `{\\an5\\pos(${cx},${cy - R * 0.3})\\p1\\1c${CY}\\blur40\\alpha&H${hex2((1 - 0.16 * fa) * 255)}&}${pth([[R * 1.8, 0], [R * 3.6, R * 4.2], [0, R * 4.2]])}`);
+    D(lay0 - 1, t, e, 'Shp', `{\\an7\\pos(${mx.toFixed(1)},${my.toFixed(1)})\\p1\\1a&HFF&\\bord4\\3c${CY}\\3a&H${hex2((1 - 0.5 * fa) * 255)}&\\blur7}${vis.map(v => pth(v.pts.map(([x, y]) => [x - mx, y - my]))).join(' ')}`);
+    vis.forEach((v, r) => {
+      const pm = Math.min(...v.pts.map(p => p[0])), qm = Math.min(...v.pts.map(p => p[1]));
+      D(lay0 + r, t, e, 'Shp', `{\\an7\\pos(${pm.toFixed(1)},${qm.toFixed(1)})\\p1\\1c${bgr(shade(0.1 + 0.9 * v.d))}\\bord1.2\\3c${CY}\\alpha&H${hex2((1 - fa) * 255)}&}${pth(v.pts.map(([x, y]) => [x - pm, y - qm]))}`);
+    });
+  }
+}
+const pops = [];
+@@END
+@@OLD
+grp(text, 's2', ['DARK', 'WEB'], 5.45, 12.8, 520, 165, { fx: 'track', size: 170, dt: 0.12, then: i => [{ t: 6.92 }, { t: 7.45, dy: -170 - i * 55, sc: 0.62, e: 'inOut' }] });
+@@NEW
+ext3d('s2', ['DARK', 'WEB'], 5.45, 12.8, 520, 165, [350, 460]);
+solid(190, 860, 105, 7.3, 12.3);
+@@END
+@@OLD
+DARK_WEB_NAZE_V31
+@@NEW
+DARK_WEB_NAZE_V32
+@@END

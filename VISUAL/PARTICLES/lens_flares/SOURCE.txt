@@ -1,0 +1,4 @@
+Asset: lens_flares.zip
+Source: https://opengameart.org/content/lens-flares-and-particles
+License: CC0 / CC-BY 3.0; verify the license of individual assets
+Credit: hc

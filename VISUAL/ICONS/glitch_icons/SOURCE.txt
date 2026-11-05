@@ -1,0 +1,4 @@
+Asset: glitch_icons.zip
+Source: https://opengameart.org/content/100-glitch-icons
+License: CC0
+Credit: rubberduck

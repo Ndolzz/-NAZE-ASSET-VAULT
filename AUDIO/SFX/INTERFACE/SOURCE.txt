@@ -1,0 +1,3 @@
+Repository: https://github.com/Calinou/kenney-interface-sounds
+Branch: master
+License: CC0 1.0 Universal

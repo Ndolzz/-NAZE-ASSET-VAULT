@@ -1,0 +1,4 @@
+Name: spaceship_components
+Author: Majadroid
+License: CC0
+Source: https://opengameart.org/content/3d-lowpoly-spaceships-and-components

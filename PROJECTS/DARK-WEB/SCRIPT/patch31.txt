@@ -1,0 +1,109 @@
+@@OLD
+const CY = '&HFFF000&', RED = '&H552AFF&';
+@@NEW
+const CY = '&HFFF000&', RED = '&HFF4A1A&'; // RED = biru elektrik
+@@END
+@@OLD
+const PREVIEW = +process.env.PREVIEW || 0, DRY = process.argv.includes('dry');
+@@NEW
+const PREVIEW = +process.env.PREVIEW || 0, DRY = process.argv.includes('dry');
+const SCN = +process.env.SCENE || 0;
+const WIN = [[0, 5.25], [5.25, 12.9], [12.9, 22.4], [22.4, 31.33], [31.33, 40]];
+@@END
+@@OLD
+const must = f => { if (!f) throw new Error('Aset ikon tidak ditemukan'); return f; };
+@@NEW
+const must = f => f || 'glyph';
+@@END
+@@OLD
+const pops = [];
+@@NEW
+function glyph(kind, cx, cy, s, t0, t1) {
+  const d = Math.round((t1 - t0) * 1000), lw = Math.max(3, Math.round(s * 0.045));
+  const circ = (r, n = 40) => Array.from({ length: n }, (_, i) => [s / 2 + r * Math.cos(i / n * 2 * Math.PI), s / 2 + r * Math.sin(i / n * 2 * Math.PI)]);
+  const bx = polys => [[[0, 0], [1, 0], [1, 1], [0, 1]], [[s - 1, s - 1], [s, s - 1], [s, s], [s - 1, s]], ...polys].map(pth).join(' ');
+  const ol = `\\1a&HFF&\\bord${lw}\\3c${CY}\\fscx1\\fscy1\\t(0,500,0.35,\\fscx100\\fscy100)\\fad(200,250)`;
+  const fl = `\\1c${CY}\\fscx1\\fscy1\\t(0,500,0.35,\\fscx100\\fscy100)\\fad(200,250)`;
+  const put = (layer, polys, tg) => SH(layer, t0 + 0.2, t1, 5, cx, cy, bx(polys), tg);
+  if (kind === 'eye') {
+    put(5, [circ(s * 0.5, 48).map(([x, y]) => [x, s / 2 + (y - s / 2) * 0.54])], ol);
+    put(5, [circ(s * 0.16)], fl);
+    put(6, [[[s * 0.14, s * 0.9], [s * 0.22, s * 0.92], [s * 0.9, s * 0.1], [s * 0.82, s * 0.08]]], fl);
+  } else if (kind === 'tri') {
+    put(5, [[[s / 2, s * 0.04], [s * 0.97, s * 0.9], [s * 0.03, s * 0.9]]], ol);
+    put(5, [[[s / 2 - s * 0.04, s * 0.34], [s / 2 + s * 0.04, s * 0.34], [s / 2 + s * 0.03, s * 0.62], [s / 2 - s * 0.03, s * 0.62]], [[s / 2 - s * 0.04, s * 0.68], [s / 2 + s * 0.04, s * 0.68], [s / 2 + s * 0.04, s * 0.76], [s / 2 - s * 0.04, s * 0.76]]], fl);
+  } else if (kind === 'node') {
+    put(5, [circ(s * 0.5)], ol);
+    network(t0 + 0.2, t1, [[cx - s * .3, cy - s * .25], [cx + s * .32, cy - s * .08], [cx - s * .04, cy + s * .3]], [[0, 1], [1, 2], [2, 0]]);
+  } else if (kind === 'hex') {
+    put(5, [circ(s * 0.48, 6)], ol); put(5, [circ(s * 0.12)], fl);
+  } else if (kind === 'hexbig') {
+    SH(2, t0, t1, 5, cx, cy, ngon(s / 2, 6), `\\1a&HFF&\\bord2\\3c${CY}\\3a&HB0&\\frz0\\t(0,${d},1,\\frz120)\\fad(400,400)`);
+    SH(2, t0, t1, 5, cx, cy, ngon(s / 3, 6), `\\1a&HFF&\\bord2\\3c${CY}\\3a&HB0&\\frz60\\t(0,${d},1,\\frz-60)\\fad(400,400)`);
+  } else if (kind === 'flare') {
+    SH(8, t0, t1, 5, cx, cy, ngon(s * 0.2), `\\1c&HFFFFFF&\\blur45\\1a&H60&\\fscx40\\fscy40\\t(0,350,0.4,\\fscx140\\fscy140)\\t(350,${d},1,\\1a&HFF&)`);
+    SH(8, t0, t1, 5, cx, cy, rectP(W, 5), `\\1c${CY}\\blur8\\1a&H40&\\fscx1\\t(0,250,0.4,\\fscx100)\\t(250,${d},1,\\1a&HFF&)`);
+  }
+}
+function panel(o) {
+  const { t0, t1, x, y, w, h } = o, n = 14;
+  frame(t0 + 0.15, t1, x, y, w, h, o.label);
+  grid(t0 + 0.3, t1, x, y, w, h, 4, 6);
+  for (let i = 0, t = t0 + 0.4; t < t1 - 0.05; i++, t += 0.1) {
+    const polys = [[[0, 0], [1, 0], [1, 1], [0, 1]]];
+    for (let b = 0; b < n; b++) {
+      const bh = (0.15 + 0.7 * rnd(i * 29 + b * 11 + y)) * h * 0.45 * (0.5 + 0.5 * Math.abs(Math.sin(t * 2 + b))), bx0 = 10 + b * ((w - 20) / n), bw = (w - 20) / n * 0.6;
+      polys.push([[bx0, h - 14 - bh], [bx0 + bw, h - 14 - bh], [bx0 + bw, h - 14], [bx0, h - 14]]);
+    }
+    D(2, t, t + 0.1, 'Shp', `{\\an7\\pos(${x},${y})\\p1\\1c${CY}\\1a&H50&}${polys.map(pth).join(' ')}`);
+  }
+  for (let s0 = t0 + 0.4; s0 < t1 - 0.3; s0 += 1.6)
+    D(3, s0, Math.min(s0 + 1.6, t1), 'Shp', `{\\an7\\p1\\1c${CY}\\1a&H80&\\clip(${x},${y},${x + w},${y + h})\\move(${x},${y},${x},${y + h},0,1500)}${rectP(w, 3)}`);
+  counter(t0 + 0.4, t1, x + 14, y + 30, 'SYNC ');
+}
+function procPop(o) {
+  const lab = o.label || '', b = o.src ? path.basename(o.src) : '', cx = o.x + o.w / 2, cy = o.y + o.h / 2, s = Math.min(o.w, o.h);
+  if (o.kind === 'v') return panel(o);
+  if (/hexagon/.test(b)) return glyph('hexbig', cx, cy, s, o.t0, o.t1);
+  if (/sun/.test(b)) return glyph('flare', cx, cy, s, o.t0, o.t1);
+  frame(o.t0 + 0.15, o.t1, o.x, o.y, o.w, o.h, lab);
+  glyph(/ID/.test(lab) ? 'eye' : /FORUM/.test(lab) ? 'node' : /WARN/.test(lab) ? 'tri' : 'hex', cx, cy, s * 0.62, o.t0, o.t1);
+}
+const pops = [];
+@@END
+@@OLD
+function pop(o) {
+  pops.push(o);
+@@NEW
+function pop(o) {
+  if (!(o.src && /NAZE_LOGO/.test(o.src))) return procPop(o);
+  pops.push(o);
+@@END
+@@OLD
+const FOOT = addIn('-i', footage), vids = pops.filter(p => p.kind === 'v'), g = [];
+@@NEW
+const vids = [], g = [];
+@@END
+@@OLD
+g.push(`${cur}format=yuv420p,ass=filename='${assPath}':fontsdir='${fdir}'[v]`);
+@@NEW
+const IMPT = [4.75, 6.1, 20.32, 22.4, 29.0, 37.8];
+const CAM = [[0, 5.25, 1.00, 1.07, 0, 0, 0, 0], [5.25, 12.9, 1.09, 1.00, 24, -24, 0, 0], [12.9, 22.4, 1.00, 1.06, -22, 22, 0, 0], [22.4, 31.33, 1.07, 1.00, 0, 0, 28, -28], [31.33, 40, 1.00, 1.05, 0, 0, 0, 0]];
+const camSeg = (a, b) => CAM.reduceRight((acc, c) => `if(lt(t,${c[1]}),(${c[a]})+((${c[b]})-(${c[a]}))*(1-cos(PI*clip((t-${c[0]})/(${c[1]}-${c[0]}),0,1)))/2,${acc})`, `(${CAM.at(-1)[b]})`);
+const SHK = `(${IMPT.map(ti => `gte(t,${ti})*exp(-9*(t-${ti}))`).join('+')})`;
+const ZX = camSeg(2, 3), PX = `${camSeg(4, 5)}+14*${SHK}*sin(t*95)`, PY = `${camSeg(6, 7)}+14*${SHK}*cos(t*121)`;
+const BK = addIn('-f', 'lavfi', '-i', `color=c=black:s=${W}x${H}:r=${FPS}:d=${DUR}`);
+g.push(`${cur}format=yuv420p,ass=filename='${assPath}':fontsdir='${fdir}'[asv]`);
+g.push(`[asv]scale=w='2*trunc(${W}*(${ZX})/2)':h='2*trunc(${H}*(${ZX})/2)':eval=frame:flags=bicubic[zz]`);
+g.push(`[${BK}:v][zz]overlay=x='(W-w)/2+(${PX})':y='(H-h)/2+(${PY})':eval=frame:format=auto,format=yuv420p[v]`);
+@@END
+@@OLD
+'-t', `${PREVIEW || DUR}`, out];
+@@NEW
+...(SCN ? ['-ss', `${WIN[SCN - 1][0]}`, '-t', `${WIN[SCN - 1][1] - WIN[SCN - 1][0]}`] : ['-t', `${PREVIEW || DUR}`]), out];
+@@END
+@@OLD
+DARK_WEB_NAZE_V3.mp4
+@@NEW
+DARK_WEB_NAZE_V31${SCN ? '_S' + SCN : ''}.mp4
+@@END

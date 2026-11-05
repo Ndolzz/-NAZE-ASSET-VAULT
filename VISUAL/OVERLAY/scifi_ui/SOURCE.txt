@@ -1,0 +1,4 @@
+Asset: scifi_ui.zip
+Source: https://opengameart.org/content/scifi-ui
+License: CC0
+Credit: Anton Revin (optional)
