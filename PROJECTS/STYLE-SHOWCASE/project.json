@@ -1,0 +1,57 @@
+{
+  "schema": "naze-project/2.0",
+  "name": "STYLE-SHOWCASE",
+  "style": "colorful-editorial",
+  "palette": "sunset-editorial",
+  "profile": "vertical-1080",
+  "animationIntensity": 1,
+  "accentWords": true,
+  "burnInCc": true,
+  "narration": { "engine": "espeak-ng", "language": "id", "speed": 145 },
+  "scenes": [
+    {
+      "id": "scene-1",
+      "title": "Ilustrasi Wajib",
+      "narration": "Selamat datang di NAZE Motion Engine. Setiap video kini menggunakan ilustrasi orisinal yang dibuat khusus untuk setiap adegan. Tidak ada lagi video yang hanya berisi teks bergerak.",
+      "subjects": [
+        { "kind": "character", "mood": "happy" },
+        { "kind": "object", "name": "palette-swatch" }
+      ],
+      "sfx": [{ "file": "AUDIO/SFX/IMPACT/impact_punch_medium_000.ogg", "volume": 0.5, "at": 0.15 }]
+    },
+    {
+      "id": "scene-2",
+      "title": "Warna Sesuai Topik",
+      "narration": "Warna tidak lagi didominasi biru neon. Setiap topik mendapat palet warna sendiri, dengan lima peran warna yang konsisten dari awal hingga akhir video.",
+      "subjects": [{ "kind": "object", "name": "palette-swatch" }],
+      "sfx": [{ "file": "AUDIO/SFX/INTERFACE/click_001.wav", "volume": 0.4, "at": 0.3 }]
+    },
+    {
+      "id": "scene-3",
+      "title": "Gerak Nyata 60 FPS",
+      "narration": "Seluruh animasi berjalan pada enam puluh frame per detik dengan easing dan keyframe yang halus. Ini bukan slideshow, melainkan motion graphics yang benar benar hidup.",
+      "subjects": [
+        { "kind": "object", "name": "rocket" },
+        { "kind": "chart", "data": [30, 55, 45, 80, 92] }
+      ],
+      "sfx": [{ "file": "AUDIO/SFX/DIGITAL/power_up_2.ogg", "volume": 0.45, "at": 0.1 }]
+    },
+    {
+      "id": "scene-4",
+      "title": "CC Wajib Sinkron",
+      "narration": "Setiap video bernarasi wajib memiliki closed caption yang tersinkronisasi dengan waktu pengucapan. Subtitle mudah dibaca di ponsel dan tidak menutupi ilustrasi utama.",
+      "subjects": [{ "kind": "object", "name": "phone" }],
+      "sfx": [{ "file": "AUDIO/SFX/INTERFACE/click_003.wav", "volume": 0.4, "at": 0.4 }]
+    },
+    {
+      "id": "scene-5",
+      "title": "Standar Permanen",
+      "narration": "Ini adalah standar global permanen NAZE Motion Engine. Ilustrasi wajib, closed caption wajib, dan warna bebas dari dominasi biru pada seluruh produksi berikutnya.",
+      "subjects": [
+        { "kind": "object", "name": "shield" },
+        { "kind": "object", "name": "lightbulb" }
+      ],
+      "sfx": [{ "file": "AUDIO/SFX/IMPACT/impact_bell_heavy_000.ogg", "volume": 0.5, "at": 0.1 }]
+    }
+  ]
+}

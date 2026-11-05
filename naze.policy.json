@@ -1,0 +1,22 @@
+{
+  "policyVersion": "2.0.0",
+  "standards": {
+    "resolution": { "width": 1080, "height": 1920, "aspectRatio": "9:16" },
+    "frameRate": { "value": 60, "mode": "cfr" },
+    "video": { "codec": "h264", "pixelFormat": "yuv420p", "container": "mp4" },
+    "audio": { "codec": "aac", "narrationDominant": true, "backgroundMusic": "explicit-only" },
+    "captions": { "required": true, "maxLines": 2, "syncRequired": true },
+    "illustrations": { "required": true, "everyScene": true },
+    "styles": { "minCount": 17 },
+    "color": { "blueDominanceForbidden": true },
+    "validation": { "required": true, "failOnViolation": true },
+    "quality": { "motionRequired": true }
+  },
+  "overrides": {
+    "allowed": true,
+    "onlyByExplicitUserInstruction": true,
+    "cliFlag": "--explicit-override",
+    "requiresReason": true
+  },
+  "notes": "Kebijakan global permanen NAZE Motion Engine. Berlaku untuk semua proyek, template, preset, workflow, dan pembaruan engine. Konfigurasi proyek tidak dapat menonaktifkan persyaratan wajib. Pengecualian hanya melalui --explicit-override dengan alasan terdokumentasi pada render report. Profil tambahan yang diizinkan: 1440x2560 dan 2160x3840, keduanya 60 FPS CFR."
+}

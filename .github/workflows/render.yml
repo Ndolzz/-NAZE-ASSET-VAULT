@@ -1,0 +1,118 @@
+name: NAZE Render
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'Nama proyek di PROJECTS/ (mis. STYLE-SHOWCASE)'
+        required: false
+        default: 'STYLE-SHOWCASE'
+      profile:
+        description: 'Profil render'
+        required: false
+        default: 'vertical-1080'
+        type: choice
+        options:
+          - vertical-1080
+          - vertical-1440
+          - vertical-2160
+  push:
+    branches: [main]
+    paths:
+      - 'PROJECTS/**'
+      - 'MOTION-ENGINE/**'
+      - 'naze.policy.json'
+      - '.github/workflows/render.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naze-render-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    name: Render ${{ github.event_name == 'workflow_dispatch' && inputs.project || 'STYLE-SHOWCASE' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instal ffmpeg dan espeak-ng
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ffmpeg espeak-ng
+          ffmpeg -version | head -n 1
+          espeak-ng --version | head -n 1
+
+      - name: Siapkan Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instal dependensi engine
+        working-directory: MOTION-ENGINE
+        run: npm install
+
+      - name: Tentukan proyek
+        id: cfg
+        run: |
+          PROJECT="${{ github.event_name == 'workflow_dispatch' && inputs.project || 'STYLE-SHOWCASE' }}"
+          PROFILE="${{ github.event_name == 'workflow_dispatch' && inputs.profile || 'vertical-1080' }}"
+          echo "project=$PROJECT" >> "$GITHUB_OUTPUT"
+          echo "profile=$PROFILE" >> "$GITHUB_OUTPUT"
+          echo "Proyek: $PROJECT | Profil: $PROFILE"
+
+      - name: Render video
+        working-directory: MOTION-ENGINE
+        env:
+          NAZE_REPO_ROOT: ${{ github.workspace }}
+        run: |
+          npx tsx src/cli.ts render "../PROJECTS/${{ steps.cfg.outputs.project }}" \
+            --out "${{ github.workspace }}/dist/${{ steps.cfg.outputs.project }}" \
+            --profile "${{ steps.cfg.outputs.profile }}"
+
+      - name: Inspeksi hasil dengan ffprobe
+        run: |
+          set -e
+          OUT="dist/${{ steps.cfg.outputs.project }}/${{ steps.cfg.outputs.project }}.mp4"
+          echo "== ffprobe: $OUT =="
+          ffprobe -v error -select_streams v:0 \
+            -show_entries stream=codec_name,width,height,pix_fmt,r_frame_rate,avg_frame_rate \
+            -of default=noprint_wrappers=1 "$OUT"
+          ffprobe -v error -select_streams a:0 \
+            -show_entries stream=codec_name,sample_rate,channels \
+            -of default=noprint_wrappers=1 "$OUT"
+          echo "== File output =="
+          ls -la "dist/${{ steps.cfg.outputs.project }}"
+
+      - name: Verifikasi laporan render
+        run: |
+          node -e '
+          const fs = require("fs");
+          const reportPath = "dist/${{ steps.cfg.outputs.project }}/render-report.json";
+          const report = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
+          const failed = report.validation.checks.filter((c) => !c.pass);
+          if (failed.length > 0) {
+            console.error("VALIDASI GAGAL:");
+            for (const c of failed) console.error(` - ${c.id}: ${c.detail}`);
+            process.exit(1);
+          }
+          console.log(`Validasi lolos: ${report.validation.checks.length} pemeriksaan.`);
+          console.log(`Durasi: ${report.duration.toFixed(2)}s | Frame: ${report.frames} | Ilustrasi: ${report.illustrations}`);
+          '
+
+      - name: Unggah artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: naze-render-${{ steps.cfg.outputs.project }}
+          path: |
+            dist/**
+            !dist/**/work/**
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Status akhir
+        run: echo "Render selesai dan seluruh validasi otomatis lolos."
