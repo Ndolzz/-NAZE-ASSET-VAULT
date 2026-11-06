@@ -56,19 +56,29 @@ perbaiki teks scene-7 di `project.json` lalu render ulang.
 
 ## Sistem visual
 
-- Gaya kustom `ai-cyber-doc` (terdaftar otomatis saat render): dokumenter
-  teknologi sinematik, grid HUD, komposisi asimetris, shading gradien,
-  transisi zoomDissolve/panelSwipe/shapeWipe, intensitas animasi 0,95.
-- Font: Oxanium (FONTS/GOOGLE/TECHNO/oxanium.ttf), judul kapital, tracking 1,
-  kinetic typography per kata dengan stagger.
-- Palet `ai-cyber-brand` (lima peran, tanpa dominasi biru):
-  latar charcoal #0B0B10, primer crimson #FF3B47 (serangan siber),
-  sekunder violet #A855F7 (artificial intelligence), aksen oranye #FF9E1B
-  (warning/threat), teks #F5F7FA. Scene pertahanan dibaca melalui kontras
-  violet-oranye di atas charcoal sinematik.
-- Ilustrasi orisinal prosedural di setiap scene (kebijakan permanen):
+RESTYLE PENUH (perbaikan penuh proyek kedua): proyek ini kini menggunakan
+art direction permanen NAZE "Editorial Kinetic Motion". Narasi, peta scene,
+subjects, dan SFX tidak berubah; hanya arah visual yang diperbarui.
+
+- Style builtin `editorial-kinetic` (identitas visual permanen #18): editing
+  berbasis typography sebagai elemen visual utama (oversized, stacked,
+  split words, rotating, perspective, text masking, collage), desain grafis
+  editorial kontras tinggi (bentuk tebal, asimetri, halftone, cutout, panel
+  berlapis, kartu miring, color blocking), tanpa dominasi biru.
+- Gerak berlapis: setiap scene mendefinisikan `layers` eksplisit dengan
+  relasi parent-child, null object, mask/clip, parallax, dan Z-depth;
+  kamera rig per scene (zoom, pan, roll, dolly, tracking mengikuti target
+  layer, interpolasi easing mulus).
+- Font: Barlow Condensed (judul kapital, weight 900), Plus Jakarta Sans,
+  Inter; tracking -1. Palet `editorial-ink`: latar kertas #F2F0EB, primer
+  tinta #111111, sekunder #2E2E2E, aksen merah sinyal #E63B2E (topik
+  keamanan, bukan biru), teks #0A0A0A.
+- Transisi antar scene berbasis grafis: textWipe, panelSwipe, rotationWhip,
+  maskSlide, matchCut (bukan fade berulang).
+- Ilustrasi orisinal prosedural di setiap scene tetap hadir (kebijakan
+  permanen), kini sebagai subject layer di dalam komposisi berlapis:
   brain/globe, chart/gauge, phone/character, gauge/brain, shield/character,
-  rocket/chart, shield/globe — semuanya dianimasikan (pop-in, float, scan).
+  rocket/chart, shield/globe.
 - CC burn-in tersinkronisasi, maksimal 2 baris x 32 karakter, sidecar SRT+VTT.
 - Durasi video mengikuti rekaman narasi + 0,25 detik lead + 1,2 detik outro.
 

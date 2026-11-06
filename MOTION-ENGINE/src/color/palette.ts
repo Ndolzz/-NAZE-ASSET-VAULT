@@ -88,6 +88,15 @@ export const palettePresets: Palette[] = [
     text: "#FFF3E6",
     dark: true,
   },
+  {
+    id: "editorial-ink",
+    name: "Editorial Ink",
+    background: "#F2F0EB",
+    primary: "#111111",
+    secondary: "#2E2E2E",
+    accent: "#E63B2E",
+    text: "#0A0A0A",
+  },
 ];
 
 export function getPalette(id: string): Palette {

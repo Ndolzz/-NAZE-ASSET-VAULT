@@ -31,6 +31,20 @@ export interface StyleTypography {
   titleScale: number;
 }
 
+/**
+ * Optional motion-system configuration. The Editorial Kinetic Motion art
+ * direction is a permanent NAZE identity; all other styles stay on the
+ * classic composition path and are unaffected by this field.
+ */
+export interface StyleMotion {
+  /** "classic" (default) or "editorial-kinetic" layered composition. */
+  system?: "classic" | "editorial-kinetic";
+  /** Parallax strength for layered z-depth (0..1). */
+  parallax?: number;
+  /** Whether the style opts scenes into the camera rig by default. */
+  camera?: boolean;
+}
+
 export interface StyleDef {
   id: string;
   name: string;
@@ -45,4 +59,5 @@ export interface StyleDef {
   animation: { intensity: number; signature: string[] };
   transitions: string[];
   topics: string[];
+  motion?: StyleMotion;
 }

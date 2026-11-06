@@ -1,39 +1,8 @@
 {
   "schema": "naze-project/2.0",
   "name": "AI-CYBERSECURITY",
-  "style": {
-    "id": "ai-cyber-doc",
-    "name": "18. AI Cyber Documentary",
-    "tagline": "Dokumenter teknologi sinematik: ancaman siber bertenaga AI, grid HUD, kinetic typography tekanan tinggi.",
-    "palette": "custom",
-    "typography": {
-      "fontFiles": ["FONTS/GOOGLE/TECHNO/oxanium.ttf"],
-      "fontFamily": "NazeOxanium",
-      "titleCase": "upper",
-      "titleWeight": "800",
-      "bodyWeight": "600",
-      "letterSpacing": 1,
-      "titleScale": 0.72
-    },
-    "illustrationKind": "abstract",
-    "stroke": "none",
-    "shading": "gradient",
-    "texture": "grid",
-    "composition": "asymmetric",
-    "animation": { "intensity": 0.95, "signature": ["glitch", "dataStream", "hudScan"] },
-    "transitions": ["zoomDissolve", "panelSwipe", "shapeWipe"],
-    "topics": ["ai", "cyber", "keamanan", "teknologi", "dokumenter"]
-  },
-  "palette": {
-    "id": "ai-cyber-brand",
-    "name": "AI Cyber Brand",
-    "background": "#0B0B10",
-    "primary": "#FF3B47",
-    "secondary": "#A855F7",
-    "accent": "#FF9E1B",
-    "text": "#F5F7FA",
-    "dark": true
-  },
+  "style": "editorial-kinetic",
+  "palette": "editorial-ink",
   "profile": "vertical-1080",
   "animationIntensity": 1,
   "accentWords": true,
@@ -59,7 +28,24 @@
         { "file": "AUDIO/SFX/INTERFACE/glitch_001.wav", "volume": 0.5, "at": 2.3 },
         { "file": "AUDIO/SFX/DIGITAL/phaser_up_4.ogg", "volume": 0.45, "at": 2.9 },
         { "file": "AUDIO/SFX/IMPACT/impact_metal_heavy_000.ogg", "volume": 0.7, "at": 3.4 }
-      ]
+      ],
+      "layers": [
+        { "id": "s1-grid", "kind": "grid", "box": [0, 0, 1, 1], "fill": "text", "z": 0.8, "enter": { "type": "wipe" } },
+        { "id": "s1-halftone", "kind": "halftone", "box": [0, 0, 1, 0.07], "fill": "accent", "z": 0.85, "enter": { "type": "wipe", "at": 0.15 } },
+        { "id": "s1-band", "kind": "colorblock", "box": [0, 0.755, 1, 0.245], "fill": "primary", "z": 0.9, "enter": { "type": "wipe", "at": 0.1 } },
+        { "id": "s1-title", "kind": "typography", "mode": "oversized", "text": "AI IS THE", "box": [0.04, 0.09, 0.92, 0.18], "fill": "primary", "underline": true, "z": 1.1, "enter": { "type": "pop", "at": 0.2 } },
+        { "id": "s1-weapon", "kind": "typography", "mode": "oversized", "text": "NEW WEAPON", "box": [0.04, 0.3, 0.92, 0.22], "fill": "accent", "z": 1.1, "enter": { "type": "spin", "at": 0.5 }, "transform": { "x": [{ "t": 0, "value": 0 }, { "t": 4, "value": 18 }] } },
+        { "id": "s1-subject-a", "kind": "subject", "subjectIndex": 0, "box": [0.06, 0.53, 0.42, 0.2], "z": 1.15, "enter": { "type": "pop", "at": 0.8 } },
+        { "id": "s1-subject-b", "kind": "subject", "subjectIndex": 1, "box": [0.52, 0.53, 0.42, 0.2], "z": 1.15, "enter": { "type": "pop", "at": 0.95 } },
+        { "id": "s1-band-text", "kind": "typography", "mode": "stacked", "text": "BUKAN FIKSI", "box": [0.08, 0.79, 0.84, 0.18], "fill": "#F2F0EB", "z": 1.2, "enter": { "type": "rise", "at": 1.1 } }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.16, "panY": 0.02 },
+          { "at": 2.4, "zoom": 1.0, "panY": 0, "ease": "easeInOutSine" },
+          { "at": 4.2, "zoom": 1.06, "panX": -0.03, "ease": "easeInOutSine" }
+        ]
+      }
     },
     {
       "id": "scene-2",
@@ -75,7 +61,24 @@
         { "file": "AUDIO/SFX/DIGITAL/zap_1.ogg", "volume": 0.45, "at": 1.6 },
         { "file": "AUDIO/SFX/DIGITAL/phaser_up_7.ogg", "volume": 0.4, "at": 2.3 },
         { "file": "AUDIO/SFX/IMPACT/impact_punch_heavy_000.ogg", "volume": 0.6, "at": 2.8 }
-      ]
+      ],
+      "layers": [
+        { "id": "s2-block", "kind": "colorblock", "box": [0, 0, 1, 0.16], "fill": "primary", "z": 0.9, "enter": { "type": "wipe" } },
+        { "id": "s2-title", "kind": "typography", "mode": "oversized", "text": "AUTOMATED", "box": [0.04, 0.01, 0.92, 0.14], "fill": "#F2F0EB", "z": 1.1, "enter": { "type": "slideL", "at": 0.15 } },
+        { "id": "s2-split", "kind": "typography", "mode": "splitWords", "text": "LEBIH CEPAT LEBIH OTOMATIS", "box": [0.04, 0.22, 0.92, 0.14], "fill": "text", "z": 1.05, "enter": { "type": "rise", "at": 0.4 } },
+        { "id": "s2-null", "kind": "null", "box": [0.05, 0.4, 0.9, 0.5], "z": 1.0, "transform": { "rotate": [{ "t": 0, "value": -1.5 }, { "t": 3, "value": 1.5 }] }, "enter": { "type": "none" } },
+        { "id": "s2-card", "kind": "card", "parent": "s2-null", "box": [0.07, 0.42, 0.5, 0.42], "rotate": -3, "z": 1.02, "enter": { "type": "slideL", "at": 0.6 } },
+        { "id": "s2-chart", "kind": "subject", "subjectIndex": 0, "parent": "s2-card", "box": [0.09, 0.44, 0.46, 0.38], "z": 1.05, "enter": { "type": "pop", "at": 0.85 } },
+        { "id": "s2-gauge", "kind": "subject", "subjectIndex": 1, "parent": "s2-null", "box": [0.62, 0.46, 0.32, 0.34], "z": 1.1, "enter": { "type": "pop", "at": 1.0 } },
+        { "id": "s2-bar", "kind": "shape", "shape": "bar", "box": [0.07, 0.88, 0.86, 0.045], "fill": "accent", "z": 1.15, "enter": { "type": "slideL", "at": 1.3 } }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.05, "panX": 0.03 },
+          { "at": 1.2, "zoom": 1.2, "panX": -0.02, "dolly": 0.5, "track": "s2-card", "ease": "easeInOutSine" },
+          { "at": 2.8, "zoom": 1.0, "panX": 0, "dolly": 0, "track": null, "ease": "easeInOutSine" }
+        ]
+      }
     },
     {
       "id": "scene-3",
@@ -93,7 +96,27 @@
         { "file": "AUDIO/SFX/DIGITAL/low_three_tone.ogg", "volume": 0.4, "at": 3.4 },
         { "file": "AUDIO/SFX/DIGITAL/zap_three_tone_up.ogg", "volume": 0.4, "at": 4.2 },
         { "file": "AUDIO/SFX/IMPACT/impact_glass_heavy_000.ogg", "volume": 0.55, "at": 5.0 }
-      ]
+      ],
+      "layers": [
+        { "id": "s3-grid", "kind": "grid", "box": [0, 0, 1, 1], "fill": "text", "z": 0.8, "enter": { "type": "wipe" } },
+        { "id": "s3-mask", "kind": "typography", "mode": "maskReveal", "text": "PHISHING", "box": [0.05, 0.06, 0.9, 0.2], "fill": "primary", "z": 1.1, "enter": { "type": "wipe", "at": 0.15, "dur": 1.0 } },
+        { "id": "s3-depth", "kind": "typography", "mode": "perspective", "text": "VOICE CLONING", "box": [0.05, 0.3, 0.9, 0.16], "fill": "accent", "z": 1.05, "enter": { "type": "rise", "at": 0.8 } },
+        { "id": "s3-halftone", "kind": "halftone", "box": [0, 0.5, 1, 0.06], "fill": "secondary", "z": 0.85, "enter": { "type": "wipe", "at": 0.9 } },
+        { "id": "s3-null", "kind": "null", "box": [0.05, 0.56, 0.9, 0.36], "z": 1.0, "transform": { "x": [{ "t": 0, "value": 0 }, { "t": 3, "value": 10 }, { "t": 6, "value": 0 }] }, "enter": { "type": "none" } },
+        { "id": "s3-card", "kind": "card", "parent": "s3-null", "box": [0.06, 0.58, 0.42, 0.32], "rotate": 4, "z": 1.02, "enter": { "type": "slideR", "at": 1.0 } },
+        { "id": "s3-phone", "kind": "subject", "subjectIndex": 0, "parent": "s3-card", "box": [0.08, 0.6, 0.38, 0.28], "z": 1.05, "enter": { "type": "pop", "at": 1.2 } },
+        { "id": "s3-cutout", "kind": "cutout", "parent": "s3-null", "box": [0.52, 0.6, 0.4, 0.3], "fill": "primary", "z": 1.02, "enter": { "type": "slideL", "at": 1.15 } },
+        { "id": "s3-victim", "kind": "subject", "subjectIndex": 1, "parent": "s3-null", "box": [0.55, 0.62, 0.34, 0.26], "z": 1.05, "mask": { "shape": "rect", "inset": 0.05 }, "enter": { "type": "pop", "at": 1.35 } },
+        { "id": "s3-stripe", "kind": "shape", "shape": "stripe", "box": [0.06, 0.9, 0.45, 0.08], "fill": "primary", "z": 1.1, "enter": { "type": "wipe", "at": 1.6 } }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.1 },
+          { "at": 1.8, "zoom": 1.24, "dolly": 0.55, "track": "s3-mask", "ease": "easeInOutSine" },
+          { "at": 4.5, "zoom": 1.02, "dolly": 0, "track": null, "ease": "easeInOutSine" },
+          { "at": 6.0, "zoom": 1.08, "panY": 0.02, "ease": "easeInOutSine" }
+        ]
+      }
     },
     {
       "id": "scene-4",
@@ -108,7 +131,23 @@
         { "file": "AUDIO/SFX/INTERFACE/tick_001.wav", "volume": 0.3, "at": 0.7 },
         { "file": "AUDIO/SFX/DIGITAL/phase_jump_2.ogg", "volume": 0.4, "at": 1.3 },
         { "file": "AUDIO/SFX/INTERFACE/error_003.wav", "volume": 0.5, "at": 1.9 }
-      ]
+      ],
+      "layers": [
+        { "id": "s4-rot", "kind": "typography", "mode": "rotating", "text": "SCANNING", "box": [0.05, 0.07, 0.9, 0.2], "fill": "primary", "spinSpeed": 0.45, "z": 1.1, "enter": { "type": "spin", "at": 0.15 } },
+        { "id": "s4-stack", "kind": "typography", "mode": "stacked", "text": "FOR WEAKNESS", "box": [0.05, 0.3, 0.9, 0.22], "fill": "accent", "z": 1.08, "enter": { "type": "rise", "at": 0.4 } },
+        { "id": "s4-ring", "kind": "shape", "shape": "ring", "box": [0.2, 0.56, 0.6, 0.28], "fill": "secondary", "z": 0.95, "enter": { "type": "pop", "at": 0.6 } },
+        { "id": "s4-gauge", "kind": "subject", "subjectIndex": 0, "box": [0.24, 0.59, 0.26, 0.22], "z": 1.1, "enter": { "type": "pop", "at": 0.75 } },
+        { "id": "s4-brain", "kind": "subject", "subjectIndex": 1, "box": [0.52, 0.59, 0.26, 0.22], "z": 1.1, "enter": { "type": "pop", "at": 0.9 } },
+        { "id": "s4-block", "kind": "colorblock", "box": [0, 0.88, 1, 0.12], "fill": "primary", "z": 1.3, "enter": { "type": "wipe", "at": 1.1 } },
+        { "id": "s4-tag", "kind": "typography", "mode": "oversized", "text": "CELAH DITEMUKAN", "box": [0.05, 0.885, 0.9, 0.11], "fill": "#F2F0EB", "z": 1.35, "enter": { "type": "rise", "at": 1.25 } }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.2, "panY": 0.02 },
+          { "at": 1.4, "zoom": 1.02, "panY": 0, "ease": "easeInOutSine" },
+          { "at": 2.8, "zoom": 1.08, "panX": 0.03, "ease": "easeInOutSine" }
+        ]
+      }
     },
     {
       "id": "scene-5",
@@ -128,7 +167,27 @@
         { "file": "AUDIO/SFX/DIGITAL/power_up_8.ogg", "volume": 0.4, "at": 5.2 },
         { "file": "AUDIO/SFX/INTERFACE/pluck_001.wav", "volume": 0.4, "at": 5.9 },
         { "file": "AUDIO/SFX/IMPACT/impact_soft_heavy_000.ogg", "volume": 0.5, "at": 6.3 }
-      ]
+      ],
+      "layers": [
+        { "id": "s5-grid", "kind": "grid", "box": [0, 0, 1, 1], "fill": "text", "z": 0.75, "enter": { "type": "wipe" } },
+        { "id": "s5-panel", "kind": "panel", "box": [0.04, 0.05, 0.92, 0.18], "fill": "primary", "z": 0.95, "enter": { "type": "slideR", "at": 0.1 } },
+        { "id": "s5-title", "kind": "typography", "mode": "oversized", "text": "CYBER DEFENSE", "box": [0.05, 0.06, 0.9, 0.16], "fill": "#F2F0EB", "z": 1.1, "enter": { "type": "slideR", "at": 0.25 } },
+        { "id": "s5-stack", "kind": "typography", "mode": "stacked", "text": "DETEKSI MALWARE ANCAMAN", "box": [0.06, 0.27, 0.88, 0.2], "fill": "text", "z": 1.05, "enter": { "type": "rise", "at": 0.6 } },
+        { "id": "s5-null", "kind": "null", "box": [0.05, 0.5, 0.9, 0.4], "z": 1.0, "transform": { "y": [{ "t": 0, "value": 0 }, { "t": 3, "value": -26 }, { "t": 7, "value": 0 }] }, "enter": { "type": "none" } },
+        { "id": "s5-shield", "kind": "subject", "subjectIndex": 0, "parent": "s5-null", "box": [0.07, 0.52, 0.4, 0.34], "z": 1.15, "enter": { "type": "pop", "at": 0.9 } },
+        { "id": "s5-card", "kind": "card", "parent": "s5-null", "box": [0.52, 0.54, 0.4, 0.32], "rotate": -4, "z": 1.05, "enter": { "type": "slideL", "at": 1.1 } },
+        { "id": "s5-analyst", "kind": "subject", "subjectIndex": 1, "parent": "s5-card", "box": [0.55, 0.57, 0.34, 0.26], "z": 1.08, "enter": { "type": "pop", "at": 1.3 } },
+        { "id": "s5-block", "kind": "colorblock", "box": [0, 0.89, 1, 0.11], "fill": "accent", "z": 1.5, "enter": { "type": "wipe", "at": 1.6 } },
+        { "id": "s5-tag", "kind": "typography", "mode": "oversized", "text": "AI MELINDUNGI", "box": [0.05, 0.895, 0.9, 0.1], "fill": "#F2F0EB", "z": 1.55, "enter": { "type": "rise", "at": 1.75 } }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.1 },
+          { "at": 1.8, "zoom": 1.26, "dolly": 0.7, "track": "s5-card", "ease": "easeInOutSine" },
+          { "at": 4.2, "zoom": 1.05, "dolly": 0, "track": null, "ease": "easeInOutSine" },
+          { "at": 6.8, "zoom": 1.0, "panY": -0.02, "ease": "easeInOutSine" }
+        ]
+      }
     },
     {
       "id": "scene-6",
@@ -145,7 +204,22 @@
         { "file": "AUDIO/SFX/DIGITAL/phaser_down_2.ogg", "volume": 0.45, "at": 2.3 },
         { "file": "AUDIO/SFX/DIGITAL/zap_2.ogg", "volume": 0.4, "at": 3.0 },
         { "file": "AUDIO/SFX/IMPACT/impact_metal_medium_000.ogg", "volume": 0.5, "at": 3.7 }
-      ]
+      ],
+      "layers": [
+        { "id": "s6-collage", "kind": "typography", "mode": "collage", "text": "ARMS RACE", "box": [0.02, 0.04, 0.96, 0.26], "fill": "primary", "z": 1.05, "enter": { "type": "wipe", "at": 0.1 } },
+        { "id": "s6-tri", "kind": "shape", "shape": "triangle", "box": [0.66, 0.06, 0.24, 0.16], "fill": "accent", "z": 1.0, "enter": { "type": "pop", "at": 0.5 }, "transform": { "rotate": [{ "t": 0, "value": 0 }, { "t": 4, "value": 22 }] } },
+        { "id": "s6-rocket", "kind": "subject", "subjectIndex": 0, "box": [0.06, 0.34, 0.42, 0.3], "z": 1.15, "enter": { "type": "rise", "at": 0.7 } },
+        { "id": "s6-chart", "kind": "subject", "subjectIndex": 1, "box": [0.52, 0.38, 0.42, 0.26], "z": 1.1, "enter": { "type": "rise", "at": 0.9 } },
+        { "id": "s6-bar", "kind": "shape", "shape": "bar", "box": [0.06, 0.72, 0.88, 0.045], "fill": "primary", "z": 1.1, "enter": { "type": "slideL", "at": 1.1 } },
+        { "id": "s6-rot", "kind": "typography", "mode": "rotating", "text": "ADAPTASI", "box": [0.3, 0.76, 0.4, 0.16], "fill": "accent", "spinSpeed": 0.5, "z": 1.2, "enter": { "type": "spin", "at": 1.3 } }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.05, "rotate": -2 },
+          { "at": 2.2, "zoom": 1.15, "rotate": 2, "ease": "easeInOutSine" },
+          { "at": 4.0, "zoom": 1.0, "rotate": 0, "ease": "easeInOutSine" }
+        ]
+      }
     },
     {
       "id": "scene-7",
@@ -164,7 +238,25 @@
         { "file": "AUDIO/SFX/INTERFACE/question_003.wav", "volume": 0.4, "at": 6.0 },
         { "file": "AUDIO/SFX/DIGITAL/pep_sound_1.ogg", "volume": 0.45, "at": 7.2 },
         { "file": "AUDIO/SFX/DIGITAL/pep_sound_2.ogg", "volume": 0.35, "at": 8.0 }
-      ]
+      ],
+      "layers": [
+        { "id": "s7-grid", "kind": "grid", "box": [0, 0, 1, 1], "fill": "text", "z": 0.8, "enter": { "type": "wipe" } },
+        { "id": "s7-block", "kind": "colorblock", "box": [0, 0.26, 1, 0.36], "fill": "primary", "z": 0.95, "enter": { "type": "wipe", "at": 0.2 } },
+        { "id": "s7-q1", "kind": "typography", "mode": "oversized", "text": "WHO WINS", "box": [0.05, 0.28, 0.9, 0.16], "fill": "#F2F0EB", "z": 1.1, "enter": { "type": "slideL", "at": 0.4 } },
+        { "id": "s7-q2", "kind": "typography", "mode": "oversized", "text": "THE FUTURE", "box": [0.05, 0.44, 0.9, 0.16], "fill": "accent", "z": 1.1, "enter": { "type": "slideR", "at": 0.6 } },
+        { "id": "s7-split", "kind": "typography", "mode": "splitWords", "text": "MENYERANG ATAU MELINDUNGI", "box": [0.04, 0.66, 0.92, 0.11], "fill": "text", "z": 1.05, "enter": { "type": "rise", "at": 1.0 } },
+        { "id": "s7-shield", "kind": "subject", "subjectIndex": 0, "box": [0.08, 0.79, 0.4, 0.18], "z": 1.15, "enter": { "type": "pop", "at": 1.3 } },
+        { "id": "s7-globe", "kind": "subject", "subjectIndex": 1, "box": [0.52, 0.79, 0.4, 0.18], "z": 1.15, "enter": { "type": "pop", "at": 1.45 } },
+        { "id": "s7-brand", "kind": "typography", "mode": "stacked", "text": "NAZ TECHNOLOGY BEYOND IMAGINATION", "box": [0.06, 0.03, 0.88, 0.2], "fill": "primary", "z": 1.2, "enter": { "type": "rise", "at": 2.4 } }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.18 },
+          { "at": 2.0, "zoom": 1.0, "ease": "easeInOutSine" },
+          { "at": 5.5, "zoom": 1.22, "dolly": 0.5, "track": "s7-brand", "ease": "easeInOutSine" },
+          { "at": 8.5, "zoom": 1.05, "dolly": 0, "track": null, "ease": "easeInOutSine" }
+        ]
+      }
     }
   ]
 }

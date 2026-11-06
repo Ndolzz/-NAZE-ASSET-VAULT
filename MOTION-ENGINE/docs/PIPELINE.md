@@ -50,6 +50,8 @@ Opsi:
   lightbulb, phone, palette-swatch, gauge, globe, shield, star, chart),
   `chart` (data), dan `icon` (name). Setiap scene wajib memiliki minimal
   satu subjek - scene hanya-teks ditolak oleh kebijakan.
+- Scene dapat mendefinisikan `layers` dan `camera` (sistem Editorial Kinetic
+  Motion; lihat bagian Art Direction di bawah).
 
 ## Narasi dan CC
 
@@ -100,3 +102,37 @@ sebagai artifact `naze-render-all`.
 Dua belas pemeriksaan wajib dijalankan pada setiap render (lihat
 `src/validation/validate.ts`). Jika satu saja gagal, render dinyatakan
 gagal dan penyebabnya ditampilkan; pipeline keluar dengan kode error.
+
+## Art Direction: Editorial Kinetic Motion (identitas permanen)
+
+Sejak November 2026, **Editorial Kinetic Motion** adalah art direction permanen NAZE: tipografi sebagai elemen visual utama, desain grafis editorial kontras tinggi, layer compositor, dan camera rig. Style lain tetap tersedia sepenuhnya; setiap produksi bebas memilih arah visualnya.
+
+- Style bawaan: `editorial-kinetic` (style 18), palet `editorial-ink` (kertas #F2F0EB, tinta #111111, aksen merah #E63B2E).
+- Digunakan oleh: **AI-CYBERSECURITY** (perbaikan penuh).
+- Opt-in per scene: aktif bila style memiliki `motion.system = "editorial-kinetic"`, atau scene mendefinisikan `layers` / `camera`. Path komposisi klasik tidak berubah.
+
+### Layer compositor (per scene, field `layers`)
+
+Setiap layer: `id`, `kind` (typography, panel, card, cutout, colorblock, grid, shape, halftone, subject, null), `box` [x, y, w, h] ternormalisasi 0..1, `parent` (parent-child / null object), `z` (kedalaman parallax), `fill` (peran palet: text, primary, secondary, accent, background, invert; atau #hex), `mask` ({shape: rect, circle, band; inset}), `subjectIndex`, `shape` (rect, circle, triangle, bar, ring, stripe), `underline`, `seed`, `spinSpeed`, `rotate`, `transform`, `enter`.
+
+- `transform`: track per properti (x, y, rotate, scale, alpha, skew, blur), masing-masing array keyframe [{t, value, easing}].
+- `enter`: {type: slideL, slideR, rise, pop, spin, wipe, none; at, dur, ease}. Tanpa `at`, stagger otomatis per indeks layer.
+- Anak layer memakai koordinat absolut kanvas; transformasi parent berporos pada pusat parent (alur kerja null object ala Alight Motion).
+
+Mode tipografi (`kind: typography`, field `mode`): `oversized`, `stacked`, `splitWords`, `rotating`, `perspective`, `maskReveal`, `collage`.
+
+### Camera rig (per scene, field `camera`)
+
+`shots`: array [{at, zoom, panX, panY, rotate, dolly, track, ease}]. `track` mengikuti layer mana pun berdasarkan `id`; `dolly` (0..1) mengatur kekuatan tarikan. Tanpa shots, kamera default push-in lembut. Nilai di-clamp aman (zoom 0.6-2.4, pan ±0.4, roll ±12 derajat).
+
+### Transisi grafis
+
+Transisi baru: `textWipe`, `rotationWhip`, `maskSlide`, `matchCut`; seluruh transisi klasik tetap tersedia (dissolve, slidePush, wipe, zoomDissolve, panelSwipe, shapeWipe). Produksi editorial tidak mengulang fade sederhana.
+
+### Aturan art direction
+
+1. Tipografi adalah elemen visual utama; setiap scene memiliki satu focal point yang jelas.
+2. Kontras tinggi, bentuk grafis tebal, asimetri, halftone, panel berlapis, kartu miring.
+3. Aksen warna sesuai topik; biru tidak boleh dominan.
+4. Logo resmi hanya jika tersedia secara legal; tidak ada logo acak sebagai dekorasi.
+5. Path komposisi klasik tidak berubah; sistem ini opt-in per scene.

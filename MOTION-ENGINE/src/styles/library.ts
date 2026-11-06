@@ -1,5 +1,5 @@
 /**
- * Built-in style library: 17 permanent visual styles.
+ * Built-in style library: 18 permanent visual styles.
  * Each style is data, interpreted by the engine core; adding a style never
  * requires rebuilding the rendering engine.
  */
@@ -274,5 +274,21 @@ export const builtinStyles: StyleDef[] = [
     animation: { intensity: 1.0, signature: ["flowField", "morphShape", "typeGlitch"] },
     transitions: ["zoomDissolve", "shapeWipe", "dissolve"],
     topics: ["abstrak", "seni", "musik", "eksperimen", "konsep"],
+  },
+  {
+    id: "editorial-kinetic",
+    name: "18. Editorial Kinetic Motion",
+    tagline: "Typography-driven editorial montage: oversized type, high-contrast ink, halftone, camera rig, layered panels.",
+    palette: "editorial-ink",
+    typography: { fontFiles: [F.barlowCondensed, F.jakarta, F.inter], fontFamily: "NazeBarlow", titleCase: "upper", titleWeight: "900", bodyWeight: "700", letterSpacing: -1, titleScale: 1.0 },
+    illustrationKind: "2d-editorial",
+    stroke: "bold",
+    shading: "flat",
+    texture: "halftone",
+    composition: "asymmetric",
+    animation: { intensity: 1.0, signature: ["oversizedType", "stackedType", "splitWords", "rotatingText", "perspectiveText", "textMask", "typeCollage", "cameraRig", "panelSlide", "colorBlock"] },
+    transitions: ["textWipe", "panelSwipe", "rotationWhip", "maskSlide", "matchCut"],
+    topics: ["editorial", "berita", "kinetik", "opini", "desain", "motivasi"],
+    motion: { system: "editorial-kinetic", parallax: 0.55, camera: true },
   },
 ];
