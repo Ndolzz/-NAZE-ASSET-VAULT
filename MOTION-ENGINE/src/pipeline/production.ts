@@ -13,7 +13,10 @@ import * as path from "node:path";
 import {
   loadPolicy,
   assertPolicyCompliant,
+  assertEditingStandard,
+  loadReferences,
   NazePolicy,
+  NazeReferences,
   ExplicitOverride,
 } from "../core/policy";
 import { getProfile, DEFAULT_PROFILE } from "../render/profiles";
@@ -105,6 +108,8 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
   const policyFile =
     opts.policyFile ?? process.env.NAZE_POLICY ?? path.join(opts.repoRoot, "naze.policy.json");
   const policy: NazePolicy = loadPolicy(policyFile);
+  const referencesFile = path.join(path.dirname(policyFile), "naze.references.json");
+  const references: NazeReferences = loadReferences(referencesFile);
 
   // Stage 2: project, style, palette, profile
   console.log("[STAGE 2/9] Memuat proyek dan menyelesaikan style, palet, dan profil...");
@@ -149,6 +154,33 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
       hasIllustrationsPerScene: manager.hasIllustrationPerScene(plans),
       backgroundMusicExplicit: !!project.musicFile,
       styleCount: styleCount(),
+    },
+    override
+  );
+
+  // Editing reference standard (naze.references.json): mandatory for every
+  // project except legacy projects explicitly listed in exemptProjects.
+  const editingScenes = project.scenes as Array<
+    SceneDef & { layers?: Array<{ kind?: string; transform?: unknown }>; camera?: unknown }
+  >;
+  const editingLayers = editingScenes.flatMap((s) => s.layers ?? []);
+  assertEditingStandard(
+    references,
+    {
+      projectName: project.name,
+      hasLayers: editingScenes.some((s) => (s.layers ?? []).length > 0),
+      hasKeyframeTracks: editingLayers.some((l) => !!l.transform),
+      hasLayeredLayout: editingLayers.some((l) =>
+        ["typography", "panel", "card", "colorblock", "grid", "shape", "halftone"].includes(l.kind ?? "")
+      ),
+      hasVisualSubjects:
+        editingScenes.length > 0 &&
+        editingScenes.every(
+          (s) => (s.subjects ?? []).length > 0 || (s.layers ?? []).some((l) => l.kind === "subject")
+        ),
+      hasNullObject: editingLayers.some((l) => l.kind === "null"),
+      hasCamera: editingScenes.some((s) => !!s.camera),
+      hasTransitions: (style.transitions?.length ?? 0) > 0,
     },
     override
   );
@@ -331,6 +363,8 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
         profile: profile.id,
         policyFile,
         policyVersion: policy.policyVersion,
+        referencesFile,
+        editingReferenceVersion: references.referenceVersion,
         explicitOverride: opts.explicitOverride ?? null,
         narrationEngine: narrConfig.engine,
         duration,

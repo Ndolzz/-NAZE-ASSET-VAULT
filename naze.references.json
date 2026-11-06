@@ -1,0 +1,103 @@
+{
+  "referenceVersion": "1.0.0",
+  "name": "NAZE Editing Reference Standard",
+  "description": "Standar editing referensi permanen dari arsip EXAMPLE_VIDEO. Ditegakkan oleh MOTION-ENGINE/src/core/policy.ts pada setiap render untuk seluruh proyek, kecuali proyek legacy yang terdaftar eksplisit di exemptProjects (dibiarkan apa adanya dan tidak digunakan lagi).",
+  "exampleVideos": [
+    {
+      "id": "example-1",
+      "file": "EXAMPLE_VIDEO/28f98836985e9de8b81051c382d4f17b.mp4",
+      "sizeBytes": 4031472,
+      "demonstrates": {
+        "layers": true,
+        "keyframes": true,
+        "layout": true,
+        "visual": true,
+        "null": true,
+        "camera": true,
+        "transitions": true
+      }
+    },
+    {
+      "id": "example-2",
+      "file": "EXAMPLE_VIDEO/5acff211cf5b51a099ff9e85a77764d8.mp4",
+      "sizeBytes": 3547070,
+      "demonstrates": {
+        "layers": true,
+        "keyframes": true,
+        "layout": true,
+        "visual": true,
+        "null": true,
+        "camera": true,
+        "transitions": true
+      }
+    },
+    {
+      "id": "example-3",
+      "file": "EXAMPLE_VIDEO/69a1ba4764d4713b2a20e98e924aa5c9.mp4",
+      "sizeBytes": 2810639,
+      "demonstrates": {
+        "layers": true,
+        "keyframes": true,
+        "layout": true,
+        "visual": true,
+        "null": true,
+        "camera": true,
+        "transitions": true
+      }
+    },
+    {
+      "id": "example-4",
+      "file": "EXAMPLE_VIDEO/bca453cf082b15173e3f472cbae34a45.mp4",
+      "sizeBytes": 3117469,
+      "demonstrates": {
+        "layers": true,
+        "keyframes": true,
+        "layout": true,
+        "visual": true,
+        "null": true,
+        "camera": true,
+        "transitions": true
+      }
+    }
+  ],
+  "editingRequirements": {
+    "layers": {
+      "required": true,
+      "detail": "Minimal satu scene harus mendefinisikan layers (sistem komposisi berlapis)."
+    },
+    "keyframes": {
+      "required": true,
+      "detail": "Minimal satu layer harus memakai track transform keyframe (x/y/rotate/scale/alpha/skew/blur)."
+    },
+    "layout": {
+      "required": true,
+      "detail": "Komposisi berlapis harus hadir: minimal satu layer typography/panel/card/colorblock/grid/shape/halftone."
+    },
+    "visual": {
+      "required": true,
+      "detail": "Setiap scene harus memiliki subjek visual (subjects atau layer kind subject)."
+    },
+    "null": {
+      "required": true,
+      "detail": "Minimal satu layer null object sebagai parent (alur kerja null object)."
+    },
+    "camera": {
+      "required": true,
+      "detail": "Minimal satu scene harus mendefinisikan camera (shots: zoom/pan/panX/panY/rotate/dolly/track)."
+    },
+    "transitions": {
+      "required": true,
+      "detail": "Style harus mendeklarasikan transisi antarscene."
+    }
+  },
+  "exemptProjects": [
+    {
+      "name": "DARK-WEB",
+      "reason": "Proyek legacy jalur klasik; tidak digunakan lagi dan dibiarkan apa adanya."
+    },
+    {
+      "name": "STYLE-SHOWCASE",
+      "reason": "Proyek legacy jalur klasik; tidak digunakan lagi dan dibiarkan apa adanya."
+    }
+  ]
+}

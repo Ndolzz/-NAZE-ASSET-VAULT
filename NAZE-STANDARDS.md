@@ -42,6 +42,11 @@ Profil tambahan yang diizinkan: 1440 x 2560 dan 2160 x 3840, keduanya
    (cutout transparan), lalu gambar wajib dianimasikan (keyframes,
    layers, atau camera). Gambar mentahan dari `VISUAL/RAW/` tidak
    boleh dipakai langsung.
+9. Setiap proyek baru wajib memenuhi standar editing referensi
+   `naze.references.json`: layer, keyframe, tata letak berlapis, visual,
+   null object, kamera, dan transisi. Proyek legacy yang terdaftar di
+   `exemptProjects` pada berkas tersebut dikecualikan dan dibiarkan apa
+   adanya.
 
 ## Aset Gambar Mentahan (VISUAL/RAW)
 
@@ -67,4 +72,5 @@ tersebut tercatat permanen pada render report.
 - Arsitektur: `MOTION-ENGINE/docs/ARCHITECTURE.md`
 - Pustaka style: `MOTION-ENGINE/docs/STYLES.md`
 - Pipeline: `MOTION-ENGINE/docs/PIPELINE.md`
+- Standar editing referensi: `naze.references.json`
 - Workflow render: `.github/workflows/render.yml`

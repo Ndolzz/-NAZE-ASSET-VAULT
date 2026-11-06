@@ -113,3 +113,111 @@ export function assertPolicyCompliant(
   }
   return [];
 }
+
+/**
+ * Editing reference standard (naze.references.json).
+ * Catalogues the EXAMPLE_VIDEO reference edits and the mandatory editing
+ * features every new project must use; enforced by the production pipeline.
+ * Projects explicitly listed in exemptProjects are legacy and kept as-is.
+ */
+export interface EditingFeature {
+  required: boolean;
+  detail: string;
+}
+
+export interface NazeReferences {
+  referenceVersion: string;
+  name: string;
+  description?: string;
+  exampleVideos: Array<{
+    id: string;
+    file: string;
+    sizeBytes?: number;
+    demonstrates: Record<string, boolean>;
+  }>;
+  editingRequirements: Record<string, EditingFeature>;
+  exemptProjects: Array<{ name: string; reason: string }>;
+}
+
+export function loadReferences(refPath: string): NazeReferences {
+  const raw = fs.readFileSync(refPath, "utf-8");
+  const references = JSON.parse(raw) as NazeReferences;
+  if (!references.editingRequirements) {
+    throw new Error(`Invalid NAZE references file: ${refPath}`);
+  }
+  return references;
+}
+
+export interface EditingCheckInput {
+  projectName: string;
+  hasLayers: boolean;
+  hasKeyframeTracks: boolean;
+  hasLayeredLayout: boolean;
+  hasVisualSubjects: boolean;
+  hasNullObject: boolean;
+  hasCamera: boolean;
+  hasTransitions: boolean;
+}
+
+/** True when the project is explicitly exempt (legacy, kept as-is). */
+export function isExemptProject(references: NazeReferences, projectName: string): boolean {
+  return (references.exemptProjects ?? []).some((e) => e.name === projectName);
+}
+
+export function validateEditingStandard(
+  references: NazeReferences,
+  input: EditingCheckInput,
+  override?: ExplicitOverride
+): { violations: PolicyViolation[]; overriddenRules: string[] } {
+  const violations: PolicyViolation[] = [];
+  if (isExemptProject(references, input.projectName)) {
+    console.warn(
+      `[POLICY] Proyek "${input.projectName}" dikecualikan dari standar editing referensi (proyek legacy).`
+    );
+    return { violations, overriddenRules: [] };
+  }
+  const featureFlags: Record<string, boolean> = {
+    layers: input.hasLayers,
+    keyframes: input.hasKeyframeTracks,
+    layout: input.hasLayeredLayout,
+    visual: input.hasVisualSubjects,
+    null: input.hasNullObject,
+    camera: input.hasCamera,
+    transitions: input.hasTransitions,
+  };
+  for (const [feature, present] of Object.entries(featureFlags)) {
+    const req = references.editingRequirements[feature];
+    if (req?.required && !present) {
+      violations.push({
+        rule: `editing.${feature}`,
+        detail: req.detail || `Editing feature "${feature}" is required by the NAZE editing reference standard.`,
+      });
+    }
+  }
+  if (violations.length === 0) return { violations, overriddenRules: [] };
+  const overrideValid =
+    !!override &&
+    override.flag === "--explicit-override" &&
+    !!override.reason &&
+    override.reason.trim().length >= 10;
+  if (overrideValid) {
+    console.warn(`[POLICY] Explicit user override applied (reason: ${override!.reason.trim()}).`);
+    return { violations: [], overriddenRules: violations.map((v) => v.rule) };
+  }
+  return { violations, overriddenRules: [] };
+}
+
+export function assertEditingStandard(
+  references: NazeReferences,
+  input: EditingCheckInput,
+  override?: ExplicitOverride
+): string[] {
+  const { violations } = validateEditingStandard(references, input, override);
+  if (violations.length > 0) {
+    const lines = violations.map((v) => `  - [${v.rule}] ${v.detail}`).join("\n");
+    throw new Error(
+      `NAZE editing reference standard violations (naze.references.json v${references.referenceVersion}):\n${lines}`
+    );
+  }
+  return [];
+}
