@@ -37,6 +37,19 @@ Profil tambahan yang diizinkan: 1440 x 2560 dan 2160 x 3840, keduanya
 6. Background music tidak boleh ditambahkan tanpa permintaan eksplisit.
 7. Hasil produksi wajib lolos validasi otomatis 12 titik; kegagalan
    apa pun berarti render gagal dan penyebabnya dilaporkan.
+8. Setiap gambar yang digunakan sebagai subjek ilustrasi utama wajib
+   diproses sebelum dipakai: latar belakang dihapus terlebih dahulu
+   (cutout transparan), lalu gambar wajib dianimasikan (keyframes,
+   layers, atau camera). Gambar mentahan dari `VISUAL/RAW/` tidak
+   boleh dipakai langsung.
+
+## Aset Gambar Mentahan (VISUAL/RAW)
+
+Folder `VISUAL/RAW/` menampung gambar mentahan yang belum diproses;
+gambar di sini belum siap pakai dan tidak boleh digunakan dalam produksi
+sebelum latar belakangnya dihapus dan rencana animasinya ditetapkan.
+Hasil cutout yang telah diproses disimpan di folder visual final yang
+sesuai, bukan kembali di folder ini.
 
 ## Persistensi
 
