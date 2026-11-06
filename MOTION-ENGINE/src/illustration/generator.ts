@@ -16,6 +16,18 @@ export interface DrawKit {
   t: number; // scene-local time (s)
 }
 
+/** Optional per-subject detail switches; absent means the classic look. */
+export interface SubjectFeatures {
+  hair?: boolean;
+  hat?: boolean;
+  glasses?: boolean;
+  outfit?: boolean;
+  accessory?: boolean;
+  /** Rising data particles (phone) or a custom label (gauge). */
+  dataFlow?: boolean;
+  label?: string;
+}
+
 function lineWidthFor(kit: DrawKit, base: number): number {
   if (kit.style.stroke === "none") return 0;
   if (kit.style.stroke === "thin") return base * 0.4;
@@ -69,13 +81,13 @@ export function drawSubject(ctx: Ctx2D, subject: any, kit: DrawKit, cx: number, 
 
   switch (subject.kind) {
     case "character":
-      drawCharacter(ctx, kit, rng, size, subject.mood ?? "neutral", lw);
+      drawCharacter(ctx, kit, rng, size, subject.mood ?? "neutral", lw, subject.features);
       break;
     case "chart":
       drawChart(ctx, kit, rng, size, subject.data ?? [30, 70, 45, 90, 60], lw);
       break;
     case "object":
-      drawObject(ctx, kit, rng, size, subject.name ?? "star", lw);
+      drawObject(ctx, kit, rng, size, subject.name ?? "star", lw, subject.features);
       break;
     case "icon":
     default:
@@ -90,10 +102,38 @@ function seedNum(rng: () => number): number {
 }
 
 /** ---------------- Character (all illustration styles) ---------------- */
-function drawCharacter(ctx: Ctx2D, kit: DrawKit, rng: () => number, size: number, mood: string, lw: number): void {
+function drawCharacter(
+  ctx: Ctx2D,
+  kit: DrawKit,
+  rng: () => number,
+  size: number,
+  mood: string,
+  lw: number,
+  features?: SubjectFeatures
+): void {
   const { palette } = kit;
   const r = size * 0.30;
   const bodyR = size * 0.24;
+  const f = features ?? {};
+
+  // Legs, pants, and shoes (optional detailed outfit)
+  if (f.outfit) {
+    const legY = r * 1.5 + bodyR * 0.7;
+    const legW = bodyR * 0.36;
+    const legH = r * 0.6;
+    for (const sx of [-1, 1]) {
+      roundRectPath(ctx, sx * bodyR * 0.44 - legW / 2, legY, legW, legH, legW * 0.4);
+      ctx.fillStyle = shade(palette.primary, -0.3);
+      ctx.fill();
+      applyStroke(ctx, kit, lw * 0.8);
+      roundRectPath(ctx, sx * bodyR * 0.44 - legW * 0.75, legY + legH - r * 0.02, legW * 1.5, r * 0.16, r * 0.08);
+      ctx.fillStyle = palette.text;
+      ctx.fill();
+      applyStroke(ctx, kit, lw * 0.7);
+      ctx.fillStyle = withAlpha(palette.accent, 0.9);
+      ctx.fillRect(sx * bodyR * 0.44 - legW * 0.75, legY + legH + r * 0.09, legW * 1.5, r * 0.045);
+    }
+  }
 
   // Body (blob)
   blobPath(ctx, 0, r * 1.55, bodyR, rng() * 1000, 9, 0.14);
@@ -101,11 +141,68 @@ function drawCharacter(ctx: Ctx2D, kit: DrawKit, rng: () => number, size: number
   ctx.fill();
   applyStroke(ctx, kit, lw);
 
+  // Shirt: collar and zipper (optional detailed outfit)
+  if (f.outfit) {
+    ctx.strokeStyle = withAlpha(palette.text, 0.85);
+    ctx.lineWidth = lw * 0.8;
+    ctx.beginPath();
+    ctx.moveTo(-bodyR * 0.3, r * 1.05);
+    ctx.lineTo(0, r * 1.4);
+    ctx.lineTo(bodyR * 0.3, r * 1.05);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, r * 1.45);
+    ctx.lineTo(0, r * 2.1);
+    ctx.stroke();
+    for (let i = 0; i < 3; i++) {
+      const zy = r * 1.52 + i * r * 0.18;
+      ctx.beginPath();
+      ctx.moveTo(-bodyR * 0.12, zy);
+      ctx.lineTo(bodyR * 0.12, zy);
+      ctx.stroke();
+    }
+  }
+
   // Head
   blobPath(ctx, 0, 0, r, seedNum(rng), 10, 0.08);
   fillShape(ctx, kit, palette.primary, 0, 0, r);
   ctx.fill();
   applyStroke(ctx, kit, lw);
+
+  // Hair and hat (optional detailed character features)
+  if (f.hair) {
+    ctx.fillStyle = shade(palette.text, -0.25);
+    ctx.beginPath();
+    ctx.arc(0, -r * 0.05, r * 1.04, Math.PI, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+    for (let i = 0; i < 3; i++) {
+      const hx = -r * 0.55 + i * r * 0.55;
+      ctx.beginPath();
+      ctx.moveTo(hx - r * 0.14, -r * 0.7);
+      ctx.quadraticCurveTo(hx + r * 0.06, -r * 1.24, hx + r * 0.24, -r * 0.76);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+  if (f.hat) {
+    ctx.save();
+    ctx.rotate(-0.05);
+    ctx.beginPath();
+    ctx.arc(0, -r * 0.5, r * 0.92, Math.PI, Math.PI * 2);
+    ctx.closePath();
+    fillShape(ctx, kit, palette.accent, 0, -r * 0.5, r * 0.92);
+    ctx.fill();
+    applyStroke(ctx, kit, lw * 0.8);
+    roundRectPath(ctx, -r * 1.02, -r * 0.62, r * 2.04, r * 0.2, r * 0.1);
+    ctx.fillStyle = shade(palette.accent, -0.2);
+    ctx.fill();
+    applyStroke(ctx, kit, lw * 0.7);
+    roundRectPath(ctx, -r * 0.1, -r * 1.42, r * 0.2, r * 0.22, r * 0.06);
+    ctx.fillStyle = palette.text;
+    ctx.fill();
+    ctx.restore();
+  }
 
   // Eyes
   const eyeY = -r * 0.1;
@@ -135,6 +232,36 @@ function drawCharacter(ctx: Ctx2D, kit: DrawKit, rng: () => number, size: number
       ctx.lineTo(-eyeDX * 0.5, eyeY - r * 0.42);
       ctx.stroke();
     }
+  }
+
+  // Glasses (optional detailed character features)
+  if (f.glasses) {
+    const gy = -r * 0.1;
+    const gdx = r * 0.36;
+    const gr = r * 0.24;
+    for (const sx of [-1, 1]) {
+      ctx.beginPath();
+      ctx.arc(sx * gdx, gy, gr, 0, Math.PI * 2);
+      ctx.fillStyle = withAlpha(palette.secondary, 0.16);
+      ctx.fill();
+      ctx.strokeStyle = kit.palette.text;
+      ctx.lineWidth = lw * 0.8;
+      ctx.stroke();
+    }
+    ctx.strokeStyle = kit.palette.text;
+    ctx.lineWidth = lw * 0.7;
+    ctx.beginPath();
+    ctx.moveTo(-gdx + gr, gy);
+    ctx.lineTo(gdx - gr, gy);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(-gdx - gr, gy);
+    ctx.lineTo(-r * 0.95, gy - r * 0.1);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(gdx + gr, gy);
+    ctx.lineTo(r * 0.95, gy - r * 0.1);
+    ctx.stroke();
   }
 
   // Mouth by mood
@@ -167,6 +294,22 @@ function drawCharacter(ctx: Ctx2D, kit: DrawKit, rng: () => number, size: number
   ctx.quadraticCurveTo(bodyR * 1.7, r * 1.0 - armWave * r, bodyR * 1.5, r * 0.6 - armWave * r);
   ctx.stroke();
 
+  // Smartwatch accessory on the right wrist (optional)
+  if (f.accessory) {
+    const wx = bodyR * 1.5;
+    const wy = r * 0.6 - armWave * r;
+    ctx.beginPath();
+    ctx.arc(wx, wy, bodyR * 0.34 * (0.85 + Math.sin(kit.t * 3) * 0.15), 0, Math.PI * 2);
+    ctx.strokeStyle = withAlpha(palette.secondary, 0.45);
+    ctx.lineWidth = lw * 0.6;
+    ctx.stroke();
+    roundRectPath(ctx, wx - bodyR * 0.15, wy - bodyR * 0.13, bodyR * 0.3, bodyR * 0.26, bodyR * 0.08);
+    ctx.fillStyle = palette.text;
+    ctx.fill();
+    ctx.fillStyle = palette.secondary;
+    ctx.fillRect(wx - bodyR * 0.1, wy - bodyR * 0.08, bodyR * 0.2, bodyR * 0.14);
+  }
+
   // Style decorations
   if (kit.style.shading === "halftone") {
     halftoneDots(ctx, -r, r * 0.1, r * 2, r * 0.9, withAlpha(kit.palette.accent, 0.7), 16 * kit.scale, 3 * kit.scale);
@@ -185,7 +328,15 @@ function drawCharacter(ctx: Ctx2D, kit: DrawKit, rng: () => number, size: number
 }
 
 /** ---------------- Objects vocabulary ---------------- */
-function drawObject(ctx: Ctx2D, kit: DrawKit, rng: () => number, size: number, name: string, lw: number): void {
+function drawObject(
+  ctx: Ctx2D,
+  kit: DrawKit,
+  rng: () => number,
+  size: number,
+  name: string,
+  lw: number,
+  features?: SubjectFeatures
+): void {
   const { palette } = kit;
   const s = size * 0.5;
   switch (name) {
@@ -292,6 +443,17 @@ function drawObject(ctx: Ctx2D, kit: DrawKit, rng: () => number, size: number, n
         ctx.fillStyle = i === 1 ? withAlpha(palette.accent, 0.9) : withAlpha(palette.primary, 0.9);
         ctx.fill();
       }
+      if (features?.dataFlow) {
+        for (let i = 0; i < 6; i++) {
+          const p = (kit.t * 0.5 + i / 6) % 1;
+          const px = -s * 0.28 + (i / 5) * s * 0.56;
+          const py = -s * 0.72 - p * s * 1.1;
+          ctx.beginPath();
+          ctx.arc(px, py, 4.5 * kit.scale * (1 - p * 0.55), 0, Math.PI * 2);
+          ctx.fillStyle = withAlpha(palette.secondary, 0.9 * (1 - p));
+          ctx.fill();
+        }
+      }
       break;
     }
     case "palette-swatch": {
@@ -333,7 +495,7 @@ function drawObject(ctx: Ctx2D, kit: DrawKit, rng: () => number, size: number, n
       ctx.font = `800 ${Math.round(34 * kit.scale)}px sans-serif`;
       ctx.fillStyle = palette.text;
       ctx.textAlign = "center";
-      ctx.fillText("60 FPS", 0, s * 1.25);
+      ctx.fillText(features?.label ?? "60 FPS", 0, s * 1.25);
       break;
     }
     case "globe": {

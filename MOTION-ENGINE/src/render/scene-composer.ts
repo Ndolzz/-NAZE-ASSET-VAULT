@@ -26,6 +26,7 @@ export interface ComposerKit {
   animationIntensity: number;
   burnInCc: boolean;
   accentWords: boolean;
+  ccBottomMargin?: number;
   w: number;
   h: number;
   timeline: Timeline;
@@ -223,6 +224,7 @@ export function renderSceneFrame(
         bodyWeight: style.typography.bodyWeight,
         scale,
         accentWords: kit.accentWords,
+        bottomMargin: kit.ccBottomMargin,
       };
       drawCaptionCue(ctx, cue, localCueT, cue.end - cue.start, ccKit, w, h);
     }

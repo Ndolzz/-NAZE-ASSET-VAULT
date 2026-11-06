@@ -43,6 +43,7 @@ export interface RenderVideoOptions {
   animationIntensity: number;
   burnInCc: boolean;
   accentWords: boolean;
+  ccBottomMargin?: number;
 }
 
 export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: number; duration: number }> {
@@ -61,6 +62,7 @@ export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: n
     animationIntensity: opts.animationIntensity * style.animation.intensity,
     burnInCc: opts.burnInCc,
     accentWords: opts.accentWords,
+    ccBottomMargin: opts.ccBottomMargin,
     w,
     h,
     timeline,

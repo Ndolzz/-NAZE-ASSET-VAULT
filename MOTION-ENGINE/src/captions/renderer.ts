@@ -18,6 +18,8 @@ export interface CcRenderKit {
   bodyWeight: string;
   scale: number;
   accentWords: boolean;
+  /** Bottom margin of the pill as a fraction of frame height (default 0.10). */
+  bottomMargin?: number;
 }
 
 const FADE = 0.14;
@@ -64,7 +66,8 @@ export function drawCaptionCue(
   const blockH = lines.length * lineH;
   const boxW = Math.min(maxW, widest + pad * 2);
   const boxH = blockH + pad * 1.4;
-  const boxY = h - Math.round(h * 0.10) - boxH + rise;
+  const ccMargin = Math.min(0.4, Math.max(0.04, kit.bottomMargin ?? 0.10));
+  const boxY = h - Math.round(h * ccMargin) - boxH + rise;
   const boxX = (w - boxW) / 2;
 
   // High-contrast dark pill (light text on near-black) on any palette.

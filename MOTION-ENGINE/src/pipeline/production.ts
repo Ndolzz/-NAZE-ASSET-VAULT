@@ -54,6 +54,11 @@ interface ProjectFile {
   animationIntensity?: number;
   accentWords?: boolean;
   burnInCc?: boolean;
+  /** Per-project CC placement (optional; defaults keep the global behavior). */
+  captions?: {
+    /** Bottom margin of the CC pill as a fraction of frame height. */
+    bottomMargin?: number;
+  };
   /** Explicit background music; absent means no music (permanent policy). */
   musicFile?: string;
   narration: {
@@ -325,6 +330,7 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
     animationIntensity,
     burnInCc: project.burnInCc !== false,
     accentWords,
+    ccBottomMargin: project.captions?.bottomMargin,
   });
 
   // Stage 8: CC sidecars (SRT + VTT)
