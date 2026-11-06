@@ -70,7 +70,7 @@ Untuk kedua engine, trek narasi dirakit pada posisi timeline final
 (`assembleNarrationTrack`): jeda antar-scene menjadi sunyi, bukan drift, jadi
 narasi, CC burn-in, SFX, dan video selalu sejajar. SRT dan VTT ditulis
 sebagai sidecar; CC diburn-in maksimal dua baris dan tidak menutupi area
-ilustrasi utama.
+ilustrasi utama. Pil CC gelap kontras tinggi (teks terang di atas pil hampir hitam di semua palet), ukuran font besar (54 px pada profil 1080) dengan penyusutan otomatis bila baris hampir melebihi lebar aman, dan bayangan lembut agar pil terpisah dari ilustrasi ramai.
 
 Suara produksi dikirim manual lewat chat per proyek: simpan sebagai
 `PROJECTS/<NAMA>/AUDIO/VOICE/narration.mp3`, isi `narration.file`, dan render
