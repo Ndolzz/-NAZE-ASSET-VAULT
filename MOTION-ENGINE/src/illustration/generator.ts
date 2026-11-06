@@ -373,6 +373,101 @@ function drawObject(ctx: Ctx2D, kit: DrawKit, rng: () => number, size: number, n
       ctx.stroke();
       break;
     }
+    case "shoe": {
+      const w = s * 1.0;
+      ctx.save();
+      ctx.rotate(-0.08 + Math.sin(kit.t * 1.4) * 0.02);
+      const glow = 0.45 + Math.sin(kit.t * 2.6) * 0.25;
+      const g = ctx.createRadialGradient(0, 0, s * 0.1, 0, 0, s * 1.4);
+      g.addColorStop(0, withAlpha(palette.secondary, 0.35 * glow));
+      g.addColorStop(1, withAlpha(palette.secondary, 0));
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(0, 0, s * 1.4, 0, Math.PI * 2);
+      ctx.fill();
+      roundRectPath(ctx, -w, s * 0.26, w * 2, s * 0.36, s * 0.17);
+      fillShape(ctx, kit, palette.text, 0, s * 0.44, s);
+      ctx.fill();
+      applyStroke(ctx, kit, lw);
+      ctx.beginPath();
+      ctx.moveTo(-w * 0.92, s * 0.28);
+      ctx.quadraticCurveTo(-w * 0.98, -s * 0.3, -w * 0.5, -s * 0.4);
+      ctx.quadraticCurveTo(-w * 0.15, -s * 0.72, w * 0.3, -s * 0.26);
+      ctx.quadraticCurveTo(w * 0.78, -s * 0.04, w * 0.94, s * 0.26);
+      ctx.closePath();
+      fillShape(ctx, kit, palette.primary, 0, 0, s);
+      ctx.fill();
+      applyStroke(ctx, kit, lw);
+      ctx.strokeStyle = palette.text;
+      ctx.lineWidth = lw * 0.8;
+      ctx.beginPath();
+      ctx.moveTo(-w * 0.5, -s * 0.4);
+      ctx.quadraticCurveTo(-w * 0.1, -s * 0.6, w * 0.12, -s * 0.38);
+      ctx.stroke();
+      for (let i = 0; i < 3; i++) {
+        const ly = -s * 0.3 + i * s * 0.14;
+        ctx.beginPath();
+        ctx.moveTo(-w * 0.28 + i * w * 0.1, ly);
+        ctx.lineTo(w * 0.05 + i * w * 0.12, ly - s * 0.05);
+        ctx.stroke();
+      }
+      ctx.strokeStyle = palette.accent;
+      ctx.lineWidth = lw * 1.3;
+      ctx.beginPath();
+      ctx.moveTo(-w * 0.62, s * 0.08);
+      ctx.quadraticCurveTo(0, -s * 0.22, w * 0.58, s * 0.12);
+      ctx.stroke();
+      for (let i = 0; i < 6; i++) {
+        const p = (kit.t * 0.45 + i / 6) % 1;
+        const px = -w * 0.8 + (i / 5) * w * 1.6;
+        const py = s * 0.2 - p * s * 1.5;
+        starPath(ctx, px, py, 5 * kit.scale * (1 - p * 0.6), 2 * kit.scale, 4);
+        ctx.fillStyle = withAlpha(palette.secondary, 0.85 * (1 - p));
+        ctx.fill();
+      }
+      ctx.restore();
+      break;
+    }
+    case "footprint": {
+      const pulse = 0.55 + Math.sin(kit.t * 3) * 0.35;
+      const g2 = ctx.createRadialGradient(0, 0, s * 0.05, 0, 0, s * 1.2);
+      g2.addColorStop(0, withAlpha(palette.secondary, 0.4 * pulse));
+      g2.addColorStop(1, withAlpha(palette.secondary, 0));
+      ctx.fillStyle = g2;
+      ctx.beginPath();
+      ctx.arc(0, 0, s * 1.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(0, -s * 0.18, s * 0.4, s * 0.56, 0.12, 0, Math.PI * 2);
+      fillShape(ctx, kit, palette.primary, 0, -s * 0.18, s * 0.5);
+      ctx.fill();
+      ctx.strokeStyle = withAlpha(palette.secondary, 0.9 * pulse);
+      ctx.lineWidth = lw * 0.9;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.ellipse(0, s * 0.48, s * 0.3, s * 0.22, 0, 0, Math.PI * 2);
+      fillShape(ctx, kit, palette.primary, 0, s * 0.48, s * 0.25);
+      ctx.fill();
+      ctx.stroke();
+      for (let i = 0; i < 5; i++) {
+        const tx = -s * 0.42 + (i / 4) * s * 0.84;
+        const ty = -s * 0.66 - (i === 1 ? s * 0.06 : 0) - Math.abs(i - 1) * s * 0.05;
+        ctx.beginPath();
+        ctx.arc(tx, ty, s * (0.1 - i * 0.008), 0, Math.PI * 2);
+        ctx.fillStyle = withAlpha(palette.secondary, 0.9);
+        ctx.fill();
+      }
+      for (let i = 0; i < 7; i++) {
+        const p = (kit.t * 0.55 + i / 7) % 1;
+        const px = -s * 0.5 + (i / 6) * s;
+        const py = s * 0.5 - p * s * 1.7;
+        ctx.beginPath();
+        ctx.arc(px, py, 3.2 * kit.scale * (1 - p * 0.5), 0, Math.PI * 2);
+        ctx.fillStyle = withAlpha(palette.accent, 0.9 * (1 - p));
+        ctx.fill();
+      }
+      break;
+    }
     default: {
       drawIcon(ctx, kit, rng, size, name, lw);
       break;
@@ -508,6 +603,8 @@ export const OBJECT_VOCABULARY = [
   "shield",
   "chart",
   "star",
+  "shoe",
+  "footprint",
 ];
 
 export function drawPaletteBlend(from: string, to: string, t: number): string {
