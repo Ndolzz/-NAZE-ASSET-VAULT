@@ -12,6 +12,7 @@ import { RenderProfile } from "./profiles";
 import { buildEncodeArgs, spawnFfmpeg } from "./encoder";
 import { ComposerKit, renderSceneFrame } from "./scene-composer";
 import { getTransition, TRANSITION_DURATION } from "../core/transitions";
+import type { CaptionEngine } from "../captions/engine";
 
 /**
  * Registers the style's font files (vault paths, repository-relative) under
@@ -44,6 +45,8 @@ export interface RenderVideoOptions {
   burnInCc: boolean;
   accentWords: boolean;
   ccBottomMargin?: number;
+  /** Adaptive Caption Engine (proyek dengan captions.mode "adaptive"). */
+  captionEngine?: CaptionEngine;
 }
 
 export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: number; duration: number }> {
@@ -63,6 +66,7 @@ export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: n
     burnInCc: opts.burnInCc,
     accentWords: opts.accentWords,
     ccBottomMargin: opts.ccBottomMargin,
+    captionEngine: opts.captionEngine,
     w,
     h,
     timeline,

@@ -43,6 +43,8 @@ import { renderVideo } from "../render/renderer";
 import { toSrt, toVtt, cueCoverageOk } from "../captions/segmenter";
 import { validateOutput, ValidationReport } from "../validation/validate";
 import { probeDuration } from "../render/encoder";
+import { createCaptionEngine } from "../captions/engine";
+import { AdaptiveCaptionsConfig } from "../captions/adaptive-types";
 
 interface ProjectFile {
   schema: "naze-project/2.0";
@@ -54,11 +56,8 @@ interface ProjectFile {
   animationIntensity?: number;
   accentWords?: boolean;
   burnInCc?: boolean;
-  /** Per-project CC placement (optional; defaults keep the global behavior). */
-  captions?: {
-    /** Bottom margin of the CC pill as a fraction of frame height. */
-    bottomMargin?: number;
-  };
+  /** Konfigurasi CC per proyek: bottomMargin klasik atau mode "adaptive". */
+  captions?: AdaptiveCaptionsConfig;
   /** Explicit background music; absent means no music (permanent policy). */
   musicFile?: string;
   narration: {
@@ -313,6 +312,21 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
   console.log("[STAGE 6/9] Timeline scene, keyframe, dan transisi siap.");
   const timeline: Timeline = timeline0;
 
+  // Adaptive Caption Engine: aktif hanya bila project.captions.mode === "adaptive".
+  // Tanpa itu, jalur CC klasik (burn-in pill) tetap dipakai seperti sebelumnya.
+  const captionEngine = createCaptionEngine({
+    palette,
+    style,
+    fontFamily: style.typography.fontFamily,
+    config: project.captions ?? {},
+  });
+  if (captionEngine) {
+    captionEngine.loadTimeline(timeline, project.scenes as any[]);
+    console.log(
+      `[STAGE 6/9] Adaptive Caption Engine aktif: ${captionEngine.count()} caption terencana dari ${timeline.cues.length} cue.`
+    );
+  }
+
   // Stage 7: native-resolution render
   console.log(
     `[STAGE 7/9] Merender ${profile.width}x${profile.height} @ ${profile.fps} FPS CFR, style "${style.id}"...`
@@ -331,6 +345,7 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
     burnInCc: project.burnInCc !== false,
     accentWords,
     ccBottomMargin: project.captions?.bottomMargin,
+    captionEngine: captionEngine ?? undefined,
   });
 
   // Stage 8: CC sidecars (SRT + VTT)

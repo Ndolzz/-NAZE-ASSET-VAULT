@@ -17,6 +17,7 @@ import { drawBackdropDecor, drawSubject, DrawKit } from "../illustration/generat
 import { drawCaptionCue, CcRenderKit } from "../captions/renderer";
 import { cueAt } from "../core/timeline";
 import { renderLayeredSceneContent, isEditorialKineticScene } from "../motion/layer-compositor";
+import { CaptionEngine } from "../captions/engine";
 
 export interface ComposerKit {
   palette: Palette;
@@ -30,6 +31,8 @@ export interface ComposerKit {
   w: number;
   h: number;
   timeline: Timeline;
+  /** Adaptive Caption Engine; undefined berarti jalur CC klasik. */
+  captionEngine?: CaptionEngine;
 }
 
 function drawStyleTexture(ctx: SKRSContext2D, kit: ComposerKit, t: number): void {
@@ -213,8 +216,11 @@ export function renderSceneFrame(
     }
   }
 
-  // 6. Burned-in CC (max 2 lines, mobile readable, safe area at the bottom)
-  if (kit.burnInCc) {
+  // 6. Captions: Adaptive Caption Engine bila proyek memilih mode "adaptive",
+  // jika tidak jalur CC klasik tetap dipakai (pil bawah, maks 2 baris, safe area).
+  if (kit.captionEngine) {
+    kit.captionEngine.render(ctx as any, timing, kit as any, globalT);
+  } else if (kit.burnInCc) {
     const cue = cueAt(kit.timeline, globalT);
     if (cue) {
       const localCueT = globalT - cue.start;
