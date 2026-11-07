@@ -788,79 +788,6 @@ function drawInstruction(call: DrawCall): RectPx {
   return { x: boxX, y: boxY, w: boxW, h: boxH };
 }
 
-/** Dispatcher: menggambar satu caption dan mengembalikan rect okupasi. */
-export function drawCaption(call: DrawCall): RectPx {
-  const { ctx, m, cap, anim } = call;
-  ctx.save();
-  if (anim.blur > 0.2 && typeof ctx.filter === "string") {
-    try {
-      ctx.filter = "blur(" + anim.blur.toFixed(2) + "px)";
-    } catch {
-      /* blur tidak didukung */
-    }
-  }
-  ctx.translate(anim.dx + anim.jitterX, anim.dy + anim.jitterY + anim.bob);
-  ctx.globalAlpha = Math.max(0, Math.min(1, anim.alpha));
-  let occupied: RectPx;
-  switch (cap.type) {
-    case "speech-bubble":
-    case "thought-bubble":
-    case "dialogue-bubble":
-    case "notification-bubble":
-    case "character-follow":
-    case "object-follow":
-      occupied = drawBubble(call);
-      break;
-    case "chat":
-      occupied = drawChat(call);
-      break;
-    case "kinetic":
-      occupied = drawKinetic(call);
-      break;
-    case "annotation":
-    case "data-caption":
-      occupied = drawAnnotation(call);
-      break;
-    case "impact":
-    case "emphasis":
-      occupied = drawImpact(call);
-      break;
-    case "fullscreen-typography":
-      occupied = drawFullscreenTypography(call);
-      break;
-    case "split-caption":
-      occupied = drawSplitCaption(call);
-      break;
-    case "side-annotation":
-      occupied = drawSideAnnotation(call);
-      break;
-    case "instruction":
-      occupied = drawInstruction(call);
-      break;
-    case "editorial-subtitle":
-      occupied = drawEditorialSubtitle(call);
-      break;
-    case "center-caption":
-    case "top-subtitle":
-    case "left-caption":
-    case "right-caption":
-    case "corner-caption":
-    case "floating-caption":
-    default:
-      occupied = drawPillSubtitle(call);
-      break;
-  }
-  if (anim.blur > 0.2 && typeof ctx.filter === "string") {
-    try {
-      ctx.filter = "none";
-    } catch {
-      /* noop */
-    }
-  }
-  ctx.restore();
-  return occupied;
-}
-
 /** Ukuran konten yang dibutuhkan caption (pra-ukur untuk solver). */
 export function estimateCaptionBox(ctx: any, m: Metrics, cap: ResolvedCaption): { w: number; h: number } {
   const theme = cap.theme;
@@ -943,116 +870,30 @@ export function estimateCaptionBox(ctx: any, m: Metrics, cap: ResolvedCaption): 
 
 
 /**
- * Ukuran estimasi caption sebelum menggambar; dipakai solver penempatan untuk
- * menghitung kandidat posisi. Perkiraan ini sengaja konservatif (sedikit lebih
- * besar) supaya solver menjauhi tabrakan lebih dini.
- */
-export function estimateCaptionBox(ctx: any, m: Metrics, cap: ResolvedCaption): { w: number; h: number } {
-  const u = m.unit;
-  switch (cap.type) {
-    case "kinetic":
-      return { w: m.w * 0.86, h: m.h * 0.34 };
-    case "impact":
-      return { w: m.w * 0.82, h: m.h * 0.24 };
-    case "fullscreen-typography":
-      return { w: m.w * 0.94, h: m.h * 0.8 };
-    case "split-caption":
-      return { w: m.w * 0.86, h: m.h * 0.4 };
-    case "side-annotation":
-      return { w: m.w * 0.34, h: m.h * 0.3 };
-    case "chat": {
-      const n = (cap.messages ?? []).length || 1;
-      return { w: m.w * 0.64, h: Math.min(m.h * 0.5, 70 * u + n * 84 * u) };
-    }
-    case "speech-bubble":
-    case "thought-bubble":
-    case "dialogue-bubble":
-    case "notification-bubble":
-    case "character-follow":
-    case "object-follow": {
-      const isNotification = cap.type === "notification-bubble";
-      const fontSize = (isNotification ? FONT_ANNOTATION : FONT_BUBBLE) * u * cap.theme.fontScale;
-      setFont(ctx, cap.theme.bodyWeight, fontSize, cap.theme.fontFamily);
-      const block = measureBlock(ctx, cap.text, {
-        maxWidth: 0.62 * m.w,
-        maxLines: cap.maxLines,
-        lineHeightFactor: cap.theme.lineHeight,
-      });
-      const padX = (isNotification ? 18 : cap.theme.paddingX) * u;
-      const padY = (isNotification ? 12 : cap.theme.paddingY) * u;
-      const labelH = cap.type === "dialogue-bubble" && cap.sender ? fontSize * 0.9 : 0;
-      return {
-        w: Math.min(0.86 * m.w, block.blockW + padX * 2 + (isNotification ? 34 * u : 0)),
-        h: block.blockH + padY * 1.5 + labelH + 30 * u,
-      };
-    }
-    case "annotation":
-    case "data-caption":
-    case "instruction": {
-      const fontSize = (cap.type === "instruction" ? FONT_SUBTITLE : FONT_ANNOTATION) * u * cap.theme.fontScale;
-      setFont(ctx, cap.theme.bodyWeight, fontSize, cap.theme.fontFamily);
-      const block = measureBlock(ctx, cap.text, {
-        maxWidth: (cap.type === "instruction" ? 0.5 : 0.4) * m.w,
-        maxLines: 2,
-        lineHeightFactor: cap.theme.lineHeight,
-      });
-      return {
-        w: Math.min(0.6 * m.w, block.blockW + 48 * u),
-        h: block.blockH + 40 * u,
-      };
-    }
-    default: {
-      // Keluarga subtitle pil: replika ukuran drawPillSubtitle.
-      let fontSize = FONT_SUBTITLE * u * cap.theme.fontScale * (cap.type === "emphasis" ? 1.3 : 1);
-      setFont(ctx, cap.theme.bodyWeight, fontSize, cap.theme.fontFamily, cap.theme.letterSpacing * u);
-      const maxW = cap.theme.maxWidth * m.w;
-      let block = measureBlock(ctx, cap.text, {
-        maxWidth: maxW - cap.theme.paddingX * 2 * u,
-        maxLines: cap.maxLines,
-        lineHeightFactor: cap.theme.lineHeight,
-      });
-      if (block.blockW > maxW - cap.theme.paddingX * 2 * u) {
-        const shrink = (maxW - cap.theme.paddingX * 2 * u) / Math.max(1, block.blockW);
-        fontSize = Math.max(FONT_MIN * u, fontSize * shrink);
-        setFont(ctx, cap.theme.bodyWeight, fontSize, cap.theme.fontFamily, cap.theme.letterSpacing * u);
-        block = measureBlock(ctx, cap.text, {
-          maxWidth: maxW - cap.theme.paddingX * 2 * u,
-          maxLines: cap.maxLines,
-          lineHeightFactor: cap.theme.lineHeight,
-        });
-      }
-      resetSpacing(ctx);
-      return {
-        w: Math.min(maxW, block.blockW + cap.theme.paddingX * 2 * u),
-        h: block.blockH + cap.theme.paddingY * 1.4 * u,
-      };
-    }
-  }
-}
-
-/**
  * Dispatcher utama: menerapkan transform animasi (geser/skala/rotasi/jitter/
  * blur) di sekitar pusat rect, lalu menggambar sesuai tipe dan mengembalikan
- * rect okupasi untuk anti-tumpukan antar caption. Fungsi per tipe menerima
- * tema lewat call.theme (diinjeksi di sini dari cap.theme).
+ * rect okupasi untuk anti-tumpukan antar caption. Tema diinjeksi ke call dari
+ * cap.theme sehingga fungsi per tipe dapat membacanya lewat destrukturisasi.
  */
 export function drawCaption(call: DrawCall): RectPx {
   const { cap, ctx, anim } = call;
   if (anim.alpha <= 0.01) return { x: 0, y: 0, w: 0, h: 0 };
   const call2: DrawCall & { theme: CaptionThemeTokens } = { ...call, theme: cap.theme };
   ctx.save();
+  ctx.globalAlpha = Math.max(0, Math.min(1, anim.alpha));
   const cx = call.rect.x + call.rect.w / 2;
   const cy = call.rect.y + call.rect.h / 2;
   const jx = anim.jitterX ?? 0;
   const jy = anim.jitterY ?? 0;
-  if (anim.dx || anim.dy || jx || jy || anim.scale !== 1 || anim.rotate) {
-    ctx.translate(cx + anim.dx + jx, cy + anim.dy + jy);
+  const bob = anim.bob ?? 0;
+  if (anim.dx || anim.dy || jx || jy || bob || anim.scale !== 1 || anim.rotate) {
+    ctx.translate(cx + anim.dx + jx, cy + anim.dy + jy + bob);
     ctx.rotate(anim.rotate ?? 0);
     ctx.scale(anim.scale ?? 1, anim.scale ?? 1);
     ctx.translate(-cx, -cy);
   }
-  if (anim.blur && anim.blur > 0.5) {
-    try { (ctx as any).filter = `blur(${Math.min(8, anim.blur)}px)`; } catch { /* filter opsional */ }
+  if (anim.blur && anim.blur > 0.2) {
+    try { (ctx as any).filter = `blur(${Math.min(8, anim.blur).toFixed(2)}px)`; } catch { /* filter opsional */ }
   }
   let used: RectPx;
   switch (cap.type) {
@@ -1075,6 +916,7 @@ export function drawCaption(call: DrawCall): RectPx {
       used = drawAnnotation(call2);
       break;
     case "impact":
+    case "emphasis":
       used = drawImpact(call2);
       break;
     case "fullscreen-typography":
