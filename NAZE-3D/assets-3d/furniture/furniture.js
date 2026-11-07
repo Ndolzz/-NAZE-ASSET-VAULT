@@ -2,8 +2,9 @@
  * Aset furnitur prosedural untuk kategori Bedroom & Home.
  */
 import * as THREE from 'three';
-import { box, cyl, sphere, plane, circle, mesh } from '../../engine/modeling/procedural.js';
+import { box, cyl, sphere, cone, plane, circle, mesh } from '../../engine/modeling/procedural.js';
 import { mat, glow, freshGlow } from '../../engine/materials/materials.js';
+import { screenTexture } from '../electronics/electronics.js';
 
 export function bed() {
   const g = new THREE.Group();
@@ -165,9 +166,6 @@ export function wallClock() {
   g.add(mesh(box(0.012, 0.06, 0.012), mat('plastic.black'), [0.03, 0.01, 0.015], [0, 0, 0.5]));
   return g;
 }
-
-// Texture layar dibuat di electronics.js; alias lokal untuk furnitur (TV).
-import { screenTexture } from '../electronics/electronics.js';
 
 export const ASSETS = {
   bed: { id: 'bed', name: 'Kasur Lengkap', category: 'furniture', factory: bed },
