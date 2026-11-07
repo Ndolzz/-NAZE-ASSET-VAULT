@@ -56,7 +56,7 @@ jobs:
         working-directory: MOTION-ENGINE
         run: npm install
 
-            - name: Uji Adaptive Caption Engine
+      - name: Uji Adaptive Caption Engine
         working-directory: MOTION-ENGINE
         run: |
           set -o pipefail
