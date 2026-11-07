@@ -1,6 +1,8 @@
 /**
  * Aset elektronik & teknologi prosedural, termasuk elemen beranimasi
  * (LED berkedip, kipas server berputar) bila factory menerima opsi env.
+ * Elemen datar (pelat, LED, tutup tombol) memakai plane agar hemat segitiga
+ * pada resolusi tinggi.
  */
 import { createCanvas } from '@napi-rs/canvas';
 import * as THREE from 'three';
@@ -38,16 +40,21 @@ export function serverRack(opts) {
   const o = opts || {};
   const g = new THREE.Group();
   g.add(mesh(box(0.7, 2.0, 0.8), mat('tech.case'), [0, 1.0, 0]));
-  g.add(mesh(box(0.62, 1.9, 0.03), mat('tech.panel'), [0, 1.0, 0.4]));
+  const panel = mesh(plane(0.62, 1.9), mat('tech.panel'), [0, 1.0, 0.4]);
+  g.add(panel);
+  const plateGeo = plane(0.56, 0.16);
+  const ledGeo = plane(0.05, 0.05);
+  const ventGeo = plane(0.2, 0.1);
   const ledColors = [0x35ff6d, 0x36c9ff];
   const leds = [];
   for (let i = 0; i < 8; i++) {
-    g.add(mesh(box(0.56, 0.16, 0.01), mat('metal.dark'), [0, 0.2 + i * 0.22, 0.42]));
-    const led = mesh(box(0.05, 0.05, 0.012), freshGlow(ledColors[i % 2]), [-0.2 + (i % 3) * 0.08, 0.2 + i * 0.22, 0.43]);
+    const y = 0.2 + i * 0.22;
+    g.add(mesh(plateGeo, mat('metal.dark'), [0, y, 0.421]));
+    const led = mesh(ledGeo, freshGlow(ledColors[i % 2]), [-0.2 + (i % 3) * 0.08, y, 0.424]);
     leds.push(led);
     g.add(led);
     if (i % 3 === 2) {
-      g.add(mesh(box(0.2, 0.1, 0.012), mat('plastic.black'), [0.22, 0.2 + i * 0.22, 0.43]));
+      g.add(mesh(ventGeo, mat('plastic.black'), [0.22, y, 0.423]));
     }
   }
   const fan = new THREE.Group();
@@ -55,7 +62,7 @@ export function serverRack(opts) {
   fan.add(mesh(torus(0.07, 0.015, 8), mat('metal.gray')));
   for (let b = 0; b < 3; b++) {
     const a = (b / 3) * Math.PI * 2;
-    const blade = mesh(box(0.1, 0.02, 0.01), mat('plastic.gray'), [Math.cos(a) * 0.035, Math.sin(a) * 0.035, 0.005]);
+    const blade = mesh(plane(0.1, 0.02), mat('plastic.gray'), [Math.cos(a) * 0.035, Math.sin(a) * 0.035, 0.005]);
     blade.rotation.z = a;
     fan.add(blade);
   }
@@ -89,9 +96,12 @@ export function keyboard(opts) {
   const g = new THREE.Group();
   g.add(mesh(box(0.36, 0.02, 0.14), mat('plastic.black'), [0, 0.01, 0]));
   const keyMat = o.glow ? freshGlow(0x22d3ee) : mat('plastic.gray');
+  const keyGeo = plane(0.022, 0.02);
   for (let r = 0; r < 4; r++) {
     for (let c = 0; c < 12; c++) {
-      g.add(mesh(box(0.022, 0.008, 0.02), keyMat, [-0.155 + c * 0.028, 0.022, -0.045 + r * 0.03]));
+      const key = mesh(keyGeo, keyMat, [-0.155 + c * 0.028, 0.024, -0.045 + r * 0.03]);
+      key.rotation.x = -Math.PI / 2;
+      g.add(key);
     }
   }
   return g;
@@ -102,7 +112,7 @@ export function mouse() {
   const m = mesh(sphere(0.05, 10), mat('plastic.black'), [0, 0.025, 0]);
   m.scale.set(1, 0.55, 1.4);
   g.add(m);
-  g.add(mesh(box(0.012, 0.008, 0.01), mat('metal.gray'), [0, 0.05, -0.035]));
+  g.add(mesh(plane(0.012, 0.01), mat('metal.gray'), [0, 0.052, -0.035], [-0.5, 0, 0]));
   return g;
 }
 
@@ -111,9 +121,10 @@ export function pcTower(opts) {
   const g = new THREE.Group();
   g.add(mesh(box(0.2, 0.45, 0.45), mat('tech.case'), [0, 0.225, 0]));
   g.add(mesh(box(0.19, 0.4, 0.01), freshGlow(0x22d3ee, { transparent: true, opacity: 0.35 }), [0.105, 0.225, 0]));
+  const ledGeo = plane(0.02, 0.02);
   const leds = [];
   for (let i = 0; i < 2; i++) {
-    const led = mesh(box(0.02, 0.02, 0.008), freshGlow(0x35ff6d), [-0.04 + i * 0.06, 0.4, 0.228]);
+    const led = mesh(ledGeo, freshGlow(0x35ff6d), [-0.04 + i * 0.06, 0.4, 0.228]);
     leds.push(led);
     g.add(led);
   }
@@ -143,16 +154,17 @@ export function router() {
   g.add(mesh(box(0.3, 0.04, 0.2), mat('plastic.black'), [0, 0.02, 0]));
   g.add(mesh(cyl(0.008, 0.008, 0.18, 6), mat('plastic.gray'), [-0.1, 0.11, -0.08], [0.3, 0, 0.15]));
   g.add(mesh(cyl(0.008, 0.008, 0.18, 6), mat('plastic.gray'), [0.1, 0.11, -0.08], [0.3, 0, -0.15]));
-  g.add(mesh(box(0.012, 0.008, 0.006), freshGlow(0x35ff6d), [0.12, 0.045, 0.1]));
+  g.add(mesh(plane(0.012, 0.008), freshGlow(0x35ff6d), [0.12, 0.045, 0.1], [-Math.PI / 2, 0, 0]));
   return g;
 }
 
 export function patchPanel() {
   const g = new THREE.Group();
   g.add(mesh(box(0.9, 0.5, 0.06), mat('tech.panel'), [0, 0, 0]));
+  const portGeo = plane(0.07, 0.08);
   for (let r = 0; r < 4; r++) {
     for (let c = 0; c < 8; c++) {
-      g.add(mesh(box(0.07, 0.08, 0.02), (r + c) % 5 === 0 ? freshGlow(0x36c9ff) : mat('plastic.black'), [-0.35 + c * 0.1, -0.18 + r * 0.12, 0.035]));
+      g.add(mesh(portGeo, (r + c) % 5 === 0 ? freshGlow(0x36c9ff) : mat('plastic.black'), [-0.35 + c * 0.1, -0.18 + r * 0.12, 0.031]));
     }
   }
   return g;

@@ -1,8 +1,9 @@
 /**
- * Aset bangunan & elemen kota prosedural.
+ * Aset bangunan & elemen kota prosedural. Jendela memakai plane (2 segitiga)
+ * untuk performa pada resolusi tinggi.
  */
 import * as THREE from 'three';
-import { box, cyl, sphere, cone, mesh } from '../../engine/modeling/procedural.js';
+import { box, cyl, sphere, cone, plane, mesh } from '../../engine/modeling/procedural.js';
 import { mat, glow, freshGlow } from '../../engine/materials/materials.js';
 
 export function buildingBlock(opts) {
@@ -17,10 +18,11 @@ export function buildingBlock(opts) {
   const cols = Math.max(2, Math.floor(w / 1.0));
   const winMat = glow('city.window', { color: 0xffd27a });
   const darkMat = mat('tech.screen');
+  const winGeo = plane(0.34, 0.5);
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const lit = (r * 7 + c * 3 + (o.seed || 0)) % 5 < 2;
-      g.add(mesh(box(0.34, 0.5, 0.02), lit ? winMat : darkMat, [-w / 2 + (c + 0.5) * (w / cols), 0.9 + r * 1.1, d / 2 + 0.011]));
+      g.add(mesh(winGeo, lit ? winMat : darkMat, [-w / 2 + (c + 0.5) * (w / cols), 0.9 + r * 1.1, d / 2 + 0.011]));
     }
   }
   g.add(mesh(box(w, 0.12, d), mat('metal.dark'), [0, h + 0.06, 0]));
@@ -40,8 +42,11 @@ export function roadStrip() {
   const g = new THREE.Group();
   g.add(mesh(box(6, 0.02, 40), mat('city.road'), [0, 0.01, 0]));
   const dash = glow('plastic.white', { color: 0xf2f4f7 });
+  const dashGeo = plane(0.12, 1.0);
   for (let z = -19; z < 20; z += 2.4) {
-    g.add(mesh(box(0.12, 0.005, 1.0), dash, [0, 0.025, z]));
+    const m = mesh(dashGeo, dash, [0, 0.026, z]);
+    m.rotation.x = -Math.PI / 2;
+    g.add(m);
   }
   return g;
 }

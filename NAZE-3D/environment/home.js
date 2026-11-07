@@ -1,5 +1,6 @@
 /**
  * Environment rumah: kamar tidur (modern/minimalis/gaming) & ruang keluarga.
+ * Versi detail: lukisan dinding, lampu plafon, jendela pemandangan langit.
  */
 import { makeRoom } from '../engine/environment/roomkit.js';
 
@@ -25,6 +26,9 @@ export function modernBedroom(env, variant) {
   env.addObject('wall-clock', { position: [0.4, 2.2, -2.96] });
   env.addObject('bookshelf', { position: [2.85, 0, 0.8], rotation: [0, -Math.PI / 2, 0] });
   env.addObject('window-frame', { position: [0.6, 1.6, -2.97] });
+  env.addObject('picture-frame', { position: [-2.5, 1.95, -2.955] });
+  env.addObject('picture-frame', { position: [2.35, 1.95, -2.955], name: 'picture-frame-2' });
+  env.addObject('ceiling-light', { position: [0, 3.02, 0] });
   if (variant !== 'minimalist') {
     lampuBerdenyut(env, env.addObject('table-lamp', { position: [2.45, 0.78, -2.5] }), 'lampu-meja-berdenyut');
     env.addObject('potted-plant', { position: [2.5, 0, 2.4] });
@@ -47,4 +51,6 @@ export function livingRoom(env) {
   env.addObject('potted-plant', { position: [3, 0, 2.3] });
   env.addObject('window-frame', { position: [0, 1.7, -2.97] });
   env.addObject('bookshelf', { position: [2.85, 0, 0.6], rotation: [0, -Math.PI / 2, 0] });
+  env.addObject('picture-frame', { position: [-2.4, 1.9, -2.955] });
+  env.addObject('ceiling-light', { position: [0, 3.02, 0] });
 }

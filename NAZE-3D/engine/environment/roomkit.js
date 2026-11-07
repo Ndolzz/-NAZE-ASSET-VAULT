@@ -1,10 +1,11 @@
 /**
- * Kit ruangan: lantai, dinding, dan ruangan tertutup siap pakai.
- * Lantai disubdivisi dan ditandai ground agar renderer menggambarnya
- * pada pass pertama (objek di atasnya tidak tertutup).
+ * Kit ruangan: lantai, dinding, plafon, papan skirting, dan ruangan tertutup
+ * siap pakai. Lantai disubdivisi dan ditandai ground agar renderer
+ * menggambarnya pada pass pertama; dinding dan plafon tidak melempar
+ * bayangan planar (noShadow) agar ruangan tidak tergelapkan.
  */
 import * as THREE from 'three';
-import { plane } from '../modeling/procedural.js';
+import { plane, box } from '../modeling/procedural.js';
 import { mat } from '../materials/materials.js';
 
 export function makeFloor(w, d, materialName, override) {
@@ -15,7 +16,9 @@ export function makeFloor(w, d, materialName, override) {
 }
 
 export function makeWall(w, h, materialName, override) {
-  return new THREE.Mesh(plane(w, h), mat(materialName || 'home.wall', override));
+  const m = new THREE.Mesh(plane(w, h), mat(materialName || 'home.wall', override));
+  m.userData.noShadow = true;
+  return m;
 }
 
 export function makeRoom(opts) {
@@ -42,7 +45,23 @@ export function makeRoom(opts) {
     ceiling = new THREE.Mesh(plane(w, d), mat('plastic.white', { color: 0xe8e8e2 }));
     ceiling.position.set(0, h, 0);
     ceiling.rotation.x = Math.PI / 2;
+    ceiling.userData.noShadow = true;
     g.add(ceiling);
+  }
+  if (o.baseboard !== false) {
+    const bb = mat('wood.dark');
+    const bbBack = new THREE.Mesh(box(w, 0.09, 0.025), bb);
+    bbBack.position.set(0, 0.045, -d / 2 + 0.0125);
+    bbBack.userData.noShadow = true;
+    g.add(bbBack);
+    const bbLeft = new THREE.Mesh(box(0.025, 0.09, d), bb);
+    bbLeft.position.set(-w / 2 + 0.0125, 0.045, 0);
+    bbLeft.userData.noShadow = true;
+    g.add(bbLeft);
+    const bbRight = new THREE.Mesh(box(0.025, 0.09, d), bb);
+    bbRight.position.set(w / 2 - 0.0125, 0.045, 0);
+    bbRight.userData.noShadow = true;
+    g.add(bbRight);
   }
   return { group: g, floor, back, left, right, ceiling, w, d, h };
 }
