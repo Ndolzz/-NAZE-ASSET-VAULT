@@ -1,0 +1,43 @@
+name: NAZE 3D Render
+
+on:
+  push:
+    paths:
+      - 'NAZE-3D/**'
+      - '.github/workflows/render-3d.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: naze-3d
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Install dependencies
+        working-directory: NAZE-3D
+        run: npm install
+      - name: QA suite
+        working-directory: NAZE-3D
+        run: node tests/qa.js --outDir ../RENDER-3D/qa
+      - name: Render demo videos
+        working-directory: NAZE-3D
+        run: node cli.js --demo all --frames 36 --fps 12 --width 360 --height 640 --outDir ../RENDER-3D/demos
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: naze-3d-render
+          path: RENDER-3D/
+          retention-days: 14
