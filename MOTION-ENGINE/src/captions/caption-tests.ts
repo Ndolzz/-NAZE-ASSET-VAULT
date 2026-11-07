@@ -3,7 +3,9 @@
  * Tanpa ffmpeg/espeak: semua asersi berbasis modul caption murni.
  * Exit 1 bila ada asersi gagal.
  */
-import { createCanvas } from "@napi-rs/canvas";
+import { createCanvas, GlobalFonts } from "@napi-rs/canvas";
+import * as fs from "node:fs";
+import * as path from "node:path";
 import { CAPTION_ANIM_PRESETS, captionAnimState, isCaptionAnimPreset } from "./anim";
 import {
   Metrics,
@@ -38,6 +40,45 @@ function check(name: string, cond: boolean, detail = ""): void {
   }
 }
 
+/**
+ * Runner CI tidak memiliki glyph sistem yang dapat dirasterisasi skia untuk
+ * keluarga generik "sans-serif": measureText mengembalikan metrik, tetapi
+ * fillText tidak menggambar apa pun. Produksi mendaftarkan font vault lewat
+ * registerFonts() (render/renderer.ts); pengujian ini wajib melakukan hal
+ * yang sama sebelum menggambar teks.
+ */
+function registerTestFont(): string {
+  const roots = [
+    process.env.NAZE_REPO_ROOT,
+    path.resolve(process.cwd(), ".."),
+    process.cwd(),
+    path.resolve(process.cwd(), "../.."),
+  ].filter((p): p is string => typeof p === "string" && p.length > 0);
+  const rels = [
+    "FONTS/GOOGLE/SANS/plusjakartasans.ttf",
+    "FONTS/GOOGLE/DISPLAY/archivoblack.ttf",
+    "FONTS/GOOGLE/TECHNO/orbitron.ttf",
+  ];
+  for (const root of roots) {
+    for (const rel of rels) {
+      const abs = path.resolve(root, rel);
+      if (!fs.existsSync(abs)) continue;
+      try {
+        if (GlobalFonts.registerFromPath(abs, "NazeTestSans")) {
+          console.log("Font pengujian terdaftar: " + abs);
+          return "NazeTestSans";
+        }
+      } catch {
+        /* lanjut ke kandidat berikutnya */
+      }
+    }
+  }
+  console.warn("Tidak ada font vault yang terdaftar; memakai fallback generik.");
+  return "sans-serif";
+}
+
+const TEST_FONT = registerTestFont();
+
 const palette: any = {
   id: "test-warm",
   name: "Test Warm",
@@ -48,8 +89,8 @@ const palette: any = {
   text: "#F7F4EF",
   dark: true,
 };
-const style: any = { id: "test-style", typography: { fontFamily: "sans-serif" } };
-const theme = (id: string) => resolveCaptionTheme({ themeId: id, palette, style, fontFamily: "sans-serif" });
+const style: any = { id: "test-style", typography: { fontFamily: TEST_FONT } };
+const theme = (id: string) => resolveCaptionTheme({ themeId: id, palette, style, fontFamily: TEST_FONT });
 
 function makeCap(over: Record<string, unknown>): any {
   return {
@@ -80,12 +121,28 @@ function countChanged(a: Uint8ClampedArray, b: Uint8ClampedArray): number {
 }
 
 async function run(): Promise<void> {
+  // ---- Font pengujian: glyph harus benar-benar tergambar di kanvas ----
+  {
+    const probeCanvas = createCanvas(160, 120);
+    const probeCtx = probeCanvas.getContext("2d");
+    probeCtx.fillStyle = "#000000";
+    probeCtx.fillRect(0, 0, 160, 120);
+    probeCtx.fillStyle = "#FFFFFF";
+    probeCtx.font = "800 64px " + TEST_FONT;
+    probeCtx.textBaseline = "middle";
+    probeCtx.fillText("XA", 12, 60);
+    const probeData = probeCtx.getImageData(0, 0, 160, 120).data;
+    let litPixels = 0;
+    for (let i = 0; i < probeData.length; i += 4) if (probeData[i] > 100) litPixels++;
+    check("font pengujian menggambar glyph", litPixels > 30, "font=" + TEST_FONT + " lit=" + litPixels);
+  }
+
   const canvas = createCanvas(1080, 1920);
   const ctx = canvas.getContext("2d");
   const m: Metrics = metricsFor(1080, 1920);
 
   // ---- Text wrapping & bubble sizing ----
-  ctx.font = "600 54px sans-serif";
+  ctx.font = "600 54px " + TEST_FONT;
   const longText = "Kalimat uji yang cukup panjang untuk memaksa pembungkusan teks caption menjadi beberapa baris pada lebar terbatas.";
   const lines = wrapTextToWidth(ctx, longText, 800, 2);
   check("wrapping max 2 baris", lines.length <= 2, "baris=" + lines.length);
@@ -306,8 +363,8 @@ async function run(): Promise<void> {
   }
 
   // ---- Engine end-to-end ----
-  check("mode klasik -> null", createCaptionEngine({ palette, style, fontFamily: "sans-serif", config: {} as AdaptiveCaptionsConfig }) === null);
-  const engine = createCaptionEngine({ palette, style, fontFamily: "sans-serif", config: { mode: "adaptive" } });
+  check("mode klasik -> null", createCaptionEngine({ palette, style, fontFamily: TEST_FONT, config: {} as AdaptiveCaptionsConfig }) === null);
+  const engine = createCaptionEngine({ palette, style, fontFamily: TEST_FONT, config: { mode: "adaptive" } });
   check("mode adaptive -> engine", engine !== null);
   if (engine) {
     const cueText = "Caption mengikuti adegan secara otomatis.";
