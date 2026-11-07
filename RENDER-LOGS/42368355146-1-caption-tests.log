@@ -1,0 +1,51 @@
+PASS wrapping max 2 baris
+PASS measureBlock > 0
+PASS estimasi bubble > 0
+PASS estimasi chat proporsional
+PASS unit vertikal
+PASS format landscape
+PASS format persegi
+PASS safe area bawah TikTok/Reels
+PASS clampToSafe menjaga tepi
+PASS kandidat above-anchor + alternatif
+PASS solver mengembalikan penempatan
+PASS tidak menutupi wajah
+PASS memilih alternatif otomatis
+PASS alternatif posisi lain tersedia
+PASS anti-tumpukan antar caption
+PASS solver jatuh ke bawah bila bebas
+PASS anchor klasik subjek
+PASS anchor klasik objek
+PASS region wajah karakter
+PASS anchor layer compositor
+PASS tepat 20 preset
+PASS 20 preset: masuk-penuh-keluar
+PASS timing kata monoton
+PASS kata aktif terdeteksi
+PASS sebelum mulai -> -1
+PASS akhir -> kata terakhir
+PASS reveal progress valid
+PASS kalimat terpisah
+PASS reading floor > 0
+PASS kutipan -> speech-bubble
+PASS CHAT -> chat
+PASS bingung -> thought-bubble
+PASS angka -> data-caption
+PASS teknologi -> annotation
+PASS langkah -> instruction
+PASS caps -> kinetic
+PASS seru pendek -> impact
+PASS pertanyaan -> emphasis
+PASS panjang -> editorial
+PASS default -> subtitle varian
+FAIL render smoke 17 tipe -> kinetic: piksel berubah=0
+PASS render deterministik
+PASS mode klasik -> null
+PASS mode adaptive -> engine
+PASS loadTimeline memetakan cue
+PASS API show/chat terdaftar
+PASS API annotate bekerja
+PASS engine.render per-frame
+PASS hide imperatif
+
+Total: 48 lulus, 1 gagal dari 49 asersi.
