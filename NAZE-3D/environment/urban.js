@@ -3,11 +3,17 @@
  */
 import { makeFloor } from '../engine/environment/roomkit.js';
 
+function tandaiLantai(obj) {
+  obj.traverse((o) => {
+    o.userData.ground = true;
+  });
+}
+
 export function cityStreet(env, variant) {
   env.scene.add(makeFloor(48, 40, 'city.sidewalk', { color: 0x6f7a85 }));
-  env.addObject('road-strip', { position: [0, 0.01, 0] });
-  env.addObject('sidewalk', { position: [-4.2, 0.02, 0] });
-  env.addObject('sidewalk', { position: [4.2, 0.02, 0], name: 'sidewalk-2' });
+  tandaiLantai(env.addObject('road-strip', { position: [0, 0.01, 0] }));
+  tandaiLantai(env.addObject('sidewalk', { position: [-4.2, 0.02, 0] }));
+  tandaiLantai(env.addObject('sidewalk', { position: [4.2, 0.02, 0], name: 'sidewalk-2' }));
   const heights = [9, 7, 11, 8, 10, 6];
   for (let i = 0; i < 3; i++) {
     const z = -12 + i * 8;

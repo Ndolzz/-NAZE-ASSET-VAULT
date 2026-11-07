@@ -3,6 +3,15 @@
  */
 import { makeRoom } from '../engine/environment/roomkit.js';
 
+function lampuBerdenyut(env, obj, name) {
+  const light = obj.children.find((c) => c.isLight);
+  if (light) {
+    env.addAnimation(name, (t) => {
+      light.intensity = 0.5 + Math.sin(t * 2.2) * 0.07;
+    });
+  }
+}
+
 export function modernBedroom(env, variant) {
   env.scene.add(makeRoom({ w: 6, d: 6, h: 3.1, floor: 'home.floor', wall: 'home.wall' }).group);
   env.addObject('bed', { position: [-1.5, 0, -1.8] });
@@ -17,7 +26,7 @@ export function modernBedroom(env, variant) {
   env.addObject('bookshelf', { position: [2.85, 0, 0.8], rotation: [0, -Math.PI / 2, 0] });
   env.addObject('window-frame', { position: [0.6, 1.6, -2.97] });
   if (variant !== 'minimalist') {
-    env.addObject('table-lamp', { position: [2.45, 0.78, -2.5] });
+    lampuBerdenyut(env, env.addObject('table-lamp', { position: [2.45, 0.78, -2.5] }), 'lampu-meja-berdenyut');
     env.addObject('potted-plant', { position: [2.5, 0, 2.4] });
   }
   if (variant === 'gaming') {
@@ -34,7 +43,7 @@ export function livingRoom(env) {
   env.addObject('coffee-table', { position: [0, 0, -0.8] });
   env.addObject('rug', { position: [0, 0, -1.4] });
   env.addObject('tv', { position: [-2.85, 0, -0.5], rotation: [0, Math.PI / 2, 0] });
-  env.addObject('floor-lamp', { position: [2.8, 0, -2.2] });
+  lampuBerdenyut(env, env.addObject('floor-lamp', { position: [2.8, 0, -2.2] }), 'lampu-lantai-berdenyut');
   env.addObject('potted-plant', { position: [3, 0, 2.3] });
   env.addObject('window-frame', { position: [0, 1.7, -2.97] });
   env.addObject('bookshelf', { position: [2.85, 0, 0.6], rotation: [0, -Math.PI / 2, 0] });

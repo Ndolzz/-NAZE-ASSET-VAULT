@@ -17,7 +17,7 @@ export const box = (w, h, d) => geo('box:' + w + '|' + h + '|' + d, () => new TH
 export const cyl = (rt, rb, h, seg = 12) => geo('cyl:' + rt + '|' + rb + '|' + h + '|' + seg, () => new THREE.CylinderGeometry(rt, rb, h, seg));
 export const sphere = (r, seg = 12) => geo('sph:' + r + '|' + seg, () => new THREE.SphereGeometry(r, seg, Math.max(6, seg >> 1)));
 export const cone = (r, h, seg = 10) => geo('cone:' + r + '|' + h + '|' + seg, () => new THREE.ConeGeometry(r, h, seg));
-export const plane = (w, h) => geo('plane:' + w + '|' + h, () => new THREE.PlaneGeometry(w, h));
+export const plane = (w, h, sw = 1, sh = 1) => geo('plane:' + w + '|' + h + '|' + sw + '|' + sh, () => new THREE.PlaneGeometry(w, h, sw, sh));
 export const torus = (r, t, seg = 16) => geo('tor:' + r + '|' + t + '|' + seg, () => new THREE.TorusGeometry(r, t, 8, seg));
 export const circle = (r, seg = 16) => geo('circle:' + r + '|' + seg, () => new THREE.CircleGeometry(r, seg));
 

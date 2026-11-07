@@ -1,13 +1,16 @@
 /**
  * Kit ruangan: lantai, dinding, dan ruangan tertutup siap pakai.
+ * Lantai disubdivisi dan ditandai ground agar renderer menggambarnya
+ * pada pass pertama (objek di atasnya tidak tertutup).
  */
 import * as THREE from 'three';
 import { plane } from '../modeling/procedural.js';
 import { mat } from '../materials/materials.js';
 
 export function makeFloor(w, d, materialName, override) {
-  const m = new THREE.Mesh(plane(w, d), mat(materialName || 'nature.grass', override));
+  const m = new THREE.Mesh(plane(w, d, 8, 8), mat(materialName || 'nature.grass', override));
   m.rotation.x = -Math.PI / 2;
+  m.userData.ground = true;
   return m;
 }
 

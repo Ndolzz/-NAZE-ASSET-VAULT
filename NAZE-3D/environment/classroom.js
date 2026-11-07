@@ -21,7 +21,14 @@ export function modernClassroom(env) {
   env.addObject('wall-clock', { position: [-2.5, 2.4, -2.96] });
   env.addObject('door', { position: [3.98, 0, 1.8], rotation: [0, -Math.PI / 2, 0] });
   env.addObject('window-frame', { position: [-3.96, 1.7, -0.5], rotation: [0, Math.PI / 2, 0] });
-  env.addObject('projector', { position: [0, 2.9, 1.6], rotation: [0.35, Math.PI, 0] });
+  const proyektor = env.addObject('projector', { position: [0, 2.9, 1.6], rotation: [0.35, Math.PI, 0] });
+  const lensa = proyektor.children[proyektor.children.length - 1];
+  if (lensa && lensa.material) {
+    lensa.material.transparent = true;
+    env.addAnimation('lensa-proyektor-berkedip', (t) => {
+      lensa.material.opacity = 0.7 + Math.abs(Math.sin(t * 2.6)) * 0.3;
+    });
+  }
   env.addObject('potted-plant', { position: [-3.4, 0, 2.4] });
 }
 
