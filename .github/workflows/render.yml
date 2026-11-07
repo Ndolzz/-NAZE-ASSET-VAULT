@@ -58,7 +58,9 @@ jobs:
 
             - name: Uji Adaptive Caption Engine
         working-directory: MOTION-ENGINE
-        run: npx tsx src/captions/caption-tests.ts
+        run: |
+          set -o pipefail
+          npx tsx src/captions/caption-tests.ts 2>&1 | tee "${{ github.workspace }}/caption-tests.log"
 
       - name: Tentukan proyek
         id: cfg
@@ -95,7 +97,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cd "${{ github.workspace }}"
-          LOGS=$(ls render-output-*.log 2>/dev/null || true)
+          LOGS=$(ls render-output-*.log caption-tests.log 2>/dev/null || true)
           if [ -z "$LOGS" ]; then echo "Log render tidak ditemukan."; exit 0; fi
           {
             echo "## Log render NAZE (gagal)"
@@ -136,7 +138,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: naze-render-log-${{ github.run_id }}
-          path: render-output-*.log
+          path: |
+            render-output-*.log
+            caption-tests.log
           if-no-files-found: warn
 
       - name: Inspeksi hasil dengan ffprobe
