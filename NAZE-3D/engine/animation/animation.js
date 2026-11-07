@@ -42,4 +42,5 @@ export class Animator {
   }
   get names() { return this.items.map((i) => i.name); }
   get count() { return this.items.length; }
+  clear() { this.items.length = 0; return this; }
 }

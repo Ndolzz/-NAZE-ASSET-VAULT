@@ -48,7 +48,7 @@ for (const id of Object.keys(DEMOS)) {
     check('pencahayaan', lightCount >= 1, lightCount + ' lampu');
     check('kamera', env.camera.isPerspectiveCamera === true, 'fov ' + env.camera.fov.toFixed(0));
     check('karakter', env.characters.size >= 1, env.characters.size + ' karakter');
-    check('animasi', env.animator.tracks.length >= 1, env.animator.tracks.length + ' track');
+    check('animasi', env.animator.count >= 1, env.animator.count + ' track');
     const standing = [...env.characters.values()].filter((c) => c.pose !== 'sit' && Math.abs(c.group.position.y) < 0.05);
     let groundedOk = true;
     for (const c of standing) {

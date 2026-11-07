@@ -122,7 +122,7 @@ export class NazeEnvironment {
 
   async ensureRenderer() {
     if (!this.rendererHandle) {
-      this.rendererHandle = await createRenderer(this._sizes.width, this._sizes.height);
+      this.rendererHandle = await createRenderer({ width: this._sizes.width, height: this._sizes.height, quality: this.quality });
       this.camera.aspect = this._sizes.width / this._sizes.height;
       this.camera.updateProjectionMatrix();
     }
@@ -135,7 +135,7 @@ export class NazeEnvironment {
     handle.renderer.render(this.scene, this.camera);
     return {
       pixels: readPixels(handle),
-      png: () => readPng(handle),
+      png: () => readPng(),
       width: handle.width,
       height: handle.height,
     };
