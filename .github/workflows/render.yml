@@ -62,7 +62,9 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             PROJECTS="${{ inputs.project }}"
           else
-            PROJECTS="STYLE-SHOWCASE DARK-WEB AI-CYBERSECURITY DIGITAL-FOOTPRINT"
+            # Hanya merender satu proyek yang sedang dikerjakan.
+            # Ganti ke proyek aktif berikutnya saat produksi berpindah.
+            PROJECTS="DIGITAL-FOOTPRINT"
           fi
           PROFILE="${{ github.event_name == 'workflow_dispatch' && inputs.profile || 'vertical-1080' }}"
           echo "projects=$PROJECTS" >> "$GITHUB_OUTPUT"
