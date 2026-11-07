@@ -1,0 +1,15 @@
+{
+  "name": "naze-3d",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "NAZE 3D Environment & Asset Library - procedural three.js environments, headless-friendly",
+  "main": "engine/environment/builder.js",
+  "scripts": {
+    "qa": "node tests/qa.js",
+    "demo": "node cli.js"
+  },
+  "dependencies": {
+    "three": "^0.160.0",
+    "@napi-rs/canvas": "^0.1.53"
+  }
+}
