@@ -17,7 +17,7 @@ permissions:
 jobs:
   render:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -39,7 +39,7 @@ jobs:
         working-directory: NAZE-3D
         run: |
           set -o pipefail
-          node cli.js --demo all --frames 36 --fps 12 --width 360 --height 640 --outDir ../RENDER-3D/demos 2>&1 | tee "${GH_WORKSPACE}/demos-3d.log"
+          node cli.js --demo all --frames 180 --fps 60 --width 720 --height 1280 --outDir ../RENDER-3D/demos 2>&1 | tee "${GH_WORKSPACE}/demos-3d.log"
         env:
           GH_WORKSPACE: ${{ github.workspace }}
       - name: Publikasikan log saat gagal

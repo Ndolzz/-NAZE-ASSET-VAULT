@@ -1,6 +1,7 @@
 /**
  * QA otomatis: validasi pembangunan, pencahayaan, kamera, karakter,
  * animasi, grounding, render output, dan scene switching untuk semua demo.
+ * PNG QA dirender pada 720x1280 agar hasil visual dapat dinilai detailnya.
  */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -58,6 +59,7 @@ for (const id of Object.keys(DEMOS)) {
     }
     check('karakter-di-lantai', groundedOk, standing.length + ' karakter berdiri diperiksa');
     env.update(0.5, 0.5);
+    env.setRenderSize(720, 1280);
     const frame = await env.render();
     let sum = 0;
     let samples = 0;
