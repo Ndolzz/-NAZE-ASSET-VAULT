@@ -261,8 +261,24 @@ async function run(): Promise<void> {
     }
     const changed = countChanged(beforePx, framePixels(cc, 540, 960));
     if (changed < 5) {
+      // Diagnostik: apakah ini masalah fase reveal atau masalah penggambaran?
+      const animLate = captionAnimState(anim, 3.0, { at: 0.2, duration: 4 });
+      const est2 = estimateCaptionBox(cc, mm, cap);
+      try {
+        drawCaption({ ctx: cc, m: mm, cap, anim: animLate, rect: { x: (540 - est2.w) / 2, y: 960 * 0.55, w: est2.w, h: est2.h }, anchorPx: null, localT: 3.0, tAbs: 3.0 });
+      } catch (e: any) {
+        smokeDetail = type + ": retry throw " + String(e && e.message);
+        smokeOk = false;
+        break;
+      }
+      const changedLate = countChanged(beforePx, framePixels(cc, 540, 960));
       smokeOk = false;
-      smokeDetail = type + ": piksel berubah=" + changed;
+      smokeDetail =
+        type + ": piksel=" + changed + " retryT3=" + changedLate +
+        " anim=" + JSON.stringify(animState) +
+        " est=" + JSON.stringify(est) +
+        " rect=" + JSON.stringify(rect) +
+        " font=" + cc.font;
       break;
     }
   }
