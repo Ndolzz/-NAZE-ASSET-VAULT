@@ -56,6 +56,10 @@ jobs:
         working-directory: MOTION-ENGINE
         run: npm install
 
+            - name: Uji Adaptive Caption Engine
+        working-directory: MOTION-ENGINE
+        run: npx tsx src/captions/caption-tests.ts
+
       - name: Tentukan proyek
         id: cfg
         run: |
@@ -64,7 +68,7 @@ jobs:
           else
             # Hanya merender satu proyek yang sedang dikerjakan.
             # Ganti ke proyek aktif berikutnya saat produksi berpindah.
-            PROJECTS="DIGITAL-FOOTPRINT"
+            PROJECTS="DIGITAL-FOOTPRINT CAPTION-DEMO"
           fi
           PROFILE="${{ github.event_name == 'workflow_dispatch' && inputs.profile || 'vertical-1080' }}"
           echo "projects=$PROJECTS" >> "$GITHUB_OUTPUT"
