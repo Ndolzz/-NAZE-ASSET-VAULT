@@ -45,29 +45,20 @@ jobs:
       - name: Publikasikan log saat gagal
         if: failure()
         env:
-          GH_TOKEN: ${{ github.token }}
-          GH_WORKSPACE: ${{ github.workspace }}
-          GH_REPO: ${{ github.repository }}
-          GH_SHA: ${{ github.sha }}
           GH_RUN_ID: ${{ github.run_id }}
           GH_RUN_ATTEMPT: ${{ github.run_attempt }}
         run: |
-          cd "${GH_WORKSPACE}"
           BRANCH="render-logs/${GH_RUN_ID}-${GH_RUN_ATTEMPT}"
-          API="https://api.github.com/repos/${GH_REPO}"
-          AUTH="Authorization: Bearer ${GH_TOKEN}"
-          ACCEPT="Accept: application/vnd.github+json"
-          HTTP=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "$AUTH" -H "$ACCEPT" -H "Content-Type: application/json" "$API/git/refs" -d "{\"ref\":\"refs/heads/$BRANCH\",\"sha\":\"$GH_SHA\"}")
-          echo "Buat branch $BRANCH: HTTP $HTTP (422 = sudah ada, lanjut)"
-          for LOG in qa-3d.log demos-3d.log; do
-            [ -f "$LOG" ] || continue
-            CONTENT=$(base64 -w0 "$LOG")
-            cat > /tmp/log-commit.json <<EOF
-          {"message":"Log 3D gagal: $LOG (run $GH_RUN_ID attempt $GH_RUN_ATTEMPT)","content":"$CONTENT","branch":"$BRANCH"}
-          EOF
-            curl -s -X PUT -H "$AUTH" -H "$ACCEPT" -H "Content-Type: application/json" --data @/tmp/log-commit.json "$API/contents/RENDER-LOGS/${GH_RUN_ID}-${GH_RUN_ATTEMPT}-$LOG" | head -c 300
-            echo ""
-          done
+          git config user.name "naze-ci"
+          git config user.email "naze-ci@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          mkdir -p RENDER-LOGS/qa
+          cp -f qa-3d.log demos-3d.log RENDER-LOGS/ 2>/dev/null || true
+          cp -f RENDER-3D/qa/qa-report.json RENDER-3D/qa/catalog.json RENDER-LOGS/qa/ 2>/dev/null || true
+          cp -f RENDER-3D/qa/*.png RENDER-LOGS/qa/ 2>/dev/null || true
+          git add -f RENDER-LOGS
+          git commit -m "Log render 3D gagal (run ${GH_RUN_ID} attempt ${GH_RUN_ATTEMPT})" || true
+          git push origin "$BRANCH" || echo "push log gagal"
       - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4

@@ -1,8 +1,7 @@
 /**
  * SVG Character Engine: karakter NAZE 2D digambar ke canvas menjadi tekstur
  * billboard 3D (plane transparan) yang kompatibel dengan kamera 3D.
- * Pose: stand, walk, sit, point, explain, hold.
- * Ekspresi: neutral, confident, happy, thinking.
+ * Pose: stand, walk, sit, point, explain, hold. Ekspresi: neutral, confident, happy, thinking.
  */
 import { createCanvas } from '@napi-rs/canvas';
 import * as THREE from 'three';
@@ -59,7 +58,6 @@ function drawCharacter(ctx, pose, expression) {
   if (pose === 'sit') { hipY = 360; torsoTop = 270; }
 
   // Kaki
-  ctx.strokeStyle = c.outline;
   if (pose === 'sit') {
     polyLimb([[cx - 22, hipY], [cx - 52, hipY], [cx - 52, hipY + 110]], 20, c.pants);
     polyLimb([[cx + 22, hipY], [cx + 52, hipY], [cx + 52, hipY + 110]], 20, c.pants);
@@ -214,6 +212,8 @@ export class CharacterBillboard {
     );
     shadow.rotation.x = -Math.PI / 2;
     shadow.position.y = 0.01;
+    shadow.userData.ground = true;
+    shadow.userData.groundLayer = 1;
     this.group.add(shadow);
   }
 
