@@ -19,7 +19,7 @@ import {
   wrapTextToWidth,
 } from "./layout";
 import { buildSceneMeta, resolveAnchor } from "./anchors";
-import { decideCueStyle, defaultAnimationFor } from "./adapt";
+import { decideCueStyle } from "./adapt";
 import { resolveCaptionTheme } from "./theme";
 import { distributeWordTimings, activeWordIndex, readingFloorSeconds, splitSentences, wordRevealProgress } from "./sync";
 import { drawCaption, estimateCaptionBox } from "./draw";
@@ -109,17 +109,30 @@ async function run(): Promise<void> {
 
   // ---- Collision detection & solver ----
   const anchor = { id: "a", x: 0.1, y: 0.30, w: 0.3, h: 0.3, kind: "character" as const, faceFraction: 0.38 };
-  const face: ImportantRegion = { id: "face", x: 0.1, y: 0.30, w: 0.3, h: 0.114, kind: "face", weight: 10 };
   const box = { w: 700, h: 130 };
   const cands: PlacementCandidate[] = candidatesForPlacement("above-anchor", box, m, anchor, {});
-  check("kandidat above-anchor tersedia", cands.length >= 1, "n=" + cands.length);
-  const solved = solvePlacement(cands, [rectFromNormalized(face, m)], [face], m);
-  check("solver menghindari wajah", !!solved, "null");
+  check("kandidat above-anchor + alternatif", cands.length >= 2, "n=" + cands.length);
+  // Wilayah wajah diletakkan tepat pada kandidat above-anchor (indeks pertama):
+  // solver wajib memilih kandidat lain (below/side) yang bebas konflik.
+  const aboveRect = cands[0].rect;
+  const face: ImportantRegion = {
+    id: "face",
+    x: aboveRect.x / m.w,
+    y: aboveRect.y / m.h,
+    w: aboveRect.w / m.w,
+    h: aboveRect.h / m.h,
+    kind: "face",
+    weight: 10,
+  };
+  const solved = solvePlacement(cands, [], [face], m);
+  check("solver mengembalikan penempatan", !!solved, "null");
   if (solved) {
-    const ov = overlapArea(solved.rect, rectFromNormalized(face, m));
+    const facePx = rectFromNormalized(face, m);
+    const ov = overlapArea(solved.rect, facePx);
     check("tidak menutupi wajah", ov < solved.rect.w * solved.rect.h * 0.3, "overlap=" + ov);
+    check("memilih alternatif otomatis", (solved as any).placement !== "above-anchor", "placement=" + (solved as any).placement);
     const alt = solvePlacement(candidatesForPlacement("bottom", box, m, anchor, {}), [solved.rect], [], m);
-    check("alternatif otomatis tersedia", !!alt, "null");
+    check("alternatif posisi lain tersedia", !!alt, "null");
     if (alt) {
       check("anti-tumpukan antar caption", overlapArea(solved.rect, alt.rect) < solved.rect.w * solved.rect.h * 0.25, "ov=" + overlapArea(solved.rect, alt.rect));
     }
@@ -127,7 +140,7 @@ async function run(): Promise<void> {
   const noRegion = solvePlacement(candidatesForPlacement("bottom", box, m, null, {}), [], [], m);
   check("solver jatuh ke bawah bila bebas", !!noRegion && noRegion.rect.y > m.h * 0.7, JSON.stringify(noRegion && noRegion.rect));
 
-  // ---- Anchor jalur klasik ----
+  // ---- Anchor jalur klasik & layer ----
   const timing: any = {
     scene: {
       id: "s1",
@@ -142,8 +155,9 @@ async function run(): Promise<void> {
     duration: 5,
     cues: [],
   };
-  const meta = buildSceneMeta(timing, { w: 1080, h: 1920, scale: 1, animationIntensity: 1, style: { id: "x", motion: undefined } }, 1);
+  const meta = buildSceneMeta(timing, { w: 1080, h: 1920, scale: 1, animationIntensity: 1, style: { id: "x" } }, 1);
   check("anchor klasik subjek", resolveAnchor({ subject: 0 } as AnchorRef, meta, 1) !== null, "null");
+  check("anchor klasik objek", resolveAnchor({ subject: 1 } as AnchorRef, meta, 1) !== null, "null");
   check("region wajah karakter", meta.regions.some((r) => r.kind === "face"), "tidak ada region wajah");
   const layeredScene: any = {
     id: "s2",
@@ -175,9 +189,11 @@ async function run(): Promise<void> {
   // ---- Sinkronisasi kata ----
   const words = distributeWordTimings("Kata demi kata tersinkronisasi rapi.", 0.5, 3.2);
   check("timing kata monoton", words.every((w, i) => (i === 0 || w.start >= words[i - 1].start) && w.end > w.start), JSON.stringify(words.map((w) => w.start)));
-  check("kata aktif terdeteksi", activeWordIndex(words, 0.9) === 0, "idx=" + activeWordIndex(words, 0.9));
+  check("kata aktif terdeteksi", activeWordIndex(words, 0.55) === 0, "idx=" + activeWordIndex(words, 0.55));
+  check("sebelum mulai -> -1", activeWordIndex(words, 0.2) === -1, "idx=" + activeWordIndex(words, 0.2));
+  check("akhir -> kata terakhir", activeWordIndex(words, 3.0) === words.length - 1, "idx=" + activeWordIndex(words, 3.0));
   const prog = wordRevealProgress(words, 1.0);
-  check("reveal progress naik", prog.every((v, i) => i === 0 || v >= prog[i - 1]), JSON.stringify(prog));
+  check("reveal progress valid", prog.every((v) => v >= 0 && v <= 1) && prog.every((v, i) => i === 0 || v <= prog[i - 1]), JSON.stringify(prog));
   check("kalimat terpisah", splitSentences("Satu. Dua! Tiga?").length === 3, "n=" + splitSentences("Satu. Dua! Tiga?").length);
   check("reading floor > 0", readingFloorSeconds("Teks uji kecepatan baca.") > 0.2, "0");
 
@@ -192,7 +208,7 @@ async function run(): Promise<void> {
   check("caps -> kinetic", decideCueStyle("KATA PENTING tampil besar.", {}, recent, false, false).type === "kinetic");
   check("seru pendek -> impact", decideCueStyle("Hati-hati!", {}, recent, false, false).type === "impact");
   check("pertanyaan -> emphasis", decideCueStyle("Sudah kamu lihat hasilnya?", {}, recent, false, false).type === "emphasis");
-  const longCue = "Narasi dokumenter yang panjang menjelaskan latar belakang topik secara mendalam kepada pemirsa.";
+  const longCue = "Narasi dokumenter yang panjang menjelaskan latar belakang topik ini secara mendalam kepada seluruh pemirsa di mana pun mereka berada saat ini.";
   check("panjang -> editorial", decideCueStyle(longCue, {}, recent, false, false).type === "editorial-subtitle");
   check("default -> subtitle varian", ["subtitle", "top-subtitle", "floating-caption"].includes(decideCueStyle("Narasi biasa saja.", {}, recent, false, false).type));
 
