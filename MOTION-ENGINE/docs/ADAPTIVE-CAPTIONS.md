@@ -122,3 +122,8 @@ speech bubble terikat karakter, thought bubble, chat berurutan, kinetic
 kata-pasti, data caption terikat objek, notifikasi sudut, dan impact.
 Proyek ini memakai narasi `espeak-ng` karena merupakan demo CI engine;
 proyek produksi tetap memakai suara manual per proyek sesuai kebijakan.
+
+## Batasan
+
+- Teks narasi jangan dibungkus tanda kutip literal (contoh: `"Halo!"` pada `scene.narration`). Segmenter cue klasik memperlakukan kutipan penutup sebagai "kalimat" tersendiri sehingga pemeriksaan coverage kata validasi gagal. Gunakan direktif `speech-bubble` eksplisit alih-alih kutipan.
+- Pengujian mandiri dan CI mendaftarkan font vault (`GlobalFonts.registerFromPath`) sebelum menggambar teks; runner CI tidak memiliki glyph yang dapat dirasterisasi untuk keluarga generik `sans-serif`, sehingga `measureText` tetap memberi metrik tetapi `fillText` tidak menggambar apa pun. Produksi mendaftarkan font melalui `registerFonts()` di `render/renderer.ts`.
