@@ -1,14 +1,15 @@
 /**
  * Renderer headless NAZE: rasterisasi murni JavaScript ke Canvas 2D
- * (@napi-rs/canvas) tanpa GPU. Paket npm three tidak menyertakan
- * SoftwareRenderer, sehingga modul ini mengimplementasikan pipeline render
- * sendiri dengan antarmuka mirip renderer three.js:
+ * (@napi-rs/canvas) tanpa GPU. Fitur:
  *   - proyeksi perspektif + clipping bidang near per segitiga;
- *   - painter's algorithm, dengan pass ground terpisah agar objek di atas
- *     lantai tidak tertutup segitiga lantai raksasa;
- *   - pencahayaan aproksimasi: ambient + hemisphere + directional + point;
- *   - fog linear; tekstur affine (exact untuk billboard menghadap kamera).
- * Kompensasi keterbatasan: tanpa shadow map, tanpa instancing (geometri
+ *   - smooth shading (normal vertex dirata-rata per wajah);
+ *   - painter's algorithm dengan pass ground terpisah;
+ *   - bayangan planar lembut (proyeksi ellips bounding sphere sepanjang
+ *     arah cahaya utama) untuk kedalaman visual;
+ *   - pencahayaan aproksimasi ambient/hemisphere/directional/point;
+ *   - fog linear + tekstur affine (exact untuk billboard);
+ *   - vignette sinematik ringan pasca-render.
+ * Kompensasi: tanpa shadow map per-piksel, tanpa instancing (geometri
  * di-cache bersama), DOF/bloom no-op.
  */
 import { createCanvas } from '@napi-rs/canvas';
@@ -16,7 +17,7 @@ import * as THREE from 'three';
 
 export const QUALITY_PROFILES = {
   low: { width: 360, height: 640, shadows: false, instancing: false, detail: 'low' },
-  medium: { width: 540, height: 960, shadows: false, instancing: true, detail: 'medium' },
+  medium: { width: 720, height: 1280, shadows: true, instancing: true, detail: 'medium' },
   high: { width: 1080, height: 1920, shadows: true, instancing: true, detail: 'high' },
 };
 
@@ -60,13 +61,10 @@ export function installNodePolyfills() {
   polyfilled = true;
 }
 
-const _pv = new THREE.Vector3();
-const _nv = new THREE.Vector3();
-const _e1 = new THREE.Vector3();
-const _e2 = new THREE.Vector3();
-const _lp = new THREE.Vector3();
-const _pp = new THREE.Vector3();
 const _mv = new THREE.Matrix4();
+const _nm = new THREE.Matrix3();
+const _v1 = new THREE.Vector3();
+const _lp = new THREE.Vector3();
 
 function clamp255(x) {
   return x < 0 ? 0 : x > 255 ? 255 : Math.round(x);
@@ -168,8 +166,8 @@ function clipNear(poly, near) {
   return out;
 }
 
+const byLayerZ = (a, b) => (a.layer - b.layer) || (a.z - b.z);
 const byZ = (a, b) => a.z - b.z;
-const byZLayer = (a, b) => (a.z - b.z) || (a.layer - b.layer);
 
 function drawItems(ctx, items) {
   for (let k = 0; k < items.length; k++) {
@@ -183,6 +181,12 @@ function drawItems(ctx, items) {
       ctx.lineTo(it.x1, it.y1);
       ctx.lineTo(it.x2, it.y2);
       ctx.closePath();
+      ctx.fill();
+    } else if (it.kind === 2) {
+      ctx.globalAlpha = it.alpha;
+      ctx.fillStyle = 'rgb(4,6,10)';
+      ctx.beginPath();
+      ctx.ellipse(it.cx, it.cy, it.rx, it.ry, it.rot, 0, Math.PI * 2);
       ctx.fill();
     } else {
       ctx.save();
@@ -207,6 +211,8 @@ function drawItems(ctx, items) {
         const oy = it.y0 - (m12 * it.u0 + m22 * it.v0);
         ctx.transform(m11, m12, m21, m22, ox, oy);
         ctx.drawImage(it.img, 0, 0);
+        if (it.shCss) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = it.shCss; ctx.fill(); }
+        if (it.faCss) { ctx.fillStyle = it.faCss; ctx.fill(); }
       }
       ctx.restore();
     }
@@ -245,6 +251,16 @@ export class SoftwareCanvasRenderer {
     this._projScreen.multiplyMatrices(proj, view);
     const frustum = this._frustum.setFromProjectionMatrix(this._projScreen);
     const near = Math.max(0.01, camera.near || 0.1);
+    const tanHalf = Math.tan(((camera.fov || 45) * Math.PI / 180) * 0.5);
+
+    let shadowDir = null;
+    scene.traverse((o) => {
+      if (shadowDir || !o.isDirectionalLight) return;
+      _v1.setFromMatrixPosition(o.matrixWorld);
+      if (_v1.y > 0.05) shadowDir = _v1.clone().negate().normalize();
+    });
+    if (!shadowDir) shadowDir = new THREE.Vector3(0.35, -1, 0.2).normalize();
+    const shadowOk = shadowDir.y < -0.05;
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.globalAlpha = 1;
@@ -262,26 +278,39 @@ export class SoftwareCanvasRenderer {
       if (!obj.isMesh || obj.visible === false) return;
       if (frustum.intersectsObject(obj) === false) return;
       this._processMesh(obj, view, proj, w, h, near, lights, fog,
-        obj.userData.ground === true ? ground : items);
+        shadowOk ? shadowDir : null, tanHalf,
+        obj.userData.ground === true ? ground : items, ground);
     });
 
-    ground.sort(byZLayer);
+    ground.sort(byLayerZ);
     items.sort(byZ);
     drawItems(ctx, ground);
     drawItems(ctx, items);
+
+    const vg = ctx.createRadialGradient(w * 0.5, h * 0.44, Math.min(w, h) * 0.36, w * 0.5, h * 0.5, Math.max(w, h) * 0.72);
+    vg.addColorStop(0, 'rgba(0,0,0,0)');
+    vg.addColorStop(1, 'rgba(4,6,10,0.30)');
+    ctx.fillStyle = vg;
+    ctx.fillRect(0, 0, w, h);
     ctx.globalAlpha = 1;
   }
 
-  _processMesh(obj, view, proj, w, h, near, lights, fog, out) {
+  _processMesh(obj, view, proj, w, h, near, lights, fog, shadowDir, tanHalf, out, groundOut) {
     const geo = obj.geometry;
     const posA = geo.attributes.position;
     if (!posA) return;
     const uvA = geo.attributes.uv;
+    const nrmA = geo.attributes.normal;
     const index = geo.index;
     const mat = Array.isArray(obj.material) ? obj.material[0] : obj.material;
     if (!mat || !mat.isMaterial) return;
 
     const mv = _mv.multiplyMatrices(view, obj.matrixWorld);
+    const me = mv.elements;
+    const pe = proj.elements;
+    const nm = nrmA ? _nm.getNormalMatrix(mv).elements : null;
+
+    const pa = posA.array;
     const vc = posA.count;
     let buf = this._buf;
     if (!buf || buf.length < vc * 3) {
@@ -289,10 +318,10 @@ export class SoftwareCanvasRenderer {
       this._buf = buf;
     }
     for (let i = 0; i < vc; i++) {
-      _pv.fromBufferAttribute(posA, i).applyMatrix4(mv);
-      buf[i * 3] = _pv.x;
-      buf[i * 3 + 1] = _pv.y;
-      buf[i * 3 + 2] = _pv.z;
+      const px = pa[i * 3]; const py = pa[i * 3 + 1]; const pz = pa[i * 3 + 2];
+      buf[i * 3] = me[0] * px + me[4] * py + me[8] * pz + me[12];
+      buf[i * 3 + 1] = me[1] * px + me[5] * py + me[9] * pz + me[13];
+      buf[i * 3 + 2] = me[2] * px + me[6] * py + me[10] * pz + me[14];
     }
 
     const map = mat.map && mat.map.image ? mat.map : null;
@@ -307,6 +336,9 @@ export class SoftwareCanvasRenderer {
       ? cssRGB(mat.color.r * 255, mat.color.g * 255, mat.color.b * 255)
       : 'rgb(204,204,204)';
     const tint = [0, 0, 0];
+    const fogCssParts = fog
+      ? [clamp255(fog.color.r * 255), clamp255(fog.color.g * 255), clamp255(fog.color.b * 255)]
+      : null;
 
     const ic = index ? index.count : vc;
     const poly = this._poly;
@@ -319,23 +351,43 @@ export class SoftwareCanvasRenderer {
       const cx = buf[c * 3]; const cy = buf[c * 3 + 1]; const cz = buf[c * 3 + 2];
       if (az >= -near && bz >= -near && cz >= -near) continue;
 
-      _e1.set(bx - ax, by - ay, bz - az);
-      _e2.set(cx - ax, cy - ay, cz - az);
-      _nv.crossVectors(_e1, _e2);
-      const nlen = _nv.length();
-      if (nlen > 1e-9) _nv.multiplyScalar(1 / nlen);
-      else _nv.set(0, 0, 1);
+      let nx; let ny; let nz;
+      if (nm && nrmA) {
+        const na = nrmA.array;
+        let t0x = na[a * 3] + na[b * 3] + na[c * 3];
+        let t0y = na[a * 3 + 1] + na[b * 3 + 1] + na[c * 3 + 1];
+        let t0z = na[a * 3 + 2] + na[b * 3 + 2] + na[c * 3 + 2];
+        let tl = Math.sqrt(t0x * t0x + t0y * t0y + t0z * t0z);
+        if (tl < 1e-9) { t0x = 0; t0y = 0; t0z = 1; tl = 1; }
+        t0x /= tl; t0y /= tl; t0z /= tl;
+        nx = nm[0] * t0x + nm[3] * t0y + nm[6] * t0z;
+        ny = nm[1] * t0x + nm[4] * t0y + nm[7] * t0z;
+        nz = nm[2] * t0x + nm[5] * t0y + nm[8] * t0z;
+        tl = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
+        nx /= tl; ny /= tl; nz /= tl;
+      } else {
+        const e1x = bx - ax; const e1y = by - ay; const e1z = bz - az;
+        const e2x = cx - ax; const e2y = cy - ay; const e2z = cz - az;
+        nx = e1y * e2z - e1z * e2y;
+        ny = e1z * e2x - e1x * e2z;
+        nz = e1x * e2y - e1y * e2x;
+        const nl = Math.sqrt(nx * nx + ny * ny + nz * nz);
+        if (nl > 1e-9) { nx /= nl; ny /= nl; nz /= nl; }
+        else { nx = 0; ny = 0; nz = 1; }
+      }
+
       const gx = (ax + bx + cx) / 3;
       const gy = (ay + by + cy) / 3;
       const gz = (az + bz + cz) / 3;
 
       let fill = matColorCss;
+      let shCss = null;
+      let faCss = null;
       if (!map) {
-        shadeFace(mat, _nv, gx, gy, gz, lights, tint);
+        shadeFace(mat, { x: nx, y: ny, z: nz }, gx, gy, gz, lights, tint);
         let r = tint[0] * 255;
         let g = tint[1] * 255;
         let bl = tint[2] * 255;
-        if (isBasic) { r = mat.color.r * 255; g = mat.color.g * 255; bl = mat.color.b * 255; }
         if (fog) {
           let f = (-gz - fog.near) / (fog.far - fog.near);
           f = f < 0 ? 0 : f > 1 ? 1 : f;
@@ -344,6 +396,17 @@ export class SoftwareCanvasRenderer {
           bl = bl * (1 - f) + fog.color.b * 255 * f;
         }
         fill = cssRGB(r, g, bl);
+      } else if (!isBasic) {
+        shadeFace(mat, { x: nx, y: ny, z: nz }, gx, gy, gz, lights, tint);
+        const base = mat.color || { r: 1, g: 1, b: 1 };
+        const lf = (tint[0] / (base.r || 1) + tint[1] / (base.g || 1) + tint[2] / (base.b || 1)) / 3;
+        const sh = 1 - lf;
+        if (sh > 0.04) shCss = 'rgba(3,5,9,' + (sh > 0.72 ? 0.72 : sh).toFixed(3) + ')';
+      }
+      if (map && fog) {
+        let f = (-gz - fog.near) / (fog.far - fog.near);
+        f = f < 0 ? 0 : f > 1 ? 1 : f;
+        if (f > 0.04) faCss = 'rgba(' + fogCssParts[0] + ',' + fogCssParts[1] + ',' + fogCssParts[2] + ',' + f.toFixed(3) + ')';
       }
 
       poly.length = 0;
@@ -363,9 +426,12 @@ export class SoftwareCanvasRenderer {
         this._pts = pts;
       }
       for (let i = 0; i < clipped.length; i++) {
-        _pp.set(clipped[i].x, clipped[i].y, clipped[i].z).applyMatrix4(proj);
-        pts[i].x = (_pp.x * 0.5 + 0.5) * w;
-        pts[i].y = (1 - (_pp.y * 0.5 + 0.5)) * h;
+        const vx = clipped[i].x; const vy = clipped[i].y; const vz = clipped[i].z;
+        const xw = pe[0] * vx + pe[4] * vy + pe[8] * vz + pe[12];
+        const yw = pe[1] * vx + pe[5] * vy + pe[9] * vz + pe[13];
+        const ww = pe[3] * vx + pe[7] * vy + pe[11] * vz + pe[15];
+        pts[i].x = (xw / ww * 0.5 + 0.5) * w;
+        pts[i].y = (1 - (yw / ww * 0.5 + 0.5)) * h;
       }
 
       for (let i = 1; i < clipped.length - 1; i++) {
@@ -373,7 +439,7 @@ export class SoftwareCanvasRenderer {
         const p1 = pts[i];
         const p2 = pts[i + 1];
         const area2 = (p1.x - p0.x) * (p2.y - p0.y) - (p2.x - p0.x) * (p1.y - p0.y);
-        if (Math.abs(area2) < 1e-9) continue;
+        if (area2 < 1 && area2 > -1) continue;
         if (side === THREE.FrontSide && area2 >= 0) continue;
         if (side === THREE.BackSide && area2 < 0) continue;
         out.push({
@@ -389,7 +455,50 @@ export class SoftwareCanvasRenderer {
           u1: clipped[i].u, v1: clipped[i].v,
           u2: clipped[i + 1].u, v2: clipped[i + 1].v,
           img: map ? map.image : null,
+          shCss,
+          faCss,
         });
+      }
+    }
+
+    // Bayangan planar lembut (ellips) untuk kedalaman visual.
+    if (shadowDir && !obj.userData.ground && !obj.userData.noShadow && alpha > 0.55) {
+      if (!geo.boundingSphere) geo.computeBoundingSphere();
+      const bs = geo.boundingSphere;
+      const mwe = obj.matrixWorld.elements;
+      const sc = Math.max(
+        Math.hypot(mwe[0], mwe[1], mwe[2]),
+        Math.hypot(mwe[4], mwe[5], mwe[6]),
+        Math.hypot(mwe[8], mwe[9], mwe[10])
+      );
+      const r = bs.radius * sc;
+      if (r >= 0.05) {
+        const cwx = mwe[0] * bs.center.x + mwe[4] * bs.center.y + mwe[8] * bs.center.z + mwe[12];
+        const cwy = mwe[1] * bs.center.x + mwe[5] * bs.center.y + mwe[9] * bs.center.z + mwe[13];
+        const cwz = mwe[2] * bs.center.x + mwe[6] * bs.center.y + mwe[10] * bs.center.z + mwe[14];
+        if (cwy > 0.04) {
+          const tt = -cwy / shadowDir.y;
+          const qx = cwx + shadowDir.x * tt;
+          const qz = cwz + shadowDir.z * tt;
+          _v1.set(qx, 0.02, qz).applyMatrix4(view);
+          if (_v1.z < -near) {
+            const dist = -_v1.z;
+            const fpp = (h * 0.5) / (dist * tanHalf || 1e-6);
+            const xw = pe[0] * _v1.x + pe[4] * _v1.y + pe[8] * _v1.z + pe[12];
+            const yw = pe[1] * _v1.x + pe[5] * _v1.y + pe[9] * _v1.z + pe[13];
+            const ww = pe[3] * _v1.x + pe[7] * _v1.y + pe[11] * _v1.z + pe[15];
+            const sx = (xw / ww * 0.5 + 0.5) * w;
+            const sy = (1 - (yw / ww * 0.5 + 0.5)) * h;
+            const spread = 1 + tt * 0.22;
+            const rx = r * spread * fpp;
+            const ry = rx * Math.max(0.32, Math.min(1, -shadowDir.y));
+            const rot = Math.atan2(shadowDir.x, shadowDir.z);
+            const al = 0.24 * (1 - Math.min(0.8, tt * 0.12));
+            if (al > 0.03 && rx > 0.6) {
+              groundOut.push({ z: _v1.z, layer: 1, kind: 2, alpha: al, cx: sx, cy: sy, rx, ry, rot });
+            }
+          }
+        }
       }
     }
   }

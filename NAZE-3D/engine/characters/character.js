@@ -1,17 +1,21 @@
 /**
- * SVG Character Engine: karakter NAZE 2D digambar ke canvas menjadi tekstur
- * billboard 3D (plane transparan) yang kompatibel dengan kamera 3D.
+ * SVG Character Engine: karakter NAZE 2D digambar ke kanvas resolusi ganda
+ * (512x1024) menjadi tekstur billboard 3D. Detail wajah, tangan, sepatu,
+ * dan gradien pakaian untuk tampilan realistis.
  * Pose: stand, walk, sit, point, explain, hold. Ekspresi: neutral, confident, happy, thinking.
  */
 import { createCanvas } from '@napi-rs/canvas';
 import * as THREE from 'three';
 
-const W = 256;
-const H = 512;
+const DW = 256;
+const DH = 512;
+const RW = 512;
+const RH = 1024;
 
 const COLORS = {
-  outline: '#1a1c22', skin: '#e8b98a', hair: '#262626', shirt: '#3f7fd6',
-  pants: '#2c3242', shoes: '#1c1c22', accent: '#f97316',
+  outline: '#1a1c22', skin: '#e8b98a', skinShade: '#d3a06c', hair: '#262626', hairLight: '#3d3d3d',
+  shirt: '#3f7fd6', shirtDark: '#2f62a8', pants: '#2c3242', pantsLight: '#3a4156',
+  shoes: '#1c1c22', accent: '#f97316', white: '#ffffff', eye: '#20242e',
 };
 
 function roundRectPath(ctx, x, y, w, h, r) {
@@ -29,27 +33,53 @@ function roundRectPath(ctx, x, y, w, h, r) {
 }
 
 function drawCharacter(ctx, pose, expression) {
-  const cx = W / 2;
-  const s = H / 512;
+  const cx = DW / 2;
   const c = COLORS;
-  ctx.clearRect(0, 0, W, H);
+  ctx.clearRect(0, 0, DW, DH);
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
 
   const limb = (x1, y1, x2, y2, w, color) => {
     ctx.strokeStyle = color;
-    ctx.lineWidth = w * s;
+    ctx.lineWidth = w;
     ctx.beginPath();
-    ctx.moveTo(x1 * s, y1 * s);
-    ctx.lineTo(x2 * s, y2 * s);
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
     ctx.stroke();
   };
   const polyLimb = (pts, w, color) => {
     ctx.strokeStyle = color;
-    ctx.lineWidth = w * s;
+    ctx.lineWidth = w;
     ctx.beginPath();
-    ctx.moveTo(pts[0][0] * s, pts[0][1] * s);
-    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0] * s, pts[i][1] * s);
+    ctx.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+    ctx.stroke();
+  };
+  const hand = (x, y) => {
+    ctx.fillStyle = c.skin;
+    ctx.strokeStyle = c.outline;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(x, y, 8, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+  };
+  const shoe = (x, y, flip) => {
+    ctx.fillStyle = c.shoes;
+    roundRectPath(ctx, x, y, 28, 13, 5);
+    ctx.fill();
+    ctx.strokeStyle = c.outline;
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.fillStyle = c.white;
+    ctx.fillRect(x + 2, y + 8, 24, 4);
+    ctx.strokeStyle = c.white;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x + (flip ? 7 : 9), y + 3);
+    ctx.lineTo(x + (flip ? 13 : 15), y + 6);
+    ctx.moveTo(x + (flip ? 13 : 15), y + 3);
+    ctx.lineTo(x + (flip ? 19 : 21), y + 6);
     ctx.stroke();
   };
 
@@ -57,130 +87,241 @@ function drawCharacter(ctx, pose, expression) {
   let torsoTop = 240;
   if (pose === 'sit') { hipY = 360; torsoTop = 270; }
 
-  // Kaki
+  // Kaki dan sepatu
   if (pose === 'sit') {
-    polyLimb([[cx - 22, hipY], [cx - 52, hipY], [cx - 52, hipY + 110]], 20, c.pants);
-    polyLimb([[cx + 22, hipY], [cx + 52, hipY], [cx + 52, hipY + 110]], 20, c.pants);
-    ctx.fillStyle = c.shoes;
-    ctx.fillRect((cx - 62) * s, (hipY + 104) * s, 22 * s, 12 * s);
-    ctx.fillRect((cx + 42) * s, (hipY + 104) * s, 22 * s, 12 * s);
+    polyLimb([[cx - 22, hipY], [cx - 52, hipY], [cx - 52, hipY + 108]], 20, c.pants);
+    polyLimb([[cx + 22, hipY], [cx + 52, hipY], [cx + 52, hipY + 108]], 20, c.pants);
+    shoe(cx - 64, hipY + 104, true);
+    shoe(cx + 42, hipY + 104, false);
   } else if (pose === 'walk') {
-    polyLimb([[cx - 16, hipY], [cx - 48, hipY + 150]], 20, c.pants);
-    polyLimb([[cx + 16, hipY], [cx + 44, hipY + 138]], 20, c.pants);
-    ctx.fillStyle = c.shoes;
-    ctx.fillRect((cx - 58) * s, (hipY + 144) * s, 24 * s, 12 * s);
-    ctx.fillRect((cx + 36) * s, (hipY + 132) * s, 24 * s, 12 * s);
+    polyLimb([[cx - 16, hipY], [cx - 48, hipY + 148]], 20, c.pants);
+    polyLimb([[cx + 16, hipY], [cx + 44, hipY + 136]], 20, c.pants);
+    limb(cx - 32, hipY + 60, cx - 44, hipY + 120, 16, c.pantsLight);
+    shoe(cx - 60, hipY + 142, true);
+    shoe(cx + 34, hipY + 130, false);
   } else {
-    limb(cx - 18, hipY, cx - 24, hipY + 152, 20, c.pants);
-    limb(cx + 18, hipY, cx + 24, hipY + 152, 20, c.pants);
-    ctx.fillStyle = c.shoes;
-    ctx.fillRect((cx - 36) * s, (hipY + 146) * s, 26 * s, 12 * s);
-    ctx.fillRect((cx + 12) * s, (hipY + 146) * s, 26 * s, 12 * s);
+    limb(cx - 18, hipY, cx - 24, hipY + 148, 20, c.pants);
+    limb(cx + 18, hipY, cx + 24, hipY + 148, 20, c.pants);
+    limb(cx - 21, hipY + 60, cx - 24, hipY + 120, 14, c.pantsLight);
+    limb(cx + 21, hipY + 60, cx + 24, hipY + 120, 14, c.pantsLight);
+    shoe(cx - 38, hipY + 142, true);
+    shoe(cx + 10, hipY + 142, false);
   }
 
-  // Torso
-  ctx.fillStyle = c.shirt;
+  // Torso dengan gradien
+  const grad = ctx.createLinearGradient(0, torsoTop, 0, hipY + 16);
+  grad.addColorStop(0, c.shirt);
+  grad.addColorStop(1, c.shirtDark);
+  ctx.fillStyle = grad;
   ctx.strokeStyle = c.outline;
-  ctx.lineWidth = 4 * s;
-  roundRectPath(ctx, (cx - 48) * s, torsoTop * s, 96 * s, (hipY - torsoTop + 16) * s, 18 * s);
+  ctx.lineWidth = 4;
+  roundRectPath(ctx, cx - 48, torsoTop, 96, hipY - torsoTop + 16, 18);
   ctx.fill();
   ctx.stroke();
+
+  // Kerah dan garis kancing
+  ctx.fillStyle = c.shirtDark;
+  ctx.beginPath();
+  ctx.moveTo(cx - 14, torsoTop + 2);
+  ctx.lineTo(cx, torsoTop + 18);
+  ctx.lineTo(cx + 14, torsoTop + 2);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(cx, torsoTop + 20);
+  ctx.lineTo(cx, torsoTop + 58);
+  ctx.stroke();
+  ctx.fillStyle = 'rgba(255,255,255,0.55)';
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+    ctx.arc(cx - 7, torsoTop + 30 + i * 14, 2, 0, Math.PI * 2);
+    ctx.arc(cx + 7, torsoTop + 37 + i * 14, 2, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
   // Lengan
   const shoulderY = torsoTop + 22;
   if (pose === 'point') {
-    limb(cx - 40, shoulderY, cx - 52, shoulderY + 78, 16, c.shirt);
-    polyLimb([[cx + 40, shoulderY], [cx + 112, shoulderY - 14], [cx + 128, shoulderY - 18]], 16, c.shirt);
+    limb(cx - 40, shoulderY, cx - 52, shoulderY + 76, 16, c.shirt);
+    polyLimb([[cx + 40, shoulderY], [cx + 108, shoulderY - 12], [cx + 122, shoulderY - 16]], 16, c.shirt);
+    hand(cx - 52, shoulderY + 84);
+    limb(cx + 122, shoulderY - 16, cx + 134, shoulderY - 20, 7, c.skin);
+    hand(cx + 134, shoulderY - 18);
   } else if (pose === 'explain') {
-    polyLimb([[cx - 40, shoulderY], [cx - 78, shoulderY + 34], [cx - 66, shoulderY - 16]], 16, c.shirt);
-    polyLimb([[cx + 40, shoulderY], [cx + 78, shoulderY + 34], [cx + 66, shoulderY - 16]], 16, c.shirt);
+    polyLimb([[cx - 40, shoulderY], [cx - 76, shoulderY + 30], [cx - 66, shoulderY - 14]], 16, c.shirt);
+    polyLimb([[cx + 40, shoulderY], [cx + 76, shoulderY + 30], [cx + 66, shoulderY - 14]], 16, c.shirt);
+    hand(cx - 66, shoulderY - 20);
+    hand(cx + 66, shoulderY - 20);
   } else if (pose === 'hold') {
-    limb(cx - 40, shoulderY, cx - 48, shoulderY + 70, 16, c.shirt);
-    polyLimb([[cx + 40, shoulderY], [cx + 74, shoulderY + 40], [cx + 52, shoulderY + 66]], 16, c.shirt);
+    limb(cx - 40, shoulderY, cx - 48, shoulderY + 68, 16, c.shirt);
+    polyLimb([[cx + 40, shoulderY], [cx + 72, shoulderY + 38], [cx + 52, shoulderY + 62]], 16, c.shirt);
+    hand(cx - 48, shoulderY + 76);
+    hand(cx + 52, shoulderY + 70);
     ctx.fillStyle = c.accent;
-    roundRectPath(ctx, (cx + 34) * s, (shoulderY + 58) * s, 30 * s, 22 * s, 5 * s);
+    roundRectPath(ctx, cx + 38, shoulderY + 56, 28, 20, 5);
     ctx.fill();
+    ctx.strokeStyle = c.outline;
+    ctx.lineWidth = 3;
     ctx.stroke();
   } else if (pose === 'walk') {
-    limb(cx - 40, shoulderY, cx - 62, shoulderY + 52, 16, c.shirt);
-    limb(cx + 40, shoulderY, cx + 62, shoulderY - 42, 16, c.shirt);
+    limb(cx - 40, shoulderY, cx - 62, shoulderY + 50, 16, c.shirt);
+    limb(cx + 40, shoulderY, cx + 62, shoulderY - 40, 16, c.shirt);
+    hand(cx - 62, shoulderY + 58);
+    hand(cx + 62, shoulderY - 32);
   } else if (pose === 'sit') {
-    limb(cx - 40, shoulderY, cx - 50, shoulderY + 72, 16, c.shirt);
-    limb(cx + 40, shoulderY, cx + 50, shoulderY + 72, 16, c.shirt);
+    limb(cx - 40, shoulderY, cx - 50, shoulderY + 70, 16, c.shirt);
+    limb(cx + 40, shoulderY, cx + 50, shoulderY + 70, 16, c.shirt);
+    hand(cx - 50, shoulderY + 78);
+    hand(cx + 50, shoulderY + 78);
   } else {
-    limb(cx - 40, shoulderY, cx - 50, shoulderY + 78, 16, c.shirt);
-    limb(cx + 40, shoulderY, cx + 50, shoulderY + 78, 16, c.shirt);
+    limb(cx - 40, shoulderY, cx - 50, shoulderY + 76, 16, c.shirt);
+    limb(cx + 40, shoulderY, cx + 50, shoulderY + 76, 16, c.shirt);
+    hand(cx - 50, shoulderY + 84);
+    hand(cx + 50, shoulderY + 84);
   }
 
   // Leher dan kepala
-  limb(cx, torsoTop + 6, cx, torsoTop - 16, 14, c.skin);
+  limb(cx, torsoTop + 6, cx, torsoTop - 14, 14, c.skin);
   const headR = 44;
-  const headY = torsoTop - 16 - headR + 6;
+  const headY = torsoTop - 14 - headR + 6;
+
+  // Telinga
+  ctx.fillStyle = c.skin;
+  ctx.strokeStyle = c.outline;
+  ctx.lineWidth = 3;
+  for (const ex of [cx - headR - 2, cx + headR + 2]) {
+    ctx.beginPath();
+    ctx.arc(ex, headY + 4, 7, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+  }
+
   ctx.fillStyle = c.skin;
   ctx.beginPath();
-  ctx.arc(cx * s, headY * s, headR * s, 0, Math.PI * 2);
+  ctx.arc(cx, headY, headR, 0, Math.PI * 2);
   ctx.fill();
+  ctx.strokeStyle = c.outline;
+  ctx.lineWidth = 4;
   ctx.stroke();
 
-  // Rambut
-  ctx.fillStyle = c.hair;
+  // Bayangan wajah sisi kanan
+  ctx.fillStyle = 'rgba(190,140,90,0.35)';
   ctx.beginPath();
-  ctx.arc(cx * s, headY * s, (headR + 3) * s, Math.PI * 1.02, Math.PI * 1.98);
+  ctx.arc(cx + 12, headY, headR - 8, -1.1, 1.1);
   ctx.closePath();
   ctx.fill();
-  for (let i = 0; i < 3; i++) {
-    const hx = cx - 26 + i * 26;
+
+  // Rambut belakang dan atas
+  ctx.fillStyle = c.hair;
+  ctx.beginPath();
+  ctx.arc(cx, headY - 2, headR + 2, Math.PI * 1.0, Math.PI * 2.0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(cx, headY - headR + 10, headR + 2, Math.PI * 1.02, Math.PI * 1.98);
+  ctx.closePath();
+  ctx.fill();
+  for (let i = 0; i < 4; i++) {
+    const hx = cx - 27 + i * 18;
     ctx.beginPath();
-    ctx.moveTo((hx - 10) * s, (headY - headR + 6) * s);
-    ctx.quadraticCurveTo(hx * s, (headY - headR - 16) * s, (hx + 12) * s, (headY - headR + 8) * s);
+    ctx.moveTo(hx - 9, headY - headR + 8);
+    ctx.quadraticCurveTo(hx, headY - headR - 12, hx + 11, headY - headR + 9);
     ctx.closePath();
     ctx.fill();
   }
+  ctx.strokeStyle = c.hairLight;
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.arc(cx - 6, headY - 16, headR - 10, Math.PI * 1.15, Math.PI * 1.55);
+  ctx.stroke();
 
-  // Wajah
-  const eyeY = headY + 4;
-  ctx.fillStyle = c.outline;
-  const eye = (ex, ey) => { ctx.beginPath(); ctx.arc(ex * s, ey * s, 5 * s, 0, Math.PI * 2); ctx.fill(); };
-  if (expression === 'thinking') {
-    eye(cx - 16, eyeY - 8);
-    eye(cx + 16, eyeY - 8);
+  // Wajah detail
+  const eyeY = headY + 6;
+  const eye = (ex, ey, browLift) => {
+    ctx.fillStyle = c.white;
     ctx.strokeStyle = c.outline;
-    ctx.lineWidth = 4 * s;
+    ctx.lineWidth = 2.5;
     ctx.beginPath();
-    ctx.arc(cx * s, (eyeY + 16) * s, 9 * s, Math.PI * 1.15, Math.PI * 1.85);
+    ctx.ellipse(ex, ey, 10, 7.5, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = c.eye;
+    ctx.beginPath();
+    ctx.arc(ex + 1, ey + 1, 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = c.white;
+    ctx.beginPath();
+    ctx.arc(ex + 2.5, ey - 0.5, 1.4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = c.hair;
+    ctx.lineWidth = 3.5;
+    ctx.beginPath();
+    ctx.moveTo(ex - 11, ey - 11 - browLift);
+    ctx.quadraticCurveTo(ex, ey - 15 - browLift * 1.4, ex + 11, ey - 10 - browLift * 0.4);
+    ctx.stroke();
+  };
+
+  let browL = 0;
+  let browR = 0;
+  if (expression === 'happy') { browL = 3; browR = 3; }
+  if (expression === 'confident') { browL = 4; browR = 0; }
+  if (expression === 'thinking') { browL = -2; browR = 4; }
+  eye(cx - 17, eyeY - (expression === 'thinking' ? 6 : 0), browL);
+  eye(cx + 17, eyeY - (expression === 'thinking' ? 6 : 0), browR);
+
+  // Hidung
+  ctx.strokeStyle = c.skinShade;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(cx + 1, eyeY + 4);
+  ctx.lineTo(cx + 4, eyeY + 12);
+  ctx.stroke();
+
+  // Mulut per ekspresi
+  ctx.strokeStyle = c.outline;
+  ctx.lineWidth = 3.5;
+  if (expression === 'happy') {
+    ctx.fillStyle = '#7c3a3a';
+    ctx.beginPath();
+    ctx.arc(cx, eyeY + 16, 12, 0.05 * Math.PI, 0.95 * Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = c.white;
+    ctx.fillRect(cx - 7, eyeY + 17, 14, 3.5);
+  } else if (expression === 'confident') {
+    ctx.beginPath();
+    ctx.moveTo(cx - 9, eyeY + 18);
+    ctx.quadraticCurveTo(cx + 3, eyeY + 22, cx + 11, eyeY + 13);
+    ctx.stroke();
+  } else if (expression === 'thinking') {
+    ctx.beginPath();
+    ctx.arc(cx + 6, eyeY + 19, 4.5, Math.PI * 1.1, Math.PI * 2.1);
     ctx.stroke();
   } else {
-    eye(cx - 16, eyeY);
-    eye(cx + 16, eyeY);
-    ctx.strokeStyle = c.outline;
-    ctx.lineWidth = 4 * s;
     ctx.beginPath();
-    if (expression === 'happy') {
-      ctx.arc(cx * s, (eyeY + 10) * s, 13 * s, 0.15 * Math.PI, 0.85 * Math.PI);
-    } else if (expression === 'confident') {
-      ctx.arc(cx * s, (eyeY + 12) * s, 11 * s, 0.2 * Math.PI, 0.8 * Math.PI);
-    } else {
-      ctx.moveTo((cx - 10) * s, (eyeY + 14) * s);
-      ctx.lineTo((cx + 10) * s, (eyeY + 14) * s);
-    }
+    ctx.arc(cx, eyeY + 13, 10, 0.2 * Math.PI, 0.8 * Math.PI);
     ctx.stroke();
   }
-  if (expression === 'confident' || expression === 'thinking') {
-    ctx.strokeStyle = c.outline;
-    ctx.lineWidth = 3 * s;
-    ctx.beginPath();
-    ctx.moveTo((cx - 26) * s, (eyeY - 16) * s);
-    ctx.lineTo((cx - 8) * s, (eyeY - 20) * s);
-    ctx.moveTo((cx + 8) * s, (eyeY - 20) * s);
-    ctx.lineTo((cx + 26) * s, (eyeY - 16) * s);
-    ctx.stroke();
+
+  // Rona pipi untuk ekspresi happy
+  if (expression === 'happy') {
+    ctx.fillStyle = 'rgba(240,130,130,0.30)';
+    for (const bx of [cx - 26, cx + 26]) {
+      ctx.beginPath();
+      ctx.ellipse(bx, eyeY + 9, 7, 4.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
   }
 }
 
 export function makeCharacterTexture(opts) {
   const o = opts || {};
-  const canvas = createCanvas(W, H);
+  const canvas = createCanvas(RW, RH);
   const ctx = canvas.getContext('2d');
+  ctx.scale(RW / DW, RH / DH);
   drawCharacter(ctx, o.pose || 'stand', o.expression || 'neutral');
   const texture = new THREE.CanvasTexture(canvas);
   texture.needsUpdate = true;
@@ -207,13 +348,13 @@ export class CharacterBillboard {
     this.group.add(this.mesh);
 
     const shadow = new THREE.Mesh(
-      new THREE.CircleGeometry(this.height * 0.2, 12),
-      new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.3 })
+      new THREE.CircleGeometry(this.height * 0.22, 14),
+      new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.32 })
     );
     shadow.rotation.x = -Math.PI / 2;
     shadow.position.y = 0.01;
     shadow.userData.ground = true;
-    shadow.userData.groundLayer = 1;
+    shadow.userData.groundLayer = 2;
     this.group.add(shadow);
   }
 
