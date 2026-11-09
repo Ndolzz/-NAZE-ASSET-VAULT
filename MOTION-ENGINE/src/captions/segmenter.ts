@@ -32,7 +32,12 @@ export function splitIntoCueTexts(
   if (!clean) return [];
   const maxChars = maxLineLen * maxLines;
 
-  const sentences = clean.match(/[^.!?]+[.!?]*/g) ?? [clean];
+  // Titik desimal di dalam angka (mis. "350.600") bukan akhir kalimat:
+  // lindungi sementara agar pemenggalan cue tidak memotong angka.
+  const guarded = clean.replace(/(\d)\.(?=\d)/g, "$1\u0000");
+  const sentences = (guarded.match(/[^.!?]+[.!?]*/g) ?? [guarded]).map((s) =>
+    s.replace(/\u0000/g, ".")
+  );
 
   const cues: string[] = [];
   for (const sentence of sentences) {
