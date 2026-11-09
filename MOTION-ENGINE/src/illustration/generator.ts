@@ -630,6 +630,118 @@ function drawObject(
       }
       break;
     }
+    case "building": {
+      const bw = s * 1.15;
+      const bh = s * 1.8;
+      roundRectPath(ctx, -bw / 2, -bh / 2, bw, bh, 10 * kit.scale);
+      fillShape(ctx, kit, palette.secondary, 0, 0, s);
+      ctx.fill();
+      applyStroke(ctx, kit, lw);
+      ctx.strokeStyle = palette.text;
+      ctx.lineWidth = lw * 0.8;
+      ctx.beginPath();
+      ctx.moveTo(0, -bh / 2);
+      ctx.lineTo(0, -bh / 2 - s * 0.14);
+      ctx.stroke();
+      const blink = 0.5 + Math.sin(kit.t * 5) * 0.5;
+      ctx.beginPath();
+      ctx.arc(0, -bh / 2 - s * 0.18, s * 0.05, 0, Math.PI * 2);
+      ctx.fillStyle = withAlpha(palette.accent, 0.35 + blink * 0.65);
+      ctx.fill();
+      const cols = 4;
+      const rows = 6;
+      const doorW = (bw * 0.76) / cols;
+      const doorH = (bh * 0.72) / rows;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const dx = -bw * 0.38 + c * doorW + doorW * 0.14;
+          const dy = -bh * 0.36 + r * doorH + doorH * 0.16;
+          const unlocked = (r * cols + c) % 7 === 3;
+          const pulse = unlocked ? 0.55 + Math.sin(kit.t * 3 + r + c) * 0.35 : 1;
+          ctx.globalAlpha = pulse;
+          roundRectPath(ctx, dx, dy, doorW * 0.72, doorH * 0.68, 3 * kit.scale);
+          ctx.fillStyle = unlocked ? palette.accent : palette.primary;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+          applyStroke(ctx, kit, lw * 0.55);
+        }
+      }
+      roundRectPath(ctx, -bw * 0.12, bh / 2 - bh * 0.16, bw * 0.24, bh * 0.14, 4 * kit.scale);
+      ctx.fillStyle = palette.text;
+      ctx.fill();
+      applyStroke(ctx, kit, lw * 0.7);
+      break;
+    }
+
+    case "firewall": {
+      const ww = s * 1.6;
+      const wh = s * 1.15;
+      roundRectPath(ctx, -ww / 2, -wh / 2, ww, wh, 10 * kit.scale);
+      fillShape(ctx, kit, palette.primary, 0, 0, s);
+      ctx.fill();
+      applyStroke(ctx, kit, lw);
+      const brickH = wh / 6;
+      ctx.strokeStyle = withAlpha(palette.background, 0.85);
+      ctx.lineWidth = lw * 0.5;
+      for (let r = 1; r < 6; r++) {
+        ctx.beginPath();
+        ctx.moveTo(-ww / 2, -wh / 2 + r * brickH);
+        ctx.lineTo(ww / 2, -wh / 2 + r * brickH);
+        ctx.stroke();
+      }
+      for (let r = 0; r < 6; r++) {
+        const shift = r % 2 === 0 ? 0 : ww / 8;
+        for (let c = 0; c < 4; c++) {
+          const vx = -ww / 2 + (c + 1) * (ww / 4) + shift - ww / 8;
+          if (vx > -ww / 2 + 2 && vx < ww / 2 - 2) {
+            ctx.beginPath();
+            ctx.moveTo(vx, -wh / 2 + r * brickH);
+            ctx.lineTo(vx, -wh / 2 + (r + 1) * brickH);
+            ctx.stroke();
+          }
+        }
+      }
+      const glow = 0.5 + Math.sin(kit.t * 2.4) * 0.3;
+      const g = ctx.createRadialGradient(0, 0, s * 0.05, 0, 0, s * 0.75);
+      g.addColorStop(0, withAlpha(palette.secondary, 0.4 * glow));
+      g.addColorStop(1, withAlpha(palette.secondary, 0));
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(0, 0, s * 0.75, 0, Math.PI * 2);
+      ctx.fill();
+      roundRectPath(ctx, -s * 0.34, -s * 0.3, s * 0.68, s * 0.6, 8 * kit.scale);
+      ctx.fillStyle = palette.background;
+      ctx.fill();
+      applyStroke(ctx, kit, lw * 0.8);
+      ctx.strokeStyle = palette.accent;
+      ctx.lineWidth = lw * 1.4;
+      ctx.beginPath();
+      ctx.moveTo(-s * 0.16, 0);
+      ctx.lineTo(-s * 0.04, s * 0.14);
+      ctx.lineTo(s * 0.2, -s * 0.16);
+      ctx.stroke();
+      for (let i = 0; i < 4; i++) {
+        const p = (kit.t * 0.55 + i / 4) % 1;
+        const px = -ww / 2 - s * 0.3 + p * (ww * 0.42 + s * 0.3);
+        const py = -wh * 0.28 + (i % 3) * wh * 0.28;
+        ctx.globalAlpha = 1 - p * 0.85;
+        roundRectPath(ctx, px, py - s * 0.07, s * 0.14, s * 0.14, 3 * kit.scale);
+        ctx.fillStyle = palette.secondary;
+        ctx.fill();
+        if (px > -s * 0.5) {
+          ctx.strokeStyle = palette.accent;
+          ctx.lineWidth = lw * 0.9;
+          ctx.beginPath();
+          ctx.moveTo(px + s * 0.01, py - s * 0.06);
+          ctx.lineTo(px + s * 0.13, py + s * 0.06);
+          ctx.moveTo(px + s * 0.13, py - s * 0.06);
+          ctx.lineTo(px + s * 0.01, py + s * 0.06);
+          ctx.stroke();
+        }
+        ctx.globalAlpha = 1;
+      }
+      break;
+    }
     default: {
       drawIcon(ctx, kit, rng, size, name, lw);
       break;
@@ -767,6 +879,8 @@ export const OBJECT_VOCABULARY = [
   "star",
   "shoe",
   "footprint",
+  "building",
+  "firewall",
 ];
 
 export function drawPaletteBlend(from: string, to: string, t: number): string {

@@ -1,0 +1,2329 @@
+{
+  "schema": "naze-project/2.0",
+  "name": "2500-SERANGAN-SIBER",
+  "style": "editorial-kinetic",
+  "palette": {
+    "background": "#0B0B0F",
+    "primary": "#F2F0EB",
+    "secondary": "#8E8E99",
+    "accent": "#E63B2E",
+    "text": "#F5F5F0",
+    "dark": true
+  },
+  "profile": "vertical-1080",
+  "animationIntensity": 1,
+  "accentWords": true,
+  "burnInCc": true,
+  "narration": {
+    "engine": "file",
+    "file": "PROJECTS/2500 serangan siber/speechma_audio_Remy Indonesian_at_10_03_28 AM_on_November_9th_2026.mp3",
+    "language": "id"
+  },
+  "scenes": [
+    {
+      "id": "scene-1",
+      "title": "WHILE YOU SLEEP",
+      "narration": "Bayangkan, saat kamu sedang tidur, ada ribuan komputer yang terus mencoba mencari celah untuk menembus sistem digital di Indonesia.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "globe"
+        },
+        {
+          "kind": "chart",
+          "data": [
+            15,
+            32,
+            48,
+            66,
+            85
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/switch_001.wav",
+          "volume": 0.45,
+          "at": 0.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_2.ogg",
+          "volume": 0.35,
+          "at": 1
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/glitch_001.wav",
+          "volume": 0.5,
+          "at": 2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_2.ogg",
+          "volume": 0.45,
+          "at": 3
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/low_random.ogg",
+          "volume": 0.35,
+          "at": 4
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_metal_heavy_000.ogg",
+          "volume": 0.65,
+          "at": 5
+        }
+      ],
+      "layers": [
+        {
+          "id": "s1-grid",
+          "kind": "grid",
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "fill": "text",
+          "z": 0.8,
+          "enter": {
+            "type": "wipe"
+          }
+        },
+        {
+          "id": "s1-halftone",
+          "kind": "halftone",
+          "box": [
+            0,
+            0,
+            1,
+            0.07
+          ],
+          "fill": "accent",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 0.15
+          }
+        },
+        {
+          "id": "s1-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "WHILE YOU",
+          "box": [
+            0.04,
+            0.08,
+            0.92,
+            0.15
+          ],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "enter": {
+            "type": "pop",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s1-sleep",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "SLEEP",
+          "box": [
+            0.04,
+            0.22,
+            0.92,
+            0.16
+          ],
+          "fill": "accent",
+          "z": 1.1,
+          "enter": {
+            "type": "spin",
+            "at": 0.5
+          },
+          "transform": {
+            "x": [
+              {
+                "t": 0,
+                "value": 0
+              },
+              {
+                "t": 6,
+                "value": 18
+              }
+            ]
+          }
+        },
+        {
+          "id": "s1-null",
+          "kind": "null",
+          "box": [
+            0.06,
+            0.34,
+            0.88,
+            0.34
+          ],
+          "z": 1,
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0
+              },
+              {
+                "t": 4,
+                "value": -12
+              },
+              {
+                "t": 8,
+                "value": 0
+              }
+            ]
+          },
+          "enter": {
+            "type": "none"
+          }
+        },
+        {
+          "id": "s1-globe",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s1-null",
+          "box": [
+            0.08,
+            0.36,
+            0.38,
+            0.3
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 0.8
+          }
+        },
+        {
+          "id": "s1-chart",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s1-null",
+          "box": [
+            0.54,
+            0.4,
+            0.38,
+            0.26
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1
+          }
+        },
+        {
+          "id": "s1-band",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0.76,
+            1,
+            0.24
+          ],
+          "fill": "primary",
+          "z": 1.2,
+          "enter": {
+            "type": "wipe",
+            "at": 1.2
+          }
+        },
+        {
+          "id": "s1-bandtext",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "RIBUAN KOMPUTER MENCARI CELAH",
+          "box": [
+            0.08,
+            0.79,
+            0.84,
+            0.18
+          ],
+          "fill": "background",
+          "z": 1.25,
+          "enter": {
+            "type": "rise",
+            "at": 1.4
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.16,
+            "panY": 0.02
+          },
+          {
+            "at": 3.5,
+            "zoom": 1,
+            "panY": 0,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 8,
+            "zoom": 1.08,
+            "panX": -0.03,
+            "ease": "easeInOutSine"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-2",
+      "title": "350K IN 24 HOURS",
+      "narration": "Pada 7 November 2026, dashboard keamanan FortiGuard mencatat sekitar 350.600 aktivitas ancaman siber dalam periode 24 jam di Indonesia.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "gauge",
+          "features": {
+            "label": "350.600"
+          }
+        },
+        {
+          "kind": "chart",
+          "data": [
+            40,
+            55,
+            70,
+            85,
+            97
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/click_001.wav",
+          "volume": 0.4,
+          "at": 0.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/tick_001.wav",
+          "volume": 0.35,
+          "at": 0.8
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_4.ogg",
+          "volume": 0.4,
+          "at": 1.5
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/zap_1.ogg",
+          "volume": 0.45,
+          "at": 2.3
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_001.wav",
+          "volume": 0.45,
+          "at": 3.2
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_bell_heavy_000.ogg",
+          "volume": 0.6,
+          "at": 4.5
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/tone_1.ogg",
+          "volume": 0.35,
+          "at": 5.3
+        }
+      ],
+      "layers": [
+        {
+          "id": "s2-band",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0,
+            1,
+            0.2
+          ],
+          "fill": "primary",
+          "z": 0.95,
+          "enter": {
+            "type": "wipe"
+          }
+        },
+        {
+          "id": "s2-num",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "350.600",
+          "box": [
+            0.04,
+            0.015,
+            0.92,
+            0.17
+          ],
+          "fill": "background",
+          "z": 1.1,
+          "enter": {
+            "type": "slideL",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s2-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "AKTIVITAS ANCAMAN SIBER",
+          "box": [
+            0.05,
+            0.23,
+            0.9,
+            0.16
+          ],
+          "fill": "text",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.5
+          }
+        },
+        {
+          "id": "s2-null",
+          "kind": "null",
+          "box": [
+            0.05,
+            0.44,
+            0.9,
+            0.34
+          ],
+          "z": 1,
+          "transform": {
+            "rotate": [
+              {
+                "t": 0,
+                "value": -1.5
+              },
+              {
+                "t": 5,
+                "value": 1.5
+              }
+            ]
+          },
+          "enter": {
+            "type": "none"
+          }
+        },
+        {
+          "id": "s2-card",
+          "kind": "card",
+          "parent": "s2-null",
+          "box": [
+            0.06,
+            0.46,
+            0.52,
+            0.3
+          ],
+          "rotate": 3,
+          "z": 1.02,
+          "enter": {
+            "type": "slideR",
+            "at": 0.7
+          }
+        },
+        {
+          "id": "s2-gauge",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s2-card",
+          "box": [
+            0.09,
+            0.48,
+            0.46,
+            0.26
+          ],
+          "z": 1.05,
+          "enter": {
+            "type": "pop",
+            "at": 0.9
+          }
+        },
+        {
+          "id": "s2-chart",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s2-null",
+          "box": [
+            0.62,
+            0.5,
+            0.32,
+            0.24
+          ],
+          "z": 1.1,
+          "enter": {
+            "type": "pop",
+            "at": 1.1
+          }
+        },
+        {
+          "id": "s2-bar",
+          "kind": "shape",
+          "shape": "bar",
+          "box": [
+            0.07,
+            0.79,
+            0.86,
+            0.045
+          ],
+          "fill": "accent",
+          "z": 1.15,
+          "enter": {
+            "type": "slideL",
+            "at": 1.5
+          }
+        },
+        {
+          "id": "s2-split",
+          "kind": "typography",
+          "mode": "splitWords",
+          "text": "DALAM 24 JAM DI INDONESIA",
+          "box": [
+            0.05,
+            0.84,
+            0.9,
+            0.11
+          ],
+          "fill": "accent",
+          "z": 1.2,
+          "enter": {
+            "type": "rise",
+            "at": 1.3
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.05,
+            "panX": 0.03
+          },
+          {
+            "at": 2.5,
+            "zoom": 1.22,
+            "panX": -0.02,
+            "dolly": 0.5,
+            "track": "s2-card",
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 5.5,
+            "zoom": 1,
+            "panX": 0,
+            "dolly": 0,
+            "track": null,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 8.5,
+            "zoom": 1.06,
+            "panY": -0.02,
+            "ease": "easeInOutSine"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-3",
+      "title": "PORT SCANNING",
+      "narration": "Tapi, bagaimana sebenarnya serangan siber bekerja? Salah satu metodenya adalah port scanning. Sebuah program otomatis memindai server untuk mencari port yang terbuka dan kemungkinan celah keamanan.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "brain"
+        },
+        {
+          "kind": "object",
+          "name": "gauge",
+          "features": {
+            "label": "PORT"
+          }
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_1.ogg",
+          "volume": 0.35,
+          "at": 0.15
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/tick_002.wav",
+          "volume": 0.3,
+          "at": 0.8
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/phase_jump_1.ogg",
+          "volume": 0.4,
+          "at": 1.8
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/zap_two_tone.ogg",
+          "volume": 0.4,
+          "at": 3
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/error_002.wav",
+          "volume": 0.5,
+          "at": 4.5
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_4.ogg",
+          "volume": 0.45,
+          "at": 6
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/three_tone_1.ogg",
+          "volume": 0.35,
+          "at": 7.2
+        }
+      ],
+      "layers": [
+        {
+          "id": "s3-rot",
+          "kind": "typography",
+          "mode": "rotating",
+          "text": "PORT SCANNING",
+          "box": [
+            0.05,
+            0.06,
+            0.9,
+            0.18
+          ],
+          "fill": "primary",
+          "spinSpeed": 0.45,
+          "z": 1.1,
+          "enter": {
+            "type": "spin",
+            "at": 0.15
+          }
+        },
+        {
+          "id": "s3-stack",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "MEMINDAI SERVER",
+          "box": [
+            0.05,
+            0.27,
+            0.9,
+            0.14
+          ],
+          "fill": "accent",
+          "z": 1.08,
+          "enter": {
+            "type": "rise",
+            "at": 0.5
+          }
+        },
+        {
+          "id": "s3-grid",
+          "kind": "grid",
+          "box": [
+            0.05,
+            0.44,
+            0.9,
+            0.34
+          ],
+          "fill": "secondary",
+          "z": 0.95,
+          "enter": {
+            "type": "wipe",
+            "at": 0.7
+          }
+        },
+        {
+          "id": "s3-null",
+          "kind": "null",
+          "box": [
+            0.05,
+            0.44,
+            0.9,
+            0.34
+          ],
+          "z": 1,
+          "transform": {
+            "x": [
+              {
+                "t": 0,
+                "value": -12
+              },
+              {
+                "t": 5,
+                "value": 12
+              },
+              {
+                "t": 9,
+                "value": 0
+              }
+            ]
+          },
+          "enter": {
+            "type": "none"
+          }
+        },
+        {
+          "id": "s3-scanline",
+          "kind": "shape",
+          "shape": "bar",
+          "box": [
+            0.07,
+            0.45,
+            0.86,
+            0.03
+          ],
+          "fill": "accent",
+          "z": 1.3,
+          "enter": {
+            "type": "wipe",
+            "at": 1
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0
+              },
+              {
+                "t": 6,
+                "value": 150
+              }
+            ]
+          }
+        },
+        {
+          "id": "s3-halftone",
+          "kind": "halftone",
+          "box": [
+            0,
+            0.415,
+            1,
+            0.022
+          ],
+          "fill": "secondary",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 0.9
+          }
+        },
+        {
+          "id": "s3-brain",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "box": [
+            0.07,
+            0.8,
+            0.4,
+            0.16
+          ],
+          "z": 1.1,
+          "enter": {
+            "type": "pop",
+            "at": 1.3
+          }
+        },
+        {
+          "id": "s3-gauge",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "box": [
+            0.52,
+            0.8,
+            0.4,
+            0.16
+          ],
+          "z": 1.1,
+          "enter": {
+            "type": "pop",
+            "at": 1.5
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.2,
+            "panY": 0.02
+          },
+          {
+            "at": 3,
+            "zoom": 1.02,
+            "panY": 0,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 7,
+            "zoom": 1.15,
+            "dolly": 0.45,
+            "track": "s3-rot",
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 10.5,
+            "zoom": 1.05,
+            "dolly": 0,
+            "track": null,
+            "ease": "easeInOutSine"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-4",
+      "title": "HUNDREDS OF DOORS",
+      "narration": "Bayangkan sebuah gedung dengan ratusan pintu. Program tersebut seperti seseorang yang memeriksa setiap pintu untuk menemukan mana yang tidak terkunci.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "building"
+        },
+        {
+          "kind": "character",
+          "mood": "thinking",
+          "features": {
+            "glasses": true
+          }
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/IMPACT/footstep_concrete_000.ogg",
+          "volume": 0.5,
+          "at": 0.3
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/tick_004.wav",
+          "volume": 0.3,
+          "at": 1
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/select_002.wav",
+          "volume": 0.4,
+          "at": 1.8
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/footstep_concrete_002.ogg",
+          "volume": 0.5,
+          "at": 2.6
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_wood_medium_000.ogg",
+          "volume": 0.55,
+          "at": 3.6
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_5.ogg",
+          "volume": 0.4,
+          "at": 4.8
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/select_007.wav",
+          "volume": 0.35,
+          "at": 5.5
+        }
+      ],
+      "layers": [
+        {
+          "id": "s4-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "RATUSAN PINTU",
+          "box": [
+            0.04,
+            0.07,
+            0.92,
+            0.16
+          ],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "enter": {
+            "type": "pop",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s4-split",
+          "kind": "typography",
+          "mode": "splitWords",
+          "text": "GEDUNG DIGITAL",
+          "box": [
+            0.05,
+            0.24,
+            0.9,
+            0.1
+          ],
+          "fill": "accent",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.5
+          }
+        },
+        {
+          "id": "s4-null",
+          "kind": "null",
+          "box": [
+            0.05,
+            0.36,
+            0.9,
+            0.5
+          ],
+          "z": 1,
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0
+              },
+              {
+                "t": 4,
+                "value": -18
+              },
+              {
+                "t": 9,
+                "value": 0
+              }
+            ]
+          },
+          "enter": {
+            "type": "none"
+          }
+        },
+        {
+          "id": "s4-building",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s4-null",
+          "box": [
+            0.16,
+            0.36,
+            0.68,
+            0.5
+          ],
+          "z": 1.1,
+          "enter": {
+            "type": "rise",
+            "at": 0.8
+          }
+        },
+        {
+          "id": "s4-scout",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s4-null",
+          "box": [
+            0.66,
+            0.56,
+            0.26,
+            0.26
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.2
+          }
+        },
+        {
+          "id": "s4-halftone",
+          "kind": "halftone",
+          "box": [
+            0,
+            0.84,
+            1,
+            0.045
+          ],
+          "fill": "secondary",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 1.4
+          }
+        },
+        {
+          "id": "s4-band",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0.89,
+            1,
+            0.11
+          ],
+          "fill": "primary",
+          "z": 1.3,
+          "enter": {
+            "type": "wipe",
+            "at": 1.5
+          }
+        },
+        {
+          "id": "s4-tag",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "YANG TIDAK TERKUNCI",
+          "box": [
+            0.05,
+            0.9,
+            0.9,
+            0.09
+          ],
+          "fill": "background",
+          "z": 1.35,
+          "enter": {
+            "type": "rise",
+            "at": 1.7
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.12
+          },
+          {
+            "at": 2.5,
+            "zoom": 1.3,
+            "dolly": 0.6,
+            "track": "s4-building",
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 6,
+            "zoom": 1.02,
+            "dolly": 0,
+            "track": null,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 9,
+            "zoom": 1.08,
+            "panX": 0.03,
+            "ease": "easeInOutSine"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-5",
+      "title": "WHEN THEY GET IN",
+      "narration": "Jika menemukan kelemahan, penyerang bisa mencoba masuk melalui sistem yang belum diperbarui, kata sandi lemah, atau konfigurasi yang tidak aman. Jika berhasil, mereka bisa mencuri data, mengganggu layanan, bahkan menyebarkan program berbahaya.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "phone",
+          "features": {
+            "dataFlow": true
+          }
+        },
+        {
+          "kind": "character",
+          "mood": "shocked"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/error_001.wav",
+          "volume": 0.55,
+          "at": 0.3
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/zap_2.ogg",
+          "volume": 0.45,
+          "at": 1.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/glitch_002.wav",
+          "volume": 0.5,
+          "at": 2.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/zap_three_tone_up.ogg",
+          "volume": 0.4,
+          "at": 3.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/error_006.wav",
+          "volume": 0.5,
+          "at": 4.8
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_glass_heavy_000.ogg",
+          "volume": 0.6,
+          "at": 6.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_down_1.ogg",
+          "volume": 0.45,
+          "at": 7.6
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_punch_heavy_002.ogg",
+          "volume": 0.6,
+          "at": 9
+        }
+      ],
+      "layers": [
+        {
+          "id": "s5-mask",
+          "kind": "typography",
+          "mode": "maskReveal",
+          "text": "MEREKA MASUK",
+          "box": [
+            0.05,
+            0.06,
+            0.9,
+            0.18
+          ],
+          "fill": "accent",
+          "z": 1.1,
+          "enter": {
+            "type": "wipe",
+            "at": 0.15,
+            "dur": 1
+          }
+        },
+        {
+          "id": "s5-persp",
+          "kind": "typography",
+          "mode": "perspective",
+          "text": "CURI DATA, GANGGU LAYANAN",
+          "box": [
+            0.05,
+            0.27,
+            0.9,
+            0.14
+          ],
+          "fill": "primary",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.6
+          }
+        },
+        {
+          "id": "s5-null",
+          "kind": "null",
+          "box": [
+            0.05,
+            0.45,
+            0.9,
+            0.36
+          ],
+          "z": 1,
+          "transform": {
+            "x": [
+              {
+                "t": 0,
+                "value": 0
+              },
+              {
+                "t": 5,
+                "value": 12
+              },
+              {
+                "t": 10,
+                "value": 0
+              }
+            ]
+          },
+          "enter": {
+            "type": "none"
+          }
+        },
+        {
+          "id": "s5-card",
+          "kind": "card",
+          "parent": "s5-null",
+          "box": [
+            0.06,
+            0.47,
+            0.42,
+            0.32
+          ],
+          "rotate": -4,
+          "z": 1.02,
+          "enter": {
+            "type": "slideL",
+            "at": 0.8
+          }
+        },
+        {
+          "id": "s5-phone",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s5-card",
+          "box": [
+            0.08,
+            0.49,
+            0.38,
+            0.28
+          ],
+          "z": 1.05,
+          "enter": {
+            "type": "pop",
+            "at": 1
+          }
+        },
+        {
+          "id": "s5-cutout",
+          "kind": "cutout",
+          "parent": "s5-null",
+          "box": [
+            0.52,
+            0.49,
+            0.4,
+            0.3
+          ],
+          "fill": "primary",
+          "z": 1.02,
+          "enter": {
+            "type": "slideR",
+            "at": 0.9
+          }
+        },
+        {
+          "id": "s5-victim",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s5-null",
+          "box": [
+            0.55,
+            0.51,
+            0.34,
+            0.26
+          ],
+          "z": 1.05,
+          "mask": {
+            "shape": "rect",
+            "inset": 0.05
+          },
+          "enter": {
+            "type": "pop",
+            "at": 1.2
+          }
+        },
+        {
+          "id": "s5-stripe",
+          "kind": "shape",
+          "shape": "stripe",
+          "box": [
+            0.06,
+            0.86,
+            0.45,
+            0.08
+          ],
+          "fill": "accent",
+          "z": 1.1,
+          "enter": {
+            "type": "wipe",
+            "at": 1.5
+          }
+        },
+        {
+          "id": "s5-tag",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "SISTEM BELUM DIPERBARUI",
+          "box": [
+            0.56,
+            0.85,
+            0.38,
+            0.12
+          ],
+          "fill": "text",
+          "z": 1.15,
+          "enter": {
+            "type": "rise",
+            "at": 1.7
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.1
+          },
+          {
+            "at": 3,
+            "zoom": 1.26,
+            "dolly": 0.55,
+            "track": "s5-mask",
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 7,
+            "zoom": 1.02,
+            "dolly": 0,
+            "track": null,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 12,
+            "zoom": 1.1,
+            "panY": 0.02,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 15.5,
+            "zoom": 1,
+            "ease": "easeInOutSine"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-6",
+      "title": "BLOCKED IN TIME",
+      "narration": "Namun, ada satu hal penting: 350 ribu aktivitas ancaman bukan berarti 350 ribu sistem berhasil diretas. Sebagian aktivitas tersebut bisa dideteksi dan diblokir oleh sistem keamanan sebelum berhasil menembus target.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "shield"
+        },
+        {
+          "kind": "object",
+          "name": "gauge",
+          "features": {
+            "label": "BLOKIR"
+          }
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_002.wav",
+          "volume": 0.5,
+          "at": 0.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_6.ogg",
+          "volume": 0.35,
+          "at": 1
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_down_3.ogg",
+          "volume": 0.45,
+          "at": 2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_5.ogg",
+          "volume": 0.4,
+          "at": 3.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/maximize_001.wav",
+          "volume": 0.4,
+          "at": 4.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/tick_004.wav",
+          "volume": 0.3,
+          "at": 5.6
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_metal_medium_000.ogg",
+          "volume": 0.55,
+          "at": 7
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_004.wav",
+          "volume": 0.45,
+          "at": 8.2
+        }
+      ],
+      "layers": [
+        {
+          "id": "s6-grid",
+          "kind": "grid",
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "fill": "text",
+          "z": 0.75,
+          "enter": {
+            "type": "wipe"
+          }
+        },
+        {
+          "id": "s6-collage",
+          "kind": "typography",
+          "mode": "collage",
+          "text": "BUKAN DIRETAS",
+          "box": [
+            0.02,
+            0.05,
+            0.96,
+            0.22
+          ],
+          "fill": "primary",
+          "z": 1.05,
+          "enter": {
+            "type": "wipe",
+            "at": 0.1
+          }
+        },
+        {
+          "id": "s6-split",
+          "kind": "typography",
+          "mode": "splitWords",
+          "text": "DETEKSI & BLOKIR",
+          "box": [
+            0.04,
+            0.29,
+            0.92,
+            0.11
+          ],
+          "fill": "accent",
+          "z": 1.1,
+          "enter": {
+            "type": "rise",
+            "at": 0.5
+          }
+        },
+        {
+          "id": "s6-null",
+          "kind": "null",
+          "box": [
+            0.05,
+            0.44,
+            0.9,
+            0.36
+          ],
+          "z": 1,
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0
+              },
+              {
+                "t": 5,
+                "value": 20
+              },
+              {
+                "t": 10,
+                "value": 0
+              }
+            ]
+          },
+          "enter": {
+            "type": "none"
+          }
+        },
+        {
+          "id": "s6-shield",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s6-null",
+          "box": [
+            0.08,
+            0.46,
+            0.4,
+            0.32
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 0.8
+          }
+        },
+        {
+          "id": "s6-card",
+          "kind": "card",
+          "parent": "s6-null",
+          "box": [
+            0.52,
+            0.48,
+            0.4,
+            0.3
+          ],
+          "rotate": 5,
+          "z": 1.05,
+          "enter": {
+            "type": "slideR",
+            "at": 1
+          }
+        },
+        {
+          "id": "s6-gauge",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s6-card",
+          "box": [
+            0.55,
+            0.5,
+            0.34,
+            0.26
+          ],
+          "z": 1.08,
+          "enter": {
+            "type": "pop",
+            "at": 1.2
+          }
+        },
+        {
+          "id": "s6-band",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0.88,
+            1,
+            0.12
+          ],
+          "fill": "primary",
+          "z": 1.3,
+          "enter": {
+            "type": "wipe",
+            "at": 1.4
+          }
+        },
+        {
+          "id": "s6-tag",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "DIKUNCI SISTEM KEAMANAN",
+          "box": [
+            0.05,
+            0.89,
+            0.9,
+            0.1
+          ],
+          "fill": "background",
+          "z": 1.35,
+          "enter": {
+            "type": "rise",
+            "at": 1.6
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.08
+          },
+          {
+            "at": 2.5,
+            "zoom": 1.24,
+            "dolly": 0.5,
+            "track": "s6-shield",
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 6,
+            "zoom": 1,
+            "dolly": 0,
+            "track": null,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 10,
+            "zoom": 1.1,
+            "rotate": -2,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 13,
+            "zoom": 1.02,
+            "rotate": 0,
+            "ease": "easeInOutSine"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-7",
+      "title": "THE FIREWALL",
+      "narration": "Salah satunya adalah firewall, teknologi yang memeriksa lalu lintas jaringan dan membantu memblokir koneksi mencurigakan.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "firewall"
+        },
+        {
+          "kind": "chart",
+          "data": [
+            95,
+            80,
+            45,
+            15
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_2.ogg",
+          "volume": 0.45,
+          "at": 0.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/switch_003.wav",
+          "volume": 0.5,
+          "at": 0.9
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_8.ogg",
+          "volume": 0.4,
+          "at": 1.7
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_003.wav",
+          "volume": 0.45,
+          "at": 2.5
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/toggle_001.wav",
+          "volume": 0.4,
+          "at": 3.3
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_metal_heavy_001.ogg",
+          "volume": 0.6,
+          "at": 4.3
+        }
+      ],
+      "layers": [
+        {
+          "id": "s7-rot",
+          "kind": "typography",
+          "mode": "rotating",
+          "text": "FIREWALL",
+          "box": [
+            0.05,
+            0.06,
+            0.9,
+            0.16
+          ],
+          "fill": "primary",
+          "spinSpeed": 0.4,
+          "z": 1.1,
+          "enter": {
+            "type": "spin",
+            "at": 0.15
+          }
+        },
+        {
+          "id": "s7-stack",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "MEMERIKSA LALU LINTAS JARINGAN",
+          "box": [
+            0.05,
+            0.24,
+            0.9,
+            0.12
+          ],
+          "fill": "text",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.4
+          }
+        },
+        {
+          "id": "s7-null",
+          "kind": "null",
+          "box": [
+            0.05,
+            0.38,
+            0.9,
+            0.42
+          ],
+          "z": 1,
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0
+              },
+              {
+                "t": 3,
+                "value": 14
+              },
+              {
+                "t": 6,
+                "value": 0
+              }
+            ]
+          },
+          "enter": {
+            "type": "none"
+          }
+        },
+        {
+          "id": "s7-wall",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s7-null",
+          "box": [
+            0.12,
+            0.38,
+            0.76,
+            0.42
+          ],
+          "z": 1.1,
+          "enter": {
+            "type": "rise",
+            "at": 0.6
+          }
+        },
+        {
+          "id": "s7-halftone",
+          "kind": "halftone",
+          "box": [
+            0,
+            0.755,
+            1,
+            0.02
+          ],
+          "fill": "accent",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 0.9
+          }
+        },
+        {
+          "id": "s7-chart",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "box": [
+            0.14,
+            0.78,
+            0.72,
+            0.12
+          ],
+          "z": 1.1,
+          "enter": {
+            "type": "rise",
+            "at": 1
+          }
+        },
+        {
+          "id": "s7-band",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0.925,
+            1,
+            0.075
+          ],
+          "fill": "accent",
+          "z": 1.3,
+          "enter": {
+            "type": "wipe",
+            "at": 1.3
+          }
+        },
+        {
+          "id": "s7-tag",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "KONEKSI DIBLOKIR",
+          "box": [
+            0.05,
+            0.93,
+            0.9,
+            0.06
+          ],
+          "fill": "primary",
+          "z": 1.35,
+          "enter": {
+            "type": "rise",
+            "at": 1.5
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.18
+          },
+          {
+            "at": 2,
+            "zoom": 1.35,
+            "dolly": 0.55,
+            "track": "s7-wall",
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 5,
+            "zoom": 1,
+            "dolly": 0,
+            "track": null,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 7,
+            "zoom": 1.06,
+            "panX": -0.03,
+            "ease": "easeInOutSine"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-8",
+      "title": "PROTECT YOURSELF",
+      "narration": "Ancaman siber juga tidak hanya menyasar perusahaan besar. Pengguna biasa bisa menjadi target melalui phishing, pencurian kata sandi, dan aplikasi berbahaya. Karena itu, gunakan kata sandi yang kuat, aktifkan autentikasi dua faktor, hindari tautan mencurigakan, dan rutin perbarui perangkat.",
+      "subjects": [
+        {
+          "kind": "character",
+          "mood": "thinking",
+          "features": {
+            "glasses": true
+          }
+        },
+        {
+          "kind": "object",
+          "name": "lightbulb"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/click_002.wav",
+          "volume": 0.4,
+          "at": 0.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/toggle_002.wav",
+          "volume": 0.4,
+          "at": 0.9
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/maximize_004.wav",
+          "volume": 0.4,
+          "at": 1.8
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_9.ogg",
+          "volume": 0.4,
+          "at": 2.8
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/pluck_002.wav",
+          "volume": 0.4,
+          "at": 4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/click_005.wav",
+          "volume": 0.35,
+          "at": 5.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/two_tone_1.ogg",
+          "volume": 0.35,
+          "at": 6.6
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_003.wav",
+          "volume": 0.45,
+          "at": 8.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_12.ogg",
+          "volume": 0.4,
+          "at": 9.8
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/select_008.wav",
+          "volume": 0.35,
+          "at": 11
+        }
+      ],
+      "layers": [
+        {
+          "id": "s8-block",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0,
+            1,
+            0.16
+          ],
+          "fill": "primary",
+          "z": 0.95,
+          "enter": {
+            "type": "wipe"
+          }
+        },
+        {
+          "id": "s8-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "PROTECT YOURSELF",
+          "box": [
+            0.05,
+            0.01,
+            0.9,
+            0.14
+          ],
+          "fill": "background",
+          "z": 1.1,
+          "enter": {
+            "type": "slideL",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s8-split",
+          "kind": "typography",
+          "mode": "splitWords",
+          "text": "KATA SANDI KUAT, 2FA, UPDATE RUTIN",
+          "box": [
+            0.05,
+            0.19,
+            0.9,
+            0.11
+          ],
+          "fill": "accent",
+          "z": 1.1,
+          "enter": {
+            "type": "rise",
+            "at": 0.5
+          }
+        },
+        {
+          "id": "s8-null",
+          "kind": "null",
+          "box": [
+            0.05,
+            0.33,
+            0.9,
+            0.5
+          ],
+          "z": 1,
+          "transform": {
+            "rotate": [
+              {
+                "t": 0,
+                "value": -1.5
+              },
+              {
+                "t": 8,
+                "value": 1.5
+              }
+            ]
+          },
+          "enter": {
+            "type": "none"
+          }
+        },
+        {
+          "id": "s8-card",
+          "kind": "card",
+          "parent": "s8-null",
+          "box": [
+            0.06,
+            0.36,
+            0.42,
+            0.42
+          ],
+          "rotate": -3,
+          "z": 1.02,
+          "enter": {
+            "type": "slideR",
+            "at": 0.7
+          }
+        },
+        {
+          "id": "s8-user",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s8-card",
+          "box": [
+            0.08,
+            0.38,
+            0.38,
+            0.38
+          ],
+          "z": 1.05,
+          "enter": {
+            "type": "pop",
+            "at": 0.9
+          }
+        },
+        {
+          "id": "s8-cutout",
+          "kind": "cutout",
+          "parent": "s8-null",
+          "box": [
+            0.52,
+            0.36,
+            0.4,
+            0.4
+          ],
+          "fill": "primary",
+          "z": 1.02,
+          "enter": {
+            "type": "slideL",
+            "at": 1
+          }
+        },
+        {
+          "id": "s8-tips",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s8-null",
+          "box": [
+            0.56,
+            0.4,
+            0.32,
+            0.32
+          ],
+          "z": 1.06,
+          "enter": {
+            "type": "pop",
+            "at": 1.2
+          }
+        },
+        {
+          "id": "s8-halftone",
+          "kind": "halftone",
+          "box": [
+            0,
+            0.82,
+            1,
+            0.05
+          ],
+          "fill": "secondary",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 1.5
+          }
+        },
+        {
+          "id": "s8-band",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0.87,
+            1,
+            0.13
+          ],
+          "fill": "accent",
+          "z": 1.3,
+          "enter": {
+            "type": "wipe",
+            "at": 1.7
+          }
+        },
+        {
+          "id": "s8-tag",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "HINDARI TAUTAN MENCURIGAKAN",
+          "box": [
+            0.06,
+            0.885,
+            0.88,
+            0.1
+          ],
+          "fill": "primary",
+          "z": 1.35,
+          "enter": {
+            "type": "rise",
+            "at": 1.9
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.05,
+            "panX": 0.03
+          },
+          {
+            "at": 4,
+            "zoom": 1.2,
+            "dolly": 0.5,
+            "track": "s8-card",
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 9,
+            "zoom": 1,
+            "dolly": 0,
+            "track": null,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 14,
+            "zoom": 1.12,
+            "panY": -0.02,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 19,
+            "zoom": 1.02,
+            "ease": "easeInOutSine"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scene-9",
+      "title": "BEYOND THE SCREEN",
+      "narration": "Sebab, di dunia digital, ancaman tidak selalu terlihat. Terkadang, semuanya bekerja diam-diam di balik layar. NAZE. Understand Technology Beyond the Screen.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "globe"
+        },
+        {
+          "kind": "object",
+          "name": "shield"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/DIGITAL/low_down.ogg",
+          "volume": 0.4,
+          "at": 0.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/question_001.wav",
+          "volume": 0.45,
+          "at": 1.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_6.ogg",
+          "volume": 0.4,
+          "at": 2.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/pep_sound_1.ogg",
+          "volume": 0.45,
+          "at": 3.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/select_003.wav",
+          "volume": 0.4,
+          "at": 4.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/pep_sound_2.ogg",
+          "volume": 0.35,
+          "at": 5.2
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_soft_heavy_001.ogg",
+          "volume": 0.5,
+          "at": 6
+        }
+      ],
+      "layers": [
+        {
+          "id": "s9-grid",
+          "kind": "grid",
+          "box": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "fill": "text",
+          "z": 0.8,
+          "enter": {
+            "type": "wipe"
+          }
+        },
+        {
+          "id": "s9-brand",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "NAZE UNDERSTAND TECHNOLOGY BEYOND THE SCREEN",
+          "box": [
+            0.06,
+            0.02,
+            0.88,
+            0.2
+          ],
+          "fill": "primary",
+          "z": 1.2,
+          "enter": {
+            "type": "rise",
+            "at": 2.2
+          }
+        },
+        {
+          "id": "s9-block",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0.24,
+            1,
+            0.34
+          ],
+          "fill": "primary",
+          "z": 0.95,
+          "enter": {
+            "type": "wipe",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s9-q1",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "BEYOND THE",
+          "box": [
+            0.05,
+            0.26,
+            0.9,
+            0.15
+          ],
+          "fill": "background",
+          "z": 1.1,
+          "enter": {
+            "type": "slideL",
+            "at": 0.4
+          }
+        },
+        {
+          "id": "s9-q2",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "SCREEN",
+          "box": [
+            0.05,
+            0.41,
+            0.9,
+            0.15
+          ],
+          "fill": "accent",
+          "z": 1.1,
+          "enter": {
+            "type": "slideR",
+            "at": 0.6
+          }
+        },
+        {
+          "id": "s9-split",
+          "kind": "typography",
+          "mode": "splitWords",
+          "text": "ANCAMAN BEKERJA DIAM-DIAM",
+          "box": [
+            0.04,
+            0.62,
+            0.92,
+            0.1
+          ],
+          "fill": "text",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 1
+          }
+        },
+        {
+          "id": "s9-null",
+          "kind": "null",
+          "box": [
+            0.08,
+            0.72,
+            0.84,
+            0.22
+          ],
+          "z": 1,
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0
+              },
+              {
+                "t": 5,
+                "value": -14
+              },
+              {
+                "t": 10,
+                "value": 0
+              }
+            ]
+          },
+          "enter": {
+            "type": "none"
+          }
+        },
+        {
+          "id": "s9-globe",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s9-null",
+          "box": [
+            0.08,
+            0.73,
+            0.4,
+            0.19
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.2
+          }
+        },
+        {
+          "id": "s9-shield",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s9-null",
+          "box": [
+            0.52,
+            0.73,
+            0.4,
+            0.19
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.4
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.16
+          },
+          {
+            "at": 3,
+            "zoom": 1,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 6,
+            "zoom": 1.22,
+            "dolly": 0.5,
+            "track": "s9-brand",
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 10,
+            "zoom": 1.04,
+            "dolly": 0,
+            "track": null,
+            "ease": "easeInOutSine"
+          }
+        ]
+      }
+    }
+  ]
+}
