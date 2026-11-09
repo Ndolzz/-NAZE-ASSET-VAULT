@@ -74,21 +74,6 @@
       ],
       "layers": [
         {
-          "id": "s1-grid",
-          "kind": "grid",
-          "box": [
-            0,
-            0,
-            1,
-            1
-          ],
-          "fill": "text",
-          "z": 0.8,
-          "enter": {
-            "type": "wipe"
-          }
-        },
-        {
           "id": "s1-halftone",
           "kind": "halftone",
           "box": [
@@ -272,7 +257,8 @@
             "ease": "easeInOutSine"
           }
         ]
-      }
+      },
+      "backdrop": "city-night"
     },
     {
       "id": "scene-2",
@@ -529,7 +515,8 @@
             "ease": "easeInOutSine"
           }
         ]
-      }
+      },
+      "backdrop": "blueprint"
     },
     {
       "id": "scene-3",
@@ -775,7 +762,8 @@
             "ease": "easeInOutSine"
           }
         ]
-      }
+      },
+      "backdrop": "circuit"
     },
     {
       "id": "scene-4",
@@ -1011,7 +999,8 @@
             "ease": "easeInOutSine"
           }
         ]
-      }
+      },
+      "backdrop": "arches"
     },
     {
       "id": "scene-5",
@@ -1280,7 +1269,8 @@
             "ease": "easeInOutSine"
           }
         ]
-      }
+      },
+      "backdrop": "ink-splash"
     },
     {
       "id": "scene-6",
@@ -1342,21 +1332,6 @@
         }
       ],
       "layers": [
-        {
-          "id": "s6-grid",
-          "kind": "grid",
-          "box": [
-            0,
-            0,
-            1,
-            1
-          ],
-          "fill": "text",
-          "z": 0.75,
-          "enter": {
-            "type": "wipe"
-          }
-        },
         {
           "id": "s6-collage",
           "kind": "typography",
@@ -1542,7 +1517,8 @@
             "ease": "easeInOutSine"
           }
         ]
-      }
+      },
+      "backdrop": "radar-sweep"
     },
     {
       "id": "scene-7",
@@ -1774,7 +1750,8 @@
             "ease": "easeInOutSine"
           }
         ]
-      }
+      },
+      "backdrop": "hex-mesh"
     },
     {
       "id": "scene-8",
@@ -2075,7 +2052,8 @@
             "ease": "easeInOutSine"
           }
         ]
-      }
+      },
+      "backdrop": "dot-wave"
     },
     {
       "id": "scene-9",
@@ -2129,21 +2107,6 @@
         }
       ],
       "layers": [
-        {
-          "id": "s9-grid",
-          "kind": "grid",
-          "box": [
-            0,
-            0,
-            1,
-            1
-          ],
-          "fill": "text",
-          "z": 0.8,
-          "enter": {
-            "type": "wipe"
-          }
-        },
         {
           "id": "s9-brand",
           "kind": "typography",
@@ -2323,7 +2286,8 @@
             "ease": "easeInOutSine"
           }
         ]
-      }
+      },
+      "backdrop": "starfield"
     }
   ]
 }

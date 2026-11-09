@@ -17,6 +17,7 @@ import { drawBackdropDecor, drawSubject, DrawKit } from "../illustration/generat
 import { drawCaptionCue, CcRenderKit } from "../captions/renderer";
 import { cueAt } from "../core/timeline";
 import { renderLayeredSceneContent, isEditorialKineticScene } from "../motion/layer-compositor";
+import { drawBackdropById } from "../motion/backdrops";
 import { CaptionEngine } from "../captions/engine";
 
 export interface ComposerKit {
@@ -149,6 +150,19 @@ export function renderSceneFrame(
 
   // 2. Style texture
   drawStyleTexture(ctx, kit, globalT);
+
+  // 2b. Aset backdrop bernama (pustaka 30 latar reusable); scene.backdrop
+  // diisi manual atau diwarisi dari field backdrop level proyek (Stage 2).
+  if (scene.backdrop) {
+    drawBackdropById(ctx as any, scene.backdrop, {
+      palette,
+      scale,
+      t: localT,
+      w,
+      h,
+      seed: hashString(scene.backdrop + scene.id),
+    });
+  }
 
   // 3-5. Content: layered editorial composition, or the classic stack
   if (isEditorialKineticScene(style as any, scene as any)) {

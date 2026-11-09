@@ -45,6 +45,7 @@ import { validateOutput, ValidationReport } from "../validation/validate";
 import { probeDuration } from "../render/encoder";
 import { createCaptionEngine } from "../captions/engine";
 import { AdaptiveCaptionsConfig } from "../captions/adaptive-types";
+import { BACKDROP_IDS } from "../motion/backdrops";
 
 interface ProjectFile {
   schema: "naze-project/2.0";
@@ -60,6 +61,8 @@ interface ProjectFile {
   captions?: AdaptiveCaptionsConfig;
   /** Explicit background music; absent means no music (permanent policy). */
   musicFile?: string;
+  /** Backdrop default untuk semua scene tanpa backdrop sendiri. */
+  backdrop?: string;
   narration: {
     engine: string;
     language?: string;
@@ -120,6 +123,19 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
   const projectPath = path.join(projectDir, "project.json");
   if (!fs.existsSync(projectPath)) throw new Error(`project.json tidak ditemukan di ${projectDir}`);
   const project: ProjectFile = JSON.parse(fs.readFileSync(projectPath, "utf-8"));
+  // Backdrop default level proyek: setiap scene tanpa backdrop sendiri mewarisinya.
+  if (typeof project.backdrop === "string" && project.backdrop) {
+    for (const scene of project.scenes) {
+      if (!scene.backdrop) scene.backdrop = project.backdrop;
+    }
+  }
+  for (const scene of project.scenes) {
+    if (scene.backdrop && !BACKDROP_IDS.includes(scene.backdrop)) {
+      console.warn(
+        "[BACKDROP] Id \"" + scene.backdrop + "\" tidak dikenal pada scene " + scene.id + "; latar polos dipakai."
+      );
+    }
+  }
   const styleField =
     typeof project.style === "object" && !Array.isArray(project.style)
       ? (() => {

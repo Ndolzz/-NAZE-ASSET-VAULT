@@ -20,6 +20,8 @@ export interface SceneDef {
   id: string;
   narration: string;
   title?: string;
+  /** Id backdrop dari pustaka motion/backdrops.ts. */
+  backdrop?: string;
   subjects: Subject[];
   sfx?: Array<{ file: string; volume: number; at: number }>;
   styleOverride?: string;
