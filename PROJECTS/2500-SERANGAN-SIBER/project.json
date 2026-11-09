@@ -2298,5 +2298,8 @@
       },
       "backdrop": "starfield"
     }
-  ]
+  ],
+  "captions": {
+    "ccStyle": "midnight-orbit"
+  }
 }

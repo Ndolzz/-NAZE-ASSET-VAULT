@@ -176,4 +176,6 @@ export interface AdaptiveCaptionsConfig {
   maxSimultaneous?: number;
   /** Margin bawah subtitle klasik (kompatibilitas lama, fraksi tinggi). */
   bottomMargin?: number;
+  /** Id gaya CC dari pustaka captions/cc-styles.ts; mengaktifkan mode "adaptive". */
+  ccStyle?: string;
 }

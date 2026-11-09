@@ -47,6 +47,7 @@ import { createCaptionEngine } from "../captions/engine";
 import { AdaptiveCaptionsConfig } from "../captions/adaptive-types";
 import { BACKDROP_IDS } from "../motion/backdrops";
 import { TEXT_STYLE_IDS } from "../motion/text-styles";
+import { ccStyleById, applyCcStyle } from "../captions/cc-styles";
 
 interface ProjectFile {
   schema: "naze-project/2.0";
@@ -335,6 +336,25 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
   // Stage 6: timeline assembly
   console.log("[STAGE 6/9] Timeline scene, keyframe, dan transisi siap.");
   const timeline: Timeline = timeline0;
+
+  // Pustaka gaya CC (captions/cc-styles.ts): project.captions.ccStyle
+  // mengaktifkan mode adaptif, membangkitkan direktif per cue, dan
+  // menyuntikkan shot kamera yang mengikuti perpindahan zona CC.
+  const ccStyleId = project.captions?.ccStyle;
+  if (typeof ccStyleId === "string" && ccStyleId) {
+    const ccStyle = ccStyleById(ccStyleId);
+    project.captions = { ...(project.captions ?? {}), mode: "adaptive" };
+    if (!ccStyle) {
+      console.warn(
+        "[CC-STYLE] Id \"" + ccStyleId + "\" tidak dikenal; CC adaptif tanpa preset pustaka dipakai."
+      );
+    } else {
+      const ccApplied = applyCcStyle(ccStyle, timeline, project.scenes as any[]);
+      console.log(
+        "[STAGE 6/9] Gaya CC \"" + ccStyleId + "\" aktif: " + ccApplied.directives + " direktif cue, " + ccApplied.shots + " shot kamera pengikut CC."
+      );
+    }
+  }
 
   // Adaptive Caption Engine: aktif hanya bila project.captions.mode === "adaptive".
   // Tanpa itu, jalur CC klasik (burn-in pill) tetap dipakai seperti sebelumnya.
