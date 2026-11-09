@@ -49,6 +49,7 @@ proyek AI-CYBERSECURITY), koreksi scene-9 di `project.json` lalu render ulang.
 - Palet kustom gelap "malam ancaman" (topik siber, tanpa biru): background #0B0B0F,
   primary #F2F0EB, secondary #8E8E99, accent #E63B2E (merah sinyal), text #F5F5F0, dark: true.
 - Backdrop prosedural per scene dari pustaka engine motion/backdrops.ts (30 aset reusable): scene 1 city-night, 2 blueprint, 3 circuit, 4 arches, 5 ink-splash, 6 radar-sweep, 7 hex-mesh, 8 dot-wave, 9 starfield; tiga layer grid layar-penuh yang lama dihapus karena tugasnya kini digantikan backdrop.
+- Gaya teks statement utama tiap scene dari pustaka engine motion/text-styles.ts (50 gaya reusable: font, warna, bayangan, mode tipografi, keyframe enter dan idle): scene 1 ink-slam, 2 stencil-track, 3 terminal-code, 4 headline-break, 5 stamp-red, 6 signal-flash, 7 ticker-scroll, 8 comic-burst, 9 final-cut.
 - Tipografi kinetic: ketujuh mode dipakai (oversized, stacked, splitWords, rotating, perspective,
   maskReveal, collage); grid/halftone/panel/kartu miring/color blocking; kamera dolly track per scene.
 

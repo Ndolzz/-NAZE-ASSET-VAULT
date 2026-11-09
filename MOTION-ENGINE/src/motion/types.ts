@@ -90,6 +90,8 @@ export interface LayerSpec {
   shape?: "rect" | "circle" | "triangle" | "bar" | "ring" | "stripe";
   /** Accent underline bar under oversized typography. */
   underline?: boolean;
+  /** Id gaya teks dari pustaka motion/text-styles.ts (kind "typography"). */
+  textStyle?: string;
   seed?: number;
   transform?: TransformSpec;
   enter?: EnterSpec;

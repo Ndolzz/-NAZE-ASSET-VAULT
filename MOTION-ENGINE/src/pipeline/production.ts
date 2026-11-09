@@ -46,6 +46,7 @@ import { probeDuration } from "../render/encoder";
 import { createCaptionEngine } from "../captions/engine";
 import { AdaptiveCaptionsConfig } from "../captions/adaptive-types";
 import { BACKDROP_IDS } from "../motion/backdrops";
+import { TEXT_STYLE_IDS } from "../motion/text-styles";
 
 interface ProjectFile {
   schema: "naze-project/2.0";
@@ -134,6 +135,13 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
       console.warn(
         "[BACKDROP] Id \"" + scene.backdrop + "\" tidak dikenal pada scene " + scene.id + "; latar polos dipakai."
       );
+    }
+    for (const layer of (scene as any).layers ?? []) {
+      if (layer.textStyle && !TEXT_STYLE_IDS.includes(layer.textStyle)) {
+        console.warn(
+          "[TEXT-STYLE] Id \"" + layer.textStyle + "\" tidak dikenal pada layer " + layer.id + " (scene " + scene.id + "); tipografi default dipakai."
+        );
+      }
     }
   }
   const styleField =

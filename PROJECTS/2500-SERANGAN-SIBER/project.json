@@ -234,7 +234,8 @@
           "enter": {
             "type": "rise",
             "at": 1.4
-          }
+          },
+          "textStyle": "ink-slam"
         }
       ],
       "camera": {
@@ -352,7 +353,8 @@
           "enter": {
             "type": "slideL",
             "at": 0.2
-          }
+          },
+          "textStyle": "stencil-track"
         },
         {
           "id": "s2-sub",
@@ -590,7 +592,8 @@
           "enter": {
             "type": "spin",
             "at": 0.15
-          }
+          },
+          "textStyle": "terminal-code"
         },
         {
           "id": "s3-stack",
@@ -837,7 +840,8 @@
           "enter": {
             "type": "pop",
             "at": 0.2
-          }
+          },
+          "textStyle": "headline-break"
         },
         {
           "id": "s4-split",
@@ -1079,7 +1083,8 @@
             "type": "wipe",
             "at": 0.15,
             "dur": 1
-          }
+          },
+          "textStyle": "stamp-red"
         },
         {
           "id": "s5-persp",
@@ -1348,7 +1353,8 @@
           "enter": {
             "type": "wipe",
             "at": 0.1
-          }
+          },
+          "textStyle": "signal-flash"
         },
         {
           "id": "s6-split",
@@ -1589,7 +1595,8 @@
           "enter": {
             "type": "spin",
             "at": 0.15
-          }
+          },
+          "textStyle": "ticker-scroll"
         },
         {
           "id": "s7-stack",
@@ -1854,7 +1861,8 @@
           "enter": {
             "type": "slideL",
             "at": 0.2
-          }
+          },
+          "textStyle": "comic-burst"
         },
         {
           "id": "s8-split",
@@ -2123,7 +2131,8 @@
           "enter": {
             "type": "rise",
             "at": 2.2
-          }
+          },
+          "textStyle": "final-cut"
         },
         {
           "id": "s9-block",

@@ -12,7 +12,7 @@
  */
 import { LayerSpec, CameraSpec, TrackSpec, TransformSpec } from "./types";
 import { evaluateCamera } from "./camera";
-import { drawEditorialTypography, TypographyKit } from "./typography";
+import { applyTextStyleDefaults, drawStyledTypography } from "./text-styles";
 import { drawEditorialElement, resolveFill } from "./editorial";
 import { sampleTrack, progress } from "../core/keyframes";
 import { applyEasing } from "../core/easing";
@@ -129,7 +129,7 @@ function drawMask(ctx: any, shape: string, x: number, y: number, w: number, h: n
 
 function drawLayerTree(
   ctx: any,
-  layer: LayerSpec,
+  rawLayer: LayerSpec,
   childrenOf: Map<string, LayerSpec[]>,
   orderOf: Map<string, number>,
   kit: LayerKit,
@@ -139,6 +139,7 @@ function drawLayerTree(
   t: number,
   depth: number
 ): void {
+  const layer = applyTextStyleDefaults(rawLayer);
   const enter = enterProgress(layer, orderOf.get(layer.id) ?? 0, t);
   const box = layer.box ?? [0.1, 0.1, 0.8, 0.8];
   const bw = box[2] * w;
@@ -183,14 +184,16 @@ function drawLayerTree(
   const ly = -bh / 2;
 
   if (layer.kind === "typography") {
-    const typoKit: TypographyKit = {
-      palette: kit.palette,
-      fontFamily: kit.fontFamily,
-      weight: kit.style.typography.titleWeight,
-      letterSpacing: kit.style.typography.letterSpacing,
-      scale: s,
-    };
-    drawEditorialTypography(ctx, layer, bw, bh, enter, t, fill, typoKit);
+    drawStyledTypography(
+      ctx,
+      layer,
+      { palette: kit.palette, style: kit.style, fontFamily: kit.fontFamily, scale: s },
+      fill,
+      bw,
+      bh,
+      enter,
+      t
+    );
   } else if (layer.kind !== "null") {
     drawEditorialElement(ctx, layer, { x: lx, y: ly, w: bw, h: bh }, enter, t, fill, { palette: kit.palette, style: kit.style, scale: s }, kit.__scene?.subjects ?? []);
   }
