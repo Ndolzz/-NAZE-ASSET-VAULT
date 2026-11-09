@@ -48,6 +48,7 @@ import { AdaptiveCaptionsConfig } from "../captions/adaptive-types";
 import { BACKDROP_IDS } from "../motion/backdrops";
 import { TEXT_STYLE_IDS } from "../motion/text-styles";
 import { ccStyleById, applyCcStyle } from "../captions/cc-styles";
+import { colorSchemeById } from "../color/color-schemes";
 
 interface ProjectFile {
   schema: "naze-project/2.0";
@@ -55,6 +56,8 @@ interface ProjectFile {
   /** Style id, [primaryId, ...accentIds], or a full custom StyleDef object. */
   style: string | string[] | StyleDef;
   palette: string | Palette;
+  /** Skema warna dasar dari pustaka color/color-schemes.ts; palette eksplisit menang per peran. */
+  colorScheme?: string;
   profile?: string;
   animationIntensity?: number;
   accentWords?: boolean;
@@ -155,7 +158,34 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
       : project.style;
   const styleMix = resolveStyleMix(styleField);
   const style: StyleDef = styleMix.primary;
-  const palette = resolvePalette(project.palette);
+  // Pustaka skema warna (color/color-schemes.ts): project.colorScheme
+  // mengisi palet dasar; field palette eksplisit tetap menang per peran.
+  const colorScheme = typeof project.colorScheme === "string" ? colorSchemeById(project.colorScheme) : undefined;
+  if (typeof project.colorScheme === "string" && project.colorScheme && !colorScheme) {
+    console.warn(
+      "[COLOR-SCHEME] Id \"" + project.colorScheme + "\" tidak dikenal; palet proyek dipakai."
+    );
+  }
+  let palette: Palette;
+  if (colorScheme && !project.palette) {
+    palette = { ...colorScheme.palette };
+  } else if (colorScheme && project.palette && typeof project.palette !== "string") {
+    palette = resolvePalette({
+      ...colorScheme.palette,
+      ...(project.palette as unknown as Record<string, string>),
+    });
+  } else {
+    palette = resolvePalette(project.palette);
+  }
+  if (colorScheme) {
+    const pairs = colorScheme.pairings;
+    console.log(
+      "[STAGE 2/9] Skema warna \"" + colorScheme.id + "\" aktif (" +
+        (colorScheme.palette.dark ? "gelap" : "terang") + ", suasana " + colorScheme.mood +
+        "). Pasangan disarankan: teks " + (pairs.textStyle ?? "-") +
+        ", CC " + (pairs.ccStyle ?? "-") + ", backdrop " + (pairs.backdrop ?? "-") + "."
+    );
+  }
   if (isBlueDominant(palette)) {
     console.warn(
       `[POLICY] Peringatan: palet "${palette.id}" didominasi biru. Kebijakan permanen NAZE melarang dominasi biru permanen.`
