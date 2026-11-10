@@ -1,0 +1,2022 @@
+{
+  "schema": "naze-project/2.0",
+  "name": "AI-TECH-WAR",
+  "style": "editorial-kinetic",
+  "palette": {
+    "background": "#050505",
+    "primary": "#00D9FF",
+    "secondary": "#00FF88",
+    "accent": "#FF4444",
+    "text": "#F5F7FA",
+    "dark": true
+  },
+  "profile": "vertical-1080",
+  "animationIntensity": 1,
+  "accentWords": true,
+  "burnInCc": true,
+  "narration": {
+    "engine": "file",
+    "file": "PROJECTS/proyek baru/speechma_audio_Remy Indonesian_at_8_59_52 PM_on_November_10th_2026.mp3",
+    "language": "id"
+  },
+  "scenes": [
+    {
+      "id": "scene-1",
+      "title": "PERANG CHIP",
+      "narration": "Bayangkan, dua negara adidaya sedang memperebutkan sesuatu yang ukurannya hanya sebesar telapak tangan: sebuah chip. Kenapa benda sekecil itu begitu penting?",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "globe"
+        },
+        {
+          "kind": "chart",
+          "data": [
+            22,
+            45,
+            58,
+            74,
+            92
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/switch_001.wav",
+          "volume": 0.45,
+          "at": 0.2
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_plate_heavy_000.ogg",
+          "volume": 0.6,
+          "at": 1.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_2.ogg",
+          "volume": 0.35,
+          "at": 2.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/scroll_001.wav",
+          "volume": 0.3,
+          "at": 3.6
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_1.ogg",
+          "volume": 0.45,
+          "at": 4.8
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/glitch_002.wav",
+          "volume": 0.4,
+          "at": 6.2
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_punch_heavy_000.ogg",
+          "volume": 0.55,
+          "at": 7.6
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/two_tone_1.ogg",
+          "volume": 0.35,
+          "at": 9
+        }
+      ],
+      "layers": [
+        {
+          "id": "s1-band",
+          "kind": "halftone",
+          "box": [
+            0,
+            0,
+            1,
+            0.07
+          ],
+          "fill": "accent",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 0.15
+          }
+        },
+        {
+          "id": "s1-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "PERANG",
+          "box": [
+            0.04,
+            0.08,
+            0.92,
+            0.15
+          ],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "ink-slam",
+          "enter": {
+            "type": "pop",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s1-chip",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "CHIP",
+          "box": [
+            0.04,
+            0.23,
+            0.92,
+            0.14
+          ],
+          "fill": "accent",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.5
+          },
+          "transform": {
+            "x": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 6,
+                "value": 16,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s1-panel",
+          "kind": "panel",
+          "box": [
+            0.06,
+            0.4,
+            0.88,
+            0.16
+          ],
+          "fill": "secondary",
+          "z": 0.95,
+          "enter": {
+            "type": "slideL",
+            "at": 0.8
+          },
+          "transform": {
+            "rotate": [
+              {
+                "t": 0,
+                "value": -2,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 5,
+                "value": 1.5,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 10,
+                "value": -1,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s1-null",
+          "kind": "null",
+          "box": [
+            0.08,
+            0.6,
+            0.84,
+            0.26
+          ],
+          "z": 1,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 5,
+                "value": -12,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 10,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s1-globe",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s1-null",
+          "box": [
+            0.08,
+            0.61,
+            0.4,
+            0.24
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.2
+          }
+        },
+        {
+          "id": "s1-chart",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s1-null",
+          "box": [
+            0.52,
+            0.61,
+            0.4,
+            0.24
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.5
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1
+          },
+          {
+            "at": 2,
+            "zoom": 1.28,
+            "dolly": 0.5,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 5,
+            "zoom": 1.05,
+            "panY": 0.06,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 8,
+            "zoom": 1.2,
+            "panX": -0.05,
+            "ease": "easeInOutSine"
+          }
+        ]
+      },
+      "backdrop": "circuit"
+    },
+    {
+      "id": "scene-2",
+      "title": "MENGAPA CHIP PENTING",
+      "narration": "AI modern membutuhkan kemampuan komputasi yang sangat besar. Di sinilah GPU berperan. Chip seperti produksi Nvidia digunakan untuk melatih dan menjalankan model kecerdasan buatan.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "brain"
+        },
+        {
+          "kind": "object",
+          "name": "gauge"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_1.ogg",
+          "volume": 0.45,
+          "at": 0.3
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_001.wav",
+          "volume": 0.4,
+          "at": 1.5
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/pep_sound_1.ogg",
+          "volume": 0.35,
+          "at": 2.8
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/three_tone_1.ogg",
+          "volume": 0.35,
+          "at": 4.2
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_metal_light_000.ogg",
+          "volume": 0.5,
+          "at": 5.6
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/scroll_002.wav",
+          "volume": 0.28,
+          "at": 7
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_3.ogg",
+          "volume": 0.4,
+          "at": 8.4
+        }
+      ],
+      "layers": [
+        {
+          "id": "s2-band",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0,
+            1,
+            0.05
+          ],
+          "fill": "primary",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 0.15
+          }
+        },
+        {
+          "id": "s2-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "GPU",
+          "box": [
+            0.04,
+            0.09,
+            0.92,
+            0.16
+          ],
+          "fill": "secondary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "terminal-code",
+          "enter": {
+            "type": "pop",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s2-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "OTAK DIGITAL AI",
+          "box": [
+            0.04,
+            0.25,
+            0.92,
+            0.1
+          ],
+          "fill": "text",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.6
+          }
+        },
+        {
+          "id": "s2-card",
+          "kind": "card",
+          "box": [
+            0.08,
+            0.38,
+            0.84,
+            0.14
+          ],
+          "fill": "primary",
+          "z": 0.95,
+          "enter": {
+            "type": "rise",
+            "at": 1
+          }
+        },
+        {
+          "id": "s2-grid",
+          "kind": "grid",
+          "box": [
+            0.1,
+            0.55,
+            0.8,
+            0.3
+          ],
+          "fill": "text",
+          "z": 0.9,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "rotate": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "linear"
+              },
+              {
+                "t": 11,
+                "value": 6,
+                "easing": "linear"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s2-null",
+          "kind": "null",
+          "box": [
+            0.08,
+            0.68,
+            0.84,
+            0.24
+          ],
+          "z": 1,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 6,
+                "value": -10,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 12,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s2-brain",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s2-null",
+          "box": [
+            0.08,
+            0.69,
+            0.4,
+            0.22
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.4
+          }
+        },
+        {
+          "id": "s2-gauge",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s2-null",
+          "box": [
+            0.52,
+            0.69,
+            0.4,
+            0.22
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.7
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.22
+          },
+          {
+            "at": 3,
+            "zoom": 1,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 6,
+            "zoom": 1.18,
+            "dolly": 0.4,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 9,
+            "zoom": 1.04,
+            "ease": "easeInOutSine"
+          }
+        ]
+      },
+      "backdrop": "blueprint"
+    },
+    {
+      "id": "scene-3",
+      "title": "KEKUATAN AMERIKA",
+      "narration": "Amerika Serikat memahami bahwa siapa pun yang menguasai teknologi chip canggih memiliki keunggulan besar di masa depan.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "building"
+        },
+        {
+          "kind": "object",
+          "name": "chart"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_plate_medium_000.ogg",
+          "volume": 0.55,
+          "at": 0.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/open_002.wav",
+          "volume": 0.4,
+          "at": 1.6
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_mining_000.ogg",
+          "volume": 0.4,
+          "at": 3
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/two_tone_2.ogg",
+          "volume": 0.35,
+          "at": 4.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_003.wav",
+          "volume": 0.4,
+          "at": 5.4
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/high_up.ogg",
+          "volume": 0.35,
+          "at": 6.6
+        }
+      ],
+      "layers": [
+        {
+          "id": "s3-band",
+          "kind": "halftone",
+          "box": [
+            0,
+            0,
+            1,
+            0.07
+          ],
+          "fill": "secondary",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 0.15
+          }
+        },
+        {
+          "id": "s3-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "KEKUATAN",
+          "box": [
+            0.04,
+            0.1,
+            0.92,
+            0.15
+          ],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "headline-break",
+          "enter": {
+            "type": "pop",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s3-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "AMERIKA SERIKAT",
+          "box": [
+            0.04,
+            0.25,
+            0.92,
+            0.12
+          ],
+          "fill": "accent",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.5
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 7,
+                "value": -12,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s3-panel",
+          "kind": "panel",
+          "box": [
+            0.06,
+            0.42,
+            0.88,
+            0.15
+          ],
+          "fill": "text",
+          "z": 0.95,
+          "enter": {
+            "type": "slideL",
+            "at": 0.9
+          },
+          "transform": {
+            "rotate": [
+              {
+                "t": 0,
+                "value": 1.5,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 4,
+                "value": -1.5,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 8,
+                "value": 0.5,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s3-null",
+          "kind": "null",
+          "box": [
+            0.08,
+            0.62,
+            0.84,
+            0.26
+          ],
+          "z": 1,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 4,
+                "value": -10,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 8,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s3-building",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s3-null",
+          "box": [
+            0.08,
+            0.63,
+            0.4,
+            0.24
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.1
+          }
+        },
+        {
+          "id": "s3-chart",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s3-null",
+          "box": [
+            0.52,
+            0.63,
+            0.4,
+            0.24
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.4
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1
+          },
+          {
+            "at": 2.5,
+            "zoom": 1.24,
+            "panY": -0.05,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 5,
+            "zoom": 1.06,
+            "ease": "easeInOutSine"
+          }
+        ]
+      },
+      "backdrop": "city-night"
+    },
+    {
+      "id": "scene-4",
+      "title": "PEMBATASAN TEKNOLOGI",
+      "narration": "Karena itu, Amerika membatasi ekspor sejumlah chip AI canggih ke Tiongkok.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "firewall"
+        },
+        {
+          "kind": "object",
+          "name": "shield"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/error_001.wav",
+          "volume": 0.45,
+          "at": 0.4
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_glass_heavy_000.ogg",
+          "volume": 0.55,
+          "at": 1.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/glitch_001.wav",
+          "volume": 0.5,
+          "at": 2.4
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/zap_two_tone.ogg",
+          "volume": 0.4,
+          "at": 3.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/close_002.wav",
+          "volume": 0.4,
+          "at": 4
+        }
+      ],
+      "layers": [
+        {
+          "id": "s4-band",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0,
+            1,
+            0.06
+          ],
+          "fill": "accent",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 0.15
+          }
+        },
+        {
+          "id": "s4-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "DIBLOKIR",
+          "box": [
+            0.04,
+            0.12,
+            0.92,
+            0.16
+          ],
+          "fill": "accent",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "stamp-red",
+          "enter": {
+            "type": "pop",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s4-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "EMBARGO CHIP AI",
+          "box": [
+            0.04,
+            0.28,
+            0.92,
+            0.1
+          ],
+          "fill": "text",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.5
+          }
+        },
+        {
+          "id": "s4-panel",
+          "kind": "panel",
+          "box": [
+            0.08,
+            0.42,
+            0.84,
+            0.16
+          ],
+          "fill": "secondary",
+          "z": 0.95,
+          "enter": {
+            "type": "slideL",
+            "at": 0.7
+          },
+          "transform": {
+            "rotate": [
+              {
+                "t": 0,
+                "value": -2.5,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 3,
+                "value": 2,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 5.5,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s4-null",
+          "kind": "null",
+          "box": [
+            0.08,
+            0.62,
+            0.84,
+            0.26
+          ],
+          "z": 1,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 3,
+                "value": -8,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 5.5,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s4-firewall",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s4-null",
+          "box": [
+            0.08,
+            0.63,
+            0.4,
+            0.24
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1
+          }
+        },
+        {
+          "id": "s4-shield",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s4-null",
+          "box": [
+            0.52,
+            0.63,
+            0.4,
+            0.24
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.3
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.18
+          },
+          {
+            "at": 1.8,
+            "zoom": 1.02,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 3.5,
+            "zoom": 1.22,
+            "dolly": 0.45,
+            "ease": "easeInOutSine"
+          }
+        ]
+      },
+      "backdrop": "radar-sweep"
+    },
+    {
+      "id": "scene-5",
+      "title": "RESPONS TIONGKOK",
+      "narration": "Namun, Tiongkok tidak tinggal diam. Mereka terus mengembangkan industri semikonduktor sendiri, membangun chip domestik, dan menciptakan model AI yang mampu bersaing dengan teknologi Barat.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "building"
+        },
+        {
+          "kind": "object",
+          "name": "gauge"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_5.ogg",
+          "volume": 0.45,
+          "at": 0.3
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_mining_001.ogg",
+          "volume": 0.4,
+          "at": 1.8
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/maximize_002.wav",
+          "volume": 0.35,
+          "at": 3.4
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/three_tone_2.ogg",
+          "volume": 0.35,
+          "at": 5
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/scroll_003.wav",
+          "volume": 0.28,
+          "at": 6.6
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_metal_medium_000.ogg",
+          "volume": 0.5,
+          "at": 8.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_3.ogg",
+          "volume": 0.4,
+          "at": 9.8
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_002.wav",
+          "volume": 0.4,
+          "at": 11.4
+        }
+      ],
+      "layers": [
+        {
+          "id": "s5-band",
+          "kind": "halftone",
+          "box": [
+            0,
+            0,
+            1,
+            0.07
+          ],
+          "fill": "primary",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 0.15
+          }
+        },
+        {
+          "id": "s5-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "TIONGKOK",
+          "box": [
+            0.04,
+            0.09,
+            0.92,
+            0.15
+          ],
+          "fill": "secondary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "stencil-track",
+          "enter": {
+            "type": "pop",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s5-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "INDUSTRI SEMIKONDUKTOR",
+          "box": [
+            0.04,
+            0.24,
+            0.92,
+            0.1
+          ],
+          "fill": "text",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.6
+          },
+          "transform": {
+            "x": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 6,
+                "value": -14,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 12,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s5-card",
+          "kind": "card",
+          "box": [
+            0.08,
+            0.38,
+            0.84,
+            0.13
+          ],
+          "fill": "accent",
+          "z": 0.95,
+          "enter": {
+            "type": "rise",
+            "at": 0.9
+          }
+        },
+        {
+          "id": "s5-grid",
+          "kind": "grid",
+          "box": [
+            0.12,
+            0.54,
+            0.76,
+            0.28
+          ],
+          "fill": "secondary",
+          "z": 0.9,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "rotate": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "linear"
+              },
+              {
+                "t": 12,
+                "value": -5,
+                "easing": "linear"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s5-null",
+          "kind": "null",
+          "box": [
+            0.08,
+            0.68,
+            0.84,
+            0.24
+          ],
+          "z": 1,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 6,
+                "value": -11,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 12,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s5-building",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s5-null",
+          "box": [
+            0.08,
+            0.69,
+            0.4,
+            0.22
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.3
+          }
+        },
+        {
+          "id": "s5-gauge",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s5-null",
+          "box": [
+            0.52,
+            0.69,
+            0.4,
+            0.22
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.6
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1
+          },
+          {
+            "at": 3,
+            "zoom": 1.2,
+            "panX": 0.05,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 6,
+            "zoom": 1.03,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 9,
+            "zoom": 1.22,
+            "dolly": 0.4,
+            "ease": "easeInOutSine"
+          }
+        ]
+      },
+      "backdrop": "hex-mesh"
+    },
+    {
+      "id": "scene-6",
+      "title": "PERSAINGAN GLOBAL",
+      "narration": "Persaingan ini bukan sekadar tentang siapa yang memiliki AI paling pintar. Ada industri chip, mesin produksi, energi, pusat data, hingga rantai pasokan global yang ikut dipertaruhkan. Bahkan, persaingan ini menjadi salah satu isu penting dalam hubungan kedua negara menjelang pertemuan Donald Trump dan Xi Jinping.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "globe"
+        },
+        {
+          "kind": "object",
+          "name": "chart"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/switch_003.wav",
+          "volume": 0.45,
+          "at": 0.3
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_plate_heavy_001.ogg",
+          "volume": 0.55,
+          "at": 2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/pep_sound_3.ogg",
+          "volume": 0.35,
+          "at": 4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/scroll_004.wav",
+          "volume": 0.28,
+          "at": 6
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/two_tone_1.ogg",
+          "volume": 0.35,
+          "at": 8
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_punch_medium_000.ogg",
+          "volume": 0.5,
+          "at": 10
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/error_002.wav",
+          "volume": 0.4,
+          "at": 12
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_5.ogg",
+          "volume": 0.35,
+          "at": 14
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/glitch_003.wav",
+          "volume": 0.4,
+          "at": 16
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_4.ogg",
+          "volume": 0.4,
+          "at": 18
+        }
+      ],
+      "layers": [
+        {
+          "id": "s6-band",
+          "kind": "colorblock",
+          "box": [
+            0,
+            0,
+            1,
+            0.05
+          ],
+          "fill": "secondary",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 0.15
+          }
+        },
+        {
+          "id": "s6-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "PERSAINGAN",
+          "box": [
+            0.04,
+            0.09,
+            0.92,
+            0.15
+          ],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "signal-flash",
+          "enter": {
+            "type": "pop",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s6-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "CHIP - ENERGI - DATA",
+          "box": [
+            0.04,
+            0.24,
+            0.92,
+            0.1
+          ],
+          "fill": "accent",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.6
+          }
+        },
+        {
+          "id": "s6-panel",
+          "kind": "panel",
+          "box": [
+            0.06,
+            0.38,
+            0.88,
+            0.14
+          ],
+          "fill": "text",
+          "z": 0.95,
+          "enter": {
+            "type": "slideL",
+            "at": 0.8
+          },
+          "transform": {
+            "rotate": [
+              {
+                "t": 0,
+                "value": 1,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 8,
+                "value": -1.5,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 16,
+                "value": 0.5,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s6-grid",
+          "kind": "grid",
+          "box": [
+            0.12,
+            0.56,
+            0.76,
+            0.26
+          ],
+          "fill": "primary",
+          "z": 0.9,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "rotate": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "linear"
+              },
+              {
+                "t": 10,
+                "value": 4,
+                "easing": "linear"
+              },
+              {
+                "t": 20,
+                "value": 0,
+                "easing": "linear"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s6-null",
+          "kind": "null",
+          "box": [
+            0.08,
+            0.68,
+            0.84,
+            0.24
+          ],
+          "z": 1,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 9,
+                "value": -12,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 18,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s6-globe",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s6-null",
+          "box": [
+            0.08,
+            0.69,
+            0.4,
+            0.22
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.2
+          }
+        },
+        {
+          "id": "s6-chart",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s6-null",
+          "box": [
+            0.52,
+            0.69,
+            0.4,
+            0.22
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.5
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.14
+          },
+          {
+            "at": 4,
+            "zoom": 1,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 9,
+            "zoom": 1.2,
+            "panY": 0.05,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 14,
+            "zoom": 1.04,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 18,
+            "zoom": 1.18,
+            "dolly": 0.35,
+            "ease": "easeInOutSine"
+          }
+        ]
+      },
+      "backdrop": "dot-wave"
+    },
+    {
+      "id": "scene-7",
+      "title": "MASA DEPAN AI",
+      "narration": "Lalu, siapa yang akan menang? Belum ada yang tahu. Namun, satu hal jelas: negara yang menguasai chip, energi, dan infrastruktur komputasi akan memiliki pengaruh besar terhadap masa depan kecerdasan buatan. Karena pada akhirnya, perang AI bukan hanya tentang siapa yang menciptakan teknologi tercanggih, tetapi siapa yang menguasai fondasi di baliknya.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "brain"
+        },
+        {
+          "kind": "object",
+          "name": "star"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/DIGITAL/high_up.ogg",
+          "volume": 0.4,
+          "at": 0.3
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_plate_medium_001.ogg",
+          "volume": 0.55,
+          "at": 2.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_7.ogg",
+          "volume": 0.45,
+          "at": 4.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/scroll_005.wav",
+          "volume": 0.28,
+          "at": 6.6
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/three_tone_1.ogg",
+          "volume": 0.35,
+          "at": 8.8
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_metal_heavy_001.ogg",
+          "volume": 0.55,
+          "at": 11
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/pep_sound_5.ogg",
+          "volume": 0.35,
+          "at": 13.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_004.wav",
+          "volume": 0.4,
+          "at": 15.4
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/zap_three_tone_up.ogg",
+          "volume": 0.4,
+          "at": 17.6
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_punch_heavy_001.ogg",
+          "volume": 0.55,
+          "at": 19.5
+        }
+      ],
+      "layers": [
+        {
+          "id": "s7-band",
+          "kind": "halftone",
+          "box": [
+            0,
+            0,
+            1,
+            0.06
+          ],
+          "fill": "accent",
+          "z": 0.85,
+          "enter": {
+            "type": "wipe",
+            "at": 0.15
+          }
+        },
+        {
+          "id": "s7-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "MASA DEPAN",
+          "box": [
+            0.04,
+            0.1,
+            0.92,
+            0.15
+          ],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "ticker-scroll",
+          "enter": {
+            "type": "pop",
+            "at": 0.2
+          }
+        },
+        {
+          "id": "s7-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "FONDASI KUASA AI",
+          "box": [
+            0.04,
+            0.25,
+            0.92,
+            0.11
+          ],
+          "fill": "secondary",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.6
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 10,
+                "value": -14,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 20,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s7-card",
+          "kind": "card",
+          "box": [
+            0.08,
+            0.4,
+            0.84,
+            0.13
+          ],
+          "fill": "primary",
+          "z": 0.95,
+          "enter": {
+            "type": "rise",
+            "at": 1
+          }
+        },
+        {
+          "id": "s7-grid",
+          "kind": "grid",
+          "box": [
+            0.1,
+            0.56,
+            0.8,
+            0.28
+          ],
+          "fill": "text",
+          "z": 0.9,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "rotate": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "linear"
+              },
+              {
+                "t": 11,
+                "value": -4,
+                "easing": "linear"
+              },
+              {
+                "t": 22,
+                "value": 0,
+                "easing": "linear"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s7-null",
+          "kind": "null",
+          "box": [
+            0.08,
+            0.68,
+            0.84,
+            0.24
+          ],
+          "z": 1,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 11,
+                "value": -10,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 22,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s7-brain",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s7-null",
+          "box": [
+            0.08,
+            0.69,
+            0.4,
+            0.22
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.4
+          }
+        },
+        {
+          "id": "s7-star",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s7-null",
+          "box": [
+            0.52,
+            0.69,
+            0.4,
+            0.22
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.7
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1
+          },
+          {
+            "at": 4,
+            "zoom": 1.22,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 9,
+            "zoom": 1.02,
+            "panX": -0.05,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 14,
+            "zoom": 1.24,
+            "dolly": 0.5,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 19,
+            "zoom": 1.05,
+            "ease": "easeInOutSine"
+          }
+        ]
+      },
+      "backdrop": "starfield"
+    },
+    {
+      "id": "scene-8",
+      "title": "NAZE",
+      "narration": "NAZE - Understand Technology Beyond The Screen.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "star"
+        },
+        {
+          "kind": "object",
+          "name": "lightbulb"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_2.ogg",
+          "volume": 0.45,
+          "at": 0.2
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_plate_heavy_002.ogg",
+          "volume": 0.6,
+          "at": 0.9
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_9.ogg",
+          "volume": 0.4,
+          "at": 1.6
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_001.wav",
+          "volume": 0.4,
+          "at": 2.4
+        }
+      ],
+      "layers": [
+        {
+          "id": "s8-brand",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "NAZE",
+          "box": [
+            0.04,
+            0.3,
+            0.92,
+            0.2
+          ],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "final-cut",
+          "enter": {
+            "type": "pop",
+            "at": 0.4
+          }
+        },
+        {
+          "id": "s8-tag",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "UNDERSTAND TECHNOLOGY BEYOND THE SCREEN",
+          "box": [
+            0.08,
+            0.52,
+            0.84,
+            0.12
+          ],
+          "fill": "text",
+          "z": 1.05,
+          "enter": {
+            "type": "rise",
+            "at": 0.9
+          },
+          "transform": {
+            "x": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 3,
+                "value": 8,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s8-null",
+          "kind": "null",
+          "box": [
+            0.08,
+            0.68,
+            0.84,
+            0.2
+          ],
+          "z": 1,
+          "enter": {
+            "type": "none"
+          },
+          "transform": {
+            "y": [
+              {
+                "t": 0,
+                "value": 0,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 2,
+                "value": -8,
+                "easing": "easeInOutSine"
+              },
+              {
+                "t": 4,
+                "value": 0,
+                "easing": "easeInOutSine"
+              }
+            ]
+          }
+        },
+        {
+          "id": "s8-star",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s8-null",
+          "box": [
+            0.3,
+            0.69,
+            0.4,
+            0.18
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.2
+          }
+        },
+        {
+          "id": "s8-bulb",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s8-null",
+          "box": [
+            0.52,
+            0.69,
+            0.4,
+            0.18
+          ],
+          "z": 1.15,
+          "enter": {
+            "type": "pop",
+            "at": 1.4
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          {
+            "at": 0,
+            "zoom": 1.12
+          },
+          {
+            "at": 1.5,
+            "zoom": 1,
+            "ease": "easeInOutSine"
+          },
+          {
+            "at": 3,
+            "zoom": 1.15,
+            "dolly": 0.4,
+            "track": "s8-brand",
+            "ease": "easeInOutSine"
+          }
+        ]
+      },
+      "backdrop": "spotlight"
+    }
+  ],
+  "captions": {
+    "ccStyle": "glitch-scan"
+  }
+}

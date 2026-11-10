@@ -70,7 +70,7 @@ jobs:
           else
             # Hanya merender satu proyek yang sedang dikerjakan.
             # Ganti ke proyek aktif berikutnya saat produksi berpindah.
-            PROJECTS="2500-SERANGAN-SIBER"
+            PROJECTS="AI-TECH-WAR"
           fi
           PROFILE="${{ github.event_name == 'workflow_dispatch' && inputs.profile || 'vertical-1080' }}"
           echo "projects=$PROJECTS" >> "$GITHUB_OUTPUT"
