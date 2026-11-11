@@ -1,0 +1,1219 @@
+{
+  "schema": "naze-project/2.0",
+  "name": "AI-SHOPPING-AGENT",
+  "style": "editorial-kinetic",
+  "palette": {
+    "background": "#050505",
+    "primary": "#00FF88",
+    "secondary": "#00D9FF",
+    "accent": "#FF8A00",
+    "text": "#F5F7FA",
+    "dark": true
+  },
+  "profile": "vertical-1080",
+  "animationIntensity": 1,
+  "accentWords": true,
+  "burnInCc": true,
+  "narration": {
+    "engine": "file",
+    "file": "PROJECTS/speechma_audio_Remy Indonesian_at_5_25_49 PM_on_November_11th_2026.mp3",
+    "language": "id"
+  },
+  "scenes": [
+    {
+      "id": "scene-1",
+      "title": "BAYANGKAN",
+      "narration": "Bayangkan kamu cuma perlu mengatakan:",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "phone"
+        },
+        {
+          "kind": "character",
+          "mood": "thinking"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/switch_001.wav",
+          "volume": 0.45,
+          "at": 0.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/click_002.wav",
+          "volume": 0.4,
+          "at": 0.9
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_2.ogg",
+          "volume": 0.35,
+          "at": 1.6
+        }
+      ],
+      "layers": [
+        {
+          "id": "s1-band",
+          "kind": "halftone",
+          "box": [0, 0, 1, 0.07],
+          "fill": "accent",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.15 }
+        },
+        {
+          "id": "s1-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "BAYANGKAN",
+          "box": [0.04, 0.09, 0.92, 0.15],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "ink-slam",
+          "enter": { "type": "pop", "at": 0.2 }
+        },
+        {
+          "id": "s1-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "CUMA PERLU BILANG",
+          "box": [0.04, 0.24, 0.92, 0.1],
+          "fill": "text",
+          "z": 1.05,
+          "enter": { "type": "rise", "at": 0.5 },
+          "transform": {
+            "x": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 2.2, "value": 10, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s1-panel",
+          "kind": "panel",
+          "box": [0.06, 0.38, 0.88, 0.16],
+          "fill": "secondary",
+          "z": 0.95,
+          "enter": { "type": "slideL", "at": 0.7 },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": -2, "easing": "easeInOutSine" },
+              { "t": 2.2, "value": 1.5, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s1-null",
+          "kind": "null",
+          "box": [0.08, 0.58, 0.84, 0.28],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 1.1, "value": -12, "easing": "easeInOutSine" },
+              { "t": 2.2, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s1-phone",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s1-null",
+          "box": [0.08, 0.59, 0.4, 0.26],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1 }
+        },
+        {
+          "id": "s1-char",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s1-null",
+          "box": [0.52, 0.59, 0.4, 0.26],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.3 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.35 },
+          { "at": 1.2, "zoom": 1, "ease": "easeInOutSine" },
+          { "at": 2, "zoom": 1.18, "dolly": 0.5, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "spotlight"
+    },
+    {
+      "id": "scene-2",
+      "title": "PERINTAH SUARA",
+      "narration": "\"Carikan HP dengan kamera bagus, harga di bawah tiga juta, dan baterai tahan lama.\"",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "assistant"
+        },
+        {
+          "kind": "object",
+          "name": "phone",
+          "features": { "dataFlow": true }
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_1.ogg",
+          "volume": 0.45,
+          "at": 0.3
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/tone_1.ogg",
+          "volume": 0.4,
+          "at": 1.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/tick_001.wav",
+          "volume": 0.35,
+          "at": 2.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/click_003.wav",
+          "volume": 0.4,
+          "at": 3.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/scroll_001.wav",
+          "volume": 0.3,
+          "at": 4.6
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_2.ogg",
+          "volume": 0.4,
+          "at": 5.6
+        }
+      ],
+      "layers": [
+        {
+          "id": "s2-band",
+          "kind": "colorblock",
+          "box": [0, 0, 1, 0.05],
+          "fill": "primary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.15 }
+        },
+        {
+          "id": "s2-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "PERINTAH",
+          "box": [0.04, 0.09, 0.92, 0.15],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "terminal-code",
+          "enter": { "type": "pop", "at": 0.2 }
+        },
+        {
+          "id": "s2-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "SUARA - KAMERA - HARGA - BATERAI",
+          "box": [0.04, 0.24, 0.92, 0.1],
+          "fill": "accent",
+          "z": 1.05,
+          "enter": { "type": "rise", "at": 0.6 }
+        },
+        {
+          "id": "s2-card",
+          "kind": "card",
+          "box": [0.08, 0.38, 0.84, 0.14],
+          "fill": "secondary",
+          "z": 0.95,
+          "enter": { "type": "rise", "at": 1 },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 1.5, "easing": "easeInOutSine" },
+              { "t": 3.4, "value": -1.5, "easing": "easeInOutSine" },
+              { "t": 6.5, "value": 0.5, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s2-grid",
+          "kind": "grid",
+          "box": [0.1, 0.55, 0.8, 0.3],
+          "fill": "text",
+          "z": 0.9,
+          "enter": { "type": "none" },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 0, "easing": "linear" },
+              { "t": 6.5, "value": 5, "easing": "linear" }
+            ]
+          }
+        },
+        {
+          "id": "s2-null",
+          "kind": "null",
+          "box": [0.08, 0.68, 0.84, 0.24],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 3.2, "value": -11, "easing": "easeInOutSine" },
+              { "t": 6.5, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s2-assistant",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s2-null",
+          "box": [0.08, 0.69, 0.4, 0.22],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.4 }
+        },
+        {
+          "id": "s2-phone",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s2-null",
+          "box": [0.52, 0.69, 0.4, 0.22],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.7 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.22 },
+          { "at": 2, "zoom": 1, "ease": "easeInOutSine" },
+          { "at": 4, "zoom": 1.18, "dolly": 0.4, "ease": "easeInOutSine" },
+          { "at": 5.8, "zoom": 1.05, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "circuit"
+    },
+    {
+      "id": "scene-3",
+      "title": "AI MEMBANDINGKAN",
+      "narration": "Lalu AI mencari produk, membandingkan spesifikasi, menemukan diskon,",
+      "subjects": [
+        {
+          "kind": "chart",
+          "data": [22, 45, 58, 74, 92]
+        },
+        {
+          "kind": "object",
+          "name": "phone"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/scroll_002.wav",
+          "volume": 0.3,
+          "at": 0.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/click_004.wav",
+          "volume": 0.4,
+          "at": 1.4
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_5.ogg",
+          "volume": 0.35,
+          "at": 2.4
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/two_tone_1.ogg",
+          "volume": 0.35,
+          "at": 3.4
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/pep_sound_1.ogg",
+          "volume": 0.35,
+          "at": 4.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/high_up.ogg",
+          "volume": 0.35,
+          "at": 5
+        }
+      ],
+      "layers": [
+        {
+          "id": "s3-band",
+          "kind": "halftone",
+          "box": [0, 0, 1, 0.07],
+          "fill": "secondary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.15 }
+        },
+        {
+          "id": "s3-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "BANDINGKAN",
+          "box": [0.04, 0.1, 0.92, 0.15],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "signal-flash",
+          "enter": { "type": "pop", "at": 0.2 }
+        },
+        {
+          "id": "s3-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "SPEK - HARGA - DISKON",
+          "box": [0.04, 0.25, 0.92, 0.1],
+          "fill": "accent",
+          "z": 1.05,
+          "enter": { "type": "rise", "at": 0.5 },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 2.7, "value": -12, "easing": "easeInOutSine" },
+              { "t": 5.4, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s3-card1",
+          "kind": "card",
+          "box": [0.06, 0.38, 0.36, 0.12],
+          "fill": "primary",
+          "z": 0.95,
+          "enter": { "type": "slideL", "at": 0.8 },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": -2.5, "easing": "easeInOutSine" },
+              { "t": 2.7, "value": 1.5, "easing": "easeInOutSine" },
+              { "t": 5.4, "value": -1, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s3-card2",
+          "kind": "card",
+          "box": [0.46, 0.38, 0.36, 0.12],
+          "fill": "secondary",
+          "z": 0.96,
+          "enter": { "type": "slideR", "at": 1.1 },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 2, "easing": "easeInOutSine" },
+              { "t": 2.7, "value": -1.5, "easing": "easeInOutSine" },
+              { "t": 5.4, "value": 1, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s3-card3",
+          "kind": "card",
+          "box": [0.26, 0.52, 0.48, 0.11],
+          "fill": "accent",
+          "z": 0.97,
+          "enter": { "type": "rise", "at": 1.5 },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 2.7, "value": -8, "easing": "easeInOutSine" },
+              { "t": 5.4, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s3-null",
+          "kind": "null",
+          "box": [0.08, 0.66, 0.84, 0.26],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 2.7, "value": -10, "easing": "easeInOutSine" },
+              { "t": 5.4, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s3-chart",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s3-null",
+          "box": [0.08, 0.67, 0.4, 0.24],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.8 }
+        },
+        {
+          "id": "s3-phone",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s3-null",
+          "box": [0.52, 0.67, 0.4, 0.24],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 2.1 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.05 },
+          { "at": 1.8, "zoom": 1.24, "panX": 0.04, "ease": "easeInOutSine" },
+          { "at": 3.6, "zoom": 1.02, "panY": 0.05, "ease": "easeInOutSine" },
+          { "at": 5, "zoom": 1.18, "dolly": 0.4, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "panel-stack"
+    },
+    {
+      "id": "scene-4",
+      "title": "CHECKOUT",
+      "narration": "bahkan membantu menyelesaikan pembelian. Ini bukan lagi sekadar konsep.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "cart"
+        },
+        {
+          "kind": "object",
+          "name": "phone"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/open_002.wav",
+          "volume": 0.4,
+          "at": 0.3
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/drop_001.wav",
+          "volume": 0.45,
+          "at": 1.3
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/click_005.wav",
+          "volume": 0.4,
+          "at": 2.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_002.wav",
+          "volume": 0.45,
+          "at": 3.2
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_glass_light_000.ogg",
+          "volume": 0.5,
+          "at": 4.1
+        }
+      ],
+      "layers": [
+        {
+          "id": "s4-band",
+          "kind": "colorblock",
+          "box": [0, 0, 1, 0.06],
+          "fill": "accent",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.15 }
+        },
+        {
+          "id": "s4-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "CHECKOUT",
+          "box": [0.04, 0.12, 0.92, 0.16],
+          "fill": "accent",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "headline-break",
+          "enter": { "type": "pop", "at": 0.2 }
+        },
+        {
+          "id": "s4-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "BUKAN SEKADAR KONSEP",
+          "box": [0.04, 0.28, 0.92, 0.1],
+          "fill": "text",
+          "z": 1.05,
+          "enter": { "type": "rise", "at": 0.5 }
+        },
+        {
+          "id": "s4-panel",
+          "kind": "panel",
+          "box": [0.08, 0.42, 0.84, 0.16],
+          "fill": "primary",
+          "z": 0.95,
+          "enter": { "type": "slideL", "at": 0.7 },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": -2.5, "easing": "easeInOutSine" },
+              { "t": 2.5, "value": 2, "easing": "easeInOutSine" },
+              { "t": 4.9, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s4-null",
+          "kind": "null",
+          "box": [0.08, 0.62, 0.84, 0.26],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 2.5, "value": -9, "easing": "easeInOutSine" },
+              { "t": 4.9, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s4-cart",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s4-null",
+          "box": [0.08, 0.63, 0.4, 0.24],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1 }
+        },
+        {
+          "id": "s4-phone",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s4-null",
+          "box": [0.52, 0.63, 0.4, 0.24],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.3 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.18 },
+          { "at": 1.8, "zoom": 1.02, "ease": "easeInOutSine" },
+          { "at": 3.4, "zoom": 1.22, "dolly": 0.45, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "blueprint"
+    },
+    {
+      "id": "scene-5",
+      "title": "DATA BELANJA AI",
+      "narration": "Di China, teknologi AI mulai masuk langsung ke pengalaman belanja online. Pada Oktober 2026, sekitar 5% pembelian di Douyin berasal dari tautan chatbot AI. Untuk produk yang membutuhkan banyak pertimbangan, angkanya bahkan melewati 20%.",
+      "subjects": [
+        {
+          "kind": "chart",
+          "data": [22, 45, 58, 74, 92]
+        },
+        {
+          "kind": "object",
+          "name": "gauge",
+          "features": { "label": "20%" }
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_3.ogg",
+          "volume": 0.45,
+          "at": 0.4
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_plate_medium_000.ogg",
+          "volume": 0.55,
+          "at": 2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/scroll_003.wav",
+          "volume": 0.28,
+          "at": 4
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_3.ogg",
+          "volume": 0.35,
+          "at": 6
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_generic_light_000.ogg",
+          "volume": 0.5,
+          "at": 8.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/three_tone_2.ogg",
+          "volume": 0.35,
+          "at": 10.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/zap_two_tone.ogg",
+          "volume": 0.4,
+          "at": 12.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_4.ogg",
+          "volume": 0.4,
+          "at": 14.2
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_metal_light_001.ogg",
+          "volume": 0.5,
+          "at": 16.2
+        }
+      ],
+      "layers": [
+        {
+          "id": "s5-band",
+          "kind": "halftone",
+          "box": [0, 0, 1, 0.07],
+          "fill": "primary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.15 }
+        },
+        {
+          "id": "s5-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "5%",
+          "box": [0.04, 0.1, 0.92, 0.2],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "stencil-track",
+          "enter": { "type": "pop", "at": 0.3 }
+        },
+        {
+          "id": "s5-big2",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "> 20%",
+          "box": [0.04, 0.3, 0.92, 0.2],
+          "fill": "accent",
+          "z": 1.08,
+          "textStyle": "stencil-track",
+          "enter": { "type": "pop", "at": 1.2 },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 9, "value": -10, "easing": "easeInOutSine" },
+              { "t": 18, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s5-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "DOUYIN - OKTOBER 2026",
+          "box": [0.04, 0.5, 0.92, 0.09],
+          "fill": "text",
+          "z": 1.05,
+          "enter": { "type": "rise", "at": 0.8 }
+        },
+        {
+          "id": "s5-panel",
+          "kind": "panel",
+          "box": [0.06, 0.6, 0.88, 0.12],
+          "fill": "secondary",
+          "z": 0.95,
+          "enter": { "type": "slideL", "at": 1.5 },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 1.5, "easing": "easeInOutSine" },
+              { "t": 9, "value": -1.5, "easing": "easeInOutSine" },
+              { "t": 18, "value": 0.5, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s5-null",
+          "kind": "null",
+          "box": [0.08, 0.73, 0.84, 0.2],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 9, "value": -8, "easing": "easeInOutSine" },
+              { "t": 18, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s5-chart",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s5-null",
+          "box": [0.08, 0.74, 0.4, 0.18],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 2 }
+        },
+        {
+          "id": "s5-gauge",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s5-null",
+          "box": [0.52, 0.74, 0.4, 0.18],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 2.3 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.1 },
+          { "at": 3, "zoom": 1, "ease": "easeInOutSine" },
+          { "at": 7, "zoom": 1.18, "panX": -0.04, "ease": "easeInOutSine" },
+          { "at": 11, "zoom": 1.02, "ease": "easeInOutSine" },
+          { "at": 15, "zoom": 1.2, "dolly": 0.4, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "concentric"
+    },
+    {
+      "id": "scene-6",
+      "title": "80 JUTA PENGGUNA",
+      "narration": "Asisten belanja AI milik JD.com juga sudah menarik hampir 80 juta pengguna selama festival belanja Singles Day tahun ini.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "network"
+        },
+        {
+          "kind": "object",
+          "name": "globe"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/switch_003.wav",
+          "volume": 0.45,
+          "at": 0.3
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/pep_sound_3.ogg",
+          "volume": 0.35,
+          "at": 1.8
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/two_tone_2.ogg",
+          "volume": 0.35,
+          "at": 3.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/scroll_004.wav",
+          "volume": 0.28,
+          "at": 5
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/laser_6.ogg",
+          "volume": 0.35,
+          "at": 6.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_003.wav",
+          "volume": 0.4,
+          "at": 7.6
+        }
+      ],
+      "layers": [
+        {
+          "id": "s6-band",
+          "kind": "colorblock",
+          "box": [0, 0, 1, 0.05],
+          "fill": "secondary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.15 }
+        },
+        {
+          "id": "s6-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "80 JUTA",
+          "box": [0.04, 0.09, 0.92, 0.18],
+          "fill": "secondary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "stencil-track",
+          "enter": { "type": "pop", "at": 0.2 }
+        },
+        {
+          "id": "s6-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "PENGGUNA ASISTEN AI - JD.COM",
+          "box": [0.04, 0.27, 0.92, 0.09],
+          "fill": "text",
+          "z": 1.05,
+          "enter": { "type": "rise", "at": 0.6 },
+          "transform": {
+            "x": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 4.5, "value": -12, "easing": "easeInOutSine" },
+              { "t": 9, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s6-card",
+          "kind": "card",
+          "box": [0.08, 0.4, 0.84, 0.13],
+          "fill": "primary",
+          "z": 0.95,
+          "enter": { "type": "rise", "at": 0.9 },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": -1.5, "easing": "easeInOutSine" },
+              { "t": 4.5, "value": 1.5, "easing": "easeInOutSine" },
+              { "t": 9, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s6-grid",
+          "kind": "grid",
+          "box": [0.12, 0.56, 0.76, 0.28],
+          "fill": "text",
+          "z": 0.9,
+          "enter": { "type": "none" },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 0, "easing": "linear" },
+              { "t": 9, "value": -4, "easing": "linear" }
+            ]
+          }
+        },
+        {
+          "id": "s6-null",
+          "kind": "null",
+          "box": [0.08, 0.66, 0.84, 0.26],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 4.5, "value": -11, "easing": "easeInOutSine" },
+              { "t": 9, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s6-network",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s6-null",
+          "box": [0.08, 0.67, 0.4, 0.24],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.2 }
+        },
+        {
+          "id": "s6-globe",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s6-null",
+          "box": [0.52, 0.67, 0.4, 0.24],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.5 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.14 },
+          { "at": 2.5, "zoom": 1, "ease": "easeInOutSine" },
+          { "at": 5, "zoom": 1.2, "panY": 0.05, "ease": "easeInOutSine" },
+          { "at": 7.5, "zoom": 1.04, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "hex-mesh"
+    },
+    {
+      "id": "scene-7",
+      "title": "PERTANYAAN BESAR",
+      "narration": "Tapi ada satu pertanyaan besar. Kalau AI yang menentukan produk mana yang paling cocok, apakah kita masih benar-benar memilih sendiri? Dan bagaimana kalau suatu hari AI yang paling menentukan apa yang kita beli? Menurutmu, AI seperti ini membantu atau justru terlalu jauh mengambil alih keputusan manusia?",
+      "subjects": [
+        {
+          "kind": "character",
+          "mood": "neutral"
+        },
+        {
+          "kind": "object",
+          "name": "screen"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/INTERFACE/glitch_001.wav",
+          "volume": 0.45,
+          "at": 0.4
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_punch_medium_000.ogg",
+          "volume": 0.5,
+          "at": 2.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/high_down.ogg",
+          "volume": 0.35,
+          "at": 4.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/scroll_005.wav",
+          "volume": 0.28,
+          "at": 6.2
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/glitch_003.wav",
+          "volume": 0.4,
+          "at": 8.4
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/zap_three_tone_down.ogg",
+          "volume": 0.4,
+          "at": 10.4
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_mining_002.ogg",
+          "volume": 0.45,
+          "at": 12.4
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_7.ogg",
+          "volume": 0.4,
+          "at": 14.4
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/question_001.wav",
+          "volume": 0.4,
+          "at": 16.2
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/space_trash_2.ogg",
+          "volume": 0.35,
+          "at": 18.2
+        }
+      ],
+      "layers": [
+        {
+          "id": "s7-band",
+          "kind": "halftone",
+          "box": [0, 0, 1, 0.06],
+          "fill": "accent",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.15 }
+        },
+        {
+          "id": "s7-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "SIAPA MEMILIH?",
+          "box": [0.04, 0.1, 0.92, 0.15],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "ticker-scroll",
+          "enter": { "type": "pop", "at": 0.2 }
+        },
+        {
+          "id": "s7-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "AI ATAU MANUSIA",
+          "box": [0.04, 0.25, 0.92, 0.11],
+          "fill": "accent",
+          "z": 1.05,
+          "enter": { "type": "rise", "at": 0.6 },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 10, "value": -14, "easing": "easeInOutSine" },
+              { "t": 19.5, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s7-panel",
+          "kind": "panel",
+          "box": [0.06, 0.4, 0.88, 0.14],
+          "fill": "secondary",
+          "z": 0.95,
+          "enter": { "type": "slideL", "at": 0.9 },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 1, "easing": "easeInOutSine" },
+              { "t": 9.5, "value": -1.5, "easing": "easeInOutSine" },
+              { "t": 19.5, "value": 0.5, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s7-grid",
+          "kind": "grid",
+          "box": [0.1, 0.56, 0.8, 0.28],
+          "fill": "text",
+          "z": 0.9,
+          "enter": { "type": "none" },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 0, "easing": "linear" },
+              { "t": 9.5, "value": 4, "easing": "linear" },
+              { "t": 19.5, "value": 0, "easing": "linear" }
+            ]
+          }
+        },
+        {
+          "id": "s7-null",
+          "kind": "null",
+          "box": [0.08, 0.66, 0.84, 0.26],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 10, "value": -10, "easing": "easeInOutSine" },
+              { "t": 19.5, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s7-char",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s7-null",
+          "box": [0.08, 0.67, 0.4, 0.24],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.4 }
+        },
+        {
+          "id": "s7-screen",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s7-null",
+          "box": [0.52, 0.67, 0.4, 0.24],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.7 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.05 },
+          { "at": 4, "zoom": 1.22, "ease": "easeInOutSine" },
+          { "at": 9, "zoom": 1.02, "panX": -0.05, "ease": "easeInOutSine" },
+          { "at": 14, "zoom": 1.24, "dolly": 0.5, "ease": "easeInOutSine" },
+          { "at": 18, "zoom": 1.05, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "noir-lines"
+    },
+    {
+      "id": "scene-8",
+      "title": "NAZE",
+      "narration": "NAZE. Explore Beyond the Screen.",
+      "subjects": [
+        {
+          "kind": "object",
+          "name": "star"
+        },
+        {
+          "kind": "object",
+          "name": "lightbulb"
+        }
+      ],
+      "sfx": [
+        {
+          "file": "AUDIO/SFX/DIGITAL/phaser_up_2.ogg",
+          "volume": 0.45,
+          "at": 0.2
+        },
+        {
+          "file": "AUDIO/SFX/IMPACT/impact_plate_heavy_002.ogg",
+          "volume": 0.6,
+          "at": 0.9
+        },
+        {
+          "file": "AUDIO/SFX/DIGITAL/power_up_9.ogg",
+          "volume": 0.4,
+          "at": 1.5
+        },
+        {
+          "file": "AUDIO/SFX/INTERFACE/confirmation_001.wav",
+          "volume": 0.4,
+          "at": 2
+        }
+      ],
+      "layers": [
+        {
+          "id": "s8-brand",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "NAZE",
+          "box": [0.04, 0.3, 0.92, 0.2],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "final-cut",
+          "enter": { "type": "pop", "at": 0.4 }
+        },
+        {
+          "id": "s8-tag",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "EXPLORE BEYOND THE SCREEN",
+          "box": [0.08, 0.52, 0.84, 0.12],
+          "fill": "text",
+          "z": 1.05,
+          "enter": { "type": "rise", "at": 0.9 },
+          "transform": {
+            "x": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 2.2, "value": 8, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s8-null",
+          "kind": "null",
+          "box": [0.08, 0.68, 0.84, 0.2],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 1.1, "value": -8, "easing": "easeInOutSine" },
+              { "t": 2.2, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s8-star",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s8-null",
+          "box": [0.3, 0.69, 0.4, 0.18],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.2 }
+        },
+        {
+          "id": "s8-bulb",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s8-null",
+          "box": [0.52, 0.69, 0.4, 0.18],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 1.4 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.12 },
+          { "at": 1.5, "zoom": 1, "ease": "easeInOutSine" },
+          {
+            "at": 3,
+            "zoom": 1.15,
+            "dolly": 0.4,
+            "track": "s8-brand",
+            "ease": "easeInOutSine"
+          }
+        ]
+      },
+      "backdrop": "corner-frame"
+    }
+  ],
+  "captions": {
+    "ccStyle": "glitch-scan"
+  }
+}

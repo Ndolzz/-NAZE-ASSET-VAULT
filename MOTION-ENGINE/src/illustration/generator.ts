@@ -742,6 +742,200 @@ function drawObject(
       }
       break;
     }
+    case "assistant": {
+      const glow = 0.5 + Math.sin(kit.t * 2.2) * 0.3;
+      const g = ctx.createRadialGradient(0, 0, s * 0.1, 0, 0, s * 1.25);
+      g.addColorStop(0, withAlpha(palette.secondary, 0.4 * glow));
+      g.addColorStop(1, withAlpha(palette.secondary, 0));
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(0, 0, s * 1.25, 0, Math.PI * 2);
+      ctx.fill();
+      roundRectPath(ctx, -s * 0.55, -s * 0.7, s * 1.1, s * 0.95, s * 0.3);
+      fillShape(ctx, kit, palette.primary, 0, -s * 0.22, s);
+      ctx.fill();
+      applyStroke(ctx, kit, lw);
+      const blinkEyes = Math.sin(kit.t * 2.6) > 0.94 ? 0.2 : 1;
+      ctx.fillStyle = palette.background;
+      for (const sx of [-1, 1]) {
+        ctx.beginPath();
+        ctx.ellipse(sx * s * 0.22, -s * 0.3, s * 0.1, s * 0.13 * blinkEyes, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.strokeStyle = withAlpha(palette.secondary, 0.9);
+      ctx.lineWidth = lw * 0.7;
+      ctx.beginPath();
+      ctx.moveTo(-s * 0.18, s * 0.05);
+      ctx.quadraticCurveTo(0, s * 0.14, s * 0.18, s * 0.05);
+      ctx.stroke();
+      ctx.strokeStyle = palette.text;
+      ctx.lineWidth = lw * 0.8;
+      ctx.beginPath();
+      ctx.moveTo(0, -s * 0.7);
+      ctx.lineTo(0, -s * 0.95);
+      ctx.stroke();
+      const antPulse = 0.5 + Math.sin(kit.t * 5) * 0.5;
+      ctx.beginPath();
+      ctx.arc(0, -s * 1.02, s * 0.08, 0, Math.PI * 2);
+      ctx.fillStyle = withAlpha(palette.accent, 0.35 + antPulse * 0.65);
+      ctx.fill();
+      ctx.strokeStyle = palette.accent;
+      for (let i = 0; i < 3; i++) {
+        const wp = (kit.t * 0.8 + i / 3) % 1;
+        ctx.globalAlpha = 1 - wp;
+        ctx.lineWidth = lw * (0.5 + wp * 0.5);
+        ctx.beginPath();
+        ctx.arc(0, -s * 0.22, s * (0.75 + wp * 0.55), -0.6, 0.6);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(0, -s * 0.22, s * (0.75 + wp * 0.55), Math.PI - 0.6, Math.PI + 0.6);
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+      roundRectPath(ctx, -s * 0.3, s * 0.35, s * 0.6, s * 0.5, s * 0.12);
+      fillShape(ctx, kit, palette.secondary, 0, s * 0.6, s * 0.4);
+      ctx.fill();
+      applyStroke(ctx, kit, lw * 0.8);
+      break;
+    }
+    case "cart": {
+      ctx.save();
+      ctx.rotate(Math.sin(kit.t * 1.6) * 0.03);
+      ctx.strokeStyle = palette.text;
+      ctx.lineWidth = lw;
+      ctx.beginPath();
+      ctx.moveTo(-s * 0.85, -s * 0.55);
+      ctx.lineTo(-s * 0.55, -s * 0.55);
+      ctx.lineTo(-s * 0.3, s * 0.2);
+      ctx.lineTo(s * 0.55, s * 0.2);
+      ctx.lineTo(s * 0.8, -s * 0.35);
+      ctx.lineTo(-s * 0.42, -s * 0.35);
+      ctx.stroke();
+      ctx.fillStyle = withAlpha(palette.primary, 0.25);
+      ctx.beginPath();
+      ctx.moveTo(-s * 0.42, -s * 0.35);
+      ctx.lineTo(s * 0.8, -s * 0.35);
+      ctx.lineTo(s * 0.55, s * 0.2);
+      ctx.lineTo(-s * 0.3, s * 0.2);
+      ctx.closePath();
+      ctx.fill();
+      for (let i = 0; i < 3; i++) {
+        const dp = Math.min(1, Math.max(0, kit.t * 1.1 - i * 0.4));
+        const iy = -s * 0.95 + (1 - Math.pow(1 - dp, 2)) * s * 0.5;
+        ctx.globalAlpha = dp;
+        roundRectPath(ctx, -s * 0.3 + i * s * 0.3, iy - s * 0.08, s * 0.22, s * 0.16, 3 * kit.scale);
+        ctx.fillStyle = [palette.primary, palette.secondary, palette.accent][i];
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+      for (const wx of [-s * 0.15, s * 0.35]) {
+        ctx.beginPath();
+        ctx.arc(wx, s * 0.42, s * 0.11, 0, Math.PI * 2);
+        ctx.strokeStyle = palette.text;
+        ctx.lineWidth = lw * 0.9;
+        ctx.stroke();
+      }
+      const badge = 0.8 + Math.sin(kit.t * 4) * 0.2;
+      ctx.beginPath();
+      ctx.arc(s * 0.62, -s * 0.62, s * 0.24 * badge, 0, Math.PI * 2);
+      ctx.fillStyle = palette.accent;
+      ctx.fill();
+      applyStroke(ctx, kit, lw * 0.8);
+      ctx.strokeStyle = palette.background;
+      ctx.lineWidth = lw * 1.1;
+      ctx.beginPath();
+      ctx.moveTo(s * 0.51, -s * 0.62);
+      ctx.lineTo(s * 0.59, -s * 0.54);
+      ctx.lineTo(s * 0.74, -s * 0.71);
+      ctx.stroke();
+      ctx.restore();
+      break;
+    }
+    case "network": {
+      const nodes = [
+        { x: 0, y: 0, r: 0.3 },
+        { x: -0.75, y: -0.45, r: 0.13 },
+        { x: 0.75, y: -0.45, r: 0.13 },
+        { x: -0.8, y: 0.5, r: 0.13 },
+        { x: 0.8, y: 0.5, r: 0.13 },
+        { x: 0, y: -0.85, r: 0.13 },
+        { x: 0, y: 0.85, r: 0.13 },
+      ];
+      ctx.strokeStyle = withAlpha(palette.secondary, 0.55);
+      ctx.lineWidth = lw * 0.6;
+      for (let i = 1; i < nodes.length; i++) {
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(nodes[i].x * s, nodes[i].y * s);
+        ctx.stroke();
+      }
+      for (let i = 1; i < nodes.length; i++) {
+        const p = (kit.t * 0.6 + i / (nodes.length - 1)) % 1;
+        const px = nodes[i].x * s * p;
+        const py = nodes[i].y * s * p;
+        ctx.beginPath();
+        ctx.arc(px, py, 4 * kit.scale, 0, Math.PI * 2);
+        ctx.fillStyle = withAlpha(palette.accent, 0.9 * (1 - Math.abs(p - 0.5) * 1.2));
+        ctx.fill();
+      }
+      const corePulse = 0.85 + Math.sin(kit.t * 3) * 0.15;
+      ctx.beginPath();
+      ctx.arc(0, 0, s * nodes[0].r * corePulse, 0, Math.PI * 2);
+      fillShape(ctx, kit, palette.primary, 0, 0, s * 0.3);
+      ctx.fill();
+      applyStroke(ctx, kit, lw * 0.9);
+      ctx.fillStyle = palette.background;
+      ctx.beginPath();
+      ctx.arc(-s * 0.08, -s * 0.04, s * 0.04, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(s * 0.08, -s * 0.04, s * 0.04, 0, Math.PI * 2);
+      ctx.fill();
+      for (let i = 1; i < nodes.length; i++) {
+        ctx.beginPath();
+        ctx.arc(nodes[i].x * s, nodes[i].y * s, s * nodes[i].r, 0, Math.PI * 2);
+        ctx.fillStyle = i % 2 === 0 ? palette.secondary : palette.text;
+        ctx.fill();
+        applyStroke(ctx, kit, lw * 0.6);
+      }
+      break;
+    }
+    case "screen": {
+      const sw = s * 1.9;
+      const sh = s * 1.25;
+      roundRectPath(ctx, -sw / 2, -sh / 2, sw, sh, 10 * kit.scale);
+      fillShape(ctx, kit, palette.text, 0, 0, s);
+      ctx.fill();
+      applyStroke(ctx, kit, lw);
+      roundRectPath(ctx, -sw / 2 + s * 0.09, -sh / 2 + s * 0.09, sw - s * 0.18, sh - s * 0.18, 6 * kit.scale);
+      ctx.fillStyle = palette.background;
+      ctx.fill();
+      for (let i = 0; i < 3; i++) {
+        const cp = Math.min(1, Math.max(0, kit.t * 1.2 - i * 0.3));
+        const fl = 0.75 + Math.sin(kit.t * 2 + i * 1.7) * 0.25;
+        roundRectPath(ctx, -sw * 0.36 + i * sw * 0.26, -sh * 0.28, sw * 0.22 * cp, sh * 0.5 * fl, 5 * kit.scale);
+        ctx.fillStyle = withAlpha([palette.primary, palette.secondary, palette.accent][i], 0.85);
+        ctx.fill();
+      }
+      ctx.strokeStyle = withAlpha(palette.text, 0.6);
+      ctx.lineWidth = lw * 0.5;
+      ctx.beginPath();
+      ctx.moveTo(-sw * 0.36, sh * 0.32);
+      ctx.lineTo(sw * 0.36, sh * 0.32);
+      ctx.stroke();
+      roundRectPath(ctx, -s * 0.12, sh / 2, s * 0.24, s * 0.14, 3 * kit.scale);
+      ctx.fillStyle = palette.text;
+      ctx.fill();
+      roundRectPath(ctx, -s * 0.35, sh / 2 + s * 0.14, s * 0.7, s * 0.08, 4 * kit.scale);
+      ctx.fillStyle = palette.text;
+      ctx.fill();
+      const scan = (kit.t * 0.35) % 1;
+      ctx.globalAlpha = 0.25;
+      ctx.fillStyle = palette.secondary;
+      ctx.fillRect(-sw / 2 + s * 0.09, -sh / 2 + s * 0.09 + scan * (sh - s * 0.18), sw - s * 0.18, s * 0.08);
+      ctx.globalAlpha = 1;
+      break;
+    }
     default: {
       drawIcon(ctx, kit, rng, size, name, lw);
       break;
@@ -881,6 +1075,10 @@ export const OBJECT_VOCABULARY = [
   "footprint",
   "building",
   "firewall",
+  "assistant",
+  "cart",
+  "network",
+  "screen",
 ];
 
 export function drawPaletteBlend(from: string, to: string, t: number): string {
