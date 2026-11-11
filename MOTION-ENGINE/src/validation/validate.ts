@@ -31,6 +31,8 @@ export interface ValidateOptions {
   illustrationCount: number;
   failedScenes: string[];
   narrationDuration: number;
+  /** Masalah integritas cue (urutan/tumpang tindih/teks kosong); kosong = sehat. */
+  cueIssues?: string[];
 }
 
 interface ProbeStream {
@@ -125,15 +127,18 @@ export async function validateOutput(opts: ValidateOptions): Promise<ValidationR
   const narrOk = !!audio && audio.channels! > 0;
   add("narration", "Audio narasi tersedia", narrOk, audio ? `Stream audio: ${audio.channels} channel.` : "Tidak ada stream audio.");
 
-  // 7. CC present + synced
+  // 7. CC present + synced + cue integrity
   const srtOk = fs.existsSync(opts.srtFile);
   const vttOk = fs.existsSync(opts.vttFile);
-  const ccOk = srtOk && vttOk && opts.cueCoverageOk;
+  const cueIssues = opts.cueIssues ?? [];
+  const cuesOk = cueIssues.length === 0;
+  const ccOk = srtOk && vttOk && opts.cueCoverageOk && cuesOk;
   add(
     "cc",
     "CC tersedia dan tersinkronisasi",
     ccOk,
-    `SRT: ${srtOk}, VTT: ${vttOk}, coverage: ${opts.cueCoverageOk}.`
+    `SRT: ${srtOk}, VTT: ${vttOk}, coverage: ${opts.cueCoverageOk}, integritas cue: ${cuesOk}` +
+      (cuesOk ? "" : `. Masalah: ${cueIssues.slice(0, 5).join(" | ")}`)
   );
 
   // 8. Illustrations present

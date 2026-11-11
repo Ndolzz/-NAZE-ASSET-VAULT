@@ -87,6 +87,39 @@ export function splitSentences(text: string): SentenceSlice[] {
   });
 }
 
+export interface SentenceTiming {
+  text: string;
+  start: number;
+  end: number;
+  pauseAfter: number;
+}
+
+/**
+ * Sentence-level timing: mendistribusikan rentang [start, end] ke kalimat
+ * berbobot panjang + jeda tanda baca. Monoton, tanpa tumpang tindih, dan
+ * selalu menutup rentang penuh (kalimat terakhir berakhir di "end").
+ */
+export function distributeSentenceTimings(text: string, start: number, end: number): SentenceTiming[] {
+  const slices = splitSentences(text).filter((s) => s.text.length > 0);
+  if (slices.length === 0) return [];
+  const weights = slices.map((s) => s.text.replace(/\s+/g, "").length + s.pauseAfter * 10);
+  const total = weights.reduce((a, b) => a + b, 0);
+  const span = Math.max(0.001, end - start);
+  let cursor = start;
+  return slices.map((s, i) => {
+    const isLast = i === slices.length - 1;
+    const dur = isLast ? end - cursor : (weights[i] / total) * span;
+    const timing: SentenceTiming = {
+      text: s.text,
+      start: cursor,
+      end: cursor + Math.max(0, dur),
+      pauseAfter: s.pauseAfter,
+    };
+    cursor += Math.max(0, dur);
+    return timing;
+  });
+}
+
 /** Highlight kata aktif pada mode kinetic: progres [0..1] per kata. */
 export function wordRevealProgress(words: WordTiming[], t: number): number[] {
   return words.map((w) => Math.max(0, Math.min(1, (t - w.start) / Math.max(0.001, w.end - w.start))));

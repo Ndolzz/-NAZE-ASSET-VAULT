@@ -30,7 +30,7 @@ import {
   SceneDef,
   SfxEvent,
 } from "../core/timeline";
-import { splitIntoCueTexts as splitCues } from "../captions/segmenter";
+import { splitIntoCueTexts as splitCues, validateCues } from "../captions/segmenter";
 import {
   synthesizeCues,
   assembleNarrationTrack,
@@ -186,7 +186,8 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
         ", CC " + (pairs.ccStyle ?? "-") + ", backdrop " + (pairs.backdrop ?? "-") + "."
     );
   }
-  if (isBlueDominant(palette)) {
+  const blueDominant = isBlueDominant(palette);
+  if (blueDominant) {
     console.warn(
       `[POLICY] Peringatan: palet "${palette.id}" didominasi biru. Kebijakan permanen NAZE melarang dominasi biru permanen.`
     );
@@ -213,6 +214,7 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
       hasIllustrationsPerScene: manager.hasIllustrationPerScene(plans),
       backgroundMusicExplicit: !!project.musicFile,
       styleCount: styleCount(),
+      blueDominant,
     },
     override
   );
@@ -422,14 +424,18 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
     captionEngine: captionEngine ?? undefined,
   });
 
-  // Stage 8: CC sidecars (SRT + VTT)
-  console.log("[STAGE 8/9] Menulis sidecar CC (SRT + VTT)...");
+  // Stage 8: CC sidecars (SRT + VTT) + validasi integritas cue
+  console.log("[STAGE 8/9] Menulis sidecar CC (SRT + VTT) dan memvalidasi integritas cue...");
   const srtFile = path.join(outDir, `${project.name}.srt`);
   const vttFile = path.join(outDir, `${project.name}.vtt`);
   fs.writeFileSync(srtFile, toSrt(timeline.cues), "utf-8");
   fs.writeFileSync(vttFile, toVtt(timeline.cues), "utf-8");
   const fullNarration = project.scenes.map((s) => s.narration ?? "").join(" ");
-  const coverageOk = cueCoverageOk(fullNarration, timeline.cues);
+  const cueIssues = validateCues(timeline.cues);
+  for (const issue of cueIssues) {
+    console.warn("[CC-VALIDATE] " + issue);
+  }
+  const coverageOk = cueCoverageOk(fullNarration, timeline.cues) && cueIssues.length === 0;
 
   // Stage 9: mandatory 12-point validation
   console.log("[STAGE 9/9] Validasi otomatis 12 titik...");
@@ -444,6 +450,7 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
     illustrationCount: illustrationStats.total,
     failedScenes: [],
     narrationDuration,
+    cueIssues,
   });
 
   const reportFile = path.join(outDir, "render-report.json");
@@ -466,6 +473,7 @@ export async function produceVideo(opts: ProduceOptions): Promise<ProductionResu
         frames,
         illustrations: illustrationStats,
         cues: timeline.cues.length,
+        cueIssues,
         validation,
       },
       null,

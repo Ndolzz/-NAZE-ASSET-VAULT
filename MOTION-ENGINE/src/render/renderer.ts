@@ -95,11 +95,18 @@ export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: n
     ffmpeg.on("error", (err: Error) => reject(err));
   });
 
-  // Two reusable canvases for transition compositing.
+  // Reusable canvases: no per-frame allocation. During transitions the
+  // outgoing scene frame is constant (fixed globalT), so it is rendered once
+  // per transition and cached; the composite target is also reused.
   const canvasA = createCanvas(w, h);
   const canvasB = createCanvas(w, h);
+  const canvasMain = createCanvas(w, h);
   const ctxA = canvasA.getContext("2d");
   const ctxB = canvasB.getContext("2d");
+  const ctxMain = canvasMain.getContext("2d");
+  const canvasPrev = createCanvas(w, h);
+  const ctxPrev = canvasPrev.getContext("2d");
+  let cachedPrevIndex = -1;
 
   const t0 = Date.now();
   const logEvery = Math.max(1, Math.floor(totalFrames / 20));
@@ -113,15 +120,15 @@ export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: n
 
     if (sceneIndex > 0 && localT < TRANSITION_DURATION && transitionFns.length > 0) {
       const prevTiming = timeline.scenes[sceneIndex - 1];
-      renderSceneFrame(ctxA, prevTiming, kit, prevTiming.end - 0.001);
+      if (cachedPrevIndex !== sceneIndex - 1) {
+        renderSceneFrame(ctxPrev, prevTiming, kit, prevTiming.end - 0.001);
+        cachedPrevIndex = sceneIndex - 1;
+      }
       renderSceneFrame(ctxB, timing, kit, t);
       const p = Math.min(1, localT / TRANSITION_DURATION);
       const fn = transitionFns[(sceneIndex - 1) % transitionFns.length];
-      // Fresh main canvas: the transition composites both scenes onto it.
-      const main = createCanvas(w, h);
-      const ctx = main.getContext("2d");
-      fn(ctx, canvasA, canvasB, p, w, h, opts.palette);
-      await writeFrame(ffmpeg, ctx, w, h);
+      fn(ctxMain, canvasPrev, canvasB, p, w, h, opts.palette);
+      await writeFrame(ffmpeg, ctxMain, w, h);
     } else {
       renderSceneFrame(ctxA, timing, kit, t);
       await writeFrame(ffmpeg, ctxA, w, h);
@@ -168,7 +175,7 @@ function writeFrame(ffmpeg: any, ctx: any, w: number, h: number): Promise<void> 
       }
       ffmpeg.once("close", (code: number | null) => {
         if (code === 0) resolve();
-        else reject(new Error(`ffmpeg exited with code ${code} while encoding.`));
+        else reject(new Error(`ffmpeg exited with code ${ffmpeg.exitCode} while encoding.`));
       });
     };
     stdin.once("drain", onDrain);

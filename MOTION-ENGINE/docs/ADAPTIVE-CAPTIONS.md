@@ -88,6 +88,21 @@ overshoot, blur-reveal, mask-reveal, split-reveal, glitch, shake,
 smooth-floating. Parameter: `at`, `duration`, `enter`, `exit`,
 `intensity`. Semua preset dievaluasi deterministik dari waktu lokal.
 
+## Varian kinetic typography
+
+Tipe `kinetic` mendukung varian per kata yang digambar di `draw.ts`:
+
+- `word` (default), `scalePop`, `bounce`, `char`: reveal kata/karakter
+  bertahap dengan highlight kata aktif dari timing kata.
+- `tracking`: letter-spacing melebar saat kata masuk, lalu menyempit ke
+  spacing tema (memakai `ctx.letterSpacing`).
+- `rotate`: kata masuk dengan rotasi -9 derajat yang easing ke 0 di sekitar
+  pusat kata.
+- `blur`: kata masuk dengan blur hingga 9px yang easing ke tajam
+  (`ctx.filter`, dengan fallback tanpa filter bila tidak didukung).
+- `mask` / `split`: reveal per kata dari progres animasi; alpha tidak lagi
+  diterapkan ganda (perbaikan bug rendering sebelumnya).
+
 ## Sinkronisasi
 
 Dengan engine narasi `espeak-ng`, durasi tiap cue diukur per cue dan
@@ -96,6 +111,54 @@ timing kata didistribusikan berbobot karakter di dalam rentang cue (lihat
 Dengan engine `file` (suara manual), durasi cue adalah taksiran bobot teks.
 Engine TIDAK menganalisis audio per kata; klaim sinkronisasi sebatas data
 timeline produksi yang tersedia.
+
+Timing tingkat kalimat tersedia lewat `distributeSentenceTimings(text,
+start, end)` di `sync.ts`: durasi didistribusikan berbobot panjang kalimat
+plus jeda tanda baca, monoton, tidak tumpang tindih, dan kalimat terakhir
+selalu berakhir tepat di `end`.
+
+## Impor SRT/VTT (parser.ts)
+
+`parser.ts` mengimpor berkas subtitle eksternal menjadi cue engine:
+
+```ts
+import { parseSrt, parseVtt, linesToCues } from "./captions/parser";
+
+const lines = parseSrt(fs.readFileSync("subs.srt", "utf8"));   // atau parseVtt
+const cues = linesToCues(lines, { sceneId: "scene-1" });        // timing kata diisi otomatis
+```
+
+Perilaku:
+
+- Timestamp hilang atau tidak valid melempar error yang menyebut bloknya;
+  parser tidak pernah membuat timestamp palsu.
+- Blok tanpa teks dilewati; header `WEBVTT`, baris `NOTE`, dan cue settings
+  VTT (mis. `line:0 position:50%`) diabaikan; tag HTML dibersihkan.
+- Format `HH:MM:SS,mmm` (SRT) dan `MM:SS.mmm` (VTT) didukung, koma dan titik
+  desimal diterima.
+- Segment yang tumpang tindih dinormalisasi oleh `linesToCues`: start cue
+  di-clamp ke akhir cue sebelumnya sehingga timeline tetap monoton.
+
+## Validasi integritas cue
+
+`validateCues(cues, tolerance)` di `segmenter.ts` memeriksa perilaku
+timeline, bukan sekadar keberadaan berkas: waktu non-finite, end < start,
+teks kosong, cue tanpa timing kata, timing kata tidak valid, dan tumpang
+tindih antar-cue. Pipeline produksi (Tahap 8) menjalankannya terhadap
+timeline final; temuan dicatat sebagai `[CC-VALIDATE]`, digabung ke pemeriksaan
+coverage CC, diteruskan ke validasi 12 titik, dan ditulis ke
+`render-report.json`. `buildCuesFromDurations` juga menolak durasi negatif
+atau non-finite agar timeline korup tidak bisa terbentuk.
+
+## Penegakan dominasi warna
+
+`naze.policy.json` menyatakan `color.blueDominanceForbidden`, dan kini
+ditegakkan secara aktif di `core/policy.ts`: pipeline menghitung
+`isBlueDominant(palette)` (Tahap 2) dan bila dua peran warna atau lebih
+terdeteksi biru dominan, `validateAgainstPolicy` menghasilkan pelanggaran
+`color.blueDominance` yang menggagalkan render. Satu-satunya jalur lolos
+adalah override eksplisit `--explicit-override "<alasan >= 10 karakter>"`
+sesuai kebijakan permanen.
 
 ## Responsif
 
@@ -112,8 +175,13 @@ cd MOTION-ENGINE && npx tsx src/captions/caption-tests.ts
 Menguji wrapping, pengukuran bubble, responsif tiga resolusi, safe area,
 solver tabrakan (wajah + alternatif + anti-tumpukan), anchor klasik dan
 layer, 20 preset, sinkronisasi kata, 11 aturan konteks, smoke render 17
-tipe, determinisme piksel, dan engine end-to-end. Langkah ini juga berjalan
-di CI sebelum render (workflow "NAZE Render").
+tipe, determinisme piksel, dan engine end-to-end. Tambahan: timing kalimat,
+round-trip parser SRT/VTT, penolakan timestamp hilang/invalid, blok kosong,
+cue settings VTT, normalisasi tumpang tindih, `validateCues` (sehat,
+tumpang tindih, teks kosong, waktu terbalik, non-finite), penolakan durasi
+negatif, penegakan dominasi biru (lolos/pelanggaran/override eksplisit), dan
+smoke render varian kinetic tracking/rotate/blur/mask. Langkah ini juga
+berjalan di CI sebelum render (workflow "NAZE Render").
 
 ## Demo
 
@@ -127,3 +195,5 @@ proyek produksi tetap memakai suara manual per proyek sesuai kebijakan.
 
 - Teks narasi jangan dibungkus tanda kutip literal (contoh: `"Halo!"` pada `scene.narration`). Segmenter cue klasik memperlakukan kutipan penutup sebagai "kalimat" tersendiri sehingga pemeriksaan coverage kata validasi gagal. Gunakan direktif `speech-bubble` eksplisit alih-alih kutipan.
 - Pengujian mandiri dan CI mendaftarkan font vault (`GlobalFonts.registerFromPath`) sebelum menggambar teks; runner CI tidak memiliki glyph yang dapat dirasterisasi untuk keluarga generik `sans-serif`, sehingga `measureText` tetap memberi metrik tetapi `fillText` tidak menggambar apa pun. Produksi mendaftarkan font melalui `registerFonts()` di `render/renderer.ts`.
+- Timing kata tetap estimasi berbobot dalam rentang cue; tidak ada speech
+  recognition atau pengukuran audio per kata di engine.

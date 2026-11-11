@@ -29,8 +29,21 @@ MOTION-ENGINE/src/
     generator.ts     - Generator subjek ilustrasi (karakter, objek 3D-look, chart, ikon)
     manager.ts       - Perencanaan dan reuse aset ilustrasi per scene
   captions/
-    segmenter.ts     - Segmentasi narasi menjadi cue (maks 2 baris), SRT/VTT
+    adaptive-types.ts- Tipe data sistem caption adaptif
+    adapt.ts         - Aturan konteks dan pemilihan tipe/posisi caption
+    anchors.ts       - Anchor karakter, layer, dan titik (follow per frame)
+    anim.ts          - 20 preset animasi deterministik berbasis waktu
+    cc-styles.ts     - 40 gaya CC (font, warna, stroke, layout)
+    theme.ts         - Tema bubble/chat/kinetic
+    layout.ts        - Layout dan pengukuran teks caption
+    draw.ts          - Penggambaran semua tipe caption (bubble, chat, kinetic, dll.)
+    engine.ts        - CaptionEngine: API imperatif + jalur deklaratif
+    segmenter.ts     - Segmentasi narasi menjadi cue (maks 2 baris), SRT/VTT,
+                       validasi integritas cue (validateCues)
+    parser.ts        - Impor subtitle SRT/WebVTT menjadi cue engine
+    sync.ts          - Distribusi timing kata dan kalimat dalam rentang cue
     renderer.ts      - Burn-in CC dengan pill, kata aksen, animasi fade/rise
+    caption-tests.ts - Test suite otomatis caption (dijalankan di CI)
   audio/
     narration.ts     - Sintesis per-cue (espeak-ng) + pengukuran durasi
     mixer.ts         - Mix narasi dominan + SFX; musik hanya eksplisit
@@ -49,13 +62,17 @@ MOTION-ENGINE/src/
 ## Alur Produksi (9 Tahap)
 
 1. Muat kebijakan global (`naze.policy.json`).
-2. Muat proyek; selesaikan style, palet, dan profil.
+2. Muat proyek; selesaikan style, palet, dan profil; dominasi biru
+   dihitung dan ditegakkan di sini (pelanggaran menggagalkan render,
+   kecuali override `--explicit-override`).
 3. Rencanakan ilustrasi per scene; tegakkan kebijakan.
 4. Sintesis narasi per cue CC dan ukur durasinya (CC mengikuti audio).
 5. Campur audio: narasi dominan, SFX sinkron, tanpa musik otomatis.
 6. Bangun timeline scene, keyframe, dan transisi.
-7. Render frame demi frame pada resolusi native, pipe ke FFmpeg.
-8. Tulis sidecar CC (SRT + VTT).
+7. Render frame demi frame pada resolusi native, pipe ke FFmpeg; kanvas
+   transisi dipakai ulang dan scene keluar dirender sekali per transisi.
+8. Tulis sidecar CC (SRT + VTT); integritas cue diperiksa `validateCues`
+   (waktu non-finite, terbalik, teks kosong, tumpang tindih, timing kata).
 9. Validasi otomatis 12 titik; gagal = render gagal.
 
 ## Prinsip Desain
@@ -63,5 +80,8 @@ MOTION-ENGINE/src/
 - Kebenaran data: durasi CC diukur dari audio nyata, bukan estimasi.
 - Modularitas: style baru cukup menambah entri di `styles/library.ts`.
 - Kebijakan permanen: `core/policy.ts` memvalidasi setiap render; proyek
-  tidak dapat menonaktifkan persyaratan wajib secara diam-diam.
+  tidak dapat menonaktifkan persyaratan wajib secara diam-diam, termasuk
+  larangan dominasi biru yang kini ditegakkan aktif, bukan sekadar warning.
+- Integritas timeline: cue tanpa timestamp valid, tumpang tindih, atau
+  durasi negatif ditolak, bukan diperbaiki diam-diam.
 - Portabilitas: seluruh pipeline berjalan di GitHub Actions (Ubuntu).

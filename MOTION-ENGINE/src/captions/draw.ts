@@ -486,10 +486,15 @@ function drawKinetic(call: DrawCall): RectPx {
       let wordAlpha = anim.alpha;
       let dy = 0;
       let scale = 1;
-      if (variant === "word" || variant === "scalePop" || variant === "bounce") {
-        const appear = wordTiming
+      let rotateDeg = 0;
+      let blurPx = 0;
+      let spacing = 0;
+      const appearOf = (): number =>
+        wordTiming
           ? Math.max(0, Math.min(1, (tAbs - (wordTiming.start - 0.06)) / 0.26))
-          : Math.min(1, Math.max(0, (anim.reveal * words.length - wordIdx)));
+          : Math.min(1, Math.max(0, anim.reveal * words.length - wordIdx));
+      if (variant === "word" || variant === "scalePop" || variant === "bounce") {
+        const appear = appearOf();
         if (appear <= 0) { wordIdx++; continue; }
         const eased = 1 - Math.pow(1 - appear, 3);
         wordAlpha *= eased;
@@ -512,13 +517,44 @@ function drawKinetic(call: DrawCall): RectPx {
         wordIdx++;
         continue;
       } else if (variant === "tracking") {
-        wordAlpha *= anim.alpha;
+        // Tracking animation: jarak antarhuruf melebar saat masuk, menyempit
+        // ke spacing tema saat kata terungkap.
+        const appear = appearOf();
+        if (appear <= 0) { wordIdx++; continue; }
+        const eased = 1 - Math.pow(1 - appear, 3);
+        wordAlpha = anim.alpha * eased;
+        spacing = (1 - eased) * 9 * m.unit;
+        if (isActive) scale = 1.06;
+      } else if (variant === "rotate") {
+        // Rotation: kata masuk dengan rotasi kecil yang menegak ke 0 derajat.
+        const appear = appearOf();
+        if (appear <= 0) { wordIdx++; continue; }
+        const eased = 1 - Math.pow(1 - appear, 3);
+        wordAlpha = anim.alpha * eased;
+        rotateDeg = (1 - eased) * -9;
+        dy = (1 - eased) * 16 * m.unit;
+      } else if (variant === "blur") {
+        // Blur transition: kata tajam dari buram saat masuk.
+        const appear = appearOf();
+        if (appear <= 0) { wordIdx++; continue; }
+        const eased = 1 - Math.pow(1 - appear, 3);
+        wordAlpha = anim.alpha * eased;
+        blurPx = (1 - eased) * 9;
       } else {
-        // mask/split: reveal global dengan clip.
-        wordAlpha *= anim.alpha;
+        // mask/split: reveal kata demi kata dari progres global mask.
+        const visibleCount = anim.reveal * words.length;
+        if (wordIdx >= visibleCount) { wordIdx++; continue; }
+        wordAlpha = anim.alpha;
       }
+      const wWidthNow = ctx.measureText(word).width;
       ctx.save();
-      ctx.globalAlpha = wordAlpha;
+      ctx.globalAlpha = Math.max(0, Math.min(1, wordAlpha));
+      if (spacing > 0) {
+        try { ctx.letterSpacing = spacing.toFixed(2) + "px"; } catch { /* opsional */ }
+      }
+      if (blurPx > 0.3) {
+        try { (ctx as any).filter = `blur(${blurPx.toFixed(2)}px)`; } catch { /* opsional */ }
+      }
       if (theme.backgroundAlpha < 0.2 && theme.outlineWidth > 0) {
         ctx.lineWidth = theme.outlineWidth * m.unit;
         ctx.strokeStyle = themeAlpha(theme.outlineColor, 1);
@@ -528,7 +564,12 @@ function drawKinetic(call: DrawCall): RectPx {
       ctx.fillStyle = themeAlpha(
         isActive || isEmph ? theme.accentColor : theme.textColor, 1
       );
-      if (scale !== 1 || dy !== 0) {
+      if (rotateDeg !== 0) {
+        ctx.translate(x + wWidthNow / 2, y + dy);
+        ctx.rotate((rotateDeg * Math.PI) / 180);
+        ctx.textAlign = "left";
+        ctx.fillText(word, -wWidthNow / 2, 0);
+      } else if (scale !== 1 || dy !== 0) {
         ctx.translate(x, y + dy);
         ctx.scale(scale, scale);
         ctx.textAlign = "left";
@@ -538,7 +579,11 @@ function drawKinetic(call: DrawCall): RectPx {
         ctx.fillText(word, x, y + dy);
       }
       ctx.restore();
-      x += ctx.measureText(word).width + spaceW;
+      if (spacing > 0) {
+        try { ctx.letterSpacing = (theme.letterSpacing * m.unit).toFixed(2) + "px"; } catch { /* opsional */ }
+      }
+      try { (ctx as any).filter = "none"; } catch { /* ignore */ }
+      x += wWidthNow + spaceW;
       wordIdx++;
     }
   }

@@ -23,7 +23,10 @@ import {
 import { buildSceneMeta, resolveAnchor } from "./anchors";
 import { decideCueStyle } from "./adapt";
 import { resolveCaptionTheme } from "./theme";
-import { distributeWordTimings, activeWordIndex, readingFloorSeconds, splitSentences, wordRevealProgress } from "./sync";
+import { distributeWordTimings, distributeSentenceTimings, activeWordIndex, readingFloorSeconds, splitSentences, wordRevealProgress } from "./sync";
+import { validateCues, buildCuesFromDurations, toSrt, toVtt, CaptionCue } from "./segmenter";
+import { parseSrt, parseVtt, linesToCues } from "./parser";
+import { validateAgainstPolicy } from "../core/policy";
 import { drawCaption, estimateCaptionBox } from "./draw";
 import { createCaptionEngine } from "./engine";
 import { AdaptiveCaptionsConfig, AnchorRef, CaptionType, ImportantRegion, SceneCaptionDirective } from "./adaptive-types";
@@ -254,6 +257,136 @@ async function run(): Promise<void> {
   check("kalimat terpisah", splitSentences("Satu. Dua! Tiga?").length === 3, "n=" + splitSentences("Satu. Dua! Tiga?").length);
   check("reading floor > 0", readingFloorSeconds("Teks uji kecepatan baca.") > 0.2, "0");
 
+  // ---- Sentence-level timing ----
+  {
+    const st = distributeSentenceTimings("Satu. Dua! Tiga?", 0, 3);
+    const monoton = st.length === 3 && st.every((s, i) => i === 0 || s.start >= st[i - 1].end - 0.001) && st.every((s) => s.end > s.start);
+    check("timing kalimat monoton", monoton, JSON.stringify(st));
+    check("timing kalimat menutup rentang", st.length === 3 && Math.abs(st[st.length - 1].end - 3) < 0.001, JSON.stringify(st));
+  }
+
+  // ---- Caption parser (SRT/VTT) ----
+  {
+    const cues: CaptionCue[] = [
+      { sceneId: "s1", index: 0, text: "Halo dunia.", start: 0.5, end: 1.75, words: distributeWordTimings("Halo dunia.", 0.5, 1.75) },
+      { sceneId: "s1", index: 1, text: "Baris kedua!", start: 2.0, end: 3.25, words: distributeWordTimings("Baris kedua!", 2.0, 3.25) },
+    ];
+    const srtBack = parseSrt(toSrt(cues));
+    check(
+      "parser SRT round-trip",
+      srtBack.length === 2 && srtBack[0].text === "Halo dunia." && Math.abs(srtBack[0].start - 0.5) < 0.002 && Math.abs(srtBack[1].end - 3.25) < 0.002,
+      JSON.stringify(srtBack)
+    );
+    const vttBack = parseVtt(toVtt(cues));
+    check(
+      "parser VTT round-trip",
+      vttBack.length === 2 && vttBack[0].text === "Halo dunia." && Math.abs(vttBack[1].end - 3.25) < 0.002,
+      JSON.stringify(vttBack)
+    );
+    let threwMissing = false;
+    try {
+      parseSrt("1\n00:00:01,000 --> \nTeks tanpa akhir\n");
+    } catch {
+      threwMissing = true;
+    }
+    check("parser menolak timestamp hilang", threwMissing);
+    let threwInvalid = false;
+    try {
+      parseSrt("1\nbukan-waktu --> 00:00:02,000\nTeks\n");
+    } catch {
+      threwInvalid = true;
+    }
+    check("parser menolak timestamp invalid", threwInvalid);
+    const withEmpty = parseSrt("1\n00:00:00,000 --> 00:00:01,000\n\n\n2\n00:00:01,000 --> 00:00:02,000\nTeks hidup\n");
+    check("parser melewati blok kosong", withEmpty.length === 1 && withEmpty[0].text === "Teks hidup", JSON.stringify(withEmpty));
+    const vttSettings = parseVtt("WEBVTT\n\n1\n00:00.000 --> 00:01.000 line:0 position:50%\nDengan settings\n");
+    check(
+      "parser VTT cue settings diabaikan",
+      vttSettings.length === 1 && vttSettings[0].text === "Dengan settings" && Math.abs(vttSettings[0].end - 1) < 0.002,
+      JSON.stringify(vttSettings)
+    );
+    const overlapping = linesToCues(
+      [
+        { index: 0, text: "Pertama.", start: 0, end: 2 },
+        { index: 1, text: "Kedua.", start: 1, end: 3 },
+      ],
+      { sceneId: "s1" }
+    );
+    check("parser menormalisasi tumpang tindih", overlapping[1].start >= overlapping[0].end - 0.001, JSON.stringify(overlapping));
+  }
+
+  // ---- Validasi integritas cue ----
+  {
+    const clean: CaptionCue[] = [
+      { sceneId: "s", index: 0, text: "Satu dua.", start: 0, end: 1, words: distributeWordTimings("Satu dua.", 0, 1) },
+      { sceneId: "s", index: 1, text: "Tiga empat.", start: 1, end: 2, words: distributeWordTimings("Tiga empat.", 1, 2) },
+    ];
+    check("validateCues cue sehat", validateCues(clean).length === 0, JSON.stringify(validateCues(clean)));
+    const overlapIssues = validateCues([
+      { sceneId: "s", index: 0, text: "A.", start: 0, end: 2, words: [] },
+      { sceneId: "s", index: 1, text: "B.", start: 1, end: 3, words: [] },
+    ]);
+    check("validateCues deteksi tumpang tindih", overlapIssues.some((i) => i.includes("tumpang tindih")), JSON.stringify(overlapIssues));
+    check(
+      "validateCues deteksi teks kosong",
+      validateCues([{ sceneId: "s", index: 0, text: "  ", start: 0, end: 1, words: [] }]).some((i) => i.includes("kosong"))
+    );
+    check(
+      "validateCues deteksi waktu terbalik",
+      validateCues([{ sceneId: "s", index: 0, text: "A.", start: 2, end: 1, words: [] }]).some((i) => i.includes("< start"))
+    );
+    check(
+      "validateCues deteksi waktu non-finite",
+      validateCues([{ sceneId: "s", index: 0, text: "A.", start: NaN, end: 1, words: [] }]).some((i) => i.includes("finite"))
+    );
+    let threwNeg = false;
+    try {
+      buildCuesFromDurations("s", ["A."], [-0.5], 0);
+    } catch {
+      threwNeg = true;
+    }
+    check("buildCuesFromDurations menolak durasi negatif", threwNeg);
+  }
+
+  // ---- Penegakan kebijakan dominasi biru ----
+  {
+    const policyStub = {
+      policyVersion: "test",
+      standards: {
+        resolution: { width: 1080, height: 1920, aspectRatio: "9:16" },
+        frameRate: { value: 60, mode: "CFR" },
+        video: { codec: "h264", pixelFormat: "yuv420p", container: "mp4" },
+        audio: { codec: "aac", narrationDominant: true, backgroundMusic: "none" },
+        captions: { required: true, maxLines: 2, syncRequired: true },
+        illustrations: { required: true, everyScene: true },
+        styles: { minCount: 17 },
+        color: { blueDominanceForbidden: true },
+        validation: { required: true, failOnViolation: true },
+        quality: { motionRequired: true },
+      },
+      overrides: { allowed: true, onlyByExplicitUserInstruction: true, cliFlag: "--explicit-override", requiresReason: true },
+    };
+    const baseInput = {
+      resolution: { width: 1080, height: 1920 },
+      fps: 60,
+      profileId: "vertical-1080",
+      hasCaptions: true,
+      hasIllustrationsPerScene: true,
+      backgroundMusicExplicit: false,
+      styleCount: 17,
+    };
+    const ok = validateAgainstPolicy(policyStub as any, { ...baseInput, blueDominant: false });
+    check("palet non-biru lolos", ok.violations.length === 0, JSON.stringify(ok.violations));
+    const blue = validateAgainstPolicy(policyStub as any, { ...baseInput, blueDominant: true });
+    check("dominasi biru -> pelanggaran", blue.violations.some((v) => v.rule === "color.blueDominance"), JSON.stringify(blue.violations));
+    const overridden = validateAgainstPolicy(policyStub as any, { ...baseInput, blueDominant: true }, { flag: "--explicit-override", reason: "Permintaan eksplisit pengguna untuk palet biru." });
+    check(
+      "override eksplisit menembus dominasi biru",
+      overridden.violations.length === 0 && overridden.overriddenRules.includes("color.blueDominance"),
+      JSON.stringify(overridden)
+    );
+  }
+
   // ---- Context-aware rules ----
   const recent: CaptionType[] = [];
   check("kutipan -> speech-bubble", decideCueStyle('"Halo, apa kabar?"', { subjects: [{ kind: "character" }] }, recent, true, false).type === "speech-bubble");
@@ -340,6 +473,41 @@ async function run(): Promise<void> {
     }
   }
   check("render smoke 17 tipe", smokeOk, smokeDetail);
+
+  // ---- Kinetic varian baru: tracking / rotate / blur / mask ----
+  {
+    let variantOk = true;
+    let variantDetail = "";
+    for (const v of ["tracking", "rotate", "blur", "mask"]) {
+      const c = createCanvas(540, 960);
+      const cc = c.getContext("2d");
+      const mm = metricsFor(540, 960);
+      cc.fillStyle = "#161210";
+      cc.fillRect(0, 0, 540, 960);
+      const beforePx = new Uint8ClampedArray(framePixels(cc, 540, 960));
+      const cap = makeCap({ type: "kinetic", variant: v, text: "KATA BERGERAK BESAR.", theme: theme("editorial") });
+      const est = estimateCaptionBox(cc, mm, cap);
+      const animState = captionAnimState("word-reveal", 1.0, { at: 0.2, duration: 3 });
+      try {
+        drawCaption({
+          ctx: cc, m: mm, cap, anim: animState,
+          rect: { x: (540 - est.w) / 2, y: 300, w: est.w, h: est.h },
+          anchorPx: null, localT: 1.0, tAbs: 1.0,
+        });
+      } catch (e: any) {
+        variantOk = false;
+        variantDetail = v + ": " + String(e && e.message);
+        break;
+      }
+      const changed = countChanged(beforePx, framePixels(cc, 540, 960));
+      if (changed < 5) {
+        variantOk = false;
+        variantDetail = v + ": piksel berubah=" + changed;
+        break;
+      }
+    }
+    check("kinetic varian tracking/rotate/blur/mask", variantOk, variantDetail);
+  }
 
   // ---- Determinisme ----
   {

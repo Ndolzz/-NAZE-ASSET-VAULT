@@ -43,6 +43,8 @@ export interface PolicyCheckInput {
   hasIllustrationsPerScene: boolean;
   backgroundMusicExplicit: boolean;
   styleCount: number;
+  /** Hasil isBlueDominant(palette); ditegakkan bila kebijakan melarang. */
+  blueDominant?: boolean;
 }
 
 export interface ExplicitOverride {
@@ -83,6 +85,13 @@ export function validateAgainstPolicy(
   }
   if (input.styleCount < s.styles.minCount) {
     violations.push({ rule: "styles", detail: `Style library must expose at least ${s.styles.minCount} styles, found ${input.styleCount}.` });
+  }
+  if (s.color?.blueDominanceForbidden && input.blueDominant === true) {
+    violations.push({
+      rule: "color.blueDominance",
+      detail:
+        "Palette is blue-dominant (two or more blue-hued roles). Permanent blue identity is forbidden; pick a topic-adaptive palette or pass --explicit-override with a reason.",
+    });
   }
 
   if (violations.length === 0) return { violations, overriddenRules: [] };

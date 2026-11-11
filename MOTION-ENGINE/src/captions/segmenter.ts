@@ -119,7 +119,11 @@ export function distributeWords(cueText: string, start: number, end: number): Ca
   });
 }
 
-/** Builds cues from per-cue measured audio durations (exact speech sync). */
+/**
+ * Builds cues from per-cue measured audio durations (exact speech sync).
+ * Durasi non-finite atau negatif ditolak: timeline yang korup tidak boleh
+ * masuk render. Durasi nol diizinkan (cue nol detik tetap tervalidasi).
+ */
 export function buildCuesFromDurations(
   sceneId: string,
   cueTexts: string[],
@@ -128,6 +132,12 @@ export function buildCuesFromDurations(
 ): CaptionCue[] {
   if (cueTexts.length !== durations.length) {
     throw new Error(`Cue/duration mismatch for scene ${sceneId}: ${cueTexts.length} vs ${durations.length}`);
+  }
+  for (let i = 0; i < durations.length; i++) {
+    const d = durations[i];
+    if (!Number.isFinite(d) || d < 0) {
+      throw new Error(`Cue duration invalid for scene ${sceneId}, cue ${i}: ${d}`);
+    }
   }
   const cues: CaptionCue[] = [];
   let cursor = offset;
@@ -138,6 +148,44 @@ export function buildCuesFromDurations(
     cursor = end;
   });
   return cues;
+}
+
+/**
+ * Validasi integritas cue (perilaku aktual, bukan keberadaan file):
+ * memeriksa waktu finite, urutan start <= end, teks tidak kosong, timing
+ * kata tersedia, dan tidak ada tumpang tindih antar cue. Mengembalikan
+ * daftar masalah; kosong berarti cue sehat.
+ */
+export function validateCues(cues: CaptionCue[], tolerance = 0.002): string[] {
+  const issues: string[] = [];
+  let prev: CaptionCue | null = null;
+  for (const cue of cues) {
+    const label = `cue ${cue.sceneId}#${cue.index}`;
+    if (!Number.isFinite(cue.start) || !Number.isFinite(cue.end)) {
+      issues.push(`${label}: waktu tidak finite (start=${cue.start}, end=${cue.end})`);
+      prev = cue;
+      continue;
+    }
+    if (cue.end < cue.start - tolerance) {
+      issues.push(`${label}: end (${cue.end.toFixed(3)}) < start (${cue.start.toFixed(3)})`);
+    }
+    if (!cue.text || cue.text.trim().length === 0) {
+      issues.push(`${label}: teks kosong`);
+    }
+    if (cue.text && cue.text.trim().length > 0 && (!cue.words || cue.words.length === 0)) {
+      issues.push(`${label}: tanpa timing kata (sinkronisasi kata tidak tersedia)`);
+    }
+    if (cue.words && cue.words.some((w) => !Number.isFinite(w.start) || !Number.isFinite(w.end) || w.end < w.start)) {
+      issues.push(`${label}: timing kata tidak valid`);
+    }
+    if (prev && Number.isFinite(prev.end) && cue.start < prev.end - tolerance) {
+      issues.push(
+        `${label}: tumpang tindih dengan cue sebelumnya (start ${cue.start.toFixed(3)} < end ${prev.end.toFixed(3)})`
+      );
+    }
+    prev = cue;
+  }
+  return issues;
 }
 
 /** Coverage check: every narration word is inside some cue (validation requirement). */
