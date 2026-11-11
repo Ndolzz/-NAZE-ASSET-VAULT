@@ -32,10 +32,13 @@ export function splitIntoCueTexts(
   if (!clean) return [];
   const maxChars = maxLineLen * maxLines;
 
-  // Titik desimal di dalam angka (mis. "350.600") bukan akhir kalimat:
-  // lindungi sementara agar pemenggalan cue tidak memotong angka.
-  const guarded = clean.replace(/(\d)\.(?=\d)/g, "$1\u0000");
-  const sentences = (guarded.match(/[^.!?]+[.!?]*/g) ?? [guarded]).map((s) =>
+  // Titik desimal di dalam angka (mis. "350.600") dan titik di dalam
+  // singkatan/domain (mis. "JD.com") bukan akhir kalimat: lindungi sementara
+  // agar pemenggalan cue tidak memotongnya menjadi dua token.
+  const guarded = clean
+    .replace(/(\d)\.(?=\d)/g, "$1\u0000")
+    .replace(/(\p{L})\.(?=\p{L})/gu, "$1\u0000");
+  const sentences = (guarded.match(/[^.!?]+[.!?]*["')\]]*/g) ?? [guarded]).map((s) =>
     s.replace(/\u0000/g, ".")
   );
 
