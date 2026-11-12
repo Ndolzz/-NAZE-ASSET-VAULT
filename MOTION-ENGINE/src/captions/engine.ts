@@ -10,6 +10,8 @@
  * Setiap frame engine menyelesaikan penempatan dengan kandidat + scoring:
  * tabrakan dengan wajah/objek/judul dan tumpukan antar caption dihindari,
  * aman terhadap safe area, dan mengikuti anchor yang bergerak.
+ * Dengan smartPlacement (default aktif), CC tanpa anchor terikat ke area
+ * adegan melalui captions/tracking.ts sehingga mengikuti kamera.
  */
 import { Timeline, SceneTiming } from "../core/timeline";
 import { Palette } from "../color/palette";
@@ -40,6 +42,7 @@ import { buildSceneMeta, resolveAnchor } from "./anchors";
 import { decideCueStyle, defaultAnimationFor } from "./adapt";
 import { ResolvedCaption, drawCaption, estimateCaptionBox } from "./draw";
 import { WordTiming, readingFloorSeconds } from "./sync";
+import { CaptionTracker, zoomFontScale } from "./tracking";
 
 interface EngineCaption extends ResolvedCaption {
   anchorRef?: AnchorRef;
@@ -121,6 +124,7 @@ export class CaptionEngine {
   private readonly fontFamily: string;
   private readonly byScene = new Map<string, EngineCaption[]>();
   private readonly index = new Map<string, EngineCaption>();
+  private readonly tracker = new CaptionTracker();
   private seq = 0;
   private recentTypes: CaptionType[] = [];
 
@@ -357,6 +361,9 @@ export class CaptionEngine {
     const meta: SceneMeta = buildSceneMeta(timing, { w, h, scale: kit.scale ?? 1, animationIntensity: kit.animationIntensity ?? 1, style: kit.style }, localT);
     const m: Metrics = metricsFor(w, h, this.config.safeArea as Partial<SafeArea> | undefined);
     const maxSim = Math.max(1, this.config.maxSimultaneous ?? 3);
+    // Camera-aware tracking + intelligent placement (matikan dengan
+    // smartPlacement: false untuk perilaku lama).
+    const smart = this.config.smartPlacement !== false;
 
     const active = caps.filter(
       (c) => localT >= c.at - 0.05 && localT <= c.at + c.duration + 0.35
@@ -376,22 +383,50 @@ export class CaptionEngine {
       if (anim.alpha <= 0.01) continue;
       const anchorBox = resolveAnchor(cap.anchorRef, meta, localT);
       const anchorPx = anchorBox ? rectFromNormalized(anchorBox, m) : null;
-      const box = estimateCaptionBox(ctx, m, cap);
+      // Ukuran font diskalakan proporsional zoom kamera (dibatasi agar
+      // keterbacaan tetap terjaga) sebelum pengukuran dan penggambaran.
+      let capEff: EngineCaption = cap;
+      if (smart) {
+        const zs = zoomFontScale(meta.camera.zoom);
+        if (Math.abs(zs - 1) > 0.005) {
+          capEff = { ...cap, theme: { ...cap.theme, fontScale: cap.theme.fontScale * zs } };
+        }
+      }
+      const box = estimateCaptionBox(ctx, m, capEff);
+      const requested = (
+        cap.placement === "auto" ? (TYPE_PLACEMENT[cap.type] ?? "bottom") : cap.placement
+      ) as Placement;
       const candidates: PlacementCandidate[] = candidatesForPlacement(
-        cap.placement === "auto" ? (TYPE_PLACEMENT[cap.type] ?? "bottom") : cap.placement,
+        requested,
         box,
         m,
         anchorBox,
         this.typeBias(cap.type, cap.placement as Placement)
       );
-      const solved = solvePlacement(candidates, occupied, meta.regions, m);
-      const rect: RectPx = solved
-        ? solved.rect
-        : { x: (w - box.w) / 2, y: h * 0.82 - box.h, w: box.w, h: box.h };
+      let rect: RectPx;
+      if (smart) {
+        const decision = this.tracker.solve({
+          capId: cap.id,
+          kind: anchorBox || cap.anchorRef ? "anchor" : "scene",
+          requested,
+          box,
+          m,
+          meta,
+          localT,
+          baseCandidates: candidates,
+          occupied,
+        });
+        rect = decision.rect;
+      } else {
+        const solved = solvePlacement(candidates, occupied, meta.regions, m);
+        rect = solved
+          ? solved.rect
+          : { x: (w - box.w) / 2, y: h * 0.82 - box.h, w: box.w, h: box.h };
+      }
       const used = drawCaption({
         ctx,
         m,
-        cap,
+        cap: capEff,
         anim,
         rect,
         anchorPx,
@@ -401,6 +436,7 @@ export class CaptionEngine {
       occupied.push(used);
       drawn++;
     }
+    if (smart) this.tracker.prune(localT);
   }
 }
 

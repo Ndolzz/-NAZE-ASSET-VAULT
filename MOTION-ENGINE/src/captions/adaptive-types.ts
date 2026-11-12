@@ -178,4 +178,10 @@ export interface AdaptiveCaptionsConfig {
   bottomMargin?: number;
   /** Id gaya CC dari pustaka captions/cc-styles.ts; mengaktifkan mode "adaptive". */
   ccStyle?: string;
+  /**
+   * Tracking CC sadar-kamera + penempatan ruang kosong cerdas (default
+   * true). CC terikat ke area adegan dan mengikuti pan/tilt/zoom kamera;
+   * set false untuk perilaku lama berbasis slot layar statis.
+   */
+  smartPlacement?: boolean;
 }
