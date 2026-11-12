@@ -36,6 +36,7 @@ jobs:
     name: Render NAZE
     runs-on: ubuntu-latest
     timeout-minutes: 90
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -74,10 +75,9 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             PROJECTS="${{ inputs.project }}"
           else
-            # Hanya merender satu proyek yang sedang dikerjakan.
-            # Ganti ke proyek aktif berikutnya saat produksi berpindah.
             PROJECTS="HIDDEN-INTERNET-HIGHWAY"
           fi
+
           PROFILE="${{ github.event_name == 'workflow_dispatch' && inputs.profile || 'vertical-1080' }}"
           echo "projects=$PROJECTS" >> "$GITHUB_OUTPUT"
           echo "profile=$PROFILE" >> "$GITHUB_OUTPUT"
@@ -90,6 +90,7 @@ jobs:
         run: |
           set -o pipefail
           echo "=== NAZE render mulai ==="
+
           for PROJECT in ${{ steps.cfg.outputs.projects }}; do
             echo "--- Render proyek: $PROJECT ---"
             npx tsx src/cli.ts render "../PROJECTS/$PROJECT" \
@@ -103,13 +104,20 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cd "${{ github.workspace }}"
+
           LOGS=$(ls render-output-*.log caption-tests.log placement-tests.log 2>/dev/null || true)
-          if [ -z "$LOGS" ]; then echo "Log render tidak ditemukan."; exit 0; fi
+
+          if [ -z "$LOGS" ]; then
+            echo "Log render tidak ditemukan."
+            exit 0
+          fi
+
           {
             echo "## Log render NAZE (gagal)"
             echo ""
             echo "Baris log terakhir (maks. 150 per berkas):"
             echo ""
+
             for LOG in $LOGS; do
               echo "### $LOG"
               echo ""
@@ -118,24 +126,32 @@ jobs:
               echo '=== LOG-END ==='
             done
           } >> "$GITHUB_STEP_SUMMARY"
+
           BRANCH="render-logs/${{ github.run_id }}-${{ github.run_attempt }}"
           API="https://api.github.com/repos/${{ github.repository }}"
-          AUTH="Authorization: Bearer ${{ GH_TOKEN }}"
+
+          AUTH="Authorization: Bearer $GH_TOKEN"
           ACCEPT="Accept: application/vnd.github+json"
+
           HTTP=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
             -H "$AUTH" -H "$ACCEPT" -H "Content-Type: application/json" \
             "$API/git/refs" \
             -d "{\"ref\":\"refs/heads/$BRANCH\",\"sha\":\"${{ github.sha }}\"}")
+
           echo "Buat branch $BRANCH: HTTP $HTTP (422 = sudah ada, lanjut)"
+
           for LOG in $LOGS; do
             CONTENT=$(base64 -w0 "$LOG")
-            cat > /tmp/log-commit.json <<EOF
+
+            cat > /tmp/log-commit.json <<EOFJSON
           {"message":"Log render gagal: $LOG (run ${{ github.run_id }} attempt ${{ github.run_attempt }})","content":"$CONTENT","branch":"$BRANCH"}
-          EOF
+          EOFJSON
+
             curl -s -X PUT \
               -H "$AUTH" -H "$ACCEPT" -H "Content-Type: application/json" \
               --data @/tmp/log-commit.json \
               "$API/contents/RENDER-LOGS/${{ github.run_id }}-${{ github.run_attempt }}-$LOG" | head -c 300
+
             echo ""
           done
 
@@ -153,16 +169,21 @@ jobs:
       - name: Inspeksi hasil dengan ffprobe
         run: |
           set -e
+
           for PROJECT in ${{ steps.cfg.outputs.projects }}; do
             OUT="dist/$PROJECT/$PROJECT.mp4"
+
             echo "== ffprobe: $OUT =="
+
             ffprobe -v error -select_streams v:0 \
               -show_entries stream=codec_name,width,height,pix_fmt,r_frame_rate,avg_frame_rate \
               -of default=noprint_wrappers=1 "$OUT"
+
             ffprobe -v error -select_streams a:0 \
               -show_entries stream=codec_name,sample_rate,channels \
               -of default=noprint_wrappers=1 "$OUT"
           done
+
           echo "== File output =="
           ls -la dist/*/
 
@@ -170,15 +191,18 @@ jobs:
         run: |
           node -e '
           const fs = require("fs");
+
           for (const project of "${{ steps.cfg.outputs.projects }}".split(/\s+/).filter(Boolean)) {
             const reportPath = `dist/${project}/render-report.json`;
             const report = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
             const failed = report.validation.checks.filter((c) => !c.pass);
+
             if (failed.length > 0) {
               console.error(`VALIDASI GAGAL: ${project}`);
               for (const c of failed) console.error(` - ${c.id}: ${c.detail}`);
               process.exit(1);
             }
+
             console.log(`${project}: validasi lolos ${report.validation.checks.length} pemeriksaan.`);
             console.log(`${project}: durasi ${report.duration.toFixed(2)}s | ${report.frames} frame | ${report.illustrations.total} ilustrasi | engine narasi ${report.narrationEngine}`);
           }
@@ -196,4 +220,3 @@ jobs:
 
       - name: Status akhir
         run: echo "Render selesai dan seluruh validasi otomatis lolos."
-
