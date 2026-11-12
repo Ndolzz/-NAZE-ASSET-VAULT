@@ -320,7 +320,10 @@ async function run(): Promise<void> {
       final = c;
     }
     check("re-anchor: transisi tanpa lompatan", maxStep <= 2.5 * m.h / 60 + 1, "max=" + maxStep.toFixed(1));
-    check("re-anchor: menjauh dari subjek baru", final.y > centerOf(d0.rect).y + 400, JSON.stringify({ from: centerOf(d0.rect), to: final }));
+    const subjectCenter = { x: (0.28 + 0.25 / 2) * m.w, y: (0.42 + 0.2 / 2) * m.h };
+    const captionCenter = centerOf({ x: final.x - 150, y: final.y - 60, w: 300, h: 120 });
+    const separation = Math.hypot(captionCenter.x - subjectCenter.x, captionCenter.y - subjectCenter.y);
+    check("re-anchor: menjauh dari subjek baru", separation > 0.2 * m.h, JSON.stringify({ subjectCenter, captionCenter, separation: Math.round(separation) }));
     const ovFrac = overlapArea({ x: final.x - 150, y: final.y - 60, w: 300, h: 120 }, rectFromNormalized(subj(0.28, 0.42, 0.25, 0.2), m)) / 36000;
     check("re-anchor: tidak menutupi subjek baru", ovFrac < 0.05, "frac=" + ovFrac.toFixed(3));
   }

@@ -189,7 +189,9 @@ export function negativeSpaceCandidates(
       run = 0;
     }
   }
-  return out.slice(0, 15);
+  // Jangan potong berdasarkan urutan baris grid.
+  // Kandidat sisi berlawanan bisa terbuang sebelum diperiksa.
+  return out;
 }
 
 interface TrackState {
