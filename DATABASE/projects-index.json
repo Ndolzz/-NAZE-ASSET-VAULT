@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "kind": "projects",
+  "generatedAt": "2026-11-12T08:53:03.893Z",
+  "source": {
+    "repo": "Ndolzz/-NAZE-ASSET-VAULT",
+    "branch": "main",
+    "commit": "9cfacd9509cb5ccdfc2575a0d25bdbf79f160928"
+  },
+  "totals": {
+    "projects": 11,
+    "rootFiles": 2
+  },
+  "projects": [
+    {
+      "name": "2500 serangan siber",
+      "path": "PROJECTS/2500 serangan siber",
+      "hasProjectJson": false,
+      "fileCount": 2,
+      "totalBytes": 714386,
+      "folders": [
+        "0",
+        "speechma_audio_Remy Indonesian_at_10_03_28 AM_on_November_9th_2026.mp3"
+      ]
+    },
+    {
+      "name": "2500-SERANGAN-SIBER",
+      "path": "PROJECTS/2500-SERANGAN-SIBER",
+      "hasProjectJson": true,
+      "fileCount": 2,
+      "totalBytes": 58386,
+      "folders": [
+        "narration.md"
+      ]
+    },
+    {
+      "name": "AI-CYBERSECURITY",
+      "path": "PROJECTS/AI-CYBERSECURITY",
+      "hasProjectJson": true,
+      "fileCount": 2,
+      "totalBytes": 26468,
+      "folders": [
+        "narration.md"
+      ]
+    },
+    {
+      "name": "AI-SHOPPING-AGENT",
+      "path": "PROJECTS/AI-SHOPPING-AGENT",
+      "hasProjectJson": true,
+      "fileCount": 3,
+      "totalBytes": 39181,
+      "folders": [
+        "narration.md",
+        "README.md"
+      ]
+    },
+    {
+      "name": "AI-TECH-WAR",
+      "path": "PROJECTS/AI-TECH-WAR",
+      "hasProjectJson": true,
+      "fileCount": 3,
+      "totalBytes": 49209,
+      "folders": [
+        "narration.md",
+        "README.md"
+      ]
+    },
+    {
+      "name": "CAPTION-DEMO",
+      "path": "PROJECTS/CAPTION-DEMO",
+      "hasProjectJson": true,
+      "fileCount": 1,
+      "totalBytes": 38915,
+      "folders": []
+    },
+    {
+      "name": "DARK-WEB",
+      "path": "PROJECTS/DARK-WEB",
+      "hasProjectJson": true,
+      "fileCount": 39,
+      "totalBytes": 4597002,
+      "folders": [
+        "AUDIO",
+        "narration.md",
+        "package-lock.json",
+        "package.json",
+        "render.sh",
+        "SCRIPT",
+        "SOUND_TIMELINE.txt",
+        "VISUAL"
+      ]
+    },
+    {
+      "name": "DIGITAL-FOOTPRINT",
+      "path": "PROJECTS/DIGITAL-FOOTPRINT",
+      "hasProjectJson": true,
+      "fileCount": 3,
+      "totalBytes": 45522,
+      "folders": [
+        "ASSET-AUDIT.md",
+        "narration.md"
+      ]
+    },
+    {
+      "name": "jejak digital",
+      "path": "PROJECTS/jejak digital",
+      "hasProjectJson": false,
+      "fileCount": 1,
+      "totalBytes": 536400,
+      "folders": [
+        "speechma_audio_Remy Indonesian_at_1_17_38 AM_on_November_7th_2026.mp3"
+      ]
+    },
+    {
+      "name": "proyek baru",
+      "path": "PROJECTS/proyek baru",
+      "hasProjectJson": false,
+      "fileCount": 2,
+      "totalBytes": 575570,
+      "folders": [
+        "0",
+        "speechma_audio_Remy Indonesian_at_8_59_52 PM_on_November_10th_2026.mp3"
+      ]
+    },
+    {
+      "name": "STYLE-SHOWCASE",
+      "path": "PROJECTS/STYLE-SHOWCASE",
+      "hasProjectJson": true,
+      "fileCount": 2,
+      "totalBytes": 3045,
+      "folders": [
+        "narration.md"
+      ]
+    }
+  ],
+  "rootFiles": [
+    {
+      "name": "speechma_audio_Remy Indonesian_at_5_25_49 PM_on_November_11th_2026.mp3",
+      "path": "PROJECTS/speechma_audio_Remy Indonesian_at_5_25_49 PM_on_November_11th_2026.mp3",
+      "size": 402768
+    },
+    {
+      "name": "speechma_audio_Remy Indonesian_at_7_44_16 PM_on_November_5th_2026.mp3",
+      "path": "PROJECTS/speechma_audio_Remy Indonesian_at_7_44_16 PM_on_November_5th_2026.mp3",
+      "size": 480096
+    }
+  ]
+}
