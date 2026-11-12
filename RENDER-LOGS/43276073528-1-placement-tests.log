@@ -1,0 +1,28 @@
+PASS transform kamera round-trip (pan/tilt/zoom/rotasi/diagonal)
+PASS skala font zoom terbatas 0.85..1.18
+PASS grid okupansi menandai sel subjek
+PASS statis: CC tidak menutupi subjek
+PASS statis: CC dalam safe area
+PASS pan horizontal: CC mengikuti adegan
+PASS tilt vertikal: CC mengikuti adegan
+PASS zoom: CC menjauh dari pusat secara proporsional
+PASS gerak diagonal: CC mengikuti dua sumbu
+PASS subjek bergerak: CC mengikuti anchor
+PASS subjek bergerak: wajah tidak tertutup
+PASS banyak objek: subjek kiri -> CC kanan
+PASS banyak objek: subjek kanan -> CC kiri
+PASS footage penuh: fallback tetap dalam safe area
+PASS anchor hilang: tanpa lompatan
+PASS anchor hilang: pulih ke posisi valid
+PASS stabilitas: tanpa jitter saat statis
+PASS re-anchor: transisi tanpa lompatan
+FAIL re-anchor: menjauh dari subjek baru -> {"subjectCenter":{"x":437.40000000000003,"y":998.4000000000001},"captionCenter":{"x":749.4000000000001,"y":855},"separation":343}
+PASS re-anchor: tidak menutupi subjek baru
+PASS kandidat ruang kosong dalam safe area
+PASS engine adaptif dengan smartPlacement default
+PASS engine.render 150 frame kamera bergerak
+PASS CC tergambar pada scene kamera
+PASS smartPlacement false -> engine tetap dibuat
+PASS jalur lama (legacy) tetap bekerja
+
+Total: 25 lulus, 1 gagal dari 26 asersi.
