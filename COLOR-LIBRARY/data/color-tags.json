@@ -1,0 +1,1572 @@
+{
+ "version": 1,
+ "usage": {
+  "background.base": [
+   "background"
+  ],
+  "background.surface": [
+   "surface"
+  ],
+  "text.primary": [
+   "typography"
+  ],
+  "brand.primary": [
+   "interactive",
+   "border",
+   "data-visualization"
+  ],
+  "brand.accent": [
+   "accent",
+   "illustration",
+   "motion-graphics"
+  ]
+ },
+ "palettes": {
+  "mono-graphite": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "neutral",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "accent": {
+    "hue": "neutral",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "warmCoolBalance": "neutral",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "graphite mono",
+    "monochrome",
+    "dark",
+    "technical",
+    "neutral"
+   ]
+  },
+  "mono-paper": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "neutral",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "accent": {
+    "hue": "neutral",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "warmCoolBalance": "neutral",
+   "character": [
+    "editorial"
+   ],
+   "search": [
+    "paper mono",
+    "monochrome",
+    "light",
+    "editorial",
+    "neutral"
+   ]
+  },
+  "min-nordic": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "muted"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "calm"
+   ],
+   "search": [
+    "nordic minimal",
+    "minimalist",
+    "light",
+    "calm",
+    "blue",
+    "orange"
+   ]
+  },
+  "tech-slate": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "slate engineer",
+    "software engineering",
+    "dark",
+    "technical",
+    "blue",
+    "orange"
+   ]
+  },
+  "cyber-sentinel": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "sentinel",
+    "cybersecurity",
+    "dark",
+    "technical",
+    "green",
+    "red"
+   ]
+  },
+  "ai-violet": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "purple",
+    "temperature": "cool",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "magenta",
+    "temperature": "neutral",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "futuristic"
+   ],
+   "search": [
+    "neural violet",
+    "artificial intelligence",
+    "dark",
+    "futuristic",
+    "purple",
+    "magenta"
+   ]
+  },
+  "corp-boardroom": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "professional"
+   ],
+   "search": [
+    "boardroom",
+    "corporate",
+    "light",
+    "professional",
+    "blue",
+    "orange"
+   ]
+  },
+  "pro-ledger": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "professional"
+   ],
+   "search": [
+    "ledger pro",
+    "professional",
+    "light",
+    "green",
+    "orange"
+   ]
+  },
+  "lux-noirgold": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "yellow",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "yellow",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "warm",
+   "character": [
+    "elegant"
+   ],
+   "search": [
+    "noir gold",
+    "luxury",
+    "dark",
+    "elegant",
+    "yellow"
+   ]
+  },
+  "edit-ink": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "muted"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "editorial"
+   ],
+   "search": [
+    "editorial ink",
+    "editorial",
+    "light",
+    "red",
+    "blue"
+   ]
+  },
+  "cre-pop": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "playful"
+   ],
+   "search": [
+    "studio pop",
+    "creative studio",
+    "light",
+    "playful",
+    "orange",
+    "blue"
+   ]
+  },
+  "game-arena": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "energetic"
+   ],
+   "search": [
+    "arena",
+    "gaming",
+    "dark",
+    "energetic",
+    "red",
+    "green"
+   ]
+  },
+  "cine-tealorange": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "cinematic"
+   ],
+   "search": [
+    "teal & amber",
+    "cinematic",
+    "dark",
+    "orange",
+    "cyan"
+   ]
+  },
+  "ind-foundry": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "neutral",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "foundry",
+    "industrial",
+    "dark",
+    "technical",
+    "orange",
+    "neutral"
+   ]
+  },
+  "nat-pine": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "yellow",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "organic"
+   ],
+   "search": [
+    "pine forest",
+    "forest",
+    "dark",
+    "organic",
+    "green",
+    "yellow"
+   ]
+  },
+  "nat-deepocean": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "cool",
+   "character": [
+    "calm"
+   ],
+   "search": [
+    "deep ocean",
+    "ocean",
+    "dark",
+    "calm",
+    "blue",
+    "cyan"
+   ]
+  },
+  "earth-terracotta": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "green",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "organic"
+   ],
+   "search": [
+    "terracotta",
+    "earth tone",
+    "light",
+    "organic",
+    "red",
+    "green"
+   ]
+  },
+  "des-dune": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "green",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "organic"
+   ],
+   "search": [
+    "dune",
+    "desert",
+    "light",
+    "organic",
+    "orange",
+    "green"
+   ]
+  },
+  "sun-rush": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "yellow",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "warm",
+   "character": [
+    "energetic"
+   ],
+   "search": [
+    "sunset rush",
+    "sunset",
+    "dark",
+    "energetic",
+    "orange",
+    "yellow"
+   ]
+  },
+  "neon-night": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "magenta",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "futuristic"
+   ],
+   "search": [
+    "neon night",
+    "neon",
+    "dark",
+    "futuristic",
+    "magenta",
+    "cyan"
+   ]
+  },
+  "ret-arcade": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "playful"
+   ],
+   "search": [
+    "retro arcade",
+    "retro",
+    "dark",
+    "playful",
+    "orange",
+    "cyan"
+   ]
+  },
+  "vin-library": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "muted"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "elegant"
+   ],
+   "search": [
+    "vintage library",
+    "vintage",
+    "light",
+    "elegant",
+    "orange",
+    "green"
+   ]
+  },
+  "pas-cloud": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "magenta",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "playful"
+   ],
+   "search": [
+    "pastel cloud",
+    "pastel",
+    "light",
+    "playful",
+    "blue",
+    "magenta"
+   ]
+  },
+  "fut-aurora": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "green",
+    "temperature": "neutral",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "futuristic"
+   ],
+   "search": [
+    "aurora",
+    "futuristic",
+    "dark",
+    "blue",
+    "green"
+   ]
+  },
+  "exp-signal": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "energetic"
+   ],
+   "search": [
+    "signal orange",
+    "experimental",
+    "light",
+    "energetic",
+    "orange",
+    "blue"
+   ]
+  },
+  "calm-mint": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "calm"
+   ],
+   "search": [
+    "mint calm",
+    "nature",
+    "light",
+    "calm",
+    "green",
+    "orange"
+   ]
+  },
+  "mono-bone": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "neutral",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "accent": {
+    "hue": "neutral",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "warmCoolBalance": "neutral",
+   "character": [
+    "editorial"
+   ],
+   "search": [
+    "bone & ink",
+    "monochrome",
+    "light",
+    "editorial",
+    "neutral"
+   ]
+  },
+  "min-sand": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "muted"
+   },
+   "accent": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "warm",
+   "character": [
+    "calm"
+   ],
+   "search": [
+    "sand studio",
+    "minimalist",
+    "light",
+    "calm",
+    "orange",
+    "red"
+   ]
+  },
+  "tech-terminal": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "yellow",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "terminal amber",
+    "modern technology",
+    "dark",
+    "technical",
+    "yellow",
+    "cyan"
+   ]
+  },
+  "tech-ice": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "ice console",
+    "modern technology",
+    "light",
+    "technical",
+    "blue",
+    "orange"
+   ]
+  },
+  "se-ide": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "yellow",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "ide midnight",
+    "software engineering",
+    "dark",
+    "technical",
+    "blue",
+    "yellow"
+   ]
+  },
+  "cyber-redteam": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "yellow",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "warm",
+   "character": [
+    "energetic"
+   ],
+   "search": [
+    "red team",
+    "cybersecurity",
+    "dark",
+    "energetic",
+    "red",
+    "yellow"
+   ]
+  },
+  "ai-lumen": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "cool",
+   "character": [
+    "futuristic"
+   ],
+   "search": [
+    "lumen",
+    "artificial intelligence",
+    "light",
+    "futuristic",
+    "blue",
+    "cyan"
+   ]
+  },
+  "corp-harbor": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "professional"
+   ],
+   "search": [
+    "harbor navy",
+    "corporate",
+    "dark",
+    "professional",
+    "blue",
+    "orange"
+   ]
+  },
+  "pro-clay": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "muted"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "professional"
+   ],
+   "search": [
+    "clay office",
+    "professional",
+    "light",
+    "red",
+    "blue"
+   ]
+  },
+  "lux-emerald": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "yellow",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "elegant"
+   ],
+   "search": [
+    "emerald salon",
+    "luxury",
+    "dark",
+    "elegant",
+    "yellow",
+    "green"
+   ]
+  },
+  "edit-broadsheet": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "editorial"
+   ],
+   "search": [
+    "broadsheet",
+    "editorial",
+    "light",
+    "red",
+    "blue"
+   ]
+  },
+  "cre-sorbet": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "magenta",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "playful"
+   ],
+   "search": [
+    "sorbet studio",
+    "creative studio",
+    "light",
+    "playful",
+    "magenta",
+    "cyan"
+   ]
+  },
+  "game-quest": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "playful"
+   ],
+   "search": [
+    "quest log",
+    "gaming",
+    "dark",
+    "playful",
+    "orange",
+    "green"
+   ]
+  },
+  "cine-noir": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "warm",
+   "character": [
+    "cinematic"
+   ],
+   "search": [
+    "film noir",
+    "cinematic",
+    "dark",
+    "orange",
+    "red"
+   ]
+  },
+  "ind-concrete": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "muted"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "concrete",
+    "industrial",
+    "light",
+    "technical",
+    "blue",
+    "orange"
+   ]
+  },
+  "for-moss": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "organic"
+   ],
+   "search": [
+    "moss & bark",
+    "forest",
+    "light",
+    "organic",
+    "green",
+    "orange"
+   ]
+  },
+  "oc-reef": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "calm"
+   ],
+   "search": [
+    "coral reef",
+    "ocean",
+    "dark",
+    "calm",
+    "cyan",
+    "red"
+   ]
+  },
+  "sun-golden": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "purple",
+    "temperature": "neutral",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "energetic"
+   ],
+   "search": [
+    "golden hour",
+    "sunset",
+    "light",
+    "energetic",
+    "orange",
+    "purple"
+   ]
+  },
+  "ret-70s": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "playful"
+   ],
+   "search": [
+    "seventies",
+    "retro",
+    "light",
+    "playful",
+    "orange",
+    "cyan"
+   ]
+  },
+  "fut-chrome": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "cool",
+   "character": [
+    "futuristic"
+   ],
+   "search": [
+    "chrome lab",
+    "futuristic",
+    "light",
+    "blue",
+    "cyan"
+   ]
+  },
+  "mono-ash": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "neutral",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "ash dark",
+    "monochrome",
+    "dark",
+    "technical",
+    "neutral",
+    "orange"
+   ]
+  },
+  "min-fog": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "muted"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "cool",
+   "character": [
+    "calm"
+   ],
+   "search": [
+    "fog minimal",
+    "minimalist",
+    "light",
+    "calm",
+    "blue",
+    "cyan"
+   ]
+  },
+  "tech-circuit": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "circuit green",
+    "modern technology",
+    "dark",
+    "technical",
+    "green",
+    "orange"
+   ]
+  },
+  "se-docs": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "yellow",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "docs paper",
+    "software engineering",
+    "light",
+    "technical",
+    "blue",
+    "yellow"
+   ]
+  },
+  "cyber-ghost": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "purple",
+    "temperature": "cool",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "technical"
+   ],
+   "search": [
+    "ghost shell",
+    "cybersecurity",
+    "dark",
+    "technical",
+    "purple",
+    "red"
+   ]
+  },
+  "ai-oracle": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "purple",
+    "temperature": "neutral",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "futuristic"
+   ],
+   "search": [
+    "oracle",
+    "artificial intelligence",
+    "dark",
+    "futuristic",
+    "green",
+    "purple"
+   ]
+  },
+  "corp-civic": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "professional"
+   ],
+   "search": [
+    "civic blue",
+    "corporate",
+    "light",
+    "professional",
+    "blue",
+    "orange"
+   ]
+  },
+  "pro-graphite": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "neutral",
+    "temperature": "neutral",
+    "saturation": "muted"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "highly-saturated"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "professional"
+   ],
+   "search": [
+    "graphite office",
+    "professional",
+    "light",
+    "neutral",
+    "orange"
+   ]
+  },
+  "lux-ivory": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "warm",
+   "character": [
+    "elegant"
+   ],
+   "search": [
+    "ivory atelier",
+    "luxury",
+    "light",
+    "elegant",
+    "orange",
+    "red"
+   ]
+  },
+  "edit-magazine": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "blue",
+    "temperature": "cool",
+    "saturation": "highly-saturated"
+   },
+   "accent": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "editorial"
+   ],
+   "search": [
+    "magazine pop",
+    "editorial",
+    "light",
+    "blue",
+    "red"
+   ]
+  },
+  "cre-collage": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "purple",
+    "temperature": "neutral",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "playful"
+   ],
+   "search": [
+    "collage",
+    "creative studio",
+    "light",
+    "playful",
+    "purple",
+    "orange"
+   ]
+  },
+  "game-dungeon": {
+   "mode": "dark",
+   "brightness": "dark",
+   "primary": {
+    "hue": "red",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "accent": {
+    "hue": "yellow",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "warm",
+   "character": [
+    "energetic"
+   ],
+   "search": [
+    "dungeon",
+    "gaming",
+    "dark",
+    "energetic",
+    "red",
+    "yellow"
+   ]
+  },
+  "nat-meadow": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "green",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "orange",
+    "temperature": "warm",
+    "saturation": "vivid"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "organic"
+   ],
+   "search": [
+    "meadow",
+    "nature",
+    "light",
+    "organic",
+    "green",
+    "orange"
+   ]
+  },
+  "pas-peach": {
+   "mode": "light",
+   "brightness": "light",
+   "primary": {
+    "hue": "magenta",
+    "temperature": "warm",
+    "saturation": "balanced"
+   },
+   "accent": {
+    "hue": "cyan",
+    "temperature": "cool",
+    "saturation": "balanced"
+   },
+   "warmCoolBalance": "mixed",
+   "character": [
+    "playful"
+   ],
+   "search": [
+    "peach fizz",
+    "pastel",
+    "light",
+    "playful",
+    "magenta",
+    "cyan"
+   ]
+  }
+ }
+}

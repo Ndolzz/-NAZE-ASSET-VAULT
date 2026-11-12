@@ -1,0 +1,44 @@
+{
+ "theme": {
+  "extend": {
+   "colors": {
+    "brand": {
+     "primary": "var(--brand-primary)",
+     "secondary": "var(--brand-secondary)",
+     "accent": "var(--brand-accent)"
+    },
+    "background": {
+     "base": "var(--background-base)",
+     "surface": "var(--background-surface)",
+     "elevated": "var(--background-elevated)",
+     "overlay": "var(--background-overlay)"
+    },
+    "text": {
+     "primary": "var(--text-primary)",
+     "secondary": "var(--text-secondary)",
+     "muted": "var(--text-muted)",
+     "inverse": "var(--text-inverse)"
+    },
+    "border": {
+     "subtle": "var(--border-subtle)",
+     "default": "var(--border-default)",
+     "strong": "var(--border-strong)"
+    },
+    "interactive": {
+     "default": "var(--interactive-default)",
+     "hover": "var(--interactive-hover)",
+     "active": "var(--interactive-active)",
+     "disabled": "var(--interactive-disabled)",
+     "focus": "var(--interactive-focus)"
+    },
+    "status": {
+     "success": "var(--status-success)",
+     "warning": "var(--status-warning)",
+     "error": "var(--status-error)",
+     "info": "var(--status-info)"
+    }
+   }
+  }
+ },
+ "note": "Set data-palette pada elemen root; warna mengikuti variabel CSS."
+}

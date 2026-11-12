@@ -1,0 +1,605 @@
+{
+ "version": 1,
+ "typography": [
+  {
+   "id": "type-editorial-classic",
+   "name": "Editorial Classic",
+   "category": "Editorial",
+   "heading": {
+    "family": "Playfair Display",
+    "fallback": "serif",
+    "weight": 700,
+    "letterSpacing": "-0.01em",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Lora",
+    "fallback": "serif"
+   },
+   "paletteId": "edit-ink",
+   "headingRole": "text.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-broadsheet",
+   "name": "Broadsheet",
+   "category": "Editorial",
+   "heading": {
+    "family": "DM Serif Display",
+    "fallback": "serif",
+    "weight": 400,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Merriweather",
+    "fallback": "serif"
+   },
+   "paletteId": "edit-broadsheet",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-modern-sans",
+   "name": "Modern Sans",
+   "category": "Corporate",
+   "heading": {
+    "family": "Inter",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "-0.02em",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Inter",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "corp-boardroom",
+   "headingRole": "text.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-grotesk",
+   "name": "Grotesk Tech",
+   "category": "Software Engineering",
+   "heading": {
+    "family": "Space Grotesk",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "-0.02em",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Inter",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "tech-slate",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-terminal",
+   "name": "Terminal Mono",
+   "category": "Modern Technology",
+   "heading": {
+    "family": "JetBrains Mono",
+    "fallback": "monospace",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "JetBrains Mono",
+    "fallback": "monospace"
+   },
+   "paletteId": "tech-terminal",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-ide",
+   "name": "IDE Pair",
+   "category": "Software Engineering",
+   "heading": {
+    "family": "IBM Plex Mono",
+    "fallback": "monospace",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "IBM Plex Sans",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "se-ide",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-sentinel",
+   "name": "Sentinel Console",
+   "category": "Cybersecurity",
+   "heading": {
+    "family": "Roboto Mono",
+    "fallback": "monospace",
+    "weight": 700,
+    "letterSpacing": "0.02em",
+    "textTransform": "uppercase"
+   },
+   "body": {
+    "family": "Roboto",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "cyber-sentinel",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-neural",
+   "name": "Neural Geometric",
+   "category": "Artificial Intelligence",
+   "heading": {
+    "family": "Sora",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "-0.02em",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Manrope",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "ai-violet",
+   "headingRole": "brand.accent",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-lumen",
+   "name": "Lumen Soft",
+   "category": "Artificial Intelligence",
+   "heading": {
+    "family": "Outfit",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "-0.01em",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Outfit",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "ai-lumen",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-harbor",
+   "name": "Harbor Corporate",
+   "category": "Corporate",
+   "heading": {
+    "family": "Montserrat",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Open Sans",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "corp-harbor",
+   "headingRole": "text.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-ledger",
+   "name": "Ledger Humanist",
+   "category": "Professional",
+   "heading": {
+    "family": "Source Serif 4",
+    "fallback": "serif",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Source Sans 3",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "pro-ledger",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-luxe",
+   "name": "Luxe Display",
+   "category": "Luxury",
+   "heading": {
+    "family": "Cormorant Garamond",
+    "fallback": "serif",
+    "weight": 700,
+    "letterSpacing": "0.04em",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Montserrat",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "lux-noirgold",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-salon",
+   "name": "Salon Serif",
+   "category": "Luxury",
+   "heading": {
+    "family": "Fraunces",
+    "fallback": "serif",
+    "weight": 700,
+    "letterSpacing": "-0.01em",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Manrope",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "lux-emerald",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-studio",
+   "name": "Studio Display",
+   "category": "Creative Studio",
+   "heading": {
+    "family": "Syne",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "-0.02em",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Inter",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "cre-pop",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-sorbet",
+   "name": "Sorbet Rounded",
+   "category": "Creative Studio",
+   "heading": {
+    "family": "Poppins",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Poppins",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "cre-sorbet",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-arena",
+   "name": "Arena Condensed",
+   "category": "Gaming",
+   "heading": {
+    "family": "Oswald",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "0.04em",
+    "textTransform": "uppercase"
+   },
+   "body": {
+    "family": "Rubik",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "game-arena",
+   "headingRole": "brand.accent",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-quest",
+   "name": "Quest Pixel",
+   "category": "Gaming",
+   "heading": {
+    "family": "Press Start 2P",
+    "fallback": "sans-serif",
+    "weight": 400,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Rubik",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "game-quest",
+   "headingRole": "brand.accent",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-cinema",
+   "name": "Cinema Title",
+   "category": "Cinematic",
+   "heading": {
+    "family": "Bebas Neue",
+    "fallback": "sans-serif",
+    "weight": 400,
+    "letterSpacing": "0.06em",
+    "textTransform": "uppercase"
+   },
+   "body": {
+    "family": "Archivo",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "cine-tealorange",
+   "headingRole": "text.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-noir",
+   "name": "Noir Serif",
+   "category": "Cinematic",
+   "heading": {
+    "family": "Libre Baskerville",
+    "fallback": "serif",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Archivo",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "cine-noir",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-foundry",
+   "name": "Foundry Industrial",
+   "category": "Industrial",
+   "heading": {
+    "family": "Archivo",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "0.03em",
+    "textTransform": "uppercase"
+   },
+   "body": {
+    "family": "Barlow",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "ind-foundry",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-concrete",
+   "name": "Concrete Condensed",
+   "category": "Industrial",
+   "heading": {
+    "family": "Barlow Condensed",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "0.02em",
+    "textTransform": "uppercase"
+   },
+   "body": {
+    "family": "Barlow",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "ind-concrete",
+   "headingRole": "text.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-pine",
+   "name": "Forest Humanist",
+   "category": "Forest",
+   "heading": {
+    "family": "Merriweather",
+    "fallback": "serif",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Nunito",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "nat-pine",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-reef",
+   "name": "Reef Rounded",
+   "category": "Ocean",
+   "heading": {
+    "family": "Nunito",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Nunito",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "oc-reef",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-terracotta",
+   "name": "Terracotta Warm",
+   "category": "Earth Tone",
+   "heading": {
+    "family": "Fraunces",
+    "fallback": "serif",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "DM Sans",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "earth-terracotta",
+   "headingRole": "brand.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-dune",
+   "name": "Dune Slab",
+   "category": "Desert",
+   "heading": {
+    "family": "Zilla Slab",
+    "fallback": "serif",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Work Sans",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "des-dune",
+   "headingRole": "text.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-sunset",
+   "name": "Sunset Brush",
+   "category": "Sunset",
+   "heading": {
+    "family": "Pacifico",
+    "fallback": "sans-serif",
+    "weight": 400,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Rubik",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "sun-rush",
+   "headingRole": "brand.accent",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-neon",
+   "name": "Neon Display",
+   "category": "Neon",
+   "heading": {
+    "family": "Orbitron",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "0.04em",
+    "textTransform": "uppercase"
+   },
+   "body": {
+    "family": "Rajdhani",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "neon-night",
+   "headingRole": "brand.accent",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-arcade",
+   "name": "Arcade Retro",
+   "category": "Retro",
+   "heading": {
+    "family": "Rubik Mono One",
+    "fallback": "sans-serif",
+    "weight": 400,
+    "letterSpacing": "0",
+    "textTransform": "uppercase"
+   },
+   "body": {
+    "family": "Space Mono",
+    "fallback": "monospace"
+   },
+   "paletteId": "ret-arcade",
+   "headingRole": "brand.accent",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-vintage",
+   "name": "Vintage Press",
+   "category": "Vintage",
+   "heading": {
+    "family": "Libre Baskerville",
+    "fallback": "serif",
+    "weight": 700,
+    "letterSpacing": "0",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Libre Baskerville",
+    "fallback": "serif"
+   },
+   "paletteId": "vin-library",
+   "headingRole": "text.primary",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  },
+  {
+   "id": "type-chrome",
+   "name": "Chrome Futurist",
+   "category": "Futuristic",
+   "heading": {
+    "family": "Unbounded",
+    "fallback": "sans-serif",
+    "weight": 700,
+    "letterSpacing": "-0.01em",
+    "textTransform": "none"
+   },
+   "body": {
+    "family": "Space Grotesk",
+    "fallback": "sans-serif"
+   },
+   "paletteId": "fut-aurora",
+   "headingRole": "brand.accent",
+   "bodyRole": "text.primary",
+   "linkRole": "brand.primary"
+  }
+ ]
+}

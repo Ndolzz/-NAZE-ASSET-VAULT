@@ -1,0 +1,1349 @@
+{
+ "version": 1,
+ "gradients": [
+  {
+   "id": "grad-dusk-linear",
+   "name": "Dusk Fade",
+   "category": "Linear",
+   "type": "linear",
+   "css": "linear-gradient(160deg,#1a0f1f 0%,#5b2a4e 55%,#ff7a45 100%)",
+   "stops": [
+    {
+     "hex": "#1a0f1f",
+     "position": 0
+    },
+    {
+     "hex": "#5b2a4e",
+     "position": 55
+    },
+    {
+     "hex": "#ff7a45",
+     "position": 100
+    }
+   ],
+   "textColor": "#fde9dc"
+  },
+  {
+   "id": "grad-ocean-depth",
+   "name": "Ocean Depth",
+   "category": "Linear",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#7fd6d1 0%,#2b8fbf 45%,#06141f 100%)",
+   "stops": [
+    {
+     "hex": "#7fd6d1",
+     "position": 0
+    },
+    {
+     "hex": "#2b8fbf",
+     "position": 45
+    },
+    {
+     "hex": "#06141f",
+     "position": 100
+    }
+   ],
+   "textColor": "#ffffff"
+  },
+  {
+   "id": "grad-paper-soft",
+   "name": "Paper Soft",
+   "category": "Subtle",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#fbf6ee 0%,#f0e8da 100%)",
+   "stops": [
+    {
+     "hex": "#fbf6ee",
+     "position": 0
+    },
+    {
+     "hex": "#f0e8da",
+     "position": 100
+    }
+   ],
+   "textColor": "#1f1a17"
+  },
+  {
+   "id": "grad-slate-glow",
+   "name": "Slate Glow",
+   "category": "Radial",
+   "type": "radial",
+   "css": "radial-gradient(circle at 30% 20%,#38bdf8 0%,#1e293b 45%,#0f172a 100%)",
+   "stops": [
+    {
+     "hex": "#38bdf8",
+     "position": 0
+    },
+    {
+     "hex": "#1e293b",
+     "position": 45
+    },
+    {
+     "hex": "#0f172a",
+     "position": 100
+    }
+   ],
+   "textColor": "#e2e8f0"
+  },
+  {
+   "id": "grad-violet-halo",
+   "name": "Violet Halo",
+   "category": "Radial",
+   "type": "radial",
+   "css": "radial-gradient(ellipse at 50% 0%,#8b5cf6 0%,#12101f 70%)",
+   "stops": [
+    {
+     "hex": "#8b5cf6",
+     "position": 0
+    },
+    {
+     "hex": "#12101f",
+     "position": 70
+    }
+   ],
+   "textColor": "#ece9ff"
+  },
+  {
+   "id": "grad-gold-metal",
+   "name": "Gold Metal",
+   "category": "Metallic",
+   "type": "linear",
+   "css": "linear-gradient(135deg,#7a5c1e 0%,#e8cf8a 35%,#c9a24b 60%,#7a5c1e 100%)",
+   "stops": [
+    {
+     "hex": "#7a5c1e",
+     "position": 0
+    },
+    {
+     "hex": "#e8cf8a",
+     "position": 35
+    },
+    {
+     "hex": "#c9a24b",
+     "position": 60
+    },
+    {
+     "hex": "#7a5c1e",
+     "position": 100
+    }
+   ],
+   "textColor": "#0d0b09"
+  },
+  {
+   "id": "grad-steel",
+   "name": "Brushed Steel",
+   "category": "Metallic",
+   "type": "linear",
+   "css": "linear-gradient(100deg,#8a8f94 0%,#e8e8e8 30%,#9a9ea3 55%,#d4d4d4 80%,#7a7e83 100%)",
+   "stops": [
+    {
+     "hex": "#8a8f94",
+     "position": 0
+    },
+    {
+     "hex": "#e8e8e8",
+     "position": 30
+    },
+    {
+     "hex": "#9a9ea3",
+     "position": 55
+    },
+    {
+     "hex": "#d4d4d4",
+     "position": 80
+    },
+    {
+     "hex": "#7a7e83",
+     "position": 100
+    }
+   ],
+   "textColor": "#111111"
+  },
+  {
+   "id": "grad-neon-wire",
+   "name": "Neon Wire",
+   "category": "Neon",
+   "type": "linear",
+   "css": "linear-gradient(90deg,#ff2e97 0%,#8b2fff 50%,#00e5ff 100%)",
+   "stops": [
+    {
+     "hex": "#ff2e97",
+     "position": 0
+    },
+    {
+     "hex": "#8b2fff",
+     "position": 50
+    },
+    {
+     "hex": "#00e5ff",
+     "position": 100
+    }
+   ],
+   "textColor": "#0a0a14"
+  },
+  {
+   "id": "grad-aurora",
+   "name": "Aurora Sweep",
+   "category": "Conic",
+   "type": "conic",
+   "css": "conic-gradient(from 200deg at 50% 60%,#080b16,#5b8cff,#b2ff59,#5b8cff,#080b16)",
+   "stops": [
+    {
+     "hex": "#080b16",
+     "position": 0
+    },
+    {
+     "hex": "#5b8cff",
+     "position": 25
+    },
+    {
+     "hex": "#b2ff59",
+     "position": 50
+    },
+    {
+     "hex": "#5b8cff",
+     "position": 75
+    },
+    {
+     "hex": "#080b16",
+     "position": 100
+    }
+   ],
+   "textColor": "#e9f0ff"
+  },
+  {
+   "id": "grad-sunrise-cone",
+   "name": "Sunrise Dial",
+   "category": "Conic",
+   "type": "conic",
+   "css": "conic-gradient(from 0deg at 50% 100%,#ffc857,#ff7a45,#b5573a,#ffc857)",
+   "stops": [
+    {
+     "hex": "#ffc857",
+     "position": 0
+    },
+    {
+     "hex": "#ff7a45",
+     "position": 33
+    },
+    {
+     "hex": "#b5573a",
+     "position": 67
+    },
+    {
+     "hex": "#ffc857",
+     "position": 100
+    }
+   ],
+   "textColor": "#2e211a"
+  },
+  {
+   "id": "grad-teal-amber",
+   "name": "Teal to Amber",
+   "category": "Cinematic",
+   "type": "linear",
+   "css": "linear-gradient(120deg,#0a1214 0%,#2a8c96 50%,#e8833a 100%)",
+   "stops": [
+    {
+     "hex": "#0a1214",
+     "position": 0
+    },
+    {
+     "hex": "#2a8c96",
+     "position": 50
+    },
+    {
+     "hex": "#e8833a",
+     "position": 100
+    }
+   ],
+   "textColor": "#e6eef0"
+  },
+  {
+   "id": "grad-forest-mist",
+   "name": "Forest Mist",
+   "category": "Soft",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#e3efe5 0%,#4f9d69 60%,#0f1a14 100%)",
+   "stops": [
+    {
+     "hex": "#e3efe5",
+     "position": 0
+    },
+    {
+     "hex": "#4f9d69",
+     "position": 60
+    },
+    {
+     "hex": "#0f1a14",
+     "position": 100
+    }
+   ],
+   "textColor": "#ffffff"
+  },
+  {
+   "id": "grad-rose-quartz",
+   "name": "Rose Quartz",
+   "category": "Soft",
+   "type": "linear",
+   "css": "linear-gradient(135deg,#ffe4ec 0%,#f5c6d6 100%)",
+   "stops": [
+    {
+     "hex": "#ffe4ec",
+     "position": 0
+    },
+    {
+     "hex": "#f5c6d6",
+     "position": 100
+    }
+   ],
+   "textColor": "#3a2030"
+  },
+  {
+   "id": "grad-midnight",
+   "name": "Midnight Blue",
+   "category": "Linear",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#0b1d33 0%,#12294a 100%)",
+   "stops": [
+    {
+     "hex": "#0b1d33",
+     "position": 0
+    },
+    {
+     "hex": "#12294a",
+     "position": 100
+    }
+   ],
+   "textColor": "#e8eef7"
+  },
+  {
+   "id": "grad-mint-wash",
+   "name": "Mint Wash",
+   "category": "Soft",
+   "type": "linear",
+   "css": "linear-gradient(160deg,#f2faf6 0%,#cfeade 100%)",
+   "stops": [
+    {
+     "hex": "#f2faf6",
+     "position": 0
+    },
+    {
+     "hex": "#cfeade",
+     "position": 100
+    }
+   ],
+   "textColor": "#1d3a30"
+  },
+  {
+   "id": "grad-citrus",
+   "name": "Citrus Pop",
+   "category": "High Contrast",
+   "type": "linear",
+   "css": "linear-gradient(90deg,#ffe600 0%,#ff6a00 100%)",
+   "stops": [
+    {
+     "hex": "#ffe600",
+     "position": 0
+    },
+    {
+     "hex": "#ff6a00",
+     "position": 100
+    }
+   ],
+   "textColor": "#111111"
+  },
+  {
+   "id": "grad-spotlight",
+   "name": "Spotlight",
+   "category": "Radial",
+   "type": "radial",
+   "css": "radial-gradient(circle at 50% 30%,#3a3f5c 0%,#0c0c0e 70%)",
+   "stops": [
+    {
+     "hex": "#3a3f5c",
+     "position": 0
+    },
+    {
+     "hex": "#0c0c0e",
+     "position": 70
+    }
+   ],
+   "textColor": "#ece8e1"
+  },
+  {
+   "id": "grad-sun-disc",
+   "name": "Sun Disc",
+   "category": "Radial",
+   "type": "radial",
+   "css": "radial-gradient(circle at 50% 50%,#fff1b8 0%,#ffb347 40%,#c2410c 100%)",
+   "stops": [
+    {
+     "hex": "#fff1b8",
+     "position": 0
+    },
+    {
+     "hex": "#ffb347",
+     "position": 40
+    },
+    {
+     "hex": "#c2410c",
+     "position": 100
+    }
+   ],
+   "textColor": "#2a1500"
+  },
+  {
+   "id": "grad-soft-wheel",
+   "name": "Soft Wheel",
+   "category": "Conic",
+   "type": "conic",
+   "css": "conic-gradient(from 0deg,#ff9aa2,#ffdac1,#e2f0cb,#b5ead7,#c7ceea,#ff9aa2)",
+   "stops": [
+    {
+     "hex": "#ff9aa2",
+     "position": 0
+    },
+    {
+     "hex": "#ffdac1",
+     "position": 20
+    },
+    {
+     "hex": "#e2f0cb",
+     "position": 40
+    },
+    {
+     "hex": "#b5ead7",
+     "position": 60
+    },
+    {
+     "hex": "#c7ceea",
+     "position": 80
+    },
+    {
+     "hex": "#ff9aa2",
+     "position": 100
+    }
+   ],
+   "textColor": "#2a2430"
+  },
+  {
+   "id": "grad-radar",
+   "name": "Radar Sweep",
+   "category": "Conic",
+   "type": "conic",
+   "css": "conic-gradient(from 0deg at 50% 50%,#071a0f 0%,#22c55e 30%,#071a0f 30%,#071a0f 100%)",
+   "stops": [
+    {
+     "hex": "#071a0f",
+     "position": 0
+    },
+    {
+     "hex": "#22c55e",
+     "position": 30
+    },
+    {
+     "hex": "#071a0f",
+     "position": 30
+    },
+    {
+     "hex": "#071a0f",
+     "position": 100
+    }
+   ],
+   "textColor": "#d7f5df"
+  },
+  {
+   "id": "grad-spectrum",
+   "name": "Spectrum Strip",
+   "category": "Multi-stop",
+   "type": "linear",
+   "css": "linear-gradient(90deg,#3a4fe0 0%,#0e8a8a 33%,#f5c542 66%,#d63a00 100%)",
+   "stops": [
+    {
+     "hex": "#3a4fe0",
+     "position": 0
+    },
+    {
+     "hex": "#0e8a8a",
+     "position": 33
+    },
+    {
+     "hex": "#f5c542",
+     "position": 66
+    },
+    {
+     "hex": "#d63a00",
+     "position": 100
+    }
+   ],
+   "textColor": "#111111"
+  },
+  {
+   "id": "grad-heatmap",
+   "name": "Heat Map",
+   "category": "Multi-stop",
+   "type": "linear",
+   "css": "linear-gradient(90deg,#0b1d33 0%,#5aa0e8 30%,#f2b134 65%,#ff4d4d 100%)",
+   "stops": [
+    {
+     "hex": "#0b1d33",
+     "position": 0
+    },
+    {
+     "hex": "#5aa0e8",
+     "position": 30
+    },
+    {
+     "hex": "#f2b134",
+     "position": 65
+    },
+    {
+     "hex": "#ff4d4d",
+     "position": 100
+    }
+   ],
+   "textColor": "#ffffff"
+  },
+  {
+   "id": "grad-mesh-peach",
+   "name": "Mesh Peach Sky",
+   "category": "Mesh-inspired",
+   "type": "radial",
+   "css": "radial-gradient(circle at 15% 20%,#ffb4a2 0%,transparent 55%),radial-gradient(circle at 85% 15%,#a2d2ff 0%,transparent 50%),#fdf6f0",
+   "stops": [
+    {
+     "hex": "#ffb4a2",
+     "position": 0
+    },
+    {
+     "hex": "#a2d2ff",
+     "position": 0
+    },
+    {
+     "hex": "#fdf6f0",
+     "position": 100
+    }
+   ],
+   "textColor": "#2b2430"
+  },
+  {
+   "id": "grad-mesh-bloom",
+   "name": "Mesh Night Bloom",
+   "category": "Mesh-inspired",
+   "type": "radial",
+   "css": "radial-gradient(circle at 20% 80%,#8b5cf6 0%,transparent 55%),radial-gradient(circle at 80% 20%,#ff2e97 0%,transparent 45%),#0a0a14",
+   "stops": [
+    {
+     "hex": "#8b5cf6",
+     "position": 0
+    },
+    {
+     "hex": "#ff2e97",
+     "position": 0
+    },
+    {
+     "hex": "#0a0a14",
+     "position": 100
+    }
+   ],
+   "textColor": "#f0f0ff"
+  },
+  {
+   "id": "grad-fog",
+   "name": "Morning Fog",
+   "category": "Atmospheric",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#dfe7ee 0%,#c9d6df 50%,#f2f2ef 100%)",
+   "stops": [
+    {
+     "hex": "#dfe7ee",
+     "position": 0
+    },
+    {
+     "hex": "#c9d6df",
+     "position": 50
+    },
+    {
+     "hex": "#f2f2ef",
+     "position": 100
+    }
+   ],
+   "textColor": "#1e2a32"
+  },
+  {
+   "id": "grad-storm",
+   "name": "Storm Front",
+   "category": "Atmospheric",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#1b2430 0%,#46566a 55%,#a8b4c2 100%)",
+   "stops": [
+    {
+     "hex": "#1b2430",
+     "position": 0
+    },
+    {
+     "hex": "#46566a",
+     "position": 55
+    },
+    {
+     "hex": "#a8b4c2",
+     "position": 100
+    }
+   ],
+   "textColor": "#f1f4f8"
+  },
+  {
+   "id": "grad-copper",
+   "name": "Copper Sheen",
+   "category": "Metallic",
+   "type": "linear",
+   "css": "linear-gradient(135deg,#5c2e1a 0%,#d9895a 35%,#b5573a 60%,#5c2e1a 100%)",
+   "stops": [
+    {
+     "hex": "#5c2e1a",
+     "position": 0
+    },
+    {
+     "hex": "#d9895a",
+     "position": 35
+    },
+    {
+     "hex": "#b5573a",
+     "position": 60
+    },
+    {
+     "hex": "#5c2e1a",
+     "position": 100
+    }
+   ],
+   "textColor": "#fff4ea"
+  },
+  {
+   "id": "grad-silver",
+   "name": "Silver Foil",
+   "category": "Metallic",
+   "type": "linear",
+   "css": "linear-gradient(120deg,#9aa0a6 0%,#f5f5f5 40%,#b8bcc1 70%,#e8e8e8 100%)",
+   "stops": [
+    {
+     "hex": "#9aa0a6",
+     "position": 0
+    },
+    {
+     "hex": "#f5f5f5",
+     "position": 40
+    },
+    {
+     "hex": "#b8bcc1",
+     "position": 70
+    },
+    {
+     "hex": "#e8e8e8",
+     "position": 100
+    }
+   ],
+   "textColor": "#111111"
+  },
+  {
+   "id": "grad-plasma",
+   "name": "Plasma Lime",
+   "category": "Neon",
+   "type": "linear",
+   "css": "linear-gradient(90deg,#b2ff59 0%,#00e5ff 100%)",
+   "stops": [
+    {
+     "hex": "#b2ff59",
+     "position": 0
+    },
+    {
+     "hex": "#00e5ff",
+     "position": 100
+    }
+   ],
+   "textColor": "#080b16"
+  },
+  {
+   "id": "grad-laser",
+   "name": "Laser Magenta",
+   "category": "Neon",
+   "type": "linear",
+   "css": "linear-gradient(135deg,#ff2e97 0%,#7c3aed 100%)",
+   "stops": [
+    {
+     "hex": "#ff2e97",
+     "position": 0
+    },
+    {
+     "hex": "#7c3aed",
+     "position": 100
+    }
+   ],
+   "textColor": "#ffffff"
+  },
+  {
+   "id": "grad-blockbuster",
+   "name": "Blockbuster Dusk",
+   "category": "Cinematic",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#0a1214 0%,#2a8c96 55%,#e8833a 100%)",
+   "stops": [
+    {
+     "hex": "#0a1214",
+     "position": 0
+    },
+    {
+     "hex": "#2a8c96",
+     "position": 55
+    },
+    {
+     "hex": "#e8833a",
+     "position": 100
+    }
+   ],
+   "textColor": "#e6eef0"
+  },
+  {
+   "id": "grad-paper-fade",
+   "name": "Paper Grain Fade",
+   "category": "Subtle",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#f7f3ec 0%,#ebe4d8 100%)",
+   "stops": [
+    {
+     "hex": "#f7f3ec",
+     "position": 0
+    },
+    {
+     "hex": "#ebe4d8",
+     "position": 100
+    }
+   ],
+   "textColor": "#262019"
+  },
+  {
+   "id": "grad-lagoon",
+   "name": "Lagoon Drift",
+   "category": "Linear",
+   "type": "linear",
+   "css": "linear-gradient(135deg,#0e8a8a 0%,#2b8fbf 100%)",
+   "stops": [
+    {
+     "hex": "#0e8a8a",
+     "position": 0
+    },
+    {
+     "hex": "#2b8fbf",
+     "position": 100
+    }
+   ],
+   "textColor": "#ffffff"
+  },
+  {
+   "id": "grad-ember",
+   "name": "Ember Glow",
+   "category": "Linear",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#2e211a 0%,#b5573a 100%)",
+   "stops": [
+    {
+     "hex": "#2e211a",
+     "position": 0
+    },
+    {
+     "hex": "#b5573a",
+     "position": 100
+    }
+   ],
+   "textColor": "#fde9dc"
+  },
+  {
+   "id": "grad-lilac-sky",
+   "name": "Lilac Sky",
+   "category": "Soft",
+   "type": "linear",
+   "css": "linear-gradient(160deg,#f2e7f5 0%,#d9d0f5 100%)",
+   "stops": [
+    {
+     "hex": "#f2e7f5",
+     "position": 0
+    },
+    {
+     "hex": "#d9d0f5",
+     "position": 100
+    }
+   ],
+   "textColor": "#3a3347"
+  },
+  {
+   "id": "grad-sage",
+   "name": "Sage Mist",
+   "category": "Soft",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#eef0e4 0%,#cdd7b8 100%)",
+   "stops": [
+    {
+     "hex": "#eef0e4",
+     "position": 0
+    },
+    {
+     "hex": "#cdd7b8",
+     "position": 100
+    }
+   ],
+   "textColor": "#1f2a1a"
+  },
+  {
+   "id": "grad-core-heat",
+   "name": "Core Heat",
+   "category": "Radial",
+   "type": "radial",
+   "css": "radial-gradient(circle at 50% 100%,#ff7a45 0%,#5b2a4e 50%,#1a0f1f 100%)",
+   "stops": [
+    {
+     "hex": "#ff7a45",
+     "position": 0
+    },
+    {
+     "hex": "#5b2a4e",
+     "position": 50
+    },
+    {
+     "hex": "#1a0f1f",
+     "position": 100
+    }
+   ],
+   "textColor": "#fde9dc"
+  },
+  {
+   "id": "grad-moonlit",
+   "name": "Moonlit Pool",
+   "category": "Radial",
+   "type": "radial",
+   "css": "radial-gradient(circle at 70% 20%,#dcecf5 0%,#2b8fbf 30%,#06141f 80%)",
+   "stops": [
+    {
+     "hex": "#dcecf5",
+     "position": 0
+    },
+    {
+     "hex": "#2b8fbf",
+     "position": 30
+    },
+    {
+     "hex": "#06141f",
+     "position": 80
+    }
+   ],
+   "textColor": "#ffffff"
+  },
+  {
+   "id": "grad-vignette",
+   "name": "Soft Vignette",
+   "category": "Subtle",
+   "type": "radial",
+   "css": "radial-gradient(ellipse at center,#ffffff 0%,#e9e7e1 100%)",
+   "stops": [
+    {
+     "hex": "#ffffff",
+     "position": 0
+    },
+    {
+     "hex": "#e9e7e1",
+     "position": 100
+    }
+   ],
+   "textColor": "#17171a"
+  },
+  {
+   "id": "grad-glow-mint",
+   "name": "Mint Glow",
+   "category": "Radial",
+   "type": "radial",
+   "css": "radial-gradient(circle at 50% 40%,#b8f0d4 0%,#3fa27c 45%,#12301f 100%)",
+   "stops": [
+    {
+     "hex": "#b8f0d4",
+     "position": 0
+    },
+    {
+     "hex": "#3fa27c",
+     "position": 45
+    },
+    {
+     "hex": "#12301f",
+     "position": 100
+    }
+   ],
+   "textColor": "#ffffff"
+  },
+  {
+   "id": "grad-gold-dial",
+   "name": "Gold Dial",
+   "category": "Conic",
+   "type": "conic",
+   "css": "conic-gradient(from 45deg at 50% 50%,#7a5c1e,#e8cf8a,#c9a24b,#e8cf8a,#7a5c1e)",
+   "stops": [
+    {
+     "hex": "#7a5c1e",
+     "position": 0
+    },
+    {
+     "hex": "#e8cf8a",
+     "position": 25
+    },
+    {
+     "hex": "#c9a24b",
+     "position": 50
+    },
+    {
+     "hex": "#e8cf8a",
+     "position": 75
+    },
+    {
+     "hex": "#7a5c1e",
+     "position": 100
+    }
+   ],
+   "textColor": "#0d0b09"
+  },
+  {
+   "id": "grad-twilight-cone",
+   "name": "Twilight Cone",
+   "category": "Conic",
+   "type": "conic",
+   "css": "conic-gradient(from 180deg at 50% 0%,#1a0f1f 0%,#5b2a4e 40%,#ff7a45 70%,#1a0f1f 100%)",
+   "stops": [
+    {
+     "hex": "#1a0f1f",
+     "position": 0
+    },
+    {
+     "hex": "#5b2a4e",
+     "position": 40
+    },
+    {
+     "hex": "#ff7a45",
+     "position": 70
+    },
+    {
+     "hex": "#1a0f1f",
+     "position": 100
+    }
+   ],
+   "textColor": "#fde9dc"
+  },
+  {
+   "id": "grad-ice-cone",
+   "name": "Ice Cone",
+   "category": "Conic",
+   "type": "conic",
+   "css": "conic-gradient(from 0deg at 50% 50%,#dcecf5 0%,#7fd6d1 35%,#2b8fbf 70%,#dcecf5 100%)",
+   "stops": [
+    {
+     "hex": "#dcecf5",
+     "position": 0
+    },
+    {
+     "hex": "#7fd6d1",
+     "position": 35
+    },
+    {
+     "hex": "#2b8fbf",
+     "position": 70
+    },
+    {
+     "hex": "#dcecf5",
+     "position": 100
+    }
+   ],
+   "textColor": "#06141f"
+  },
+  {
+   "id": "grad-sunrise-bands",
+   "name": "Sunrise Bands",
+   "category": "Multi-stop",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#1a0f1f 0%,#5b2a4e 25%,#b5573a 50%,#ff7a45 75%,#ffc857 100%)",
+   "stops": [
+    {
+     "hex": "#1a0f1f",
+     "position": 0
+    },
+    {
+     "hex": "#5b2a4e",
+     "position": 25
+    },
+    {
+     "hex": "#b5573a",
+     "position": 50
+    },
+    {
+     "hex": "#ff7a45",
+     "position": 75
+    },
+    {
+     "hex": "#ffc857",
+     "position": 100
+    }
+   ],
+   "textColor": "#fde9dc"
+  },
+  {
+   "id": "grad-pine-layers",
+   "name": "Pine Layers",
+   "category": "Multi-stop",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#e3efe5 0%,#a7cfae 30%,#4f9d69 60%,#18291f 100%)",
+   "stops": [
+    {
+     "hex": "#e3efe5",
+     "position": 0
+    },
+    {
+     "hex": "#a7cfae",
+     "position": 30
+    },
+    {
+     "hex": "#4f9d69",
+     "position": 60
+    },
+    {
+     "hex": "#18291f",
+     "position": 100
+    }
+   ],
+   "textColor": "#ffffff"
+  },
+  {
+   "id": "grad-candy",
+   "name": "Candy Ribbon",
+   "category": "Multi-stop",
+   "type": "linear",
+   "css": "linear-gradient(90deg,#ff9aa2 0%,#ffdac1 33%,#b5ead7 66%,#c7ceea 100%)",
+   "stops": [
+    {
+     "hex": "#ff9aa2",
+     "position": 0
+    },
+    {
+     "hex": "#ffdac1",
+     "position": 33
+    },
+    {
+     "hex": "#b5ead7",
+     "position": 66
+    },
+    {
+     "hex": "#c7ceea",
+     "position": 100
+    }
+   ],
+   "textColor": "#2a2430"
+  },
+  {
+   "id": "grad-signal",
+   "name": "Signal Scale",
+   "category": "Multi-stop",
+   "type": "linear",
+   "css": "linear-gradient(90deg,#22c55e 0%,#f5c542 50%,#ef4444 100%)",
+   "stops": [
+    {
+     "hex": "#22c55e",
+     "position": 0
+    },
+    {
+     "hex": "#f5c542",
+     "position": 50
+    },
+    {
+     "hex": "#ef4444",
+     "position": 100
+    }
+   ],
+   "textColor": "#111111"
+  },
+  {
+   "id": "grad-mesh-ocean",
+   "name": "Mesh Ocean",
+   "category": "Mesh-inspired",
+   "type": "radial",
+   "css": "radial-gradient(circle at 20% 20%,#7fd6d1 0%,transparent 55%),radial-gradient(circle at 80% 70%,#2b8fbf 0%,transparent 55%),#06141f",
+   "stops": [
+    {
+     "hex": "#7fd6d1",
+     "position": 0
+    },
+    {
+     "hex": "#2b8fbf",
+     "position": 0
+    },
+    {
+     "hex": "#06141f",
+     "position": 100
+    }
+   ],
+   "textColor": "#dcecf5"
+  },
+  {
+   "id": "grad-mesh-dune",
+   "name": "Mesh Dune",
+   "category": "Mesh-inspired",
+   "type": "radial",
+   "css": "radial-gradient(circle at 10% 80%,#c2703d 0%,transparent 55%),radial-gradient(circle at 90% 10%,#e8d3b0 0%,transparent 50%),#f5ead7",
+   "stops": [
+    {
+     "hex": "#c2703d",
+     "position": 0
+    },
+    {
+     "hex": "#e8d3b0",
+     "position": 0
+    },
+    {
+     "hex": "#f5ead7",
+     "position": 100
+    }
+   ],
+   "textColor": "#33261a"
+  },
+  {
+   "id": "grad-mesh-forest",
+   "name": "Mesh Forest",
+   "category": "Mesh-inspired",
+   "type": "radial",
+   "css": "radial-gradient(circle at 80% 80%,#4f9d69 0%,transparent 55%),radial-gradient(circle at 10% 10%,#c8b560 0%,transparent 45%),#0f1a14",
+   "stops": [
+    {
+     "hex": "#4f9d69",
+     "position": 0
+    },
+    {
+     "hex": "#c8b560",
+     "position": 0
+    },
+    {
+     "hex": "#0f1a14",
+     "position": 100
+    }
+   ],
+   "textColor": "#e3efe5"
+  },
+  {
+   "id": "grad-haze",
+   "name": "Golden Haze",
+   "category": "Atmospheric",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#fff4e0 0%,#ffe3b8 50%,#f4c18a 100%)",
+   "stops": [
+    {
+     "hex": "#fff4e0",
+     "position": 0
+    },
+    {
+     "hex": "#ffe3b8",
+     "position": 50
+    },
+    {
+     "hex": "#f4c18a",
+     "position": 100
+    }
+   ],
+   "textColor": "#3a2410"
+  },
+  {
+   "id": "grad-deep-space",
+   "name": "Deep Space",
+   "category": "Atmospheric",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#080b16 0%,#11172b 60%,#2a2f5c 100%)",
+   "stops": [
+    {
+     "hex": "#080b16",
+     "position": 0
+    },
+    {
+     "hex": "#11172b",
+     "position": 60
+    },
+    {
+     "hex": "#2a2f5c",
+     "position": 100
+    }
+   ],
+   "textColor": "#e9f0ff"
+  },
+  {
+   "id": "grad-rose-gold",
+   "name": "Rose Gold",
+   "category": "Metallic",
+   "type": "linear",
+   "css": "linear-gradient(135deg,#8a4b3d 0%,#f1c4b0 35%,#c98a76 65%,#8a4b3d 100%)",
+   "stops": [
+    {
+     "hex": "#8a4b3d",
+     "position": 0
+    },
+    {
+     "hex": "#f1c4b0",
+     "position": 35
+    },
+    {
+     "hex": "#c98a76",
+     "position": 65
+    },
+    {
+     "hex": "#8a4b3d",
+     "position": 100
+    }
+   ],
+   "textColor": "#2e1510"
+  },
+  {
+   "id": "grad-gunmetal",
+   "name": "Gunmetal",
+   "category": "Metallic",
+   "type": "linear",
+   "css": "linear-gradient(135deg,#1f2328 0%,#4a525c 40%,#2b3038 70%,#6b7480 100%)",
+   "stops": [
+    {
+     "hex": "#1f2328",
+     "position": 0
+    },
+    {
+     "hex": "#4a525c",
+     "position": 40
+    },
+    {
+     "hex": "#2b3038",
+     "position": 70
+    },
+    {
+     "hex": "#6b7480",
+     "position": 100
+    }
+   ],
+   "textColor": "#f1f4f8"
+  },
+  {
+   "id": "grad-volt",
+   "name": "Volt Heat",
+   "category": "Neon",
+   "type": "linear",
+   "css": "linear-gradient(90deg,#ff2e97 0%,#ffe600 100%)",
+   "stops": [
+    {
+     "hex": "#ff2e97",
+     "position": 0
+    },
+    {
+     "hex": "#ffe600",
+     "position": 100
+    }
+   ],
+   "textColor": "#0a0a14"
+  },
+  {
+   "id": "grad-ultraviolet",
+   "name": "Ultraviolet",
+   "category": "Neon",
+   "type": "linear",
+   "css": "linear-gradient(135deg,#7c3aed 0%,#ff2e97 60%,#ffb43a 100%)",
+   "stops": [
+    {
+     "hex": "#7c3aed",
+     "position": 0
+    },
+    {
+     "hex": "#ff2e97",
+     "position": 60
+    },
+    {
+     "hex": "#ffb43a",
+     "position": 100
+    }
+   ],
+   "textColor": "#ffffff"
+  },
+  {
+   "id": "grad-golden-noir",
+   "name": "Golden Noir",
+   "category": "Cinematic",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#0c0c0e 0%,#3a2f22 55%,#b8a27a 100%)",
+   "stops": [
+    {
+     "hex": "#0c0c0e",
+     "position": 0
+    },
+    {
+     "hex": "#3a2f22",
+     "position": 55
+    },
+    {
+     "hex": "#b8a27a",
+     "position": 100
+    }
+   ],
+   "textColor": "#ece8e1"
+  },
+  {
+   "id": "grad-neon-city",
+   "name": "Neon City Night",
+   "category": "Cinematic",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#0a0a14 0%,#2a1050 55%,#ff2e97 100%)",
+   "stops": [
+    {
+     "hex": "#0a0a14",
+     "position": 0
+    },
+    {
+     "hex": "#2a1050",
+     "position": 55
+    },
+    {
+     "hex": "#ff2e97",
+     "position": 100
+    }
+   ],
+   "textColor": "#f0f0ff"
+  },
+  {
+   "id": "grad-black-white",
+   "name": "Black to White",
+   "category": "High Contrast",
+   "type": "linear",
+   "css": "linear-gradient(90deg,#000000 0%,#ffffff 100%)",
+   "stops": [
+    {
+     "hex": "#000000",
+     "position": 0
+    },
+    {
+     "hex": "#ffffff",
+     "position": 100
+    }
+   ],
+   "textColor": "#ffffff"
+  },
+  {
+   "id": "grad-cloud-fade",
+   "name": "Cloud Fade",
+   "category": "Subtle",
+   "type": "linear",
+   "css": "linear-gradient(180deg,#f4f6f7 0%,#e6eaed 100%)",
+   "stops": [
+    {
+     "hex": "#f4f6f7",
+     "position": 0
+    },
+    {
+     "hex": "#e6eaed",
+     "position": 100
+    }
+   ],
+   "textColor": "#1e2a32"
+  }
+ ]
+}

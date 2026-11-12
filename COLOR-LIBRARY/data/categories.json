@@ -1,0 +1,525 @@
+{
+ "version": 1,
+ "solid": [
+  {
+   "id": "cat-monochrome",
+   "name": "Monochrome",
+   "paletteIds": [
+    "mono-graphite",
+    "mono-paper",
+    "mono-bone",
+    "mono-ash"
+   ]
+  },
+  {
+   "id": "cat-minimalist",
+   "name": "Minimalist",
+   "paletteIds": [
+    "min-nordic",
+    "min-sand",
+    "min-fog"
+   ]
+  },
+  {
+   "id": "cat-modern-technology",
+   "name": "Modern Technology",
+   "paletteIds": [
+    "tech-terminal",
+    "tech-ice",
+    "tech-circuit"
+   ]
+  },
+  {
+   "id": "cat-software-engineering",
+   "name": "Software Engineering",
+   "paletteIds": [
+    "tech-slate",
+    "se-ide",
+    "se-docs"
+   ]
+  },
+  {
+   "id": "cat-cybersecurity",
+   "name": "Cybersecurity",
+   "paletteIds": [
+    "cyber-sentinel",
+    "cyber-redteam",
+    "cyber-ghost"
+   ]
+  },
+  {
+   "id": "cat-artificial-intelligence",
+   "name": "Artificial Intelligence",
+   "paletteIds": [
+    "ai-violet",
+    "ai-lumen",
+    "ai-oracle"
+   ]
+  },
+  {
+   "id": "cat-corporate",
+   "name": "Corporate",
+   "paletteIds": [
+    "corp-boardroom",
+    "corp-harbor",
+    "corp-civic"
+   ]
+  },
+  {
+   "id": "cat-professional",
+   "name": "Professional",
+   "paletteIds": [
+    "pro-ledger",
+    "pro-clay",
+    "pro-graphite"
+   ]
+  },
+  {
+   "id": "cat-luxury",
+   "name": "Luxury",
+   "paletteIds": [
+    "lux-noirgold",
+    "lux-emerald",
+    "lux-ivory"
+   ]
+  },
+  {
+   "id": "cat-editorial",
+   "name": "Editorial",
+   "paletteIds": [
+    "edit-ink",
+    "edit-broadsheet",
+    "edit-magazine"
+   ]
+  },
+  {
+   "id": "cat-creative-studio",
+   "name": "Creative Studio",
+   "paletteIds": [
+    "cre-pop",
+    "cre-sorbet",
+    "cre-collage"
+   ]
+  },
+  {
+   "id": "cat-gaming",
+   "name": "Gaming",
+   "paletteIds": [
+    "game-arena",
+    "game-quest",
+    "game-dungeon"
+   ]
+  },
+  {
+   "id": "cat-cinematic",
+   "name": "Cinematic",
+   "paletteIds": [
+    "cine-tealorange",
+    "cine-noir"
+   ]
+  },
+  {
+   "id": "cat-industrial",
+   "name": "Industrial",
+   "paletteIds": [
+    "ind-foundry",
+    "ind-concrete"
+   ]
+  },
+  {
+   "id": "cat-nature",
+   "name": "Nature",
+   "paletteIds": [
+    "calm-mint",
+    "nat-meadow"
+   ]
+  },
+  {
+   "id": "cat-forest",
+   "name": "Forest",
+   "paletteIds": [
+    "nat-pine",
+    "for-moss"
+   ]
+  },
+  {
+   "id": "cat-ocean",
+   "name": "Ocean",
+   "paletteIds": [
+    "nat-deepocean",
+    "oc-reef"
+   ]
+  },
+  {
+   "id": "cat-earth-tone",
+   "name": "Earth Tone",
+   "paletteIds": [
+    "earth-terracotta"
+   ]
+  },
+  {
+   "id": "cat-desert",
+   "name": "Desert",
+   "paletteIds": [
+    "des-dune"
+   ]
+  },
+  {
+   "id": "cat-sunset",
+   "name": "Sunset",
+   "paletteIds": [
+    "sun-rush",
+    "sun-golden"
+   ]
+  },
+  {
+   "id": "cat-neon",
+   "name": "Neon",
+   "paletteIds": [
+    "neon-night"
+   ]
+  },
+  {
+   "id": "cat-retro",
+   "name": "Retro",
+   "paletteIds": [
+    "ret-arcade",
+    "ret-70s"
+   ]
+  },
+  {
+   "id": "cat-vintage",
+   "name": "Vintage",
+   "paletteIds": [
+    "vin-library"
+   ]
+  },
+  {
+   "id": "cat-pastel",
+   "name": "Pastel",
+   "paletteIds": [
+    "pas-cloud",
+    "pas-peach"
+   ]
+  },
+  {
+   "id": "cat-futuristic",
+   "name": "Futuristic",
+   "paletteIds": [
+    "fut-aurora",
+    "fut-chrome"
+   ]
+  },
+  {
+   "id": "cat-experimental",
+   "name": "Experimental",
+   "paletteIds": [
+    "exp-signal"
+   ]
+  }
+ ],
+ "gradient": [
+  {
+   "id": "gcat-linear",
+   "key": "Linear",
+   "name": "Linear Gradient",
+   "gradientIds": [
+    "grad-dusk-linear",
+    "grad-ocean-depth",
+    "grad-midnight",
+    "grad-lagoon",
+    "grad-ember"
+   ]
+  },
+  {
+   "id": "gcat-radial",
+   "key": "Radial",
+   "name": "Radial Gradient",
+   "gradientIds": [
+    "grad-slate-glow",
+    "grad-violet-halo",
+    "grad-spotlight",
+    "grad-sun-disc",
+    "grad-core-heat",
+    "grad-moonlit",
+    "grad-glow-mint"
+   ]
+  },
+  {
+   "id": "gcat-conic",
+   "key": "Conic",
+   "name": "Conic Gradient",
+   "gradientIds": [
+    "grad-aurora",
+    "grad-sunrise-cone",
+    "grad-soft-wheel",
+    "grad-radar",
+    "grad-gold-dial",
+    "grad-twilight-cone",
+    "grad-ice-cone"
+   ]
+  },
+  {
+   "id": "gcat-multi-stop",
+   "key": "Multi-stop",
+   "name": "Multi-stop Gradient",
+   "gradientIds": [
+    "grad-spectrum",
+    "grad-heatmap",
+    "grad-sunrise-bands",
+    "grad-pine-layers",
+    "grad-candy",
+    "grad-signal"
+   ]
+  },
+  {
+   "id": "gcat-mesh-inspired",
+   "key": "Mesh-inspired",
+   "name": "Mesh-inspired Gradient",
+   "gradientIds": [
+    "grad-mesh-peach",
+    "grad-mesh-bloom",
+    "grad-mesh-ocean",
+    "grad-mesh-dune",
+    "grad-mesh-forest"
+   ]
+  },
+  {
+   "id": "gcat-atmospheric",
+   "key": "Atmospheric",
+   "name": "Atmospheric Gradient",
+   "gradientIds": [
+    "grad-fog",
+    "grad-storm",
+    "grad-haze",
+    "grad-deep-space"
+   ]
+  },
+  {
+   "id": "gcat-metallic",
+   "key": "Metallic",
+   "name": "Metallic Gradient",
+   "gradientIds": [
+    "grad-gold-metal",
+    "grad-steel",
+    "grad-copper",
+    "grad-silver",
+    "grad-rose-gold",
+    "grad-gunmetal"
+   ]
+  },
+  {
+   "id": "gcat-neon",
+   "key": "Neon",
+   "name": "Neon Gradient",
+   "gradientIds": [
+    "grad-neon-wire",
+    "grad-plasma",
+    "grad-laser",
+    "grad-volt",
+    "grad-ultraviolet"
+   ]
+  },
+  {
+   "id": "gcat-cinematic",
+   "key": "Cinematic",
+   "name": "Cinematic Gradient",
+   "gradientIds": [
+    "grad-teal-amber",
+    "grad-blockbuster",
+    "grad-golden-noir",
+    "grad-neon-city"
+   ]
+  },
+  {
+   "id": "gcat-subtle",
+   "key": "Subtle",
+   "name": "Subtle Background Gradient",
+   "gradientIds": [
+    "grad-paper-soft",
+    "grad-paper-fade",
+    "grad-vignette",
+    "grad-cloud-fade"
+   ]
+  },
+  {
+   "id": "gcat-soft",
+   "key": "Soft",
+   "name": "Soft Gradient",
+   "gradientIds": [
+    "grad-forest-mist",
+    "grad-rose-quartz",
+    "grad-mint-wash",
+    "grad-lilac-sky",
+    "grad-sage"
+   ]
+  },
+  {
+   "id": "gcat-high-contrast",
+   "key": "High Contrast",
+   "name": "High Contrast Gradient",
+   "gradientIds": [
+    "grad-citrus",
+    "grad-black-white"
+   ]
+  }
+ ],
+ "typography": [
+  {
+   "id": "tcat-editorial",
+   "name": "Editorial",
+   "typographyIds": [
+    "type-editorial-classic",
+    "type-broadsheet"
+   ]
+  },
+  {
+   "id": "tcat-corporate",
+   "name": "Corporate",
+   "typographyIds": [
+    "type-modern-sans",
+    "type-harbor"
+   ]
+  },
+  {
+   "id": "tcat-software-engineering",
+   "name": "Software Engineering",
+   "typographyIds": [
+    "type-grotesk",
+    "type-ide"
+   ]
+  },
+  {
+   "id": "tcat-modern-technology",
+   "name": "Modern Technology",
+   "typographyIds": [
+    "type-terminal"
+   ]
+  },
+  {
+   "id": "tcat-cybersecurity",
+   "name": "Cybersecurity",
+   "typographyIds": [
+    "type-sentinel"
+   ]
+  },
+  {
+   "id": "tcat-artificial-intelligence",
+   "name": "Artificial Intelligence",
+   "typographyIds": [
+    "type-neural",
+    "type-lumen"
+   ]
+  },
+  {
+   "id": "tcat-professional",
+   "name": "Professional",
+   "typographyIds": [
+    "type-ledger"
+   ]
+  },
+  {
+   "id": "tcat-luxury",
+   "name": "Luxury",
+   "typographyIds": [
+    "type-luxe",
+    "type-salon"
+   ]
+  },
+  {
+   "id": "tcat-creative-studio",
+   "name": "Creative Studio",
+   "typographyIds": [
+    "type-studio",
+    "type-sorbet"
+   ]
+  },
+  {
+   "id": "tcat-gaming",
+   "name": "Gaming",
+   "typographyIds": [
+    "type-arena",
+    "type-quest"
+   ]
+  },
+  {
+   "id": "tcat-cinematic",
+   "name": "Cinematic",
+   "typographyIds": [
+    "type-cinema",
+    "type-noir"
+   ]
+  },
+  {
+   "id": "tcat-industrial",
+   "name": "Industrial",
+   "typographyIds": [
+    "type-foundry",
+    "type-concrete"
+   ]
+  },
+  {
+   "id": "tcat-forest",
+   "name": "Forest",
+   "typographyIds": [
+    "type-pine"
+   ]
+  },
+  {
+   "id": "tcat-ocean",
+   "name": "Ocean",
+   "typographyIds": [
+    "type-reef"
+   ]
+  },
+  {
+   "id": "tcat-earth-tone",
+   "name": "Earth Tone",
+   "typographyIds": [
+    "type-terracotta"
+   ]
+  },
+  {
+   "id": "tcat-desert",
+   "name": "Desert",
+   "typographyIds": [
+    "type-dune"
+   ]
+  },
+  {
+   "id": "tcat-sunset",
+   "name": "Sunset",
+   "typographyIds": [
+    "type-sunset"
+   ]
+  },
+  {
+   "id": "tcat-neon",
+   "name": "Neon",
+   "typographyIds": [
+    "type-neon"
+   ]
+  },
+  {
+   "id": "tcat-retro",
+   "name": "Retro",
+   "typographyIds": [
+    "type-arcade"
+   ]
+  },
+  {
+   "id": "tcat-vintage",
+   "name": "Vintage",
+   "typographyIds": [
+    "type-vintage"
+   ]
+  },
+  {
+   "id": "tcat-futuristic",
+   "name": "Futuristic",
+   "typographyIds": [
+    "type-chrome"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,4925 @@
+{
+ "version": 1,
+ "palettes": [
+  {
+   "id": "mono-graphite",
+   "name": "Graphite Mono",
+   "category": "Monochrome",
+   "tags": [
+    "dark",
+    "technical"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#111111",
+     "rgb": [
+      17,
+      17,
+      17
+     ],
+     "hsl": [
+      0,
+      0,
+      7
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#1c1c1c",
+     "rgb": [
+      28,
+      28,
+      28
+     ],
+     "hsl": [
+      0,
+      0,
+      11
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#f2f2f2",
+     "rgb": [
+      242,
+      242,
+      242
+     ],
+     "hsl": [
+      0,
+      0,
+      95
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#9a9a9a",
+     "rgb": [
+      154,
+      154,
+      154
+     ],
+     "hsl": [
+      0,
+      0,
+      60
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#ffffff",
+     "rgb": [
+      255,
+      255,
+      255
+     ],
+     "hsl": [
+      0,
+      0,
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mono-paper",
+   "name": "Paper Mono",
+   "category": "Monochrome",
+   "tags": [
+    "light",
+    "editorial"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f7f7f5",
+     "rgb": [
+      247,
+      247,
+      245
+     ],
+     "hsl": [
+      60,
+      11,
+      96
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#ecece8",
+     "rgb": [
+      236,
+      236,
+      232
+     ],
+     "hsl": [
+      60,
+      10,
+      92
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#1a1a1a",
+     "rgb": [
+      26,
+      26,
+      26
+     ],
+     "hsl": [
+      0,
+      0,
+      10
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#555555",
+     "rgb": [
+      85,
+      85,
+      85
+     ],
+     "hsl": [
+      0,
+      0,
+      33
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#000000",
+     "rgb": [
+      0,
+      0,
+      0
+     ],
+     "hsl": [
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "id": "min-nordic",
+   "name": "Nordic Minimal",
+   "category": "Minimalist",
+   "tags": [
+    "light",
+    "calm"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f4f6f7",
+     "rgb": [
+      244,
+      246,
+      247
+     ],
+     "hsl": [
+      200,
+      16,
+      96
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e6eaed",
+     "rgb": [
+      230,
+      234,
+      237
+     ],
+     "hsl": [
+      206,
+      16,
+      92
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#1e2a32",
+     "rgb": [
+      30,
+      42,
+      50
+     ],
+     "hsl": [
+      204,
+      25,
+      16
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#4a6572",
+     "rgb": [
+      74,
+      101,
+      114
+     ],
+     "hsl": [
+      200,
+      21,
+      37
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#c97b4a",
+     "rgb": [
+      201,
+      123,
+      74
+     ],
+     "hsl": [
+      23,
+      54,
+      54
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tech-slate",
+   "name": "Slate Engineer",
+   "category": "Software Engineering",
+   "tags": [
+    "dark",
+    "technical"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0f172a",
+     "rgb": [
+      15,
+      23,
+      42
+     ],
+     "hsl": [
+      222,
+      47,
+      11
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#1e293b",
+     "rgb": [
+      30,
+      41,
+      59
+     ],
+     "hsl": [
+      217,
+      33,
+      17
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#e2e8f0",
+     "rgb": [
+      226,
+      232,
+      240
+     ],
+     "hsl": [
+      214,
+      32,
+      91
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#38bdf8",
+     "rgb": [
+      56,
+      189,
+      248
+     ],
+     "hsl": [
+      198,
+      93,
+      60
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#f59e0b",
+     "rgb": [
+      245,
+      158,
+      11
+     ],
+     "hsl": [
+      38,
+      92,
+      50
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cyber-sentinel",
+   "name": "Sentinel",
+   "category": "Cybersecurity",
+   "tags": [
+    "dark",
+    "technical"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0b0f0c",
+     "rgb": [
+      11,
+      15,
+      12
+     ],
+     "hsl": [
+      135,
+      15,
+      5
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#131b15",
+     "rgb": [
+      19,
+      27,
+      21
+     ],
+     "hsl": [
+      135,
+      17,
+      9
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#d7f5df",
+     "rgb": [
+      215,
+      245,
+      223
+     ],
+     "hsl": [
+      136,
+      60,
+      90
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#22c55e",
+     "rgb": [
+      34,
+      197,
+      94
+     ],
+     "hsl": [
+      142,
+      71,
+      45
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#ef4444",
+     "rgb": [
+      239,
+      68,
+      68
+     ],
+     "hsl": [
+      0,
+      84,
+      60
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ai-violet",
+   "name": "Neural Violet",
+   "category": "Artificial Intelligence",
+   "tags": [
+    "dark",
+    "futuristic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#12101f",
+     "rgb": [
+      18,
+      16,
+      31
+     ],
+     "hsl": [
+      248,
+      32,
+      9
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#1d1a33",
+     "rgb": [
+      29,
+      26,
+      51
+     ],
+     "hsl": [
+      247,
+      32,
+      15
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#ece9ff",
+     "rgb": [
+      236,
+      233,
+      255
+     ],
+     "hsl": [
+      248,
+      100,
+      96
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#8b5cf6",
+     "rgb": [
+      139,
+      92,
+      246
+     ],
+     "hsl": [
+      258,
+      90,
+      66
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#f0abfc",
+     "rgb": [
+      240,
+      171,
+      252
+     ],
+     "hsl": [
+      291,
+      93,
+      83
+     ]
+    }
+   ]
+  },
+  {
+   "id": "corp-boardroom",
+   "name": "Boardroom",
+   "category": "Corporate",
+   "tags": [
+    "light",
+    "professional"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f5f7fa",
+     "rgb": [
+      245,
+      247,
+      250
+     ],
+     "hsl": [
+      216,
+      33,
+      97
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#ffffff",
+     "rgb": [
+      255,
+      255,
+      255
+     ],
+     "hsl": [
+      0,
+      0,
+      100
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#14233a",
+     "rgb": [
+      20,
+      35,
+      58
+     ],
+     "hsl": [
+      216,
+      49,
+      15
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#1f4e8c",
+     "rgb": [
+      31,
+      78,
+      140
+     ],
+     "hsl": [
+      214,
+      64,
+      34
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#b8892f",
+     "rgb": [
+      184,
+      137,
+      47
+     ],
+     "hsl": [
+      39,
+      59,
+      45
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pro-ledger",
+   "name": "Ledger Pro",
+   "category": "Professional",
+   "tags": [
+    "light",
+    "professional"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#faf9f6",
+     "rgb": [
+      250,
+      249,
+      246
+     ],
+     "hsl": [
+      45,
+      29,
+      97
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#f0ede6",
+     "rgb": [
+      240,
+      237,
+      230
+     ],
+     "hsl": [
+      42,
+      25,
+      92
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#24302b",
+     "rgb": [
+      36,
+      48,
+      43
+     ],
+     "hsl": [
+      155,
+      14,
+      16
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#2f6b5a",
+     "rgb": [
+      47,
+      107,
+      90
+     ],
+     "hsl": [
+      163,
+      39,
+      30
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#8a5a2b",
+     "rgb": [
+      138,
+      90,
+      43
+     ],
+     "hsl": [
+      30,
+      52,
+      35
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lux-noirgold",
+   "name": "Noir Gold",
+   "category": "Luxury",
+   "tags": [
+    "dark",
+    "elegant"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0d0b09",
+     "rgb": [
+      13,
+      11,
+      9
+     ],
+     "hsl": [
+      30,
+      18,
+      4
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#1a1612",
+     "rgb": [
+      26,
+      22,
+      18
+     ],
+     "hsl": [
+      30,
+      18,
+      9
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#f1e8d5",
+     "rgb": [
+      241,
+      232,
+      213
+     ],
+     "hsl": [
+      41,
+      50,
+      89
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#c9a24b",
+     "rgb": [
+      201,
+      162,
+      75
+     ],
+     "hsl": [
+      41,
+      54,
+      54
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#7a5c1e",
+     "rgb": [
+      122,
+      92,
+      30
+     ],
+     "hsl": [
+      40,
+      61,
+      30
+     ]
+    }
+   ]
+  },
+  {
+   "id": "edit-ink",
+   "name": "Editorial Ink",
+   "category": "Editorial",
+   "tags": [
+    "light",
+    "editorial"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#fbf6ee",
+     "rgb": [
+      251,
+      246,
+      238
+     ],
+     "hsl": [
+      37,
+      62,
+      96
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#f0e8da",
+     "rgb": [
+      240,
+      232,
+      218
+     ],
+     "hsl": [
+      38,
+      42,
+      90
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#1f1a17",
+     "rgb": [
+      31,
+      26,
+      23
+     ],
+     "hsl": [
+      23,
+      15,
+      11
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#b3261e",
+     "rgb": [
+      179,
+      38,
+      30
+     ],
+     "hsl": [
+      3,
+      71,
+      41
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#3b4a6b",
+     "rgb": [
+      59,
+      74,
+      107
+     ],
+     "hsl": [
+      221,
+      29,
+      33
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cre-pop",
+   "name": "Studio Pop",
+   "category": "Creative Studio",
+   "tags": [
+    "light",
+    "playful"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#fff8f0",
+     "rgb": [
+      255,
+      248,
+      240
+     ],
+     "hsl": [
+      32,
+      100,
+      97
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#ffe9d6",
+     "rgb": [
+      255,
+      233,
+      214
+     ],
+     "hsl": [
+      28,
+      100,
+      92
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#2b2430",
+     "rgb": [
+      43,
+      36,
+      48
+     ],
+     "hsl": [
+      275,
+      14,
+      16
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#c2410c",
+     "rgb": [
+      194,
+      65,
+      12
+     ],
+     "hsl": [
+      17,
+      88,
+      40
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#2563eb",
+     "rgb": [
+      37,
+      99,
+      235
+     ],
+     "hsl": [
+      221,
+      83,
+      53
+     ]
+    }
+   ]
+  },
+  {
+   "id": "game-arena",
+   "name": "Arena",
+   "category": "Gaming",
+   "tags": [
+    "dark",
+    "energetic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0e1116",
+     "rgb": [
+      14,
+      17,
+      22
+     ],
+     "hsl": [
+      218,
+      22,
+      7
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#191e27",
+     "rgb": [
+      25,
+      30,
+      39
+     ],
+     "hsl": [
+      219,
+      22,
+      13
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#e8ecf3",
+     "rgb": [
+      232,
+      236,
+      243
+     ],
+     "hsl": [
+      218,
+      31,
+      93
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#ff3d5a",
+     "rgb": [
+      255,
+      61,
+      90
+     ],
+     "hsl": [
+      351,
+      100,
+      62
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#36e0b4",
+     "rgb": [
+      54,
+      224,
+      180
+     ],
+     "hsl": [
+      164,
+      73,
+      55
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cine-tealorange",
+   "name": "Teal & Amber",
+   "category": "Cinematic",
+   "tags": [
+    "dark",
+    "cinematic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0a1214",
+     "rgb": [
+      10,
+      18,
+      20
+     ],
+     "hsl": [
+      192,
+      33,
+      6
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#142126",
+     "rgb": [
+      20,
+      33,
+      38
+     ],
+     "hsl": [
+      197,
+      31,
+      11
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#e6eef0",
+     "rgb": [
+      230,
+      238,
+      240
+     ],
+     "hsl": [
+      192,
+      25,
+      92
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#e8833a",
+     "rgb": [
+      232,
+      131,
+      58
+     ],
+     "hsl": [
+      25,
+      79,
+      57
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#2a8c96",
+     "rgb": [
+      42,
+      140,
+      150
+     ],
+     "hsl": [
+      186,
+      56,
+      38
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ind-foundry",
+   "name": "Foundry",
+   "category": "Industrial",
+   "tags": [
+    "dark",
+    "technical"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#1f1f1d",
+     "rgb": [
+      31,
+      31,
+      29
+     ],
+     "hsl": [
+      60,
+      3,
+      12
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#2d2c29",
+     "rgb": [
+      45,
+      44,
+      41
+     ],
+     "hsl": [
+      45,
+      5,
+      17
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#ece9e2",
+     "rgb": [
+      236,
+      233,
+      226
+     ],
+     "hsl": [
+      42,
+      21,
+      91
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#e0a030",
+     "rgb": [
+      224,
+      160,
+      48
+     ],
+     "hsl": [
+      38,
+      74,
+      53
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#8a8f94",
+     "rgb": [
+      138,
+      143,
+      148
+     ],
+     "hsl": [
+      210,
+      4,
+      56
+     ]
+    }
+   ]
+  },
+  {
+   "id": "nat-pine",
+   "name": "Pine Forest",
+   "category": "Forest",
+   "tags": [
+    "dark",
+    "organic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0f1a14",
+     "rgb": [
+      15,
+      26,
+      20
+     ],
+     "hsl": [
+      147,
+      27,
+      8
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#18291f",
+     "rgb": [
+      24,
+      41,
+      31
+     ],
+     "hsl": [
+      145,
+      26,
+      13
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#e3efe5",
+     "rgb": [
+      227,
+      239,
+      229
+     ],
+     "hsl": [
+      130,
+      27,
+      91
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#4f9d69",
+     "rgb": [
+      79,
+      157,
+      105
+     ],
+     "hsl": [
+      140,
+      33,
+      46
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#c8b560",
+     "rgb": [
+      200,
+      181,
+      96
+     ],
+     "hsl": [
+      49,
+      49,
+      58
+     ]
+    }
+   ]
+  },
+  {
+   "id": "nat-deepocean",
+   "name": "Deep Ocean",
+   "category": "Ocean",
+   "tags": [
+    "dark",
+    "calm"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#06141f",
+     "rgb": [
+      6,
+      20,
+      31
+     ],
+     "hsl": [
+      206,
+      68,
+      7
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#0d2436",
+     "rgb": [
+      13,
+      36,
+      54
+     ],
+     "hsl": [
+      206,
+      61,
+      13
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#dcecf5",
+     "rgb": [
+      220,
+      236,
+      245
+     ],
+     "hsl": [
+      202,
+      56,
+      91
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#2b8fbf",
+     "rgb": [
+      43,
+      143,
+      191
+     ],
+     "hsl": [
+      199,
+      63,
+      46
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#7fd6d1",
+     "rgb": [
+      127,
+      214,
+      209
+     ],
+     "hsl": [
+      177,
+      51,
+      67
+     ]
+    }
+   ]
+  },
+  {
+   "id": "earth-terracotta",
+   "name": "Terracotta",
+   "category": "Earth Tone",
+   "tags": [
+    "light",
+    "organic"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f6efe6",
+     "rgb": [
+      246,
+      239,
+      230
+     ],
+     "hsl": [
+      34,
+      47,
+      93
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e9dccb",
+     "rgb": [
+      233,
+      220,
+      203
+     ],
+     "hsl": [
+      34,
+      41,
+      85
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#2e211a",
+     "rgb": [
+      46,
+      33,
+      26
+     ],
+     "hsl": [
+      21,
+      28,
+      14
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#b5573a",
+     "rgb": [
+      181,
+      87,
+      58
+     ],
+     "hsl": [
+      14,
+      51,
+      47
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#6b7b4c",
+     "rgb": [
+      107,
+      123,
+      76
+     ],
+     "hsl": [
+      80,
+      24,
+      39
+     ]
+    }
+   ]
+  },
+  {
+   "id": "des-dune",
+   "name": "Dune",
+   "category": "Desert",
+   "tags": [
+    "light",
+    "organic"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f5ead7",
+     "rgb": [
+      245,
+      234,
+      215
+     ],
+     "hsl": [
+      38,
+      60,
+      90
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e8d3b0",
+     "rgb": [
+      232,
+      211,
+      176
+     ],
+     "hsl": [
+      38,
+      55,
+      80
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#33261a",
+     "rgb": [
+      51,
+      38,
+      26
+     ],
+     "hsl": [
+      29,
+      32,
+      15
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#c2703d",
+     "rgb": [
+      194,
+      112,
+      61
+     ],
+     "hsl": [
+      23,
+      52,
+      50
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#7a8450",
+     "rgb": [
+      122,
+      132,
+      80
+     ],
+     "hsl": [
+      72,
+      25,
+      42
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sun-rush",
+   "name": "Sunset Rush",
+   "category": "Sunset",
+   "tags": [
+    "dark",
+    "energetic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#1a0f1f",
+     "rgb": [
+      26,
+      15,
+      31
+     ],
+     "hsl": [
+      281,
+      35,
+      9
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#2b1630",
+     "rgb": [
+      43,
+      22,
+      48
+     ],
+     "hsl": [
+      288,
+      37,
+      14
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#fde9dc",
+     "rgb": [
+      253,
+      233,
+      220
+     ],
+     "hsl": [
+      24,
+      89,
+      93
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#ff7a45",
+     "rgb": [
+      255,
+      122,
+      69
+     ],
+     "hsl": [
+      17,
+      100,
+      64
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#ffc857",
+     "rgb": [
+      255,
+      200,
+      87
+     ],
+     "hsl": [
+      40,
+      100,
+      67
+     ]
+    }
+   ]
+  },
+  {
+   "id": "neon-night",
+   "name": "Neon Night",
+   "category": "Neon",
+   "tags": [
+    "dark",
+    "futuristic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0a0a14",
+     "rgb": [
+      10,
+      10,
+      20
+     ],
+     "hsl": [
+      240,
+      33,
+      6
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#14142a",
+     "rgb": [
+      20,
+      20,
+      42
+     ],
+     "hsl": [
+      240,
+      35,
+      12
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#f0f0ff",
+     "rgb": [
+      240,
+      240,
+      255
+     ],
+     "hsl": [
+      240,
+      100,
+      97
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#ff2e97",
+     "rgb": [
+      255,
+      46,
+      151
+     ],
+     "hsl": [
+      330,
+      100,
+      59
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#00e5ff",
+     "rgb": [
+      0,
+      229,
+      255
+     ],
+     "hsl": [
+      186,
+      100,
+      50
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ret-arcade",
+   "name": "Retro Arcade",
+   "category": "Retro",
+   "tags": [
+    "dark",
+    "playful"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#1b1a3a",
+     "rgb": [
+      27,
+      26,
+      58
+     ],
+     "hsl": [
+      242,
+      38,
+      16
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#28265a",
+     "rgb": [
+      40,
+      38,
+      90
+     ],
+     "hsl": [
+      242,
+      41,
+      25
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#fdf2d0",
+     "rgb": [
+      253,
+      242,
+      208
+     ],
+     "hsl": [
+      45,
+      92,
+      90
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#ff6b35",
+     "rgb": [
+      255,
+      107,
+      53
+     ],
+     "hsl": [
+      16,
+      100,
+      60
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#3ec1d3",
+     "rgb": [
+      62,
+      193,
+      211
+     ],
+     "hsl": [
+      187,
+      63,
+      54
+     ]
+    }
+   ]
+  },
+  {
+   "id": "vin-library",
+   "name": "Vintage Library",
+   "category": "Vintage",
+   "tags": [
+    "light",
+    "elegant"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#efe4cf",
+     "rgb": [
+      239,
+      228,
+      207
+     ],
+     "hsl": [
+      39,
+      50,
+      87
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e2d2b4",
+     "rgb": [
+      226,
+      210,
+      180
+     ],
+     "hsl": [
+      39,
+      44,
+      80
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#2f2418",
+     "rgb": [
+      47,
+      36,
+      24
+     ],
+     "hsl": [
+      31,
+      32,
+      14
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#7b3f2a",
+     "rgb": [
+      123,
+      63,
+      42
+     ],
+     "hsl": [
+      16,
+      49,
+      32
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#4e6a54",
+     "rgb": [
+      78,
+      106,
+      84
+     ],
+     "hsl": [
+      133,
+      15,
+      36
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pas-cloud",
+   "name": "Pastel Cloud",
+   "category": "Pastel",
+   "tags": [
+    "light",
+    "playful"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#fdf6fb",
+     "rgb": [
+      253,
+      246,
+      251
+     ],
+     "hsl": [
+      317,
+      64,
+      98
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#f2e7f5",
+     "rgb": [
+      242,
+      231,
+      245
+     ],
+     "hsl": [
+      287,
+      41,
+      93
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#3a3347",
+     "rgb": [
+      58,
+      51,
+      71
+     ],
+     "hsl": [
+      261,
+      16,
+      24
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#7c6bc0",
+     "rgb": [
+      124,
+      107,
+      192
+     ],
+     "hsl": [
+      252,
+      40,
+      59
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#e87a97",
+     "rgb": [
+      232,
+      122,
+      151
+     ],
+     "hsl": [
+      344,
+      71,
+      69
+     ]
+    }
+   ]
+  },
+  {
+   "id": "fut-aurora",
+   "name": "Aurora",
+   "category": "Futuristic",
+   "tags": [
+    "dark",
+    "futuristic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#080b16",
+     "rgb": [
+      8,
+      11,
+      22
+     ],
+     "hsl": [
+      227,
+      47,
+      6
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#11172b",
+     "rgb": [
+      17,
+      23,
+      43
+     ],
+     "hsl": [
+      226,
+      43,
+      12
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#e9f0ff",
+     "rgb": [
+      233,
+      240,
+      255
+     ],
+     "hsl": [
+      221,
+      100,
+      96
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#5b8cff",
+     "rgb": [
+      91,
+      140,
+      255
+     ],
+     "hsl": [
+      222,
+      100,
+      68
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#b2ff59",
+     "rgb": [
+      178,
+      255,
+      89
+     ],
+     "hsl": [
+      88,
+      100,
+      67
+     ]
+    }
+   ]
+  },
+  {
+   "id": "exp-signal",
+   "name": "Signal Orange",
+   "category": "Experimental",
+   "tags": [
+    "light",
+    "energetic"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f0ede4",
+     "rgb": [
+      240,
+      237,
+      228
+     ],
+     "hsl": [
+      45,
+      29,
+      92
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#ddd8c8",
+     "rgb": [
+      221,
+      216,
+      200
+     ],
+     "hsl": [
+      46,
+      24,
+      83
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#191919",
+     "rgb": [
+      25,
+      25,
+      25
+     ],
+     "hsl": [
+      0,
+      0,
+      10
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#d63a00",
+     "rgb": [
+      214,
+      58,
+      0
+     ],
+     "hsl": [
+      16,
+      100,
+      42
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#0033ff",
+     "rgb": [
+      0,
+      51,
+      255
+     ],
+     "hsl": [
+      228,
+      100,
+      50
+     ]
+    }
+   ]
+  },
+  {
+   "id": "calm-mint",
+   "name": "Mint Calm",
+   "category": "Nature",
+   "tags": [
+    "light",
+    "calm"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f2faf6",
+     "rgb": [
+      242,
+      250,
+      246
+     ],
+     "hsl": [
+      150,
+      44,
+      96
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#dff1e8",
+     "rgb": [
+      223,
+      241,
+      232
+     ],
+     "hsl": [
+      150,
+      39,
+      91
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#1d3a30",
+     "rgb": [
+      29,
+      58,
+      48
+     ],
+     "hsl": [
+      159,
+      33,
+      17
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#2b7a5c",
+     "rgb": [
+      43,
+      122,
+      92
+     ],
+     "hsl": [
+      157,
+      48,
+      32
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#b8651b",
+     "rgb": [
+      184,
+      101,
+      27
+     ],
+     "hsl": [
+      28,
+      74,
+      41
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mono-bone",
+   "name": "Bone & Ink",
+   "category": "Monochrome",
+   "tags": [
+    "light",
+    "editorial"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#ffffff",
+     "rgb": [
+      255,
+      255,
+      255
+     ],
+     "hsl": [
+      0,
+      0,
+      100
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#f3f3f3",
+     "rgb": [
+      243,
+      243,
+      243
+     ],
+     "hsl": [
+      0,
+      0,
+      95
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#111111",
+     "rgb": [
+      17,
+      17,
+      17
+     ],
+     "hsl": [
+      0,
+      0,
+      7
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#3d3d3d",
+     "rgb": [
+      61,
+      61,
+      61
+     ],
+     "hsl": [
+      0,
+      0,
+      24
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#6b6b6b",
+     "rgb": [
+      107,
+      107,
+      107
+     ],
+     "hsl": [
+      0,
+      0,
+      42
+     ]
+    }
+   ]
+  },
+  {
+   "id": "min-sand",
+   "name": "Sand Studio",
+   "category": "Minimalist",
+   "tags": [
+    "light",
+    "calm"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f7f3ec",
+     "rgb": [
+      247,
+      243,
+      236
+     ],
+     "hsl": [
+      38,
+      41,
+      95
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#ebe4d8",
+     "rgb": [
+      235,
+      228,
+      216
+     ],
+     "hsl": [
+      38,
+      32,
+      88
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#262019",
+     "rgb": [
+      38,
+      32,
+      25
+     ],
+     "hsl": [
+      32,
+      21,
+      12
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#6b5b45",
+     "rgb": [
+      107,
+      91,
+      69
+     ],
+     "hsl": [
+      35,
+      22,
+      35
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#b0482c",
+     "rgb": [
+      176,
+      72,
+      44
+     ],
+     "hsl": [
+      13,
+      60,
+      43
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tech-terminal",
+   "name": "Terminal Amber",
+   "category": "Modern Technology",
+   "tags": [
+    "dark",
+    "technical"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#101010",
+     "rgb": [
+      16,
+      16,
+      16
+     ],
+     "hsl": [
+      0,
+      0,
+      6
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#1a1a17",
+     "rgb": [
+      26,
+      26,
+      23
+     ],
+     "hsl": [
+      60,
+      6,
+      10
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#f0e6c8",
+     "rgb": [
+      240,
+      230,
+      200
+     ],
+     "hsl": [
+      45,
+      57,
+      86
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#ffb000",
+     "rgb": [
+      255,
+      176,
+      0
+     ],
+     "hsl": [
+      41,
+      100,
+      50
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#7ad7f0",
+     "rgb": [
+      122,
+      215,
+      240
+     ],
+     "hsl": [
+      193,
+      80,
+      71
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tech-ice",
+   "name": "Ice Console",
+   "category": "Modern Technology",
+   "tags": [
+    "light",
+    "technical"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f3f7fb",
+     "rgb": [
+      243,
+      247,
+      251
+     ],
+     "hsl": [
+      210,
+      50,
+      97
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e4edf5",
+     "rgb": [
+      228,
+      237,
+      245
+     ],
+     "hsl": [
+      208,
+      46,
+      93
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#0f2233",
+     "rgb": [
+      15,
+      34,
+      51
+     ],
+     "hsl": [
+      208,
+      55,
+      13
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#0b63b5",
+     "rgb": [
+      11,
+      99,
+      181
+     ],
+     "hsl": [
+      209,
+      89,
+      38
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#c2410c",
+     "rgb": [
+      194,
+      65,
+      12
+     ],
+     "hsl": [
+      17,
+      88,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "id": "se-ide",
+   "name": "IDE Midnight",
+   "category": "Software Engineering",
+   "tags": [
+    "dark",
+    "technical"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#1e1e2e",
+     "rgb": [
+      30,
+      30,
+      46
+     ],
+     "hsl": [
+      240,
+      21,
+      15
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#2a2a3c",
+     "rgb": [
+      42,
+      42,
+      60
+     ],
+     "hsl": [
+      240,
+      18,
+      20
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#cdd6f4",
+     "rgb": [
+      205,
+      214,
+      244
+     ],
+     "hsl": [
+      226,
+      64,
+      88
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#89b4fa",
+     "rgb": [
+      137,
+      180,
+      250
+     ],
+     "hsl": [
+      217,
+      92,
+      76
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#f9e2af",
+     "rgb": [
+      249,
+      226,
+      175
+     ],
+     "hsl": [
+      41,
+      86,
+      83
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cyber-redteam",
+   "name": "Red Team",
+   "category": "Cybersecurity",
+   "tags": [
+    "dark",
+    "energetic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#120808",
+     "rgb": [
+      18,
+      8,
+      8
+     ],
+     "hsl": [
+      0,
+      38,
+      5
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#1f1010",
+     "rgb": [
+      31,
+      16,
+      16
+     ],
+     "hsl": [
+      0,
+      32,
+      9
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#f6e6e6",
+     "rgb": [
+      246,
+      230,
+      230
+     ],
+     "hsl": [
+      0,
+      47,
+      93
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#ff4d4d",
+     "rgb": [
+      255,
+      77,
+      77
+     ],
+     "hsl": [
+      0,
+      100,
+      65
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#f5c542",
+     "rgb": [
+      245,
+      197,
+      66
+     ],
+     "hsl": [
+      44,
+      90,
+      61
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ai-lumen",
+   "name": "Lumen",
+   "category": "Artificial Intelligence",
+   "tags": [
+    "light",
+    "futuristic"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#faf9ff",
+     "rgb": [
+      250,
+      249,
+      255
+     ],
+     "hsl": [
+      250,
+      100,
+      99
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#efeaff",
+     "rgb": [
+      239,
+      234,
+      255
+     ],
+     "hsl": [
+      254,
+      100,
+      96
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#1e1b3a",
+     "rgb": [
+      30,
+      27,
+      58
+     ],
+     "hsl": [
+      246,
+      36,
+      17
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#5b3fd0",
+     "rgb": [
+      91,
+      63,
+      208
+     ],
+     "hsl": [
+      252,
+      61,
+      53
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#0e8f7a",
+     "rgb": [
+      14,
+      143,
+      122
+     ],
+     "hsl": [
+      170,
+      82,
+      31
+     ]
+    }
+   ]
+  },
+  {
+   "id": "corp-harbor",
+   "name": "Harbor Navy",
+   "category": "Corporate",
+   "tags": [
+    "dark",
+    "professional"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0b1d33",
+     "rgb": [
+      11,
+      29,
+      51
+     ],
+     "hsl": [
+      213,
+      65,
+      12
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#12294a",
+     "rgb": [
+      18,
+      41,
+      74
+     ],
+     "hsl": [
+      215,
+      61,
+      18
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#e8eef7",
+     "rgb": [
+      232,
+      238,
+      247
+     ],
+     "hsl": [
+      216,
+      48,
+      94
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#5aa0e8",
+     "rgb": [
+      90,
+      160,
+      232
+     ],
+     "hsl": [
+      210,
+      76,
+      63
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#f2b134",
+     "rgb": [
+      242,
+      177,
+      52
+     ],
+     "hsl": [
+      39,
+      88,
+      58
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pro-clay",
+   "name": "Clay Office",
+   "category": "Professional",
+   "tags": [
+    "light",
+    "professional"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f6f4f1",
+     "rgb": [
+      246,
+      244,
+      241
+     ],
+     "hsl": [
+      36,
+      22,
+      95
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#ece7e1",
+     "rgb": [
+      236,
+      231,
+      225
+     ],
+     "hsl": [
+      33,
+      22,
+      90
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#2a2622",
+     "rgb": [
+      42,
+      38,
+      34
+     ],
+     "hsl": [
+      30,
+      11,
+      15
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#8f3b2a",
+     "rgb": [
+      143,
+      59,
+      42
+     ],
+     "hsl": [
+      10,
+      55,
+      36
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#40576b",
+     "rgb": [
+      64,
+      87,
+      107
+     ],
+     "hsl": [
+      208,
+      25,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lux-emerald",
+   "name": "Emerald Salon",
+   "category": "Luxury",
+   "tags": [
+    "dark",
+    "elegant"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#07140f",
+     "rgb": [
+      7,
+      20,
+      15
+     ],
+     "hsl": [
+      157,
+      48,
+      5
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#0f2219",
+     "rgb": [
+      15,
+      34,
+      25
+     ],
+     "hsl": [
+      152,
+      39,
+      10
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#efe9d8",
+     "rgb": [
+      239,
+      233,
+      216
+     ],
+     "hsl": [
+      44,
+      42,
+      89
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#d6b25e",
+     "rgb": [
+      214,
+      178,
+      94
+     ],
+     "hsl": [
+      42,
+      59,
+      60
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#2f9e74",
+     "rgb": [
+      47,
+      158,
+      116
+     ],
+     "hsl": [
+      157,
+      54,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "id": "edit-broadsheet",
+   "name": "Broadsheet",
+   "category": "Editorial",
+   "tags": [
+    "light",
+    "editorial"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f5f2ea",
+     "rgb": [
+      245,
+      242,
+      234
+     ],
+     "hsl": [
+      44,
+      35,
+      94
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e8e3d6",
+     "rgb": [
+      232,
+      227,
+      214
+     ],
+     "hsl": [
+      43,
+      28,
+      87
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#141414",
+     "rgb": [
+      20,
+      20,
+      20
+     ],
+     "hsl": [
+      0,
+      0,
+      8
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#8a1c1c",
+     "rgb": [
+      138,
+      28,
+      28
+     ],
+     "hsl": [
+      0,
+      66,
+      33
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#1f4d6b",
+     "rgb": [
+      31,
+      77,
+      107
+     ],
+     "hsl": [
+      204,
+      55,
+      27
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cre-sorbet",
+   "name": "Sorbet Studio",
+   "category": "Creative Studio",
+   "tags": [
+    "light",
+    "playful"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#fff6f2",
+     "rgb": [
+      255,
+      246,
+      242
+     ],
+     "hsl": [
+      18,
+      100,
+      97
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#ffe4da",
+     "rgb": [
+      255,
+      228,
+      218
+     ],
+     "hsl": [
+      16,
+      100,
+      93
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#2a1f2d",
+     "rgb": [
+      42,
+      31,
+      45
+     ],
+     "hsl": [
+      287,
+      18,
+      15
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#c0265c",
+     "rgb": [
+      192,
+      38,
+      92
+     ],
+     "hsl": [
+      339,
+      67,
+      45
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#0f7a8a",
+     "rgb": [
+      15,
+      122,
+      138
+     ],
+     "hsl": [
+      188,
+      80,
+      30
+     ]
+    }
+   ]
+  },
+  {
+   "id": "game-quest",
+   "name": "Quest Log",
+   "category": "Gaming",
+   "tags": [
+    "dark",
+    "playful"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#14102a",
+     "rgb": [
+      20,
+      16,
+      42
+     ],
+     "hsl": [
+      249,
+      45,
+      11
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#20193f",
+     "rgb": [
+      32,
+      25,
+      63
+     ],
+     "hsl": [
+      251,
+      43,
+      17
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#f3eeff",
+     "rgb": [
+      243,
+      238,
+      255
+     ],
+     "hsl": [
+      258,
+      100,
+      97
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#ffb43a",
+     "rgb": [
+      255,
+      180,
+      58
+     ],
+     "hsl": [
+      37,
+      100,
+      61
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#5ad1a0",
+     "rgb": [
+      90,
+      209,
+      160
+     ],
+     "hsl": [
+      155,
+      56,
+      59
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cine-noir",
+   "name": "Film Noir",
+   "category": "Cinematic",
+   "tags": [
+    "dark",
+    "cinematic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0c0c0e",
+     "rgb": [
+      12,
+      12,
+      14
+     ],
+     "hsl": [
+      240,
+      8,
+      5
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#17171b",
+     "rgb": [
+      23,
+      23,
+      27
+     ],
+     "hsl": [
+      240,
+      8,
+      10
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#ece8e1",
+     "rgb": [
+      236,
+      232,
+      225
+     ],
+     "hsl": [
+      38,
+      22,
+      90
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#b8a27a",
+     "rgb": [
+      184,
+      162,
+      122
+     ],
+     "hsl": [
+      39,
+      30,
+      60
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#c0453f",
+     "rgb": [
+      192,
+      69,
+      63
+     ],
+     "hsl": [
+      3,
+      51,
+      50
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ind-concrete",
+   "name": "Concrete",
+   "category": "Industrial",
+   "tags": [
+    "light",
+    "technical"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#e9e9e6",
+     "rgb": [
+      233,
+      233,
+      230
+     ],
+     "hsl": [
+      60,
+      6,
+      91
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#d8d8d3",
+     "rgb": [
+      216,
+      216,
+      211
+     ],
+     "hsl": [
+      60,
+      6,
+      84
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#1c1d1f",
+     "rgb": [
+      28,
+      29,
+      31
+     ],
+     "hsl": [
+      220,
+      5,
+      12
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#3b4a57",
+     "rgb": [
+      59,
+      74,
+      87
+     ],
+     "hsl": [
+      208,
+      19,
+      29
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#d9531e",
+     "rgb": [
+      217,
+      83,
+      30
+     ],
+     "hsl": [
+      17,
+      76,
+      48
+     ]
+    }
+   ]
+  },
+  {
+   "id": "for-moss",
+   "name": "Moss & Bark",
+   "category": "Forest",
+   "tags": [
+    "light",
+    "organic"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#eef0e4",
+     "rgb": [
+      238,
+      240,
+      228
+     ],
+     "hsl": [
+      70,
+      29,
+      92
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#dde2cc",
+     "rgb": [
+      221,
+      226,
+      204
+     ],
+     "hsl": [
+      74,
+      27,
+      84
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#1f2a1a",
+     "rgb": [
+      31,
+      42,
+      26
+     ],
+     "hsl": [
+      101,
+      24,
+      13
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#3f6b3a",
+     "rgb": [
+      63,
+      107,
+      58
+     ],
+     "hsl": [
+      114,
+      30,
+      32
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#8a5a2b",
+     "rgb": [
+      138,
+      90,
+      43
+     ],
+     "hsl": [
+      30,
+      52,
+      35
+     ]
+    }
+   ]
+  },
+  {
+   "id": "oc-reef",
+   "name": "Coral Reef",
+   "category": "Ocean",
+   "tags": [
+    "dark",
+    "calm"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#08202b",
+     "rgb": [
+      8,
+      32,
+      43
+     ],
+     "hsl": [
+      199,
+      69,
+      10
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#0e3140",
+     "rgb": [
+      14,
+      49,
+      64
+     ],
+     "hsl": [
+      198,
+      64,
+      15
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#e6f4f1",
+     "rgb": [
+      230,
+      244,
+      241
+     ],
+     "hsl": [
+      167,
+      39,
+      93
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#3dc2b0",
+     "rgb": [
+      61,
+      194,
+      176
+     ],
+     "hsl": [
+      172,
+      52,
+      50
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#ff8a65",
+     "rgb": [
+      255,
+      138,
+      101
+     ],
+     "hsl": [
+      14,
+      100,
+      70
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sun-golden",
+   "name": "Golden Hour",
+   "category": "Sunset",
+   "tags": [
+    "light",
+    "energetic"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#fff4e0",
+     "rgb": [
+      255,
+      244,
+      224
+     ],
+     "hsl": [
+      39,
+      100,
+      94
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#ffe3b8",
+     "rgb": [
+      255,
+      227,
+      184
+     ],
+     "hsl": [
+      36,
+      100,
+      86
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#3a2410",
+     "rgb": [
+      58,
+      36,
+      16
+     ],
+     "hsl": [
+      29,
+      57,
+      15
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#b8470a",
+     "rgb": [
+      184,
+      71,
+      10
+     ],
+     "hsl": [
+      21,
+      90,
+      38
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#7a3b8c",
+     "rgb": [
+      122,
+      59,
+      140
+     ],
+     "hsl": [
+      287,
+      41,
+      39
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ret-70s",
+   "name": "Seventies",
+   "category": "Retro",
+   "tags": [
+    "light",
+    "playful"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f4e6c8",
+     "rgb": [
+      244,
+      230,
+      200
+     ],
+     "hsl": [
+      41,
+      67,
+      87
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e8d3a4",
+     "rgb": [
+      232,
+      211,
+      164
+     ],
+     "hsl": [
+      41,
+      60,
+      78
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#3a2a1c",
+     "rgb": [
+      58,
+      42,
+      28
+     ],
+     "hsl": [
+      28,
+      35,
+      17
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#a8501c",
+     "rgb": [
+      168,
+      80,
+      28
+     ],
+     "hsl": [
+      22,
+      71,
+      38
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#2e6b5e",
+     "rgb": [
+      46,
+      107,
+      94
+     ],
+     "hsl": [
+      167,
+      40,
+      30
+     ]
+    }
+   ]
+  },
+  {
+   "id": "fut-chrome",
+   "name": "Chrome Lab",
+   "category": "Futuristic",
+   "tags": [
+    "light",
+    "futuristic"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#eef1f6",
+     "rgb": [
+      238,
+      241,
+      246
+     ],
+     "hsl": [
+      218,
+      31,
+      95
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#dde3ee",
+     "rgb": [
+      221,
+      227,
+      238
+     ],
+     "hsl": [
+      219,
+      33,
+      90
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#0d1324",
+     "rgb": [
+      13,
+      19,
+      36
+     ],
+     "hsl": [
+      224,
+      47,
+      10
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#3a4fe0",
+     "rgb": [
+      58,
+      79,
+      224
+     ],
+     "hsl": [
+      232,
+      73,
+      55
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#0e8a8a",
+     "rgb": [
+      14,
+      138,
+      138
+     ],
+     "hsl": [
+      180,
+      82,
+      30
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mono-ash",
+   "name": "Ash Dark",
+   "category": "Monochrome",
+   "tags": [
+    "dark",
+    "technical"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#1a1a1a",
+     "rgb": [
+      26,
+      26,
+      26
+     ],
+     "hsl": [
+      0,
+      0,
+      10
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#262626",
+     "rgb": [
+      38,
+      38,
+      38
+     ],
+     "hsl": [
+      0,
+      0,
+      15
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#ededed",
+     "rgb": [
+      237,
+      237,
+      237
+     ],
+     "hsl": [
+      0,
+      0,
+      93
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#b3b3b3",
+     "rgb": [
+      179,
+      179,
+      179
+     ],
+     "hsl": [
+      0,
+      0,
+      70
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#ff6b35",
+     "rgb": [
+      255,
+      107,
+      53
+     ],
+     "hsl": [
+      16,
+      100,
+      60
+     ]
+    }
+   ]
+  },
+  {
+   "id": "min-fog",
+   "name": "Fog Minimal",
+   "category": "Minimalist",
+   "tags": [
+    "light",
+    "calm"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f3f4f6",
+     "rgb": [
+      243,
+      244,
+      246
+     ],
+     "hsl": [
+      220,
+      14,
+      96
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e5e7eb",
+     "rgb": [
+      229,
+      231,
+      235
+     ],
+     "hsl": [
+      220,
+      13,
+      91
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#1f2937",
+     "rgb": [
+      31,
+      41,
+      55
+     ],
+     "hsl": [
+      215,
+      28,
+      17
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#4b5563",
+     "rgb": [
+      75,
+      85,
+      99
+     ],
+     "hsl": [
+      215,
+      14,
+      34
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#0f766e",
+     "rgb": [
+      15,
+      118,
+      110
+     ],
+     "hsl": [
+      175,
+      77,
+      26
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tech-circuit",
+   "name": "Circuit Green",
+   "category": "Modern Technology",
+   "tags": [
+    "dark",
+    "technical"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0a120d",
+     "rgb": [
+      10,
+      18,
+      13
+     ],
+     "hsl": [
+      143,
+      29,
+      5
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#12201a",
+     "rgb": [
+      18,
+      32,
+      26
+     ],
+     "hsl": [
+      154,
+      28,
+      10
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#e6f5ec",
+     "rgb": [
+      230,
+      245,
+      236
+     ],
+     "hsl": [
+      144,
+      43,
+      93
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#3ddc84",
+     "rgb": [
+      61,
+      220,
+      132
+     ],
+     "hsl": [
+      147,
+      69,
+      55
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#f5a623",
+     "rgb": [
+      245,
+      166,
+      35
+     ],
+     "hsl": [
+      37,
+      91,
+      55
+     ]
+    }
+   ]
+  },
+  {
+   "id": "se-docs",
+   "name": "Docs Paper",
+   "category": "Software Engineering",
+   "tags": [
+    "light",
+    "technical"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#ffffff",
+     "rgb": [
+      255,
+      255,
+      255
+     ],
+     "hsl": [
+      0,
+      0,
+      100
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#f6f8fa",
+     "rgb": [
+      246,
+      248,
+      250
+     ],
+     "hsl": [
+      210,
+      29,
+      97
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#1f2328",
+     "rgb": [
+      31,
+      35,
+      40
+     ],
+     "hsl": [
+      213,
+      13,
+      14
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#0969da",
+     "rgb": [
+      9,
+      105,
+      218
+     ],
+     "hsl": [
+      212,
+      92,
+      45
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#bf8700",
+     "rgb": [
+      191,
+      135,
+      0
+     ],
+     "hsl": [
+      42,
+      100,
+      37
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cyber-ghost",
+   "name": "Ghost Shell",
+   "category": "Cybersecurity",
+   "tags": [
+    "dark",
+    "technical"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0d1117",
+     "rgb": [
+      13,
+      17,
+      23
+     ],
+     "hsl": [
+      216,
+      28,
+      7
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#161b22",
+     "rgb": [
+      22,
+      27,
+      34
+     ],
+     "hsl": [
+      215,
+      21,
+      11
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#e6edf3",
+     "rgb": [
+      230,
+      237,
+      243
+     ],
+     "hsl": [
+      208,
+      35,
+      93
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#a371f7",
+     "rgb": [
+      163,
+      113,
+      247
+     ],
+     "hsl": [
+      262,
+      89,
+      71
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#f78166",
+     "rgb": [
+      247,
+      129,
+      102
+     ],
+     "hsl": [
+      11,
+      90,
+      68
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ai-oracle",
+   "name": "Oracle",
+   "category": "Artificial Intelligence",
+   "tags": [
+    "dark",
+    "futuristic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#0f1115",
+     "rgb": [
+      15,
+      17,
+      21
+     ],
+     "hsl": [
+      220,
+      17,
+      7
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#1a1d24",
+     "rgb": [
+      26,
+      29,
+      36
+     ],
+     "hsl": [
+      222,
+      16,
+      12
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#eceff4",
+     "rgb": [
+      236,
+      239,
+      244
+     ],
+     "hsl": [
+      218,
+      27,
+      94
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#7dd3a8",
+     "rgb": [
+      125,
+      211,
+      168
+     ],
+     "hsl": [
+      150,
+      49,
+      66
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#e5a3ff",
+     "rgb": [
+      229,
+      163,
+      255
+     ],
+     "hsl": [
+      283,
+      100,
+      82
+     ]
+    }
+   ]
+  },
+  {
+   "id": "corp-civic",
+   "name": "Civic Blue",
+   "category": "Corporate",
+   "tags": [
+    "light",
+    "professional"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f4f7fb",
+     "rgb": [
+      244,
+      247,
+      251
+     ],
+     "hsl": [
+      214,
+      47,
+      97
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#ffffff",
+     "rgb": [
+      255,
+      255,
+      255
+     ],
+     "hsl": [
+      0,
+      0,
+      100
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#12263f",
+     "rgb": [
+      18,
+      38,
+      63
+     ],
+     "hsl": [
+      213,
+      56,
+      16
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#1d5fa8",
+     "rgb": [
+      29,
+      95,
+      168
+     ],
+     "hsl": [
+      212,
+      71,
+      39
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#c2410c",
+     "rgb": [
+      194,
+      65,
+      12
+     ],
+     "hsl": [
+      17,
+      88,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pro-graphite",
+   "name": "Graphite Office",
+   "category": "Professional",
+   "tags": [
+    "light",
+    "professional"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f5f5f4",
+     "rgb": [
+      245,
+      245,
+      244
+     ],
+     "hsl": [
+      60,
+      5,
+      96
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e7e5e4",
+     "rgb": [
+      231,
+      229,
+      228
+     ],
+     "hsl": [
+      20,
+      6,
+      90
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#1c1917",
+     "rgb": [
+      28,
+      25,
+      23
+     ],
+     "hsl": [
+      24,
+      10,
+      10
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#44403c",
+     "rgb": [
+      68,
+      64,
+      60
+     ],
+     "hsl": [
+      30,
+      6,
+      25
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#b45309",
+     "rgb": [
+      180,
+      83,
+      9
+     ],
+     "hsl": [
+      26,
+      90,
+      37
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lux-ivory",
+   "name": "Ivory Atelier",
+   "category": "Luxury",
+   "tags": [
+    "light",
+    "elegant"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#faf6ee",
+     "rgb": [
+      250,
+      246,
+      238
+     ],
+     "hsl": [
+      40,
+      55,
+      96
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#efe6d3",
+     "rgb": [
+      239,
+      230,
+      211
+     ],
+     "hsl": [
+      41,
+      47,
+      88
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#211a12",
+     "rgb": [
+      33,
+      26,
+      18
+     ],
+     "hsl": [
+      32,
+      29,
+      10
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#7a5a1e",
+     "rgb": [
+      122,
+      90,
+      30
+     ],
+     "hsl": [
+      39,
+      61,
+      30
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#8c2f39",
+     "rgb": [
+      140,
+      47,
+      57
+     ],
+     "hsl": [
+      354,
+      50,
+      37
+     ]
+    }
+   ]
+  },
+  {
+   "id": "edit-magazine",
+   "name": "Magazine Pop",
+   "category": "Editorial",
+   "tags": [
+    "light",
+    "editorial"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#fffdf7",
+     "rgb": [
+      255,
+      253,
+      247
+     ],
+     "hsl": [
+      45,
+      100,
+      98
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#f4efe3",
+     "rgb": [
+      244,
+      239,
+      227
+     ],
+     "hsl": [
+      42,
+      44,
+      92
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#111111",
+     "rgb": [
+      17,
+      17,
+      17
+     ],
+     "hsl": [
+      0,
+      0,
+      7
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#0b3d91",
+     "rgb": [
+      11,
+      61,
+      145
+     ],
+     "hsl": [
+      218,
+      86,
+      31
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#e4572e",
+     "rgb": [
+      228,
+      87,
+      46
+     ],
+     "hsl": [
+      14,
+      77,
+      54
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cre-collage",
+   "name": "Collage",
+   "category": "Creative Studio",
+   "tags": [
+    "light",
+    "playful"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f6f1e7",
+     "rgb": [
+      246,
+      241,
+      231
+     ],
+     "hsl": [
+      40,
+      45,
+      94
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e8dfcb",
+     "rgb": [
+      232,
+      223,
+      203
+     ],
+     "hsl": [
+      41,
+      39,
+      85
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#241f2e",
+     "rgb": [
+      36,
+      31,
+      46
+     ],
+     "hsl": [
+      260,
+      19,
+      15
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#6a2c91",
+     "rgb": [
+      106,
+      44,
+      145
+     ],
+     "hsl": [
+      277,
+      53,
+      37
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#e07a1f",
+     "rgb": [
+      224,
+      122,
+      31
+     ],
+     "hsl": [
+      28,
+      76,
+      50
+     ]
+    }
+   ]
+  },
+  {
+   "id": "game-dungeon",
+   "name": "Dungeon",
+   "category": "Gaming",
+   "tags": [
+    "dark",
+    "energetic"
+   ],
+   "mode": "dark",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#120f0d",
+     "rgb": [
+      18,
+      15,
+      13
+     ],
+     "hsl": [
+      24,
+      16,
+      6
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#1f1a16",
+     "rgb": [
+      31,
+      26,
+      22
+     ],
+     "hsl": [
+      27,
+      17,
+      10
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#f2e8dc",
+     "rgb": [
+      242,
+      232,
+      220
+     ],
+     "hsl": [
+      33,
+      46,
+      91
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#c8472f",
+     "rgb": [
+      200,
+      71,
+      47
+     ],
+     "hsl": [
+      9,
+      62,
+      48
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#d4a73a",
+     "rgb": [
+      212,
+      167,
+      58
+     ],
+     "hsl": [
+      42,
+      64,
+      53
+     ]
+    }
+   ]
+  },
+  {
+   "id": "nat-meadow",
+   "name": "Meadow",
+   "category": "Nature",
+   "tags": [
+    "light",
+    "organic"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#f4f8ec",
+     "rgb": [
+      244,
+      248,
+      236
+     ],
+     "hsl": [
+      80,
+      46,
+      95
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#e4edd2",
+     "rgb": [
+      228,
+      237,
+      210
+     ],
+     "hsl": [
+      80,
+      43,
+      88
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#22301a",
+     "rgb": [
+      34,
+      48,
+      26
+     ],
+     "hsl": [
+      98,
+      30,
+      15
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#4d7c2a",
+     "rgb": [
+      77,
+      124,
+      42
+     ],
+     "hsl": [
+      94,
+      49,
+      33
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#c2542d",
+     "rgb": [
+      194,
+      84,
+      45
+     ],
+     "hsl": [
+      16,
+      62,
+      47
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pas-peach",
+   "name": "Peach Fizz",
+   "category": "Pastel",
+   "tags": [
+    "light",
+    "playful"
+   ],
+   "mode": "light",
+   "colors": [
+    {
+     "role": "background.base",
+     "hex": "#fff7f2",
+     "rgb": [
+      255,
+      247,
+      242
+     ],
+     "hsl": [
+      23,
+      100,
+      97
+     ]
+    },
+    {
+     "role": "background.surface",
+     "hex": "#ffe8dd",
+     "rgb": [
+      255,
+      232,
+      221
+     ],
+     "hsl": [
+      19,
+      100,
+      93
+     ]
+    },
+    {
+     "role": "text.primary",
+     "hex": "#3b2a2f",
+     "rgb": [
+      59,
+      42,
+      47
+     ],
+     "hsl": [
+      342,
+      17,
+      20
+     ]
+    },
+    {
+     "role": "brand.primary",
+     "hex": "#c2527a",
+     "rgb": [
+      194,
+      82,
+      122
+     ],
+     "hsl": [
+      339,
+      48,
+      54
+     ]
+    },
+    {
+     "role": "brand.accent",
+     "hex": "#3a8d8d",
+     "rgb": [
+      58,
+      141,
+      141
+     ],
+     "hsl": [
+      180,
+      42,
+      39
+     ]
+    }
+   ]
+  }
+ ]
+}

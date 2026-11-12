@@ -1,0 +1,13 @@
+{
+  "project": "contoh-proyek",
+  "colorSystem": {
+    "paletteId": "tech-slate",
+    "mode": "dark",
+    "gradientIds": [
+      "grad-slate-glow"
+    ],
+    "typographyId": "type-grotesk",
+    "locked": true
+  },
+  "overrides": {}
+}

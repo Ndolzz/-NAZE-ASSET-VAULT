@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NAZE Color Library</title>
+<style>
+:root{--bg:#f4f3ef;--sf:#fff;--tx:#17171a;--mu:#62626b;--bd:#dcdad2;--ac:#c2410c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121214;--sf:#1c1c20;--tx:#f1f0ec;--mu:#9b9ba5;--bd:#2d2d33;--ac:#fb923c}}
+:root[data-theme="dark"]{--bg:#121214;--sf:#1c1c20;--tx:#f1f0ec;--mu:#9b9ba5;--bd:#2d2d33;--ac:#fb923c}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:72px}
+header{padding:16px 16px 8px}h1{margin:0;font:800 22px/1.1 Georgia,serif;letter-spacing:-.5px}h1 span{color:var(--ac)}
+.sub{color:var(--mu);font-size:13px;margin-top:4px}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--sf);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav button{flex:1;border:0;background:none;color:var(--mu);padding:12px 2px;font:600 12px system-ui}nav button.on{color:var(--ac);box-shadow:inset 0 2px var(--ac)}
+main{padding:0 16px;max-width:900px;margin:auto}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--bd);border-radius:10px;background:var(--sf);color:var(--tx);font:inherit;margin:6px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1;min-width:120px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:4px 0}.chip{white-space:nowrap;border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:99px;padding:6px 12px;font-size:13px}.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;margin:10px 0;overflow:hidden}
+.sw{display:flex;height:64px}.sw i{flex:1}
+.cb{padding:12px}.cb h3{margin:0;font-size:16px}.tag{font-size:12px;color:var(--mu)}
+.btn{border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:9px;padding:8px 11px;font:600 13px system-ui}.btn.p{background:var(--ac);color:#fff;border-color:var(--ac)}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}td,th{padding:6px 8px;border-bottom:1px solid var(--bd);text-align:left;white-space:nowrap}
+.ok{color:#15803d;font-weight:700}.no{color:#b91c1c;font-weight:700}
+@media (prefers-color-scheme:dark){.ok{color:#4ade80}.no{color:#f87171}}
+.hex{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px}.hex b{width:18px;height:18px;border-radius:5px;border:1px solid var(--bd)}
+.pv{padding:14px;border-radius:12px;margin-top:8px}.pv .bt{display:inline-block;padding:8px 14px;border-radius:8px;font-weight:700;margin-top:8px}
+.grad{height:110px}
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:8px 14px;border-radius:99px;font-size:13px;opacity:0;transition:.2s;z-index:9}.toast.on{opacity:1}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.stat div{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:10px}.stat b{font-size:22px;display:block}
+</style></head><body>
+<header><h1>NAZE <span>Color</span> Library</h1><div class="sub" id="sub"></div></header>
+<main id="m"></main><div class="toast" id="t"></div>
+<nav id="nv"></nav>
+<script>
+// ===== DATA (urutan: latar, permukaan, teks, primer, aksen) =====
+const P=[
+["mono-graphite","Graphite Mono","Monochrome","111111 1c1c1c f2f2f2 9a9a9a ffffff","dark technical"],
+["mono-paper","Paper Mono","Monochrome","f7f7f5 ecece8 1a1a1a 555555 000000","light editorial"],
+["min-nordic","Nordic Minimal","Minimalist","f4f6f7 e6eaed 1e2a32 4a6572 c97b4a","light calm"],
+["tech-slate","Slate Engineer","Software Engineering","0f172a 1e293b e2e8f0 38bdf8 f59e0b","dark technical"],
+["cyber-sentinel","Sentinel","Cybersecurity","0b0f0c 131b15 d7f5df 22c55e ef4444","dark technical"],
+["ai-violet","Neural Violet","Artificial Intelligence","12101f 1d1a33 ece9ff 8b5cf6 f0abfc","dark futuristic"],
+["corp-boardroom","Boardroom","Corporate","f5f7fa ffffff 14233a 1f4e8c b8892f","light professional"],
+["pro-ledger","Ledger Pro","Professional","faf9f6 f0ede6 24302b 2f6b5a 8a5a2b","light professional"],
+["lux-noirgold","Noir Gold","Luxury","0d0b09 1a1612 f1e8d5 c9a24b 7a5c1e","dark elegant"],
+["edit-ink","Editorial Ink","Editorial","fbf6ee f0e8da 1f1a17 b3261e 3b4a6b","light editorial"],
+["cre-pop","Studio Pop","Creative Studio","fff8f0 ffe9d6 2b2430 c2410c 2563eb","light playful"],
+["game-arena","Arena","Gaming","0e1116 191e27 e8ecf3 ff3d5a 36e0b4","dark energetic"],
+["cine-tealorange","Teal & Amber","Cinematic","0a1214 142126 e6eef0 e8833a 2a8c96","dark cinematic"],
+["ind-foundry","Foundry","Industrial","1f1f1d 2d2c29 ece9e2 e0a030 8a8f94","dark technical"],
+["nat-pine","Pine Forest","Forest","0f1a14 18291f e3efe5 4f9d69 c8b560","dark organic"],
+["nat-deepocean","Deep Ocean","Ocean","06141f 0d2436 dcecf5 2b8fbf 7fd6d1","dark calm"],
+["earth-terracotta","Terracotta","Earth Tone","f6efe6 e9dccb 2e211a b5573a 6b7b4c","light organic"],
+["des-dune","Dune","Desert","f5ead7 e8d3b0 33261a c2703d 7a8450","light organic"],
+["sun-rush","Sunset Rush","Sunset","1a0f1f 2b1630 fde9dc ff7a45 ffc857","dark energetic"],
+["neon-night","Neon Night","Neon","0a0a14 14142a f0f0ff ff2e97 00e5ff","dark futuristic"],
+["ret-arcade","Retro Arcade","Retro","1b1a3a 28265a fdf2d0 ff6b35 3ec1d3","dark playful"],
+["vin-library","Vintage Library","Vintage","efe4cf e2d2b4 2f2418 7b3f2a 4e6a54","light elegant"],
+["pas-cloud","Pastel Cloud","Pastel","fdf6fb f2e7f5 3a3347 7c6bc0 e87a97","light playful"],
+["fut-aurora","Aurora","Futuristic","080b16 11172b e9f0ff 5b8cff b2ff59","dark futuristic"],
+["exp-signal","Signal Orange","Experimental","f0ede4 ddd8c8 191919 d63a00 0033ff","light energetic"],
+["calm-mint","Mint Calm","Nature","f2faf6 dff1e8 1d3a30 2b7a5c b8651b","light calm"],
+["mono-bone","Bone & Ink","Monochrome","ffffff f3f3f3 111111 3d3d3d 6b6b6b","light editorial"],
+["min-sand","Sand Studio","Minimalist","f7f3ec ebe4d8 262019 6b5b45 b0482c","light calm"],
+["tech-terminal","Terminal Amber","Modern Technology","101010 1a1a17 f0e6c8 ffb000 7ad7f0","dark technical"],
+["tech-ice","Ice Console","Modern Technology","f3f7fb e4edf5 0f2233 0b63b5 c2410c","light technical"],
+["se-ide","IDE Midnight","Software Engineering","1e1e2e 2a2a3c cdd6f4 89b4fa f9e2af","dark technical"],
+["cyber-redteam","Red Team","Cybersecurity","120808 1f1010 f6e6e6 ff4d4d f5c542","dark energetic"],
+["ai-lumen","Lumen","Artificial Intelligence","faf9ff efeaff 1e1b3a 5b3fd0 0e8f7a","light futuristic"],
+["corp-harbor","Harbor Navy","Corporate","0b1d33 12294a e8eef7 5aa0e8 f2b134","dark professional"],
+["pro-clay","Clay Office","Professional","f6f4f1 ece7e1 2a2622 8f3b2a 40576b","light professional"],
+["lux-emerald","Emerald Salon","Luxury","07140f 0f2219 efe9d8 d6b25e 2f9e74","dark elegant"],
+["edit-broadsheet","Broadsheet","Editorial","f5f2ea e8e3d6 141414 8a1c1c 1f4d6b","light editorial"],
+["cre-sorbet","Sorbet Studio","Creative Studio","fff6f2 ffe4da 2a1f2d c0265c 0f7a8a","light playful"],
+["game-quest","Quest Log","Gaming","14102a 20193f f3eeff ffb43a 5ad1a0","dark playful"],
+["cine-noir","Film Noir","Cinematic","0c0c0e 17171b ece8e1 b8a27a c0453f","dark cinematic"],
+["ind-concrete","Concrete","Industrial","e9e9e6 d8d8d3 1c1d1f 3b4a57 d9531e","light technical"],
+["for-moss","Moss & Bark","Forest","eef0e4 dde2cc 1f2a1a 3f6b3a 8a5a2b","light organic"],
+["oc-reef","Coral Reef","Ocean","08202b 0e3140 e6f4f1 3dc2b0 ff8a65","dark calm"],
+["sun-golden","Golden Hour","Sunset","fff4e0 ffe3b8 3a2410 b8470a 7a3b8c","light energetic"],
+["ret-70s","Seventies","Retro","f4e6c8 e8d3a4 3a2a1c a8501c 2e6b5e","light playful"],
+["fut-chrome","Chrome Lab","Futuristic","eef1f6 dde3ee 0d1324 3a4fe0 0e8a8a","light futuristic"],
+["mono-ash","Ash Dark","Monochrome","1a1a1a 262626 ededed b3b3b3 ff6b35","dark technical"],
+["min-fog","Fog Minimal","Minimalist","f3f4f6 e5e7eb 1f2937 4b5563 0f766e","light calm"],
+["tech-circuit","Circuit Green","Modern Technology","0a120d 12201a e6f5ec 3ddc84 f5a623","dark technical"],
+["se-docs","Docs Paper","Software Engineering","ffffff f6f8fa 1f2328 0969da bf8700","light technical"],
+["cyber-ghost","Ghost Shell","Cybersecurity","0d1117 161b22 e6edf3 a371f7 f78166","dark technical"],
+["ai-oracle","Oracle","Artificial Intelligence","0f1115 1a1d24 eceff4 7dd3a8 e5a3ff","dark futuristic"],
+["corp-civic","Civic Blue","Corporate","f4f7fb ffffff 12263f 1d5fa8 c2410c","light professional"],
+["pro-graphite","Graphite Office","Professional","f5f5f4 e7e5e4 1c1917 44403c b45309","light professional"],
+["lux-ivory","Ivory Atelier","Luxury","faf6ee efe6d3 211a12 7a5a1e 8c2f39","light elegant"],
+["edit-magazine","Magazine Pop","Editorial","fffdf7 f4efe3 111111 0b3d91 e4572e","light editorial"],
+["cre-collage","Collage","Creative Studio","f6f1e7 e8dfcb 241f2e 6a2c91 e07a1f","light playful"],
+["game-dungeon","Dungeon","Gaming","120f0d 1f1a16 f2e8dc c8472f d4a73a","dark energetic"],
+["nat-meadow","Meadow","Nature","f4f8ec e4edd2 22301a 4d7c2a c2542d","light organic"],
+["pas-peach","Peach Fizz","Pastel","fff7f2 ffe8dd 3b2a2f c2527a 3a8d8d","light playful"]
+].map(a=>({id:a[0],name:a[1],cat:a[2],c:a[3].split(" "),tags:a[4].split(" ")}));
+const ROLES=["background.base","background.surface","text.primary","brand.primary","brand.accent"];
+const G=[
+["grad-dusk-linear","Dusk Fade","Linear","linear-gradient(160deg,#1a0f1f 0%,#5b2a4e 55%,#ff7a45 100%)","#fde9dc"],
+["grad-ocean-depth","Ocean Depth","Linear","linear-gradient(180deg,#7fd6d1 0%,#2b8fbf 45%,#06141f 100%)","#ffffff"],
+["grad-paper-soft","Paper Soft","Subtle","linear-gradient(180deg,#fbf6ee 0%,#f0e8da 100%)","#1f1a17"],
+["grad-slate-glow","Slate Glow","Radial","radial-gradient(circle at 30% 20%,#38bdf8 0%,#1e293b 45%,#0f172a 100%)","#e2e8f0"],
+["grad-violet-halo","Violet Halo","Radial","radial-gradient(ellipse at 50% 0%,#8b5cf6 0%,#12101f 70%)","#ece9ff"],
+["grad-gold-metal","Gold Metal","Metallic","linear-gradient(135deg,#7a5c1e 0%,#e8cf8a 35%,#c9a24b 60%,#7a5c1e 100%)","#0d0b09"],
+["grad-steel","Brushed Steel","Metallic","linear-gradient(100deg,#8a8f94 0%,#e8e8e8 30%,#9a9ea3 55%,#d4d4d4 80%,#7a7e83 100%)","#111111"],
+["grad-neon-wire","Neon Wire","Neon","linear-gradient(90deg,#ff2e97 0%,#8b2fff 50%,#00e5ff 100%)","#0a0a14"],
+["grad-aurora","Aurora Sweep","Conic","conic-gradient(from 200deg at 50% 60%,#080b16,#5b8cff,#b2ff59,#5b8cff,#080b16)","#e9f0ff"],
+["grad-sunrise-cone","Sunrise Dial","Conic","conic-gradient(from 0deg at 50% 100%,#ffc857,#ff7a45,#b5573a,#ffc857)","#2e211a"],
+["grad-teal-amber","Teal to Amber","Cinematic","linear-gradient(120deg,#0a1214 0%,#2a8c96 50%,#e8833a 100%)","#e6eef0"],
+["grad-forest-mist","Forest Mist","Soft","linear-gradient(180deg,#e3efe5 0%,#4f9d69 60%,#0f1a14 100%)","#ffffff"],
+["grad-rose-quartz","Rose Quartz","Soft","linear-gradient(135deg,#ffe4ec 0%,#f5c6d6 100%)","#3a2030"],
+["grad-midnight","Midnight Blue","Linear","linear-gradient(180deg,#0b1d33 0%,#12294a 100%)","#e8eef7"],
+["grad-mint-wash","Mint Wash","Soft","linear-gradient(160deg,#f2faf6 0%,#cfeade 100%)","#1d3a30"],
+["grad-citrus","Citrus Pop","High Contrast","linear-gradient(90deg,#ffe600 0%,#ff6a00 100%)","#111111"],
+["grad-spotlight","Spotlight","Radial","radial-gradient(circle at 50% 30%,#3a3f5c 0%,#0c0c0e 70%)","#ece8e1"],
+["grad-sun-disc","Sun Disc","Radial","radial-gradient(circle at 50% 50%,#fff1b8 0%,#ffb347 40%,#c2410c 100%)","#2a1500"],
+["grad-soft-wheel","Soft Wheel","Conic","conic-gradient(from 0deg,#ff9aa2,#ffdac1,#e2f0cb,#b5ead7,#c7ceea,#ff9aa2)","#2a2430"],
+["grad-radar","Radar Sweep","Conic","conic-gradient(from 0deg at 50% 50%,#071a0f 0%,#22c55e 30%,#071a0f 30%,#071a0f 100%)","#d7f5df"],
+["grad-spectrum","Spectrum Strip","Multi-stop","linear-gradient(90deg,#3a4fe0 0%,#0e8a8a 33%,#f5c542 66%,#d63a00 100%)","#111111"],
+["grad-heatmap","Heat Map","Multi-stop","linear-gradient(90deg,#0b1d33 0%,#5aa0e8 30%,#f2b134 65%,#ff4d4d 100%)","#ffffff"],
+["grad-mesh-peach","Mesh Peach Sky","Mesh-inspired","radial-gradient(circle at 15% 20%,#ffb4a2 0%,transparent 55%),radial-gradient(circle at 85% 15%,#a2d2ff 0%,transparent 50%),#fdf6f0","#2b2430"],
+["grad-mesh-bloom","Mesh Night Bloom","Mesh-inspired","radial-gradient(circle at 20% 80%,#8b5cf6 0%,transparent 55%),radial-gradient(circle at 80% 20%,#ff2e97 0%,transparent 45%),#0a0a14","#f0f0ff"],
+["grad-fog","Morning Fog","Atmospheric","linear-gradient(180deg,#dfe7ee 0%,#c9d6df 50%,#f2f2ef 100%)","#1e2a32"],
+["grad-storm","Storm Front","Atmospheric","linear-gradient(180deg,#1b2430 0%,#46566a 55%,#a8b4c2 100%)","#f1f4f8"],
+["grad-copper","Copper Sheen","Metallic","linear-gradient(135deg,#5c2e1a 0%,#d9895a 35%,#b5573a 60%,#5c2e1a 100%)","#fff4ea"],
+["grad-silver","Silver Foil","Metallic","linear-gradient(120deg,#9aa0a6 0%,#f5f5f5 40%,#b8bcc1 70%,#e8e8e8 100%)","#111111"],
+["grad-plasma","Plasma Lime","Neon","linear-gradient(90deg,#b2ff59 0%,#00e5ff 100%)","#080b16"],
+["grad-laser","Laser Magenta","Neon","linear-gradient(135deg,#ff2e97 0%,#7c3aed 100%)","#ffffff"],
+["grad-blockbuster","Blockbuster Dusk","Cinematic","linear-gradient(180deg,#0a1214 0%,#2a8c96 55%,#e8833a 100%)","#e6eef0"],
+["grad-paper-fade","Paper Grain Fade","Subtle","linear-gradient(180deg,#f7f3ec 0%,#ebe4d8 100%)","#262019"],
+["grad-lagoon","Lagoon Drift","Linear","linear-gradient(135deg,#0e8a8a 0%,#2b8fbf 100%)","#ffffff"],
+["grad-ember","Ember Glow","Linear","linear-gradient(180deg,#2e211a 0%,#b5573a 100%)","#fde9dc"],
+["grad-lilac-sky","Lilac Sky","Soft","linear-gradient(160deg,#f2e7f5 0%,#d9d0f5 100%)","#3a3347"],
+["grad-sage","Sage Mist","Soft","linear-gradient(180deg,#eef0e4 0%,#cdd7b8 100%)","#1f2a1a"],
+["grad-core-heat","Core Heat","Radial","radial-gradient(circle at 50% 100%,#ff7a45 0%,#5b2a4e 50%,#1a0f1f 100%)","#fde9dc"],
+["grad-moonlit","Moonlit Pool","Radial","radial-gradient(circle at 70% 20%,#dcecf5 0%,#2b8fbf 30%,#06141f 80%)","#ffffff"],
+["grad-vignette","Soft Vignette","Subtle","radial-gradient(ellipse at center,#ffffff 0%,#e9e7e1 100%)","#17171a"],
+["grad-glow-mint","Mint Glow","Radial","radial-gradient(circle at 50% 40%,#b8f0d4 0%,#3fa27c 45%,#12301f 100%)","#ffffff"],
+["grad-gold-dial","Gold Dial","Conic","conic-gradient(from 45deg at 50% 50%,#7a5c1e,#e8cf8a,#c9a24b,#e8cf8a,#7a5c1e)","#0d0b09"],
+["grad-twilight-cone","Twilight Cone","Conic","conic-gradient(from 180deg at 50% 0%,#1a0f1f 0%,#5b2a4e 40%,#ff7a45 70%,#1a0f1f 100%)","#fde9dc"],
+["grad-ice-cone","Ice Cone","Conic","conic-gradient(from 0deg at 50% 50%,#dcecf5 0%,#7fd6d1 35%,#2b8fbf 70%,#dcecf5 100%)","#06141f"],
+["grad-sunrise-bands","Sunrise Bands","Multi-stop","linear-gradient(180deg,#1a0f1f 0%,#5b2a4e 25%,#b5573a 50%,#ff7a45 75%,#ffc857 100%)","#fde9dc"],
+["grad-pine-layers","Pine Layers","Multi-stop","linear-gradient(180deg,#e3efe5 0%,#a7cfae 30%,#4f9d69 60%,#18291f 100%)","#ffffff"],
+["grad-candy","Candy Ribbon","Multi-stop","linear-gradient(90deg,#ff9aa2 0%,#ffdac1 33%,#b5ead7 66%,#c7ceea 100%)","#2a2430"],
+["grad-signal","Signal Scale","Multi-stop","linear-gradient(90deg,#22c55e 0%,#f5c542 50%,#ef4444 100%)","#111111"],
+["grad-mesh-ocean","Mesh Ocean","Mesh-inspired","radial-gradient(circle at 20% 20%,#7fd6d1 0%,transparent 55%),radial-gradient(circle at 80% 70%,#2b8fbf 0%,transparent 55%),#06141f","#dcecf5"],
+["grad-mesh-dune","Mesh Dune","Mesh-inspired","radial-gradient(circle at 10% 80%,#c2703d 0%,transparent 55%),radial-gradient(circle at 90% 10%,#e8d3b0 0%,transparent 50%),#f5ead7","#33261a"],
+["grad-mesh-forest","Mesh Forest","Mesh-inspired","radial-gradient(circle at 80% 80%,#4f9d69 0%,transparent 55%),radial-gradient(circle at 10% 10%,#c8b560 0%,transparent 45%),#0f1a14","#e3efe5"],
+["grad-haze","Golden Haze","Atmospheric","linear-gradient(180deg,#fff4e0 0%,#ffe3b8 50%,#f4c18a 100%)","#3a2410"],
+["grad-deep-space","Deep Space","Atmospheric","linear-gradient(180deg,#080b16 0%,#11172b 60%,#2a2f5c 100%)","#e9f0ff"],
+["grad-rose-gold","Rose Gold","Metallic","linear-gradient(135deg,#8a4b3d 0%,#f1c4b0 35%,#c98a76 65%,#8a4b3d 100%)","#2e1510"],
+["grad-gunmetal","Gunmetal","Metallic","linear-gradient(135deg,#1f2328 0%,#4a525c 40%,#2b3038 70%,#6b7480 100%)","#f1f4f8"],
+["grad-volt","Volt Heat","Neon","linear-gradient(90deg,#ff2e97 0%,#ffe600 100%)","#0a0a14"],
+["grad-ultraviolet","Ultraviolet","Neon","linear-gradient(135deg,#7c3aed 0%,#ff2e97 60%,#ffb43a 100%)","#ffffff"],
+["grad-golden-noir","Golden Noir","Cinematic","linear-gradient(180deg,#0c0c0e 0%,#3a2f22 55%,#b8a27a 100%)","#ece8e1"],
+["grad-neon-city","Neon City Night","Cinematic","linear-gradient(180deg,#0a0a14 0%,#2a1050 55%,#ff2e97 100%)","#f0f0ff"],
+["grad-black-white","Black to White","High Contrast","linear-gradient(90deg,#000000 0%,#ffffff 100%)","#ffffff"],
+["grad-cloud-fade","Cloud Fade","Subtle","linear-gradient(180deg,#f4f6f7 0%,#e6eaed 100%)","#1e2a32"]
+].map(a=>({id:a[0],name:a[1],type:a[2],css:a[3],tx:a[4]}));
+
+const T=[
+["type-editorial-classic","Editorial Classic","Editorial","Playfair Display","s",700,"-0.01em","none","Lora","s","edit-ink","text.primary"],
+["type-broadsheet","Broadsheet","Editorial","DM Serif Display","s",400,"0","none","Merriweather","s","edit-broadsheet","brand.primary"],
+["type-modern-sans","Modern Sans","Corporate","Inter","n",700,"-0.02em","none","Inter","n","corp-boardroom","text.primary"],
+["type-grotesk","Grotesk Tech","Software Engineering","Space Grotesk","n",700,"-0.02em","none","Inter","n","tech-slate","brand.primary"],
+["type-terminal","Terminal Mono","Modern Technology","JetBrains Mono","m",700,"0","none","JetBrains Mono","m","tech-terminal","brand.primary"],
+["type-ide","IDE Pair","Software Engineering","IBM Plex Mono","m",700,"0","none","IBM Plex Sans","n","se-ide","brand.primary"],
+["type-sentinel","Sentinel Console","Cybersecurity","Roboto Mono","m",700,"0.02em","uppercase","Roboto","n","cyber-sentinel","brand.primary"],
+["type-neural","Neural Geometric","Artificial Intelligence","Sora","n",700,"-0.02em","none","Manrope","n","ai-violet","brand.accent"],
+["type-lumen","Lumen Soft","Artificial Intelligence","Outfit","n",700,"-0.01em","none","Outfit","n","ai-lumen","brand.primary"],
+["type-harbor","Harbor Corporate","Corporate","Montserrat","n",700,"0","none","Open Sans","n","corp-harbor","text.primary"],
+["type-ledger","Ledger Humanist","Professional","Source Serif 4","s",700,"0","none","Source Sans 3","n","pro-ledger","brand.primary"],
+["type-luxe","Luxe Display","Luxury","Cormorant Garamond","s",700,"0.04em","none","Montserrat","n","lux-noirgold","brand.primary"],
+["type-salon","Salon Serif","Luxury","Fraunces","s",700,"-0.01em","none","Manrope","n","lux-emerald","brand.primary"],
+["type-studio","Studio Display","Creative Studio","Syne","n",700,"-0.02em","none","Inter","n","cre-pop","brand.primary"],
+["type-sorbet","Sorbet Rounded","Creative Studio","Poppins","n",700,"0","none","Poppins","n","cre-sorbet","brand.primary"],
+["type-arena","Arena Condensed","Gaming","Oswald","n",700,"0.04em","uppercase","Rubik","n","game-arena","brand.accent"],
+["type-quest","Quest Pixel","Gaming","Press Start 2P","n",400,"0","none","Rubik","n","game-quest","brand.accent"],
+["type-cinema","Cinema Title","Cinematic","Bebas Neue","n",400,"0.06em","uppercase","Archivo","n","cine-tealorange","text.primary"],
+["type-noir","Noir Serif","Cinematic","Libre Baskerville","s",700,"0","none","Archivo","n","cine-noir","brand.primary"],
+["type-foundry","Foundry Industrial","Industrial","Archivo","n",700,"0.03em","uppercase","Barlow","n","ind-foundry","brand.primary"],
+["type-concrete","Concrete Condensed","Industrial","Barlow Condensed","n",700,"0.02em","uppercase","Barlow","n","ind-concrete","text.primary"],
+["type-pine","Forest Humanist","Forest","Merriweather","s",700,"0","none","Nunito","n","nat-pine","brand.primary"],
+["type-reef","Reef Rounded","Ocean","Nunito","n",700,"0","none","Nunito","n","oc-reef","brand.primary"],
+["type-terracotta","Terracotta Warm","Earth Tone","Fraunces","s",700,"0","none","DM Sans","n","earth-terracotta","brand.primary"],
+["type-dune","Dune Slab","Desert","Zilla Slab","s",700,"0","none","Work Sans","n","des-dune","text.primary"],
+["type-sunset","Sunset Brush","Sunset","Pacifico","n",400,"0","none","Rubik","n","sun-rush","brand.accent"],
+["type-neon","Neon Display","Neon","Orbitron","n",700,"0.04em","uppercase","Rajdhani","n","neon-night","brand.accent"],
+["type-arcade","Arcade Retro","Retro","Rubik Mono One","n",400,"0","uppercase","Space Mono","m","ret-arcade","brand.accent"],
+["type-vintage","Vintage Press","Vintage","Libre Baskerville","s",700,"0","none","Libre Baskerville","s","vin-library","text.primary"],
+["type-chrome","Chrome Futurist","Futuristic","Unbounded","n",700,"-0.01em","none","Space Grotesk","n","fut-aurora","brand.accent"]
+];
+// ===== COLOR MATH =====
+const h2r=h=>[0,2,4].map(i=>parseInt(h.slice(i,i+2),16));
+const r2h=r=>r.map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,"0")).join("");
+function r2hsl([r,g,b]){r/=255;g/=255;b/=255;const M=Math.max(r,g,b),m=Math.min(r,g,b),l=(M+m)/2,d=M-m;let h=0,s=0;
+ if(d){s=d/(1-Math.abs(2*l-1));h=M==r?((g-b)/d)%6:M==g?(b-r)/d+2:(r-g)/d+4;h=(h*60+360)%360}return[h,s*100,l*100]}
+function hsl2h(h,s,l){h=((h%360)+360)%360;s=Math.max(0,Math.min(100,s))/100;l=Math.max(0,Math.min(100,l))/100;
+ const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));
+ return r2h([f(0),f(8),f(4)].map(v=>v*255))}
+const lum=h=>{const[r,g,b]=h2r(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*r+.7152*g+.0722*b};
+const cr=(a,b)=>{const x=lum(a),y=lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
+const fmt=(h,k)=>{const r=h2r(h);if(k=="hex")return"#"+h.toUpperCase();if(k=="rgb")return`rgb(${r.join(", ")})`;const[a,b,c]=r2hsl(r);return`hsl(${Math.round(a)}, ${Math.round(b)}%, ${Math.round(c)}%)`};
+const chk=(a,b,min)=>{const v=cr(a,b);return`<span class="${v>=min?"ok":"no"}">${v.toFixed(2)}:1 ${v>=min?"PASS":"FAIL"}</span>`};
+
+// ===== STATE =====
+const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let S={tab:"dash",q:"",cat:"Semua",open:null,fav:ld("nz-fav",[]),cmp:[],custom:ld("nz-custom",[]),gen:"#c2410c",gq:"",gt:"Semua",fq:""};
+const all=()=>P.concat(S.custom);
+const $=id=>document.getElementById(id);
+function toast(s){const t=$("t");t.textContent=s;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),1400)}
+function cp(s){(navigator.clipboard?navigator.clipboard.writeText(s):Promise.reject()).then(()=>toast("Tersalin"),()=>{const a=document.createElement("textarea");a.value=s;document.body.appendChild(a);a.select();try{document.execCommand("copy");toast("Tersalin")}catch(e){toast("Gagal menyalin")}a.remove()})}
+window.cp=cp;
+function tog(k,id){const a=S[k],i=a.indexOf(id);if(i>=0)a.splice(i,1);else{if(k=="cmp"&&a.length>=4)return toast("Maksimal 4 palet");a.push(id)}if(k=="fav")sv("nz-fav",a);render()}
+window.tog=tog;window.S=S;window.render=()=>render();
+
+function cssVars(p){return":root{\n"+ROLES.map((r,i)=>`  --${r.replace(".","-")}: #${p.c[i]};`).join("\n")+"\n}"}
+function paletteJSON(p){const o={id:p.id,name:p.name,category:p.cat,tokens:{}};ROLES.forEach((r,i)=>o.tokens[r]="#"+p.c[i]);return JSON.stringify(o,null,2)}
+function preview(p){const[b,s,t,pr,ac]=p.c;return`<div class="pv" style="background:${"#"+b};color:${"#"+t}"><b style="font-size:17px">Judul Halaman</b><div style="opacity:.8">Teks isi contoh di atas latar dasar.</div>
+<div style="background:#${s};padding:10px;border-radius:9px;margin-top:8px">Kartu permukaan <span style="color:#${ac};font-weight:700">• aksen</span></div>
+<span class="bt" style="background:#${pr};color:#${lum(pr)>.4?"000000":"ffffff"}">Tombol Utama</span></div>`}
+function detail(p){const[b,s,t,pr,ac]=p.c;
+ const rows=[["Teks / latar",t,b,4.5],["Primer / latar (tombol)",pr,b,3],["Aksen / latar",ac,b,3],["Teks / permukaan",t,s,4.5]];
+ const fails=rows.filter(r=>cr(r[1],r[2])<r[3]);
+ return`<div class="cb" style="border-top:1px solid var(--bd)">`+p.c.map((h,i)=>`<div class="hex"><b style="background:#${h}"></b><span style="flex:1"><b style="all:unset;font-weight:700">${ROLES[i]}</b><br>${["hex","rgb","hsl"].map(k=>`<a href="#" onclick="cp('${fmt(h,k)}');return false" style="color:var(--ac)">${fmt(h,k)}</a>`).join(" · ")}</span></div>`).join("")
+ +`<h4 style="margin:12px 0 4px">Kontras WCAG 2.2 AA</h4><div class="scroll"><table>`+rows.map(r=>`<tr><td>${r[0]}</td><td>${chk(r[1],r[2],r[3])}</td></tr>`).join("")+`</table></div>`
+ +(fails.length?`<div class="tag" style="margin-top:6px">Rekomendasi: untuk pasangan yang gagal, pakai warna ini hanya untuk elemen dekoratif atau teks besar (min 3:1), atau gelapkan/terangkan warna foreground. Warna asli tidak diubah.</div>`:"")
+ +preview(p)+`<div class="row" style="margin-top:10px"><button class="btn" onclick='cp(${JSON.stringify(p.c.map(h=>"#"+h).join(", "))})'>Salin HEX</button><button class="btn" onclick='cp(${JSON.stringify(cssVars(p))})'>Salin CSS</button><button class="btn" onclick='cp(${JSON.stringify(paletteJSON(p))})'>Salin JSON</button></div></div>`}
+
+function pcard(p){const f=S.fav.includes(p.id),c=S.cmp.includes(p.id);
+ return`<div class="card"><div class="sw" onclick="S.open=S.open=='${p.id}'?null:'${p.id}';render()">${p.c.map(h=>`<i style="background:#${h}"></i>`).join("")}</div>
+ <div class="cb"><div class="row" style="align-items:center;flex-wrap:nowrap"><div><h3>${p.name}</h3><div class="tag">${p.cat} · ${p.tags.join(" · ")}</div></div>
+ <button class="btn" style="flex:none;min-width:0" onclick="tog('fav','${p.id}')">${f?"★":"☆"}</button><button class="btn ${c?"p":""}" style="flex:none;min-width:0" onclick="tog('cmp','${p.id}')">${c?"✓":"+"} Bandingkan</button></div></div>${S.open==p.id?detail(p):""}</div>`}
+
+const V={
+font(){const q=S.fq.toLowerCase(),pm={};all().forEach(p=>pm[p.id]=p);
+ const FK={s:"Georgia,serif",n:"system-ui,sans-serif",m:"ui-monospace,Menlo,monospace"},ff=(f,k)=>"'"+f+"',"+FK[k];
+ const l=T.filter(t=>!q||(t[1]+t[2]+t[3]+t[8]).toLowerCase().includes(q));
+ return`<input placeholder="Cari gaya font atau kategori…" value="${S.fq}" oninput="S.fq=this.value;render(2)"><div class="tag">${T.length} gaya font. Warna font diambil dari peran token palet dan dicek kontrasnya.</div>`+l.map(t=>{
+  const p=pm[t[10]],hc=p.c[ROLES.indexOf(t[11])],bc=p.c[2],bg=p.c[0],lk=p.c[3],hf=ff(t[3],t[4]),bf=ff(t[8],t[9]);
+  const css=`:root{\n  --font-heading: ${hf};\n  --font-body: ${bf};\n  --color-heading: #${hc};\n  --color-body: #${bc};\n  --color-link: #${lk};\n}\nh1,h2{font-family:var(--font-heading);font-weight:${t[5]};letter-spacing:${t[6]};text-transform:${t[7]};color:var(--color-heading)}`.replace(/'/g,'"');
+  return`<div class="card"><div class="pv" style="background:#${bg};color:#${bc};margin:0;border-radius:0;font-family:${bf}"><div style="font-family:${hf};font-weight:${t[5]};letter-spacing:${t[6]};text-transform:${t[7]};color:#${hc};font-size:24px;line-height:1.2">Warna &amp; Tipografi</div><p style="margin:8px 0 0">Teks isi memakai peran text.primary di atas latar dasar. <span style="color:#${lk};text-decoration:underline">Tautan contoh</span></p></div>
+  <div class="cb"><h3>${t[1]}</h3><div class="tag">${t[2]} · ${t[3]} + ${t[8]} · palet ${p.name}</div>
+  <div style="font-size:13px;margin-top:6px">Judul (${t[11]}): ${chk(hc,bg,t[11].startsWith("text")?4.5:3)}<br>Isi (text.primary): ${chk(bc,bg,4.5)}<br>Tautan (brand.primary): ${chk(lk,bg,4.5)}</div>
+  <div class="row" style="margin-top:8px"><button class="btn" onclick='cp(${JSON.stringify(css)})'>Salin CSS</button></div></div></div>`}).join("")},
+dash(){const cats=[...new Set(P.map(p=>p.cat))];return`<div class="stat"><div><b>${all().length}</b>Palet solid</div><div><b>${G.length}</b>Gradien</div><div><b>${cats.length}</b>Kategori</div></div>
+<div class="tag">Target awal 60 palet dan 60 gradien sudah tercapai. Data kustom: ${S.custom.length}, favorit: ${S.fav.length}.</div>
+<h3>Koleksi terbaru</h3>`+P.slice(-3).map(pcard).join("")+`<h3>Favorit</h3>`+(S.fav.length?all().filter(p=>S.fav.includes(p.id)).map(pcard).join(""):`<div class="tag">Belum ada favorit.</div>`)},
+solid(){const cats=["Semua",...new Set(P.map(p=>p.cat))],q=S.q.toLowerCase().replace("#","");
+ const l=all().filter(p=>(S.cat=="Semua"||p.cat==S.cat)&&(!q||(p.name+p.cat+p.tags.join(" ")).toLowerCase().includes(q)||p.c.some(h=>h.includes(q))));
+ return`<input placeholder="Cari nama, tag, atau HEX…" value="${S.q}" oninput="S.q=this.value;render(1)"><div class="chips">${cats.map(c=>`<button class="chip ${S.cat==c?"on":""}" onclick="S.cat='${c}';render()">${c}</button>`).join("")}</div>`+(l.map(pcard).join("")||`<div class="tag">Tidak ada hasil.</div>`)},
+grad(){const ts=["Semua",...new Set(G.map(g=>g.type))];
+ return`<div class="chips">${ts.map(c=>`<button class="chip ${S.gt==c?"on":""}" onclick="S.gt='${c}';render()">${c}</button>`).join("")}</div>`+G.filter(g=>S.gt=="Semua"||g.type==S.gt).map(g=>`<div class="card"><div class="grad" style="background:${g.css};color:${g.tx};padding:12px;font-weight:700">${g.name}<div style="font-weight:400;font-size:13px">Teks cocok: ${g.tx}</div></div><div class="cb"><div class="tag">${g.type} · ${g.id}</div><code style="font-size:12px;word-break:break-all">${g.css}</code><div style="margin-top:8px"><button class="btn" onclick='cp(${JSON.stringify("background: "+g.css+";")})'>Salin CSS</button></div></div></div>`).join("")},
+gen(){const h=S.gen.replace("#","").toLowerCase(),ok=/^[0-9a-f]{6}$/.test(h);
+ let o=`<input id="gi" value="${S.gen}" placeholder="#RRGGBB atau rgb(...) atau hsl(...)" onchange="parseGen(this.value)"><div class="tag">Input HEX, rgb(r,g,b), atau hsl(h,s%,l%). Hasil tidak mengubah katalog sampai kamu menyimpannya.</div>`;
+ if(!ok)return o+`<div class="no">Format warna tidak valid.</div>`;
+ const[H,Sa,L]=r2hsl(h2r(h)),sw=a=>`<div class="sw" style="height:48px">${a.map(x=>`<i style="background:#${x};cursor:pointer" onclick="cp('#${x}')"></i>`).join("")}</div>`;
+ const scale=[95,88,78,66,54,42,30,20,12].map(l=>hsl2h(H,Sa,l)),
+ har={Complementary:[H,H+180],Analogous:[H-30,H,H+30],"Split complementary":[H,H+150,H+210],Triadic:[H,H+120,H+240],Tetradic:[H,H+90,H+180,H+270]};
+ o+=`<div class="card"><div class="cb"><b>Skala warna</b>${sw(scale)}<div class="tag">Ketuk swatch untuk salin. ${fmt(h,"hex")} · ${fmt(h,"rgb")} · ${fmt(h,"hsl")}</div></div></div>`;
+ o+=`<div class="card"><div class="cb"><b>Harmoni</b>`+Object.entries(har).map(([k,v])=>`<div class="tag" style="margin-top:8px">${k}</div>${sw(v.map(x=>hsl2h(x,Sa,L)))}`).join("")+`</div></div>`;
+ const g=`linear-gradient(135deg,#${hsl2h(H-20,Sa,L+12)} 0%,#${h} 50%,#${hsl2h(H+25,Sa,L-18)} 100%)`;
+ o+=`<div class="card"><div class="grad" style="background:${g}"></div><div class="cb"><code style="font-size:12px">${g}</code><div class="row" style="margin-top:8px"><button class="btn" onclick='cp(${JSON.stringify("background: "+g+";")})'>Salin CSS</button></div></div></div>`;
+ o+=`<div class="card"><div class="cb"><b>Kontras</b><div>Putih di atas warna ini: ${chk("ffffff",h,4.5)}</div><div>Hitam di atas warna ini: ${chk("000000",h,4.5)}</div><button class="btn p" style="margin-top:10px" onclick="saveGen()">Simpan sebagai palet kustom</button></div></div>`;return o},
+cmp(){const l=all().filter(p=>S.cmp.includes(p.id));if(l.length<2)return`<div class="tag">Pilih 2 sampai 4 palet lewat tombol "+ Bandingkan" di tab Palet.</div>`+l.map(pcard).join("");
+ return`<div class="scroll"><table><tr><th></th>${l.map(p=>`<th>${p.name}</th>`).join("")}</tr>
+ <tr><td>Swatch</td>${l.map(p=>`<td><div class="sw" style="height:34px;width:130px">${p.c.map(h=>`<i style="background:#${h}"></i>`).join("")}</div></td>`).join("")}</tr>
+ <tr><td>Kategori</td>${l.map(p=>`<td>${p.cat}</td>`).join("")}</tr><tr><td>Karakter</td>${l.map(p=>`<td>${p.tags.join(", ")}</td>`).join("")}</tr>
+ <tr><td>Teks/latar</td>${l.map(p=>`<td>${chk(p.c[2],p.c[0],4.5)}</td>`).join("")}</tr>
+ <tr><td>Primer/latar</td>${l.map(p=>`<td>${chk(p.c[3],p.c[0],3)}</td>`).join("")}</tr>
+ <tr><td>Aksen/latar</td>${l.map(p=>`<td>${chk(p.c[4],p.c[0],3)}</td>`).join("")}</tr></table></div>`+l.map(p=>preview(p)).join("")},
+fav(){const l=all().filter(p=>S.fav.includes(p.id));return(l.length?l.map(pcard).join(""):`<div class="tag">Belum ada favorit. Ketuk ☆ pada palet.</div>`)+`<div class="row" style="margin-top:12px"><button class="btn" onclick='cp(JSON.stringify(S.fav))'>Ekspor ID favorit</button><button class="btn" onclick="impFav()">Impor</button></div>`}
+};
+window.parseGen=v=>{v=v.trim();let m;
+ if(m=v.match(/^#?([0-9a-f]{6})$/i))S.gen="#"+m[1].toLowerCase();
+ else if(m=v.match(/^rgb\(\s*(\d+)\D+(\d+)\D+(\d+)/i))S.gen="#"+r2h([+m[1],+m[2],+m[3]]);
+ else if(m=v.match(/^hsl\(\s*([\d.]+)\D+([\d.]+)\D+([\d.]+)/i))S.gen="#"+hsl2h(+m[1],+m[2],+m[3]);
+ else S.gen=v;render()};
+window.saveGen=()=>{const h=S.gen.replace("#","");const[H,Sa]=r2hsl(h2r(h));
+ const c=[hsl2h(H,Math.min(Sa,25),96),hsl2h(H,Math.min(Sa,25),90),hsl2h(H,Math.min(Sa,30),12),hsl2h(H,Sa,35),hsl2h(H+180,Sa,40)];
+ S.custom.push({id:"custom-"+h+"-"+Date.now().toString(36),name:"Kustom #"+h.toUpperCase(),cat:"Kustom",c,tags:["generated"]});
+ sv("nz-custom",S.custom);toast("Disimpan sebagai entri baru");render()};
+window.impFav=()=>{const v=prompt("Tempel daftar ID favorit (JSON)");if(!v)return;try{const a=JSON.parse(v);if(Array.isArray(a)){S.fav=a.filter(x=>typeof x=="string");sv("nz-fav",S.fav);render()}}catch(e){toast("JSON tidak valid")}};
+(function(){const SG=["DM Serif Display","Press Start 2P","Bebas Neue","Pacifico","Rubik Mono One"],f=new Set();T.forEach(t=>{f.add(t[3]);f.add(t[8])});
+ const q=[...f].map(n=>"family="+n.replace(/ /g,"+")+(SG.includes(n)?"":":wght@400;700")).join("&"),l=document.createElement("link");
+ l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?"+q+"&display=swap";document.head.appendChild(l)})();
+const TABS=[["dash","Beranda"],["solid","Palet"],["grad","Gradien"],["font","Font"],["gen","Gen"],["cmp","Banding"],["fav","Fav"]];
+function render(keep){const m=$("m"),f=keep&&document.activeElement&&document.activeElement.tagName=="INPUT";
+ const pos=f?document.activeElement.selectionStart:0;
+ m.innerHTML=V[S.tab]();$("sub").textContent=all().length+" palet · "+G.length+" gradien · "+T.length+" font · "+S.fav.length+" favorit";
+ $("nv").innerHTML=TABS.map(t=>`<button class="${S.tab==t[0]?"on":""}" onclick="S.tab='${t[0]}';S.open=null;render();scrollTo(0,0)">${t[1]}${t[0]=="cmp"&&S.cmp.length?" ("+S.cmp.length+")":""}</button>`).join("");
+ if(f){const i=m.querySelector("input");if(i){i.focus();i.setSelectionRange(pos,pos)}}}
+render();
+</script></body></html>
