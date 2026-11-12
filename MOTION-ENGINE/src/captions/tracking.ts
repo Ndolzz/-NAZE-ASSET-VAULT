@@ -37,6 +37,7 @@ import {
   PlacementCandidate,
   RectPx,
   clampToSafe,
+  inflate,
   overlapArea,
   rectFromNormalized,
   solvePlacement,
