@@ -1,0 +1,129 @@
+{
+  "project": "HIDDEN-INTERNET-HIGHWAY",
+  "description": "Pemetaan kebutuhan visual per scene ke pustaka aset GENERATED-2D (kebijakan aset wajib). Ilustrasi prosedural scene dirender engine dari MOTION-ENGINE/src/illustration/generator.ts; aset di bawah adalah referensi visual pustaka per scene sesuai NAZE-STANDARDS.md (Pustaka Aset Wajib).",
+  "palette": "fut-aurora",
+  "assets": [
+    {
+      "scene": "scene-1 DIGITAL WORLD",
+      "path": "VISUAL/OBJECTS/PRIVACY/objects-privacy-smartphone.svg",
+      "role": "primary_visual",
+      "animation": "float-drift",
+      "palette": "fut-aurora"
+    },
+    {
+      "scene": "scene-1 DIGITAL WORLD",
+      "path": "VISUAL/MOTION-ASSETS/motion-assets-data-streams.svg",
+      "role": "motion_asset",
+      "animation": "stream-loop"
+    },
+    {
+      "scene": "scene-2 THE HIDDEN NETWORK",
+      "path": "VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-undersea-internet-cable.svg",
+      "role": "primary_visual",
+      "animation": "descend-reveal",
+      "palette": "fut-aurora"
+    },
+    {
+      "scene": "scene-2 THE HIDDEN NETWORK",
+      "path": "VISUAL/BACKGROUNDS/backgrounds-dark-navy-gradient.svg",
+      "role": "background"
+    },
+    {
+      "scene": "scene-3 GLOBAL CONNECTION",
+      "path": "VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-global-network-map.svg",
+      "role": "primary_visual",
+      "animation": "slow-pan",
+      "palette": "fut-aurora"
+    },
+    {
+      "scene": "scene-3 GLOBAL CONNECTION",
+      "path": "VISUAL/UI-ELEMENTS/ui-elements-world-map-interface.svg",
+      "role": "supporting_visual",
+      "animation": "fade-in"
+    },
+    {
+      "scene": "scene-4 99 PERCENT",
+      "path": "VISUAL/UI-ELEMENTS/ui-elements-data-chart.svg",
+      "role": "supporting_visual",
+      "animation": "count-up"
+    },
+    {
+      "scene": "scene-4 99 PERCENT",
+      "path": "VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-satellite-transmission.svg",
+      "role": "supporting_visual",
+      "animation": "orbit-drift"
+    },
+    {
+      "scene": "scene-5 FIBER OPTIC TECHNOLOGY",
+      "path": "VISUAL/MOTION-ASSETS/motion-assets-light-streaks.svg",
+      "role": "motion_asset",
+      "animation": "light-pulse",
+      "palette": "fut-aurora"
+    },
+    {
+      "scene": "scene-5 FIBER OPTIC TECHNOLOGY",
+      "path": "VISUAL/MOTION-ASSETS/motion-assets-signal-waves.svg",
+      "role": "motion_asset",
+      "animation": "wave-loop"
+    },
+    {
+      "scene": "scene-6 THE THREAT",
+      "path": "VISUAL/UI-ELEMENTS/ui-elements-warning-popup.svg",
+      "role": "supporting_visual",
+      "animation": "alert-pulse"
+    },
+    {
+      "scene": "scene-6 THE THREAT",
+      "path": "VISUAL/BACKGROUNDS/backgrounds-dark-circuit-background.svg",
+      "role": "background"
+    },
+    {
+      "scene": "scene-7 CABLE DAMAGE",
+      "path": "VISUAL/UI-ELEMENTS/ui-elements-system-alert.svg",
+      "role": "supporting_visual",
+      "animation": "glitch-shake"
+    },
+    {
+      "scene": "scene-7 CABLE DAMAGE",
+      "path": "VISUAL/MOTION-ASSETS/motion-assets-glitch-overlay.svg",
+      "role": "motion_asset",
+      "animation": "glitch-flicker"
+    },
+    {
+      "scene": "scene-8 REPAIR OPERATION",
+      "path": "VISUAL/OBJECTS/AI/objects-ai-ai-network-nodes.svg",
+      "role": "supporting_visual",
+      "animation": "node-relink"
+    },
+    {
+      "scene": "scene-8 REPAIR OPERATION",
+      "path": "VISUAL/MOTION-ASSETS/motion-assets-connection-lines.svg",
+      "role": "motion_asset",
+      "animation": "line-draw"
+    },
+    {
+      "scene": "scene-9 FINAL REVEAL",
+      "path": "VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-network-nodes-map.svg",
+      "role": "primary_visual",
+      "animation": "worldwide-ignite",
+      "palette": "fut-aurora"
+    },
+    {
+      "scene": "scene-9 FINAL REVEAL",
+      "path": "VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-hidden-network.svg",
+      "role": "supporting_visual",
+      "animation": "fade-in"
+    },
+    {
+      "scene": "scene-10 NAZE",
+      "path": "VISUAL/BACKGROUNDS/backgrounds-pure-black-studio.svg",
+      "role": "background"
+    },
+    {
+      "scene": "scene-10 NAZE",
+      "path": "VISUAL/MOTION-ASSETS/motion-assets-energy-rings.svg",
+      "role": "decorative",
+      "animation": "ring-expand"
+    }
+  ]
+}
