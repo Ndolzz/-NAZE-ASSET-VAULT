@@ -1,0 +1,64 @@
+name: NAZE Vault Index
+
+on:
+  push:
+    paths:
+      - 'VISUAL/**'
+      - 'AUDIO/**'
+      - 'FONTS/**'
+      - 'EXAMPLE_VIDEO/**'
+      - 'NAZE-3D/assets-3d/**'
+      - 'PROJECTS/**'
+      - 'DATABASE/**'
+      - 'SCRIPTS/**'
+      - '.github/workflows/vault-index.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: naze-vault-index
+  cancel-in-progress: false
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hindari loop CI dari commit metadata
+        if: github.actor == 'github-actions[bot]'
+        run: echo "Commit berasal dari bot indexing, dilewati." && exit 0
+
+      - name: Checkout repository
+        if: github.actor != 'github-actions[bot]'
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: github.actor != 'github-actions[bot]'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Jalankan test modul inti
+        if: github.actor != 'github-actions[bot]'
+        working-directory: WEBSITE
+        run: node --test tests/
+
+      - name: Bangun indeks aset dan proyek
+        if: github.actor != 'github-actions[bot]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node SCRIPTS/build-index.mjs
+
+      - name: Commit indeks bila berubah
+        if: github.actor != 'github-actions[bot]'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add DATABASE/
+          if git diff --cached --quiet; then
+            echo "Indeks tidak berubah."
+          else
+            git commit -m "Perbarui indeks aset & proyek [skip ci]"
+            git push
+          fi

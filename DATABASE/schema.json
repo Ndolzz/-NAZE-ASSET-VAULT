@@ -1,0 +1,39 @@
+{
+  "$comment": "Skema indeks NAZE Asset Vault. Indeks dibangun ulang penuh dari isi repository oleh SCRIPTS/build-index.mjs (CI: workflow NAZE Vault Index). Jangan edit manual.",
+  "assetsIndex": {
+    "file": "DATABASE/assets-index.json",
+    "schemaVersion": 1,
+    "kind": "assets",
+    "requiredFields": ["schemaVersion", "kind", "generatedAt", "source", "totals", "categories", "assets"],
+    "assetFields": {
+      "name": "string, nama file",
+      "path": "string, path relatif repo",
+      "category": "string, root aset (VISUAL | AUDIO | FONTS | EXAMPLE_VIDEO | NAZE-3D)",
+      "subcategory": "string, direktori induk",
+      "extension": "string, ekstensi lowercase tanpa titik",
+      "size": "number, byte",
+      "sha": "string opsional, blob SHA Git"
+    },
+    "excluded": [
+      "File penanda .gitkeep",
+      "Direktori sistem: .github/, CATALOG/, CONFIG/, DATABASE/, MOTION-ENGINE/, SCRIPTS/, WEBSITE/, RENDER-LOGS/, RENDER-3D/",
+      "Kode engine NAZE-3D di luar NAZE-3D/assets-3d/"
+    ]
+  },
+  "projectsIndex": {
+    "file": "DATABASE/projects-index.json",
+    "schemaVersion": 1,
+    "kind": "projects",
+    "requiredFields": ["schemaVersion", "kind", "generatedAt", "source", "totals", "projects", "rootFiles"],
+    "projectFields": {
+      "name": "string, nama folder proyek",
+      "path": "string, PROJECTS/<nama>",
+      "hasProjectJson": "boolean, ada PROJECTS/<nama>/project.json (skema naze-project/2.0)",
+      "fileCount": "number, jumlah file (tanpa penanda)",
+      "totalBytes": "number",
+      "folders": "array string, folder tingkat pertama dalam proyek"
+    },
+    "rootFiles": "File langsung di root PROJECTS/ (mis. narasi MP3 lepas); tidak dipindahkan otomatis oleh sistem."
+  },
+  "projectMetadata": "PROJECTS/<nama>/project.json mengikuti skema naze-project/2.0 milik Motion Engine."
+}

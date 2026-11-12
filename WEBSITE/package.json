@@ -1,0 +1,13 @@
+{
+  "name": "naze-asset-vault-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website manajemen aset NAZE-ASSET-VAULT (frontend statis + API serverless Vercel)",
+  "scripts": {
+    "test": "node --test tests/",
+    "build-index": "node ../SCRIPTS/build-index.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
