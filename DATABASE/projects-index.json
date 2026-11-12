@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "kind": "projects",
-  "generatedAt": "2026-11-12T12:17:20.919Z",
+  "generatedAt": "2026-11-12T14:41:39.822Z",
   "source": {
     "repo": "Ndolzz/-NAZE-ASSET-VAULT",
     "branch": "main",
-    "commit": "a4b2c5ed705912d51d8128a63a8993b07d45bfae"
+    "commit": "f9e90bd1ee0975346caf9b34f2814e6b5d5286e1"
   },
   "totals": {
     "projects": 12,
@@ -105,9 +105,10 @@
       "name": "HIDDEN-INTERNET-HIGHWAY",
       "path": "PROJECTS/HIDDEN-INTERNET-HIGHWAY",
       "hasProjectJson": true,
-      "fileCount": 3,
-      "totalBytes": 45200,
+      "fileCount": 4,
+      "totalBytes": 49556,
       "folders": [
+        "ASSET-MAP.json",
         "narration.md",
         "README.md"
       ]
