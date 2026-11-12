@@ -1,0 +1,1131 @@
+{
+  "schema": "naze-project/2.0",
+  "name": "HIDDEN-INTERNET-HIGHWAY",
+  "style": "editorial-kinetic",
+  "palette": {
+    "background": "#080b16",
+    "primary": "#00e5ff",
+    "secondary": "#f59e0b",
+    "accent": "#b2ff59",
+    "text": "#e9f0ff",
+    "dark": true
+  },
+  "colorSystem": {
+    "paletteId": "fut-aurora",
+    "mode": "dark",
+    "gradientIds": ["grad-deep-space", "grad-ocean-depth"],
+    "typographyId": "type-chrome",
+    "overrides": {
+      "brand.primary": "#00e5ff",
+      "brand.secondary": "#f59e0b"
+    }
+  },
+  "profile": "vertical-1080",
+  "animationIntensity": 1,
+  "accentWords": true,
+  "burnInCc": true,
+  "narration": {
+    "engine": "file",
+    "file": "PROJECTS/speechma_audio_Remy Indonesian_at_5_50_51 PM_on_November_12th_2026.mp3",
+    "language": "id"
+  },
+  "scenes": [
+    {
+      "id": "scene-1",
+      "title": "EVERYTHING IS CONNECTED",
+      "narration": "Bayangkan, setiap kali kamu membuka YouTube, ada perjalanan data raksasa yang tak pernah kamu lihat.",
+      "subjects": [
+        { "kind": "object", "name": "earth" },
+        { "kind": "object", "name": "phone", "features": { "dataFlow": true } }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/IMPACT/impact_bell_heavy_000.ogg", "volume": 0.4, "at": 0.2 },
+        { "file": "AUDIO/SFX/DIGITAL/tone_1.ogg", "volume": 0.35, "at": 1.1 },
+        { "file": "AUDIO/SFX/DIGITAL/power_up_3.ogg", "volume": 0.4, "at": 1.9 },
+        { "file": "AUDIO/SFX/INTERFACE/click_004.wav", "volume": 0.35, "at": 3.2 },
+        { "file": "AUDIO/SFX/DIGITAL/two_tone_1.ogg", "volume": 0.35, "at": 4.4 },
+        { "file": "AUDIO/SFX/DIGITAL/high_up.ogg", "volume": 0.3, "at": 5.6 }
+      ],
+      "layers": [
+        {
+          "id": "s1-band",
+          "kind": "halftone",
+          "box": [0, 0.02, 1, 0.05],
+          "fill": "primary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.1 }
+        },
+        {
+          "id": "s1-kicker",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "01 / DIGITAL WORLD",
+          "box": [0.04, 0.08, 0.6, 0.05],
+          "fill": "secondary",
+          "z": 1.02,
+          "enter": { "type": "rise", "at": 0.3 }
+        },
+        {
+          "id": "s1-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "EVERYTHING IS CONNECTED",
+          "box": [0.04, 0.14, 0.92, 0.2],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "signal-flash",
+          "enter": { "type": "pop", "at": 0.2 },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 7.6, "value": -8, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s1-panel",
+          "kind": "panel",
+          "box": [0.06, 0.35, 0.88, 0.45],
+          "fill": "primary",
+          "z": 0.95,
+          "enter": { "type": "slideR", "at": 0.5 },
+          "transform": {
+            "alpha": [
+              { "t": 0, "value": 0.12, "easing": "easeInOutSine" },
+              { "t": 3, "value": 0.3, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s1-null",
+          "kind": "null",
+          "box": [0.05, 0.4, 0.9, 0.42],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 4, "value": -18, "easing": "easeInOutSine" },
+              { "t": 7.6, "value": -6, "easing": "easeInOutSine" }
+            ],
+            "rotate": [
+              { "t": 0, "value": -0.8, "easing": "easeInOutSine" },
+              { "t": 7.6, "value": 0.8, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s1-earth",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s1-null",
+          "box": [0.1, 0.42, 0.8, 0.34],
+          "z": 1.18,
+          "enter": { "type": "pop", "at": 0.8 }
+        },
+        {
+          "id": "s1-phone",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s1-null",
+          "box": [0.28, 0.76, 0.44, 0.18],
+          "z": 1.12,
+          "enter": { "type": "pop", "at": 2.6 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.06 },
+          { "at": 1.4, "zoom": 1.2, "rotate": -2, "ease": "easeInOutSine" },
+          { "at": 3.6, "zoom": 1.3, "dolly": 0.55, "track": "s1-earth", "ease": "easeInOutSine" },
+          { "at": 6.6, "zoom": 1.12, "rotate": 0, "dolly": 0, "track": null, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "starfield"
+    },
+    {
+      "id": "scene-2",
+      "title": "THE HIDDEN INTERNET",
+      "narration": "Jauh di bawah permukaan laut, kabel fiber optik raksasa membentang ribuan kilometer di dasar samudra.",
+      "subjects": [
+        { "kind": "object", "name": "submarine-cable" },
+        { "kind": "object", "name": "gauge", "features": { "label": "RIBUAN KM" } }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/IMPACT/impact_glass_heavy_000.ogg", "volume": 0.4, "at": 0.2 },
+        { "file": "AUDIO/SFX/DIGITAL/low_down.ogg", "volume": 0.4, "at": 1.0 },
+        { "file": "AUDIO/SFX/DIGITAL/low_three_tone.ogg", "volume": 0.35, "at": 2.0 },
+        { "file": "AUDIO/SFX/INTERFACE/switch_001.wav", "volume": 0.4, "at": 3.4 },
+        { "file": "AUDIO/SFX/DIGITAL/pep_sound_2.ogg", "volume": 0.3, "at": 4.6 },
+        { "file": "AUDIO/SFX/IMPACT/impact_soft_heavy_001.ogg", "volume": 0.35, "at": 5.8 }
+      ],
+      "layers": [
+        {
+          "id": "s2-band",
+          "kind": "halftone",
+          "box": [0, 0.93, 1, 0.07],
+          "fill": "primary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.1 }
+        },
+        {
+          "id": "s2-kicker",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "02 / THE HIDDEN NETWORK",
+          "box": [0.04, 0.07, 0.7, 0.05],
+          "fill": "secondary",
+          "z": 1.02,
+          "enter": { "type": "rise", "at": 0.3 }
+        },
+        {
+          "id": "s2-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "THE HIDDEN INTERNET",
+          "box": [0.04, 0.12, 0.92, 0.18],
+          "fill": "text",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "stencil-track",
+          "enter": { "type": "pop", "at": 0.4 }
+        },
+        {
+          "id": "s2-grid",
+          "kind": "grid",
+          "box": [0.06, 0.32, 0.88, 0.42],
+          "fill": "primary",
+          "z": 0.9,
+          "enter": { "type": "wipe", "at": 0.7 },
+          "transform": {
+            "alpha": [
+              { "t": 0, "value": 0.15, "easing": "easeInOutSine" },
+              { "t": 7.8, "value": 0.3, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s2-null",
+          "kind": "null",
+          "box": [0.03, 0.34, 0.94, 0.5],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 40, "easing": "easeInOutSine" },
+              { "t": 4.5, "value": -16, "easing": "easeInOutSine" },
+              { "t": 7.8, "value": -8, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s2-cable",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s2-null",
+          "box": [0.04, 0.38, 0.92, 0.3],
+          "z": 1.18,
+          "enter": { "type": "pop", "at": 0.9 }
+        },
+        {
+          "id": "s2-gauge",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s2-null",
+          "box": [0.3, 0.68, 0.4, 0.2],
+          "z": 1.12,
+          "enter": { "type": "pop", "at": 2.4 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.35 },
+          { "at": 1.6, "zoom": 1.1, "panY": -0.06, "ease": "easeInOutSine" },
+          { "at": 4.2, "zoom": 1.22, "dolly": 0.5, "track": "s2-cable", "ease": "easeInOutSine" },
+          { "at": 7.2, "zoom": 1.05, "panY": 0.04, "dolly": 0, "track": null, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "waves"
+    },
+    {
+      "id": "scene-3",
+      "title": "GLOBAL SUBMARINE CABLE NETWORK",
+      "narration": "Inilah salah satu infrastruktur terpenting di era digital, jaringan kabel bawah laut yang menghubungkan seluruh benua.",
+      "subjects": [
+        { "kind": "object", "name": "cable-map" },
+        { "kind": "object", "name": "earth" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/scroll_001.wav", "volume": 0.3, "at": 0.2 },
+        { "file": "AUDIO/SFX/DIGITAL/laser_3.ogg", "volume": 0.35, "at": 1.2 },
+        { "file": "AUDIO/SFX/DIGITAL/three_tone_1.ogg", "volume": 0.35, "at": 2.4 },
+        { "file": "AUDIO/SFX/INTERFACE/click_003.wav", "volume": 0.35, "at": 3.8 },
+        { "file": "AUDIO/SFX/DIGITAL/laser_6.ogg", "volume": 0.3, "at": 5.0 },
+        { "file": "AUDIO/SFX/DIGITAL/power_up_5.ogg", "volume": 0.35, "at": 6.2 }
+      ],
+      "layers": [
+        {
+          "id": "s3-band",
+          "kind": "halftone",
+          "box": [0, 0.02, 1, 0.05],
+          "fill": "accent",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.1 }
+        },
+        {
+          "id": "s3-kicker",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "03 / GLOBAL CONNECTION",
+          "box": [0.04, 0.07, 0.7, 0.05],
+          "fill": "secondary",
+          "z": 1.02,
+          "enter": { "type": "rise", "at": 0.25 }
+        },
+        {
+          "id": "s3-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "GLOBAL SUBMARINE CABLE NETWORK",
+          "box": [0.04, 0.11, 0.92, 0.24],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "headline-break",
+          "enter": { "type": "pop", "at": 0.5 },
+          "transform": {
+            "x": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 9, "value": 10, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s3-panel",
+          "kind": "panel",
+          "box": [0.05, 0.72, 0.9, 0.16],
+          "fill": "primary",
+          "z": 0.92,
+          "enter": { "type": "slideR", "at": 3.2 },
+          "transform": {
+            "alpha": [
+              { "t": 3.2, "value": 0.15, "easing": "easeInOutSine" },
+              { "t": 9, "value": 0.32, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s3-null",
+          "kind": "null",
+          "box": [0.02, 0.38, 0.96, 0.46],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 5, "value": -14, "easing": "easeInOutSine" },
+              { "t": 9, "value": -4, "easing": "easeInOutSine" }
+            ],
+            "rotate": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 9, "value": 1, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s3-map",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s3-null",
+          "box": [0.03, 0.4, 0.94, 0.34],
+          "z": 1.18,
+          "enter": { "type": "pop", "at": 1.0 }
+        },
+        {
+          "id": "s3-earth",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s3-null",
+          "box": [0.3, 0.72, 0.4, 0.16],
+          "z": 1.1,
+          "enter": { "type": "pop", "at": 3.0 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.1 },
+          { "at": 2.2, "zoom": 1.18, "panX": 0.05, "ease": "easeInOutSine" },
+          { "at": 4.8, "zoom": 1.26, "dolly": 0.45, "track": "s3-map", "ease": "easeInOutSine" },
+          { "at": 8, "zoom": 1.08, "panX": -0.04, "dolly": 0, "track": null, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "blueprint"
+    },
+    {
+      "id": "scene-4",
+      "title": "99% INTERNATIONAL DATA TRAFFIC",
+      "narration": "Lebih dari 99 persen lalu lintas data internasional mengalir lewat kabel bawah laut, bukan lewat satelit.",
+      "subjects": [
+        { "kind": "object", "name": "fiber-core" },
+        { "kind": "chart", "data": [12, 30, 55, 78, 99] }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/DIGITAL/power_up_1.ogg", "volume": 0.4, "at": 0.2 },
+        { "file": "AUDIO/SFX/IMPACT/impact_punch_heavy_000.ogg", "volume": 0.45, "at": 0.9 },
+        { "file": "AUDIO/SFX/INTERFACE/click_002.wav", "volume": 0.35, "at": 2.2 },
+        { "file": "AUDIO/SFX/DIGITAL/zap_two_tone.ogg", "volume": 0.3, "at": 3.2 },
+        { "file": "AUDIO/SFX/DIGITAL/three_tone_2.ogg", "volume": 0.35, "at": 4.6 },
+        { "file": "AUDIO/SFX/INTERFACE/tick_001.wav", "volume": 0.3, "at": 5.8 }
+      ],
+      "layers": [
+        {
+          "id": "s4-band",
+          "kind": "halftone",
+          "box": [0, 0.9, 1, 0.1],
+          "fill": "secondary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.1 }
+        },
+        {
+          "id": "s4-kicker",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "04 / 99 PERCENT",
+          "box": [0.04, 0.07, 0.6, 0.05],
+          "fill": "secondary",
+          "z": 1.02,
+          "enter": { "type": "rise", "at": 0.25 }
+        },
+        {
+          "id": "s4-num",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "99%",
+          "box": [0.05, 0.26, 0.9, 0.3],
+          "fill": "text",
+          "z": 1.2,
+          "textStyle": "stencil-track",
+          "enter": { "type": "pop", "at": 0.3 },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 2, "easing": "easeInOutSine" },
+              { "t": 7.8, "value": -2, "easing": "easeInOutSine" }
+            ],
+            "scale": [
+              { "t": 0.3, "value": 0.94, "easing": "easeInOutSine" },
+              { "t": 2.4, "value": 1.04, "easing": "easeInOutSine" },
+              { "t": 7.8, "value": 1, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s4-title",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "INTERNATIONAL DATA TRAFFIC",
+          "box": [0.04, 0.58, 0.92, 0.08],
+          "fill": "secondary",
+          "z": 1.05,
+          "textStyle": "ticker-scroll",
+          "enter": { "type": "rise", "at": 1.2 }
+        },
+        {
+          "id": "s4-null",
+          "kind": "null",
+          "box": [0.03, 0.66, 0.94, 0.3],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 7.8, "value": -10, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s4-core",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s4-null",
+          "box": [0.08, 0.68, 0.5, 0.22],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 2.6 }
+        },
+        {
+          "id": "s4-chart",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s4-null",
+          "box": [0.6, 0.7, 0.36, 0.18],
+          "z": 1.12,
+          "enter": { "type": "pop", "at": 3.4 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.5 },
+          { "at": 1.5, "zoom": 1.15, "ease": "easeInOutSine" },
+          { "at": 3.5, "zoom": 1.3, "dolly": 0.6, "track": "s4-num", "ease": "easeInOutSine" },
+          { "at": 6.5, "zoom": 1.0, "panY": 0.05, "dolly": 0, "track": null, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "concentric"
+    },
+    {
+      "id": "scene-5",
+      "title": "LIGHT CARRIES DATA",
+      "narration": "Kabel ini dirancang dengan lapisan pelindung khusus, dan di dalamnya, cahaya membawa data dengan kecepatan luar biasa.",
+      "subjects": [
+        { "kind": "object", "name": "fiber-core" },
+        { "kind": "object", "name": "submarine-cable" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/toggle_001.wav", "volume": 0.4, "at": 0.2 },
+        { "file": "AUDIO/SFX/DIGITAL/zap_1.ogg", "volume": 0.3, "at": 1.0 },
+        { "file": "AUDIO/SFX/DIGITAL/laser_1.ogg", "volume": 0.3, "at": 2.2 },
+        { "file": "AUDIO/SFX/INTERFACE/open_003.wav", "volume": 0.4, "at": 3.6 },
+        { "file": "AUDIO/SFX/DIGITAL/high_down.ogg", "volume": 0.3, "at": 5.0 },
+        { "file": "AUDIO/SFX/INTERFACE/confirmation_001.wav", "volume": 0.35, "at": 6.4 }
+      ],
+      "layers": [
+        {
+          "id": "s5-band",
+          "kind": "halftone",
+          "box": [0, 0.02, 1, 0.05],
+          "fill": "primary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.1 }
+        },
+        {
+          "id": "s5-kicker",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "05 / FIBER OPTIC TECHNOLOGY",
+          "box": [0.04, 0.07, 0.8, 0.05],
+          "fill": "secondary",
+          "z": 1.02,
+          "enter": { "type": "rise", "at": 0.25 }
+        },
+        {
+          "id": "s5-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "LIGHT CARRIES DATA",
+          "box": [0.04, 0.12, 0.92, 0.18],
+          "fill": "accent",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "terminal-code",
+          "enter": { "type": "pop", "at": 0.5 }
+        },
+        {
+          "id": "s5-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "PELINDUNG, SERAT, CAHAYA",
+          "box": [0.04, 0.3, 0.92, 0.06],
+          "fill": "text",
+          "z": 1.04,
+          "enter": { "type": "rise", "at": 1.6 }
+        },
+        {
+          "id": "s5-shape",
+          "kind": "shape",
+          "shape": "ring",
+          "box": [0.26, 0.42, 0.48, 0.32],
+          "fill": "accent",
+          "z": 0.98,
+          "enter": { "type": "spin", "at": 1.2 },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 9, "value": 40, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s5-null",
+          "kind": "null",
+          "box": [0.03, 0.4, 0.94, 0.5],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": -1, "easing": "easeInOutSine" },
+              { "t": 9, "value": 1, "easing": "easeInOutSine" }
+            ],
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 9, "value": -12, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s5-core",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s5-null",
+          "box": [0.04, 0.42, 0.92, 0.36],
+          "z": 1.2,
+          "enter": { "type": "pop", "at": 1.0 }
+        },
+        {
+          "id": "s5-cable",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s5-null",
+          "box": [0.1, 0.78, 0.8, 0.14],
+          "z": 1.1,
+          "enter": { "type": "pop", "at": 3.2 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.2, "panY": -0.04 },
+          { "at": 2.0, "zoom": 1.32, "dolly": 0.55, "track": "s5-core", "ease": "easeInOutSine" },
+          { "at": 5.6, "zoom": 1.1, "ease": "easeInOutSine" },
+          { "at": 8.2, "zoom": 1.16, "panY": 0.05, "rotate": 1.5, "dolly": 0, "track": null, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "circuit"
+    },
+    {
+      "id": "scene-6",
+      "title": "ONE CABLE. GLOBAL IMPACT.",
+      "narration": "Namun, jaringan ini bukan tanpa risiko.",
+      "subjects": [
+        { "kind": "object", "name": "cargo-ship" },
+        { "kind": "object", "name": "anchor" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/IMPACT/impact_metal_heavy_000.ogg", "volume": 0.5, "at": 0.15 },
+        { "file": "AUDIO/SFX/INTERFACE/scratch_001.wav", "volume": 0.35, "at": 0.9 },
+        { "file": "AUDIO/SFX/DIGITAL/low_random.ogg", "volume": 0.35, "at": 1.9 },
+        { "file": "AUDIO/SFX/DIGITAL/pep_sound_5.ogg", "volume": 0.3, "at": 2.6 }
+      ],
+      "layers": [
+        {
+          "id": "s6-band",
+          "kind": "halftone",
+          "box": [0, 0.88, 1, 0.12],
+          "fill": "secondary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.05 }
+        },
+        {
+          "id": "s6-kicker",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "06 / THE THREAT",
+          "box": [0.04, 0.07, 0.6, 0.05],
+          "fill": "secondary",
+          "z": 1.02,
+          "enter": { "type": "rise", "at": 0.2 }
+        },
+        {
+          "id": "s6-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "ONE CABLE. GLOBAL IMPACT.",
+          "box": [0.04, 0.12, 0.92, 0.18],
+          "fill": "secondary",
+          "z": 1.1,
+          "textStyle": "stamp-red",
+          "enter": { "type": "pop", "at": 0.4 }
+        },
+        {
+          "id": "s6-null",
+          "kind": "null",
+          "box": [0.03, 0.34, 0.94, 0.54],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 0.6, "easing": "easeInOutSine" },
+              { "t": 3.4, "value": -0.6, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s6-ship",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s6-null",
+          "box": [0.05, 0.34, 0.9, 0.28],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 0.5 }
+        },
+        {
+          "id": "s6-anchor",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s6-null",
+          "box": [0.36, 0.44, 0.28, 0.32],
+          "z": 1.2,
+          "enter": { "type": "pop", "at": 1.0 },
+          "transform": {
+            "y": [
+              { "t": 1.0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 3.3, "value": 30, "easing": "easeInOutSine" }
+            ]
+          }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.24, "panY": 0.06 },
+          { "at": 1.4, "zoom": 1.14, "ease": "easeInOutSine" },
+          { "at": 2.4, "zoom": 1.3, "dolly": 0.5, "track": "s6-anchor", "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "radar-sweep"
+    },
+    {
+      "id": "scene-7",
+      "title": "CONNECTION LOST",
+      "narration": "Jangkar kapal, aktivitas penangkapan ikan, hingga gempa bumi bisa memutus kabel dan memadamkan koneksi jutaan orang.",
+      "subjects": [
+        { "kind": "object", "name": "broken-cable" },
+        { "kind": "object", "name": "anchor" },
+        { "kind": "chart", "data": [96, 72, 40, 8] }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/glitch_001.wav", "volume": 0.45, "at": 0.2 },
+        { "file": "AUDIO/SFX/IMPACT/impact_metal_heavy_001.ogg", "volume": 0.5, "at": 1.2 },
+        { "file": "AUDIO/SFX/INTERFACE/scratch_002.wav", "volume": 0.35, "at": 2.2 },
+        { "file": "AUDIO/SFX/INTERFACE/error_004.wav", "volume": 0.4, "at": 3.4 },
+        { "file": "AUDIO/SFX/DIGITAL/zap_three_tone_down.ogg", "volume": 0.35, "at": 4.6 },
+        { "file": "AUDIO/SFX/IMPACT/impact_tin_medium_000.ogg", "volume": 0.3, "at": 5.8 },
+        { "file": "AUDIO/SFX/DIGITAL/phaser_down_1.ogg", "volume": 0.35, "at": 6.8 }
+      ],
+      "layers": [
+        {
+          "id": "s7-band",
+          "kind": "halftone",
+          "box": [0, 0.02, 1, 0.05],
+          "fill": "secondary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.05 }
+        },
+        {
+          "id": "s7-kicker",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "07 / CABLE DAMAGE",
+          "box": [0.04, 0.07, 0.6, 0.05],
+          "fill": "secondary",
+          "z": 1.02,
+          "enter": { "type": "rise", "at": 0.25 }
+        },
+        {
+          "id": "s7-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "CONNECTION LOST",
+          "box": [0.04, 0.12, 0.92, 0.18],
+          "fill": "text",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "ink-slam",
+          "enter": { "type": "pop", "at": 0.6 },
+          "transform": {
+            "x": [
+              { "t": 0.6, "value": 0, "easing": "easeInOutSine" },
+              { "t": 2.2, "value": -6, "easing": "easeInOutSine" },
+              { "t": 9, "value": 0, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s7-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "SINYAL TERPUTUS",
+          "box": [0.04, 0.3, 0.92, 0.06],
+          "fill": "secondary",
+          "z": 1.04,
+          "enter": { "type": "rise", "at": 1.4 }
+        },
+        {
+          "id": "s7-null",
+          "kind": "null",
+          "box": [0.02, 0.36, 0.96, 0.5],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "rotate": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 4.5, "value": -1.5, "easing": "easeInOutSine" },
+              { "t": 9, "value": 1, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s7-broken",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s7-null",
+          "box": [0.04, 0.4, 0.92, 0.3],
+          "z": 1.18,
+          "enter": { "type": "pop", "at": 0.9 }
+        },
+        {
+          "id": "s7-anchor",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s7-null",
+          "box": [0.66, 0.36, 0.26, 0.24],
+          "z": 1.15,
+          "enter": { "type": "pop", "at": 2.0 },
+          "transform": {
+            "y": [
+              { "t": 2.0, "value": -10, "easing": "easeInOutSine" },
+              { "t": 5.5, "value": 18, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s7-chart",
+          "kind": "subject",
+          "subjectIndex": 2,
+          "parent": "s7-null",
+          "box": [0.08, 0.72, 0.84, 0.2],
+          "z": 1.12,
+          "enter": { "type": "pop", "at": 3.0 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.32 },
+          { "at": 2.4, "zoom": 1.12, "panX": -0.05, "ease": "easeInOutSine" },
+          { "at": 4.8, "zoom": 1.2, "dolly": 0.5, "track": "s7-broken", "ease": "easeInOutSine" },
+          { "at": 7.8, "zoom": 1.06, "panY": 0.05, "dolly": 0, "track": null, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "scanlines"
+    },
+    {
+      "id": "scene-8",
+      "title": "UNDERWATER REPAIR OPERATION",
+      "narration": "Kapal khusus harus dikirim ke lokasi kerusakan, mengangkat kabel dari dasar laut, lalu menyambungnya kembali.",
+      "subjects": [
+        { "kind": "object", "name": "repair-ship" },
+        { "kind": "object", "name": "network" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/switch_003.wav", "volume": 0.4, "at": 0.2 },
+        { "file": "AUDIO/SFX/IMPACT/impact_metal_light_000.ogg", "volume": 0.35, "at": 1.0 },
+        { "file": "AUDIO/SFX/INTERFACE/toggle_003.wav", "volume": 0.35, "at": 2.0 },
+        { "file": "AUDIO/SFX/DIGITAL/two_tone_2.ogg", "volume": 0.3, "at": 3.2 },
+        { "file": "AUDIO/SFX/IMPACT/impact_plate_light_000.ogg", "volume": 0.3, "at": 4.6 },
+        { "file": "AUDIO/SFX/DIGITAL/power_up_7.ogg", "volume": 0.35, "at": 5.8 },
+        { "file": "AUDIO/SFX/INTERFACE/confirmation_003.wav", "volume": 0.35, "at": 7.0 }
+      ],
+      "layers": [
+        {
+          "id": "s8-band",
+          "kind": "halftone",
+          "box": [0, 0.9, 1, 0.1],
+          "fill": "accent",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.1 }
+        },
+        {
+          "id": "s8-kicker",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "08 / REPAIR OPERATION",
+          "box": [0.04, 0.07, 0.7, 0.05],
+          "fill": "secondary",
+          "z": 1.02,
+          "enter": { "type": "rise", "at": 0.25 }
+        },
+        {
+          "id": "s8-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "UNDERWATER REPAIR OPERATION",
+          "box": [0.04, 0.11, 0.92, 0.22],
+          "fill": "text",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "terminal-code",
+          "enter": { "type": "pop", "at": 0.5 }
+        },
+        {
+          "id": "s8-sub",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "ROV DAN PERALATAN ROBOTIK",
+          "box": [0.04, 0.32, 0.92, 0.06],
+          "fill": "accent",
+          "z": 1.04,
+          "enter": { "type": "rise", "at": 1.3 }
+        },
+        {
+          "id": "s8-panel",
+          "kind": "panel",
+          "box": [0.05, 0.73, 0.9, 0.18],
+          "fill": "accent",
+          "z": 0.92,
+          "enter": { "type": "slideR", "at": 3.2 },
+          "transform": {
+            "alpha": [
+              { "t": 3.2, "value": 0.12, "easing": "easeInOutSine" },
+              { "t": 8.5, "value": 0.28, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s8-null",
+          "kind": "null",
+          "box": [0.02, 0.36, 0.96, 0.52],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 8.5, "value": -12, "easing": "easeInOutSine" }
+            ],
+            "rotate": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 8.5, "value": 1, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s8-ship",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s8-null",
+          "box": [0.03, 0.38, 0.94, 0.4],
+          "z": 1.18,
+          "enter": { "type": "pop", "at": 0.8 }
+        },
+        {
+          "id": "s8-net",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s8-null",
+          "box": [0.14, 0.76, 0.72, 0.16],
+          "z": 1.1,
+          "enter": { "type": "pop", "at": 3.4 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.18, "panY": -0.05 },
+          { "at": 1.8, "zoom": 1.26, "dolly": 0.5, "track": "s8-ship", "ease": "easeInOutSine" },
+          { "at": 5.0, "zoom": 1.1, "panY": 0.06, "dolly": 0, "track": null, "ease": "easeInOutSine" },
+          { "at": 7.6, "zoom": 1.15, "rotate": -1, "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "dot-wave"
+    },
+    {
+      "id": "scene-9",
+      "title": "THE WORLD IS CONNECTED",
+      "narration": "Jadi, saat kamu mengakses dunia digital, ingat, ada jalan raya tersembunyi di dasar samudra yang bekerja tanpa henti.",
+      "subjects": [
+        { "kind": "object", "name": "cable-map" },
+        { "kind": "object", "name": "earth" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/DIGITAL/phaser_up_2.ogg", "volume": 0.35, "at": 0.2 },
+        { "file": "AUDIO/SFX/DIGITAL/pep_sound_3.ogg", "volume": 0.3, "at": 1.2 },
+        { "file": "AUDIO/SFX/INTERFACE/click_005.wav", "volume": 0.35, "at": 2.4 },
+        { "file": "AUDIO/SFX/DIGITAL/zap_two_tone_2.ogg", "volume": 0.3, "at": 3.6 },
+        { "file": "AUDIO/SFX/DIGITAL/power_up_10.ogg", "volume": 0.35, "at": 5.0 },
+        { "file": "AUDIO/SFX/IMPACT/impact_soft_medium_000.ogg", "volume": 0.3, "at": 6.2 }
+      ],
+      "layers": [
+        {
+          "id": "s9-band",
+          "kind": "halftone",
+          "box": [0, 0.02, 1, 0.05],
+          "fill": "primary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.1 }
+        },
+        {
+          "id": "s9-kicker",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "09 / FINAL REVEAL",
+          "box": [0.04, 0.07, 0.6, 0.05],
+          "fill": "secondary",
+          "z": 1.02,
+          "enter": { "type": "rise", "at": 0.25 }
+        },
+        {
+          "id": "s9-title",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "THE WORLD IS CONNECTED",
+          "box": [0.04, 0.11, 0.92, 0.22],
+          "fill": "primary",
+          "underline": true,
+          "z": 1.1,
+          "textStyle": "headline-break",
+          "enter": { "type": "pop", "at": 0.5 }
+        },
+        {
+          "id": "s9-grid",
+          "kind": "grid",
+          "box": [0.06, 0.4, 0.88, 0.4],
+          "fill": "accent",
+          "z": 0.9,
+          "enter": { "type": "wipe", "at": 2.6 },
+          "transform": {
+            "alpha": [
+              { "t": 2.6, "value": 0.1, "easing": "easeInOutSine" },
+              { "t": 8.5, "value": 0.28, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s9-null",
+          "kind": "null",
+          "box": [0.02, 0.38, 0.96, 0.48],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "scale": [
+              { "t": 0, "value": 1.06, "easing": "easeInOutSine" },
+              { "t": 8.5, "value": 1, "easing": "easeInOutSine" }
+            ],
+            "y": [
+              { "t": 0, "value": 0, "easing": "easeInOutSine" },
+              { "t": 8.5, "value": -10, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s9-map",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s9-null",
+          "box": [0.03, 0.4, 0.94, 0.34],
+          "z": 1.18,
+          "enter": { "type": "pop", "at": 0.9 }
+        },
+        {
+          "id": "s9-earth",
+          "kind": "subject",
+          "subjectIndex": 1,
+          "parent": "s9-null",
+          "box": [0.32, 0.72, 0.36, 0.2],
+          "z": 1.14,
+          "enter": { "type": "pop", "at": 2.8 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.34 },
+          { "at": 2.2, "zoom": 1.14, "ease": "easeInOutSine" },
+          { "at": 4.6, "zoom": 1.05, "panY": 0.04, "ease": "easeInOutSine" },
+          { "at": 7.4, "zoom": 1.12, "dolly": 0.4, "track": "s9-map", "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "topographic"
+    },
+    {
+      "id": "scene-10",
+      "title": "NAZE",
+      "narration": "Inilah jalan raya tersembunyi yang menghubungkan dunia. NAZE. Explore Technology Beyond the Screen.",
+      "subjects": [
+        { "kind": "object", "name": "rocket" }
+      ],
+      "sfx": [
+        { "file": "AUDIO/SFX/INTERFACE/close_002.wav", "volume": 0.35, "at": 0.2 },
+        { "file": "AUDIO/SFX/DIGITAL/phase_jump_1.ogg", "volume": 0.35, "at": 1.0 },
+        { "file": "AUDIO/SFX/IMPACT/impact_plate_medium_000.ogg", "volume": 0.4, "at": 2.0 },
+        { "file": "AUDIO/SFX/DIGITAL/power_up_12.ogg", "volume": 0.35, "at": 3.2 },
+        { "file": "AUDIO/SFX/INTERFACE/confirmation_002.wav", "volume": 0.35, "at": 5.0 },
+        { "file": "AUDIO/SFX/DIGITAL/phaser_up_4.ogg", "volume": 0.3, "at": 7.5 }
+      ],
+      "layers": [
+        {
+          "id": "s10-band",
+          "kind": "halftone",
+          "box": [0, 0.86, 1, 0.04],
+          "fill": "primary",
+          "z": 0.85,
+          "enter": { "type": "wipe", "at": 0.3 },
+          "transform": {
+            "alpha": [
+              { "t": 0.3, "value": 0.6, "easing": "easeInOutSine" },
+              { "t": 8, "value": 0.15, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s10-null",
+          "kind": "null",
+          "box": [0.1, 0.3, 0.8, 0.44],
+          "z": 1,
+          "enter": { "type": "none" },
+          "transform": {
+            "scale": [
+              { "t": 0, "value": 0.94, "easing": "easeInOutSine" },
+              { "t": 8.5, "value": 1.04, "easing": "easeInOutSine" }
+            ]
+          }
+        },
+        {
+          "id": "s10-brand",
+          "kind": "typography",
+          "mode": "oversized",
+          "text": "NAZE",
+          "box": [0.05, 0.34, 0.9, 0.16],
+          "fill": "text",
+          "z": 1.2,
+          "textStyle": "final-cut",
+          "enter": { "type": "pop", "at": 0.6 },
+          "parent": "s10-null"
+        },
+        {
+          "id": "s10-line",
+          "kind": "shape",
+          "shape": "bar",
+          "box": [0.3, 0.51, 0.4, 0.008],
+          "fill": "accent",
+          "z": 1.05,
+          "enter": { "type": "wipe", "at": 1.0 }
+        },
+        {
+          "id": "s10-tag",
+          "kind": "typography",
+          "mode": "stacked",
+          "text": "EXPLORE TECHNOLOGY BEYOND THE SCREEN",
+          "box": [0.08, 0.53, 0.84, 0.07],
+          "fill": "primary",
+          "z": 1.08,
+          "enter": { "type": "rise", "at": 1.4 }
+        },
+        {
+          "id": "s10-rocket",
+          "kind": "subject",
+          "subjectIndex": 0,
+          "parent": "s10-null",
+          "box": [0.4, 0.62, 0.2, 0.16],
+          "z": 1.12,
+          "enter": { "type": "pop", "at": 2.4 }
+        }
+      ],
+      "camera": {
+        "shots": [
+          { "at": 0, "zoom": 1.28 },
+          { "at": 2.0, "zoom": 1.06, "ease": "easeInOutSine" },
+          { "at": 5.0, "zoom": 1.0, "ease": "easeInOutSine" },
+          { "at": 8.0, "zoom": 1.04, "dolly": 0.35, "track": "s10-brand", "ease": "easeInOutSine" }
+        ]
+      },
+      "backdrop": "spotlight"
+    }
+  ],
+  "captions": {
+    "ccStyle": "glitch-scan"
+  }
+}

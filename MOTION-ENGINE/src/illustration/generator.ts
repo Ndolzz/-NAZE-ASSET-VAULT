@@ -936,6 +936,374 @@ function drawObject(
       ctx.globalAlpha = 1;
       break;
     }
+    case "earth": {
+      // Bumi digital: planet, atmosfer, benua, node koneksi, busur kabel.
+      const r = s * 0.85;
+      ctx.save();
+      ctx.rotate(Math.sin(kit.t * 0.22) * 0.1);
+      const glow = ctx.createRadialGradient(0, 0, r * 0.85, 0, 0, r * 1.4);
+      glow.addColorStop(0, withAlpha(palette.primary, 0.3));
+      glow.addColorStop(1, withAlpha(palette.primary, 0));
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(0, 0, r * 1.4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(0, 0, r, 0, Math.PI * 2);
+      fillShape(ctx, kit, palette.primary, 0, 0, r);
+      ctx.fill();
+      applyStroke(ctx, kit, lw);
+      for (let i = 0; i < 4; i++) {
+        const a = (i / 4) * Math.PI * 2 + 0.5;
+        ctx.beginPath();
+        ctx.ellipse(Math.cos(a) * r * 0.42, Math.sin(a) * r * 0.42, r * 0.32, r * 0.2, a, 0, Math.PI * 2);
+        ctx.fillStyle = withAlpha(palette.accent, 0.55);
+        ctx.fill();
+      }
+      for (let i = 0; i < 7; i++) {
+        const a1 = (i / 7) * Math.PI * 2 + kit.t * 0.35;
+        const a2 = a1 + 0.85;
+        ctx.beginPath();
+        ctx.moveTo(Math.cos(a1) * r, Math.sin(a1) * r);
+        ctx.quadraticCurveTo(
+          Math.cos((a1 + a2) / 2) * r * 1.3,
+          Math.sin((a1 + a2) / 2) * r * 1.3,
+          Math.cos(a2) * r,
+          Math.sin(a2) * r
+        );
+        ctx.strokeStyle = withAlpha(palette.accent, 0.6);
+        ctx.lineWidth = lw * 0.5;
+        ctx.stroke();
+        starPath(ctx, Math.cos(a1) * r, Math.sin(a1) * r, 5 * kit.scale, 2 * kit.scale, 4);
+        ctx.fillStyle = palette.text;
+        ctx.fill();
+      }
+      ctx.restore();
+      break;
+    }
+    case "submarine-cable": {
+      // Kabel fiber optik raksasa membentang di dasar samudra.
+      const w = s * 1.9;
+      const cableY = (x: number): number => {
+        if (x <= 0) {
+          const t = (x + w) / w;
+          return s * ((1 - t) * (1 - t) * 0.18 + 2 * (1 - t) * t * 0.05 + t * t * 0.16);
+        }
+        const t = x / w;
+        return s * ((1 - t) * (1 - t) * 0.16 + 2 * (1 - t) * t * 0.27 + t * t * 0.12);
+      };
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(-w, s * 0.55);
+      ctx.quadraticCurveTo(-w * 0.4, s * 0.78, 0, s * 0.62);
+      ctx.quadraticCurveTo(w * 0.4, s * 0.48, w, s * 0.7);
+      ctx.lineTo(w, s * 1.15);
+      ctx.lineTo(-w, s * 1.15);
+      ctx.closePath();
+      ctx.fillStyle = withAlpha(palette.text, 0.1);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(-w, cableY(-w));
+      ctx.quadraticCurveTo(-w * 0.45, s * 0.05, 0, cableY(0));
+      ctx.quadraticCurveTo(w * 0.45, s * 0.27, w, cableY(w));
+      ctx.strokeStyle = palette.text;
+      ctx.lineWidth = s * 0.16;
+      ctx.lineCap = "round";
+      ctx.stroke();
+      ctx.strokeStyle = withAlpha(palette.primary, 0.9);
+      ctx.lineWidth = s * 0.07;
+      ctx.stroke();
+      for (let i = 0; i < 5; i++) {
+        const p = (kit.t * 0.35 + i / 5) % 1;
+        const px = -w + p * w * 2;
+        ctx.beginPath();
+        ctx.arc(px, cableY(px), s * 0.05, 0, Math.PI * 2);
+        ctx.fillStyle = withAlpha(palette.accent, 0.95 - Math.abs(p - 0.5) * 0.5);
+        ctx.fill();
+      }
+      ctx.restore();
+      break;
+    }
+    case "cable-map": {
+      // Peta jalur kabel bawah laut antarbenua dengan pulsa data bergerak.
+      const w = s * 1.9;
+      const h = s * 1.05;
+      const land: Array<[number, number, number, number]> = [
+        [-0.66, -0.3, 0.36, 0.34],
+        [0.02, -0.42, 0.3, 0.26],
+        [0.52, -0.26, 0.34, 0.3],
+        [-0.42, 0.32, 0.3, 0.26],
+        [0.4, 0.34, 0.34, 0.28],
+      ];
+      land.forEach((L, i) => {
+        blobPath(ctx, L[0] * w, L[1] * h, Math.min(L[2] * w, L[3] * h) * 0.85, seedNum(rng) + i * 7, 9, 0.24);
+        ctx.fillStyle = withAlpha(palette.text, 0.16);
+        ctx.fill();
+        applyStroke(ctx, kit, lw * 0.5, withAlpha(palette.text, 0.4));
+      });
+      const routes: Array<[number, number, number, number]> = [
+        [-0.5, -0.2, 0.4, -0.25],
+        [-0.45, -0.15, 0.45, 0.28],
+        [-0.35, 0.28, 0.4, -0.2],
+        [-0.55, -0.22, 0.48, 0.3],
+      ];
+      routes.forEach((R, i) => {
+        const x1 = R[0] * w, y1 = R[1] * h, x2 = R[2] * w, y2 = R[3] * h;
+        const cx = (x1 + x2) / 2;
+        const cy = Math.max(y1, y2) + h * 0.22;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.quadraticCurveTo(cx, cy, x2, y2);
+        ctx.strokeStyle = withAlpha(palette.primary, 0.75);
+        ctx.lineWidth = lw * 0.6;
+        ctx.stroke();
+        const p = (kit.t * 0.3 + i * 0.25) % 1;
+        const px = (1 - p) * (1 - p) * x1 + 2 * (1 - p) * p * cx + p * p * x2;
+        const py = (1 - p) * (1 - p) * y1 + 2 * (1 - p) * p * cy + p * p * y2;
+        ctx.beginPath();
+        ctx.arc(px, py, 5 * kit.scale, 0, Math.PI * 2);
+        ctx.fillStyle = palette.accent;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(x1, y1, 4 * kit.scale, 0, Math.PI * 2);
+        ctx.arc(x2, y2, 4 * kit.scale, 0, Math.PI * 2);
+        ctx.fillStyle = palette.text;
+        ctx.fill();
+      });
+      break;
+    }
+    case "fiber-core": {
+      // Penampang kabel serat optik + cahaya berjalan melalui serat.
+      const w = s * 1.8;
+      ctx.save();
+      ctx.strokeStyle = withAlpha(palette.primary, 0.8);
+      ctx.lineWidth = lw * 0.7;
+      ctx.beginPath();
+      ctx.moveTo(-w * 0.55, -s * 0.42);
+      ctx.lineTo(w * 0.55, -s * 0.42);
+      ctx.stroke();
+      for (let i = 0; i < 4; i++) {
+        const p = (kit.t * 0.45 + i / 4) % 1;
+        const px = -w * 0.55 + p * w * 1.1;
+        ctx.beginPath();
+        ctx.arc(px, -s * 0.42, s * 0.045, 0, Math.PI * 2);
+        ctx.fillStyle = palette.accent;
+        ctx.fill();
+      }
+      const rings: Array<[number, string]> = [
+        [s * 0.62, palette.text],
+        [s * 0.47, palette.secondary],
+        [s * 0.34, palette.text],
+        [s * 0.22, palette.primary],
+      ];
+      for (const [rr, col] of rings) {
+        ctx.beginPath();
+        ctx.arc(0, s * 0.28, rr, 0, Math.PI * 2);
+        ctx.fillStyle = withAlpha(col, 0.25);
+        ctx.fill();
+        applyStroke(ctx, kit, lw * 0.55, col);
+      }
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2 + kit.t * 0.25;
+        ctx.beginPath();
+        ctx.arc(Math.cos(a) * s * 0.545, s * 0.28 + Math.sin(a) * s * 0.545, s * 0.035, 0, Math.PI * 2);
+        ctx.fillStyle = palette.secondary;
+        ctx.fill();
+      }
+      const corePulse = 0.75 + Math.sin(kit.t * 4) * 0.25;
+      const coreGlow = ctx.createRadialGradient(0, s * 0.28, 2, 0, s * 0.28, s * 0.16);
+      coreGlow.addColorStop(0, withAlpha(palette.accent, 0.95));
+      coreGlow.addColorStop(1, withAlpha(palette.accent, 0));
+      ctx.fillStyle = coreGlow;
+      ctx.beginPath();
+      ctx.arc(0, s * 0.28, s * 0.16 * corePulse + s * 0.04, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      break;
+    }
+    case "cargo-ship": {
+      // Kapal kargo di permukaan laut dengan rantai jangkar turun.
+      const w = s * 1.8;
+      ctx.save();
+      ctx.rotate(Math.sin(kit.t * 1.1) * 0.02);
+      ctx.beginPath();
+      ctx.moveTo(-w * 0.5, -s * 0.1);
+      ctx.lineTo(w * 0.5, -s * 0.1);
+      ctx.lineTo(w * 0.34, s * 0.32);
+      ctx.lineTo(-w * 0.4, s * 0.32);
+      ctx.closePath();
+      fillShape(ctx, kit, palette.text, 0, s * 0.1, s);
+      ctx.fill();
+      applyStroke(ctx, kit, lw);
+      for (let i = 0; i < 3; i++) {
+        roundRectPath(ctx, -w * 0.32 + i * w * 0.24, -s * 0.34, w * 0.2, s * 0.2, 3 * kit.scale);
+        ctx.fillStyle = withAlpha(palette.secondary, 0.85);
+        ctx.fill();
+        applyStroke(ctx, kit, lw * 0.6);
+      }
+      roundRectPath(ctx, w * 0.18, -s * 0.62, w * 0.16, s * 0.3, 4 * kit.scale);
+      fillShape(ctx, kit, palette.primary, w * 0.26, -s * 0.47, s * 0.4);
+      ctx.fill();
+      applyStroke(ctx, kit, lw * 0.8);
+      ctx.strokeStyle = withAlpha(palette.primary, 0.5);
+      ctx.lineWidth = lw * 0.6;
+      for (let i = 0; i < 3; i++) {
+        const wy = s * 0.42 + i * s * 0.12;
+        ctx.beginPath();
+        ctx.moveTo(-w * 0.55, wy + Math.sin(kit.t * 2 + i) * 3 * kit.scale);
+        ctx.quadraticCurveTo(0, wy - s * 0.06, w * 0.55, wy + Math.sin(kit.t * 2 + i + 1) * 3 * kit.scale);
+        ctx.stroke();
+      }
+      ctx.strokeStyle = palette.text;
+      ctx.lineWidth = lw * 0.7;
+      ctx.setLineDash([6 * kit.scale, 5 * kit.scale]);
+      ctx.beginPath();
+      ctx.moveTo(-w * 0.2, s * 0.32);
+      ctx.lineTo(-w * 0.24, s * 0.95);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+      break;
+    }
+    case "anchor": {
+      // Jangkar kapal dengan rantai, bergoyang saat turun.
+      ctx.save();
+      ctx.translate(0, Math.sin(kit.t * 1.4) * 0.06 * s);
+      ctx.rotate(Math.sin(kit.t * 0.9) * 0.08);
+      ctx.strokeStyle = withAlpha(palette.text, 0.6);
+      ctx.lineWidth = lw * 0.6;
+      ctx.setLineDash([7 * kit.scale, 6 * kit.scale]);
+      ctx.beginPath();
+      ctx.moveTo(0, -s * 0.84);
+      ctx.lineTo(0, -s * 1.15);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.beginPath();
+      ctx.arc(0, -s * 0.72, s * 0.12, 0, Math.PI * 2);
+      ctx.strokeStyle = palette.text;
+      ctx.lineWidth = lw * 0.9;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(0, -s * 0.6);
+      ctx.lineTo(0, s * 0.35);
+      ctx.lineWidth = lw;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(-s * 0.42, s * 0.1);
+      ctx.quadraticCurveTo(0, s * 0.55, s * 0.42, s * 0.1);
+      ctx.stroke();
+      for (const sx of [-1, 1]) {
+        ctx.beginPath();
+        ctx.moveTo(sx * s * 0.42, s * 0.1);
+        ctx.lineTo(sx * s * 0.5, -s * 0.05);
+        ctx.strokeStyle = palette.secondary;
+        ctx.lineWidth = lw * 0.8;
+        ctx.stroke();
+      }
+      ctx.restore();
+      break;
+    }
+    case "broken-cable": {
+      // Kabel putus: ujung kusut, percikan, sinyal terputus.
+      const w = s * 1.7;
+      const gap = s * 0.24;
+      ctx.save();
+      for (const sx of [-1, 1]) {
+        ctx.beginPath();
+        ctx.moveTo(sx * w, -s * 0.08);
+        ctx.lineTo(sx * gap, -s * 0.08);
+        ctx.strokeStyle = palette.text;
+        ctx.lineWidth = s * 0.15;
+        ctx.lineCap = "round";
+        ctx.stroke();
+        for (let i = 0; i < 4; i++) {
+          ctx.beginPath();
+          ctx.moveTo(sx * gap, -s * 0.08);
+          ctx.lineTo(sx * (gap - s * 0.16 - i * s * 0.03), -s * 0.08 + (i - 1.5) * s * 0.06);
+          ctx.strokeStyle = withAlpha(palette.text, 0.7);
+          ctx.lineWidth = lw * 0.5;
+          ctx.stroke();
+        }
+      }
+      for (let i = 0; i < 5; i++) {
+        const jitter = Math.sin(kit.t * 17 + i * 2.2) * s * 0.08;
+        starPath(
+          ctx,
+          (i % 2 === 0 ? 1 : -1) * (s * 0.05 + jitter),
+          -s * 0.08 + Math.cos(kit.t * 13 + i) * s * 0.12,
+          6 * kit.scale,
+          2.5 * kit.scale,
+          4
+        );
+        ctx.fillStyle = withAlpha(palette.secondary, 0.5 + Math.sin(kit.t * 21 + i) * 0.4);
+        ctx.fill();
+      }
+      for (let i = 0; i < 3; i++) {
+        const barY = -s * 0.5 + i * s * 0.42;
+        const flick = 0.1 + Math.abs(Math.sin(kit.t * 9 + i * 1.7)) * 0.25;
+        ctx.fillStyle = withAlpha(palette.primary, flick);
+        ctx.fillRect(-w * (0.3 + 0.2 * i), barY, w * (0.6 - 0.3 * i), s * 0.05);
+      }
+      ctx.restore();
+      break;
+    }
+    case "repair-ship": {
+      // Kapal perbaikan kabel: derek, kabel diangkat, ROV dengan berkas lampu.
+      const w = s * 1.9;
+      ctx.save();
+      ctx.rotate(Math.sin(kit.t * 0.9) * 0.015);
+      ctx.strokeStyle = palette.accent;
+      ctx.lineWidth = lw * 0.9;
+      ctx.beginPath();
+      ctx.moveTo(-w * 0.6, s * 0.6);
+      ctx.quadraticCurveTo(0, s * 1.15 + Math.sin(kit.t * 1.6) * s * 0.04, w * 0.6, s * 0.6);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(-w * 0.52, -s * 0.15);
+      ctx.lineTo(w * 0.52, -s * 0.15);
+      ctx.quadraticCurveTo(w * 0.46, s * 0.28, 0, s * 0.3);
+      ctx.quadraticCurveTo(-w * 0.46, s * 0.28, -w * 0.52, -s * 0.15);
+      ctx.closePath();
+      fillShape(ctx, kit, palette.text, 0, s * 0.05, s);
+      ctx.fill();
+      applyStroke(ctx, kit, lw);
+      roundRectPath(ctx, -w * 0.18, -s * 0.42, w * 0.2, s * 0.27, 4 * kit.scale);
+      fillShape(ctx, kit, palette.primary, -w * 0.08, -s * 0.29, s * 0.5);
+      ctx.fill();
+      applyStroke(ctx, kit, lw * 0.7);
+      ctx.strokeStyle = palette.text;
+      ctx.lineWidth = lw * 0.8;
+      ctx.beginPath();
+      ctx.moveTo(w * 0.08, -s * 0.15);
+      ctx.lineTo(w * 0.16, -s * 0.55);
+      ctx.stroke();
+      ctx.strokeStyle = withAlpha(palette.text, 0.7);
+      ctx.lineWidth = lw * 0.5;
+      ctx.setLineDash([6 * kit.scale, 5 * kit.scale]);
+      ctx.beginPath();
+      ctx.moveTo(w * 0.16, -s * 0.55);
+      ctx.lineTo(0, s * 1.06);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      const rovY = s * 0.55 + Math.sin(kit.t * 1.2) * s * 0.06;
+      const beam = ctx.createLinearGradient(0, rovY, 0, rovY + s * 0.55);
+      beam.addColorStop(0, withAlpha(palette.text, 0.35));
+      beam.addColorStop(1, withAlpha(palette.text, 0));
+      ctx.fillStyle = beam;
+      ctx.beginPath();
+      ctx.moveTo(-s * 0.1, rovY + s * 0.12);
+      ctx.lineTo(-s * 0.3, rovY + s * 0.55);
+      ctx.lineTo(s * 0.3, rovY + s * 0.55);
+      ctx.lineTo(s * 0.1, rovY + s * 0.12);
+      ctx.closePath();
+      ctx.fill();
+      roundRectPath(ctx, -s * 0.16, rovY - s * 0.14, s * 0.32, s * 0.26, 5 * kit.scale);
+      fillShape(ctx, kit, palette.secondary, 0, rovY, s * 0.4);
+      ctx.fill();
+      applyStroke(ctx, kit, lw * 0.7);
+      ctx.restore();
+      break;
+    }
     default: {
       drawIcon(ctx, kit, rng, size, name, lw);
       break;
@@ -1079,8 +1447,17 @@ export const OBJECT_VOCABULARY = [
   "cart",
   "network",
   "screen",
+  "earth",
+  "submarine-cable",
+  "cable-map",
+  "fiber-core",
+  "cargo-ship",
+  "anchor",
+  "broken-cable",
+  "repair-ship",
 ];
 
 export function drawPaletteBlend(from: string, to: string, t: number): string {
   return mixHex(from, to, t);
 }
+
