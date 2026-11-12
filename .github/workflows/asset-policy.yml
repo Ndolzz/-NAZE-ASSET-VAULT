@@ -1,0 +1,37 @@
+name: NAZE Asset Policy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'PROJECTS/**'
+      - 'GENERATED-2D/**'
+  pull_request:
+    paths:
+      - 'PROJECTS/**'
+      - 'GENERATED-2D/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naze-asset-policy
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validasi katalog aset GENERATED-2D
+        run: node GENERATED-2D/tests/validate-catalog.js
+
+      - name: Validasi pemetaan aset proyek (WAJIB dari GENERATED-2D)
+        run: node GENERATED-2D/tests/validate-project-assets.js

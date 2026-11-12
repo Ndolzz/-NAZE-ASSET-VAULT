@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "requireLibraryAssets": true,
+  "rule": "Setiap produksi NAZE wajib memeriksa GENERATED-2D sebagai sumber visual utama sebelum membuat aset baru, dan mendokumentasikan pemakaian aset di PROJECTS/<NAMA>/ASSET-MAP.json. Rujukan: NAZE-STANDARDS.md (bagian Pustaka Aset Wajib). Penegakan: .github/workflows/asset-policy.yml + GENERATED-2D/tests/.",
+  "updatedAt": "2026-11-12",
+  "library": {
+    "root": "GENERATED-2D",
+    "catalog": "GENERATED-2D/catalog.json",
+    "preview": "GENERATED-2D/preview.html",
+    "requiredTotalAssets": 200
+  },
+  "allowedRoles": [
+    "primary_visual",
+    "supporting_visual",
+    "background",
+    "environment",
+    "ui_element",
+    "motion_asset",
+    "character",
+    "decorative"
+  ],
+  "forbiddenInFinal": "Placeholder, kotak kosong, ikon generik pengganti, dan teks sementara tidak boleh ada pada hasil final.",
+  "grandfathered": {
+    "2500-SERANGAN-SIBER": "Dirender dan disetujui pengguna sebelum kebijakan ini",
+    "AI-CYBERSECURITY": "Restyle editorial-kinetic tervalidasi CI sebelum kebijakan ini",
+    "AI-SHOPPING-AGENT": "Dirender dan disetujui pengguna sebelum kebijakan ini",
+    "AI-TECH-WAR": "Dirender dan disetujui pengguna sebelum kebijakan ini",
+    "CAPTION-DEMO": "Proyek demo legacy jalur klasik",
+    "DARK-WEB": "Proyek legacy jalur klasik",
+    "DIGITAL-FOOTPRINT": "Proyek legacy jalur klasik",
+    "STYLE-SHOWCASE": "Proyek demo legacy jalur klasik"
+  }
+}

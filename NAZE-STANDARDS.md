@@ -47,6 +47,125 @@ Profil tambahan yang diizinkan: 1440 x 2560 dan 2160 x 3840, keduanya
    null object, kamera, dan transisi. Proyek legacy yang terdaftar di
    `exemptProjects` pada berkas tersebut dikecualikan dan dibiarkan apa
    adanya.
+10. Pustaka aset `GENERATED-2D/` wajib diperiksa sebelum membuat visual
+    baru, aset yang relevan wajib dipakai, dan pemakaian aset wajib
+    didokumentasikan di `PROJECTS/<NAMA>/ASSET-MAP.json` (bagian
+    Pustaka Aset Wajib di bawah).
+
+## Pustaka Aset Wajib (GENERATED-2D)
+
+`GENERATED-2D/` adalah sumber visual utama produksi NAZE: 200 aset SVG 2D
+(karakter, objek per topik, lingkungan, background, UI, dan motion assets).
+Katalog mesin-terbaca: `GENERATED-2D/catalog.json`; pratinjau offline:
+`GENERATED-2D/preview.html`. Kebijakan: `GENERATED-2D/asset-policy.json`.
+Pustaka ini adalah sumber daya produksi aktif, bukan koleksi yang hanya
+disimpan.
+
+### Prosedur wajib sebelum produksi
+
+Setiap kali memulai proyek atau scene baru:
+
+1. Identifikasi topik dan kategori konten.
+2. Baca `GENERATED-2D/catalog.json` untuk menemukan aset yang relevan,
+   lalu periksa `preview.html` sebelum memilih.
+3. Tentukan karakter, objek, lingkungan, background, dan UI yang
+   dibutuhkan setiap scene.
+4. Tentukan palet melalui COLOR-LIBRARY (`policy.json` +
+   `VIBE-COLOR-RULES.md`); jangan menentukan palet di luar katalog.
+5. Buat `PROJECTS/<NAMA>/ASSET-MAP.json` yang menghubungkan kebutuhan
+   scene dengan file aset sebenarnya.
+6. Gunakan aset yang tersedia sebelum membuat aset pengganti. Jangan
+   membuat ilustrasi baru jika aset yang sesuai sudah ada, dan jangan
+   mengabaikan aset yang relevan hanya karena lebih mudah membuat visual
+   dari nol.
+
+### Aturan pemakaian aset
+
+- Pilih aset berdasarkan makna narasi, bukan sekadar dekorasi.
+- Sesuaikan ukuran dan proporsi dengan komposisi; pertahankan
+  transparansi objek.
+- Transformasi (warna, ukuran, rotasi, posisi, animasi), masking,
+  clipping, dan compositing diperbolehkan selama identitas visual dan
+  aturan desain tetap terjaga.
+- Jangan mengubah file sumber library untuk kebutuhan satu proyek;
+  buat salinan atau hasil transformasi di direktori proyek.
+- Jangan menumpuk objek tanpa tujuan visual dan jangan memaksakan
+  seluruh aset ke satu scene.
+- Setiap scene harus memiliki hierarki visual yang jelas: fokus utama,
+  informasi pendukung, dan elemen dekoratif.
+- Placeholder, kotak kosong, ikon generik pengganti, atau teks
+  sementara tidak boleh muncul pada hasil final.
+
+### Aset baru ketika katalog tidak tersedia
+
+1. Identifikasi objek yang belum tersedia.
+2. Buat ilustrasi SVG 2D baru sesuai gaya NAZE.
+3. Gunakan warna sesuai COLOR-LIBRARY.
+4. Optimalkan ukuran file dan kompleksitas SVG.
+5. Simpan di folder aset proyek, atau di folder kategori library yang
+   tepat bila bersifat reusable.
+6. Catat aset baru dalam `GENERATED-2D/catalog.json` (aset dari
+   GENERATED-2D yang tidak terdaftar di katalog akan ditolak validator).
+
+### Asset mapping (ASSET-MAP.json)
+
+Setiap proyek produksi wajib memiliki `PROJECTS/<NAMA>/ASSET-MAP.json`:
+
+```json
+{
+  "project": "NAMA-PROYEK",
+  "assets": [
+    {
+      "scene": "scene-01",
+      "path": "VISUAL/OBJECTS/AI/objects-ai-neural-network.svg",
+      "role": "primary_visual",
+      "animation": "scale_in",
+      "palette": "id-palet-color-library"
+    }
+  ]
+}
+```
+
+- `path` aset library ditulis relatif terhadap `GENERATED-2D/`
+  (mis. `VISUAL/CHARACTERS/...`) atau berawalan `GENERATED-2D/`;
+  aset lokal proyek ditulis relatif terhadap root repositori
+  (`PROJECTS/<NAMA>/assets/...`).
+- `role` salah satu dari: primary_visual, supporting_visual,
+  background, environment, ui_element, motion_asset, character,
+  decorative.
+- Setiap path wajib ada di repositori; aset dari GENERATED-2D wajib
+  terdaftar di `catalog.json`.
+- Proyek yang sudah berjalan sebelum kebijakan ini terdaftar pada
+  `grandfathered` di `GENERATED-2D/asset-policy.json` dan tidak diubah.
+
+### Integrasi motion dan camera tracking
+
+- Objek, caption, dan motion graphics wajib terintegrasi dengan
+  pergerakan kamera; jangan memakai posisi layar statis untuk elemen
+  yang seharusnya mengikuti ruang adegan.
+- Gunakan sistem camera-aware tracking yang tersedia di MOTION-ENGINE
+  dan penempatan CC adaptif sesuai `MOTION-ENGINE/docs/CC-PLACEMENT.md`.
+- Gunakan penempatan berbasis ruang kosong, terapkan smoothing, dan
+  periksa tabrakan antara caption, objek, dan elemen UI.
+- Jangan membuat sistem caption atau tracking tandingan tanpa alasan
+  teknis yang jelas.
+
+### Validasi pra-render
+
+Sebelum produksi dinyatakan selesai:
+
+1. Seluruh path aset valid dan SVG dapat dirender.
+2. Warna sesuai `COLOR-LIBRARY/policy.json` (validator warna wajib
+   dijalankan; jangan menonaktifkan validator agar pipeline terlihat
+   berhasil).
+3. Caption tidak menutupi fokus utama; animasi dan narasi tersinkron.
+4. Compositing dan ukuran output wajib sesuai standar.
+5. Hasil render tidak mengandung placeholder atau elemen yang belum
+   selesai.
+
+Kepatuhan aset diverifikasi otomatis oleh
+`.github/workflows/asset-policy.yml` (validasi katalog + validasi
+ASSET-MAP.json pada setiap perubahan `PROJECTS/` atau `GENERATED-2D/`).
 
 ## Aset Gambar Mentahan (VISUAL/RAW)
 
@@ -60,8 +179,11 @@ sesuai, bukan kembali di folder ini.
 
 Kebijakan disimpan sebagai konfigurasi global di `naze.policy.json` dan
 ditegakkan oleh `MOTION-ENGINE/src/core/policy.ts` pada setiap render.
-Kebijakan tetap aktif setelah restart, pembuatan proyek baru, penggantian
-konfigurasi proyek, pembaruan engine, dan eksekusi ulang workflow.
+Kebijakan aset disimpan di `GENERATED-2D/asset-policy.json` dan
+kebijakan warna di `COLOR-LIBRARY/policy.json`; keduanya ditegakkan oleh
+workflow CI. Kebijakan tetap aktif setelah restart, pembuatan proyek
+baru, penggantian konfigurasi proyek, pembaruan engine, dan eksekusi
+ulang workflow.
 
 Pengecualian hanya boleh dilakukan jika pengguna secara eksplisit
 menginstruksikannya melalui `--explicit-override "alasan"`; alasan
@@ -73,4 +195,9 @@ tersebut tercatat permanen pada render report.
 - Pustaka style: `MOTION-ENGINE/docs/STYLES.md`
 - Pipeline: `MOTION-ENGINE/docs/PIPELINE.md`
 - Standar editing referensi: `naze.references.json`
+- Katalog aset 2D: `GENERATED-2D/catalog.json`
+- Kebijakan aset: `GENERATED-2D/asset-policy.json`
+- Kebijakan warna: `COLOR-LIBRARY/policy.json` + `COLOR-LIBRARY/VIBE-COLOR-RULES.md`
+- Penempatan CC camera-aware: `MOTION-ENGINE/docs/CC-PLACEMENT.md`
 - Workflow render: `.github/workflows/render.yml`
+- Workflow kebijakan aset: `.github/workflows/asset-policy.yml`
