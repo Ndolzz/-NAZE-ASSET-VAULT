@@ -1,0 +1,37 @@
+name: NAZE Color Policy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'PROJECTS/**'
+      - 'COLOR-LIBRARY/**'
+  pull_request:
+    paths:
+      - 'PROJECTS/**'
+      - 'COLOR-LIBRARY/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naze-color-policy
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validasi data katalog warna
+        run: node COLOR-LIBRARY/tests/validate.js
+
+      - name: Validasi kepatuhan warna proyek (WAJIB dari COLOR-LIBRARY)
+        run: node COLOR-LIBRARY/tests/validate-project-colors.js

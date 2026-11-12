@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "requireLibraryColors": true,
+  "rule": "Semua warna proyek NAZE wajib berasal dari COLOR-LIBRARY (palet, gradien, token). Rujukan: COLOR-LIBRARY/VIBE-COLOR-RULES.md. Penegakan: .github/workflows/color-policy.yml + COLOR-LIBRARY/tests/validate-project-colors.js",
+  "updatedAt": "2026-11-12",
+  "grandfathered": {
+    "2500-SERANGAN-SIBER": "Palet kustom malam-ancaman sudah dikunci dan disetujui pengguna sebelum kebijakan ini",
+    "AI-CYBERSECURITY": "Palet editorial-ink adalah identitas visual permanen NAZE",
+    "AI-SHOPPING-AGENT": "Palet kustom sudah dirender dan disetujui pengguna sebelum kebijakan ini",
+    "AI-TECH-WAR": "Palet kustom sudah dirender dan disetujui pengguna sebelum kebijakan ini",
+    "CAPTION-DEMO": "Proyek demo legacy jalur klasik",
+    "DARK-WEB": "Proyek legacy jalur klasik, palet dark-web-cyber terkunci",
+    "DIGITAL-FOOTPRINT": "Proyek legacy jalur klasik",
+    "STYLE-SHOWCASE": "Proyek demo legacy jalur klasik"
+  }
+}

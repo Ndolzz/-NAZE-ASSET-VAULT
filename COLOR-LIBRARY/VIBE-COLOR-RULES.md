@@ -89,3 +89,17 @@ Referensi palet memakai ID stabil, misalnya `tech-slate`, `lux-noirgold`, `grad-
 - Warna judul bertipe `text.*` minimal 4,5:1. Judul berwarna `brand.*` boleh minimal 3:1 hanya untuk teks besar (sekitar 24px atau lebih). Teks isi selalu 4,5:1.
 - Tautan memakai `brand.primary` dan harus 4,5:1 terhadap latar. Jika gagal, validator melaporkan rasio aktualnya.
 - Selalu sediakan font cadangan (`serif`, `sans-serif`, atau `monospace`) karena font web bisa gagal dimuat.
+
+## Penegakan wajib (CI)
+
+Aturan dalam dokumen ini DITEGAKKAN otomatis dan tidak boleh dilewati.
+
+- Workflow `.github/workflows/color-policy.yml` menjalankan `COLOR-LIBRARY/tests/validate.js` dan `COLOR-LIBRARY/tests/validate-project-colors.js` pada setiap push/PR yang menyentuh `PROJECTS/**` atau `COLOR-LIBRARY/**`. Pelanggaran menghasilkan ERROR dan run merah.
+- Kepatuhan per proyek (`PROJECTS/<NAMA>/project.json`):
+  1. Tetapkan `colorSystem.paletteId` yang terdaftar di `data/solid-palettes.json`, ATAU
+  2. pakai objek `palette` yang warnanya identik dengan palet katalog. Pemetaan peran: `background` = `background.base`, `primary` = `brand.primary`, `secondary` = `brand.secondary` (dari `data/semantic-tokens.json`), `accent` = `brand.accent`, `text` = `text.primary`.
+- Perbedaan warna hanya boleh lewat `colorSystem.overrides`, wajib lolos kontras (teks 4,5:1, brand 3:1), dan tidak mengubah katalog global.
+- `colorSystem.gradientIds` dan `colorSystem.typographyId` wajib terdaftar di katalog.
+- Palet preset engine (mis. `palette: "editorial-ink"`) dan `colorScheme` engine BUKAN warna dari COLOR-LIBRARY; untuk proyek baru akan ditolak validator.
+- Proyek yang sudah ada sebelum kebijakan ini terdaftar di `COLOR-LIBRARY/policy.json` bagian `grandfathered` dan tidak diubah tanpa persetujuan pengguna. Menghapus proyek dari daftar tersebut berarti proyek itu wajib patuh penuh.
+- Menonaktifkan, menghapus, atau mem-bypass validasi ini dilarang.
