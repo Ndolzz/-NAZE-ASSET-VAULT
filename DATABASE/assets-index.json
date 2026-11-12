@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "kind": "assets",
-  "generatedAt": "2026-11-12T08:53:03.893Z",
+  "generatedAt": "2026-11-12T10:53:23.721Z",
   "source": {
     "repo": "Ndolzz/-NAZE-ASSET-VAULT",
     "branch": "main",
-    "commit": "9cfacd9509cb5ccdfc2575a0d25bdbf79f160928"
+    "commit": "098abe99518985b55ecf6552e030d4de5d111f76"
   },
   "totals": {
     "assets": 815,
