@@ -189,8 +189,30 @@ export function negativeSpaceCandidates(
       run = 0;
     }
   }
-  // Jangan potong berdasarkan urutan baris grid.
-  // Kandidat sisi berlawanan bisa terbuang sebelum diperiksa.
+  // Kandidat geometris tambahan dari tepi wilayah penting.
+  // Grid bisa melewatkan celah yang sebenarnya cukup untuk caption.
+  const gap = 0.025 * Math.min(m.w, m.h);
+  const ySlots = new Set<number>();
+
+  for (const region of meta.regions) {
+    const r = rectFromNormalized(region, m);
+    ySlots.add(r.y - box.h - gap);
+    ySlots.add(r.y + r.h + gap);
+    ySlots.add(r.y + r.h / 2 - box.h / 2);
+  }
+
+  for (const subject of subjects) {
+    const r = rectFromNormalized(subject, m);
+    const xRight = r.x + r.w + gap;
+    const xLeft = r.x - box.w - gap;
+
+    for (const y of ySlots) {
+      pushRect(xRight, y);
+      pushRect(xLeft, y);
+    }
+  }
+
+  // Jangan membatasi jumlah kandidat berdasarkan urutan grid.
   return out;
 }
 
