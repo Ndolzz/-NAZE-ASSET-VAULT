@@ -62,6 +62,12 @@ jobs:
           set -o pipefail
           npx tsx src/captions/caption-tests.ts 2>&1 | tee "${{ github.workspace }}/caption-tests.log"
 
+      - name: Uji penempatan & tracking CC (camera-aware)
+        working-directory: MOTION-ENGINE
+        run: |
+          set -o pipefail
+          npx tsx src/captions/placement-tests.ts 2>&1 | tee "${{ github.workspace }}/placement-tests.log"
+
       - name: Tentukan proyek
         id: cfg
         run: |
@@ -97,7 +103,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cd "${{ github.workspace }}"
-          LOGS=$(ls render-output-*.log caption-tests.log 2>/dev/null || true)
+          LOGS=$(ls render-output-*.log caption-tests.log placement-tests.log 2>/dev/null || true)
           if [ -z "$LOGS" ]; then echo "Log render tidak ditemukan."; exit 0; fi
           {
             echo "## Log render NAZE (gagal)"
@@ -114,7 +120,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
           BRANCH="render-logs/${{ github.run_id }}-${{ github.run_attempt }}"
           API="https://api.github.com/repos/${{ github.repository }}"
-          AUTH="Authorization: Bearer ${GH_TOKEN}"
+          AUTH="Authorization: Bearer ${{ GH_TOKEN }}"
           ACCEPT="Accept: application/vnd.github+json"
           HTTP=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
             -H "$AUTH" -H "$ACCEPT" -H "Content-Type: application/json" \
@@ -141,6 +147,7 @@ jobs:
           path: |
             render-output-*.log
             caption-tests.log
+            placement-tests.log
           if-no-files-found: warn
 
       - name: Inspeksi hasil dengan ffprobe
