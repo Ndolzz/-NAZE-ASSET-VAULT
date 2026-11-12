@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Loading indicator">
+<defs>
+  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00D9FF"/><stop offset="1" stop-color="#35FF9A"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#24495B"/><stop offset="1" stop-color="#0C1D29"/></linearGradient>
+  <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#183749"/><stop offset="1" stop-color="#091720"/></linearGradient>
+  <radialGradient id="softGlow"><stop offset="0" stop-color="#00D9FF" stop-opacity=".11"/><stop offset="1" stop-color="#00D9FF" stop-opacity="0"/></radialGradient>
+  <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>
+  <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <pattern id="fineGrid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#00D9FF" stroke-opacity=".10" stroke-width="1"/></pattern>
+</defs><ellipse cx="512" cy="870" rx="330" ry="28" fill="#000" opacity=".2" filter="url(#shadow)"/><rect x="110" y="180" width="804" height="650" rx="28" fill="#07131D" stroke="#285064" stroke-width="8"/><path d="M110 270H914" stroke="#00D9FF" stroke-width="5" opacity=".8"/><circle cx="155" cy="224" r="9" fill="#FF6B6B" stroke="#FF6B6B" stroke-width="1" opacity="1"/><circle cx="189" cy="224" r="9" fill="#FFBC42" stroke="#FFBC42" stroke-width="1" opacity="1"/><circle cx="223" cy="224" r="9" fill="#35FF9A" stroke="#35FF9A" stroke-width="1" opacity="1"/><circle cx="510" cy="525" r="150" fill="none" stroke="#24485A" stroke-width="18" opacity="1"/><path d="M510 375A150 150 0 0 1 660 525" fill="none" stroke="#35FF9A" stroke-width="18" stroke-linecap="round"/><circle cx="510" cy="525" r="35" fill="#00D9FF" stroke="#00D9FF" stroke-width="1" opacity="1"/><rect x="110" y="180" width="804" height="650" rx="28" fill="none" stroke="#00D9FF" stroke-opacity=".14" stroke-width="3"/></svg>

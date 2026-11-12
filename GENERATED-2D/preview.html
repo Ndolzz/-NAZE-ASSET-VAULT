@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NAZE 2D Asset Library</title>
+<style>
+:root{color-scheme:dark;--bg:#071018;--panel:#0d1d28;--line:#1d3d4e;--cyan:#00d9ff;--green:#35ff9a;--text:#eaf7ff;--muted:#91a9b8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{padding:26px clamp(16px,4vw,54px);border-bottom:1px solid var(--line);background:linear-gradient(120deg,#0c1d29,#071018 65%)}
+.kicker{color:var(--green);font-size:12px;letter-spacing:.14em;text-transform:uppercase}h1{margin:6px 0;font-size:clamp(26px,4vw,42px)}.sub{color:var(--muted);margin:0}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.toolbar input,.toolbar select{background:#0b1a25;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px 13px;min-width:220px}
+main{padding:22px clamp(16px,4vw,54px) 48px}.stats{color:var(--muted);margin:0 0 18px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.card{overflow:hidden;border:1px solid var(--line);border-radius:13px;background:var(--panel);min-width:0}.preview{height:190px;background-color:#08141d;background-image:linear-gradient(45deg,#10202b 25%,transparent 25%),linear-gradient(-45deg,#10202b 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#10202b 75%),linear-gradient(-45deg,transparent 75%,#10202b 75%);background-size:22px 22px;background-position:0 0,0 11px,11px -11px,-11px 0;display:grid;place-items:center;padding:8px}
+.preview img{max-width:100%;max-height:100%;object-fit:contain}.meta{padding:12px}.type{font-size:10px;color:var(--green);letter-spacing:.08em;text-transform:uppercase;overflow-wrap:anywhere}h2{font-size:15px;margin:5px 0 4px}.meta code{color:var(--muted);font-size:10px;overflow-wrap:anywhere}
+.empty{padding:35px;text-align:center;color:var(--muted);display:none}@media(max-width:480px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.preview{height:145px}.toolbar input,.toolbar select{width:100%}}
+</style></head>
+<body><header><div class="kicker">NAZE / PROCEDURAL VISUALS</div><h1>2D Asset Library</h1><p class="sub">200 aset vektor yang dibuat secara lokal. Preview berjalan offline.</p>
+<div class="toolbar"><input id="search" type="search" placeholder="Cari aset…"><select id="category"><option value="">Semua kategori</option><option value="CHARACTERS">Characters (20)</option><option value="OBJECTS/AI">Artificial Intelligence (20)</option><option value="OBJECTS/CYBERSECURITY">Cybersecurity (20)</option><option value="OBJECTS/CODING">Software Engineering & Coding (20)</option><option value="OBJECTS/PRIVACY">Digital Privacy & Footprint (20)</option><option value="OBJECTS/INTERNET-MYSTERIES">Internet & Technology Mysteries (20)</option><option value="OBJECTS/FUTURE-TECH">Future Technology (15)</option><option value="ENVIRONMENTS">Environment & Background (15)</option><option value="UI-ELEMENTS">UI Elements (20)</option><option value="MOTION-ASSETS">Motion Graphics (20)</option><option value="BACKGROUNDS">Backgrounds (10)</option></select></div></header>
+<main><p class="stats" id="stats">Menampilkan 200 aset</p><section class="grid" id="grid">
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-male-developer.svg" alt="Male developer"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Male developer</h2><code>characters-male-developer</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-female-developer.svg" alt="Female developer"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Female developer</h2><code>characters-female-developer</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-programmer-character.svg" alt="Programmer character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Programmer character</h2><code>characters-programmer-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-hacker-character.svg" alt="Hacker character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Hacker character</h2><code>characters-hacker-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-scientist-character.svg" alt="Scientist character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Scientist character</h2><code>characters-scientist-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-robot-character.svg" alt="Robot character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Robot character</h2><code>characters-robot-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-android-character.svg" alt="Android character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Android character</h2><code>characters-android-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-anonymous-silhouette.svg" alt="Anonymous silhouette"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Anonymous silhouette</h2><code>characters-anonymous-silhouette</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-thinking-character.svg" alt="Thinking character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Thinking character</h2><code>characters-thinking-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-surprised-character.svg" alt="Surprised character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Surprised character</h2><code>characters-surprised-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-confused-character.svg" alt="Confused character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Confused character</h2><code>characters-confused-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-scared-character.svg" alt="Scared character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Scared character</h2><code>characters-scared-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-angry-character.svg" alt="Angry character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Angry character</h2><code>characters-angry-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-happy-character.svg" alt="Happy character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Happy character</h2><code>characters-happy-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-serious-character.svg" alt="Serious character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Serious character</h2><code>characters-serious-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-explaining-character.svg" alt="Explaining character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Explaining character</h2><code>characters-explaining-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-pointing-character.svg" alt="Pointing character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Pointing character</h2><code>characters-pointing-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-typing-character.svg" alt="Typing character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Typing character</h2><code>characters-typing-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-sitting-character.svg" alt="Sitting character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Sitting character</h2><code>characters-sitting-character</code></div>
+  </article>
+  <article class="card" data-category="CHARACTERS">
+    <div class="preview"><img loading="lazy" src="VISUAL/CHARACTERS/characters-walking-character.svg" alt="Walking character"></div>
+    <div class="meta"><span class="type">CHARACTERS</span><h2>Walking character</h2><code>characters-walking-character</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-ai-brain.svg" alt="AI brain"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>AI brain</h2><code>objects-ai-ai-brain</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-neural-network.svg" alt="Neural network"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>Neural network</h2><code>objects-ai-neural-network</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-ai-chip.svg" alt="AI chip"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>AI chip</h2><code>objects-ai-ai-chip</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-gpu.svg" alt="GPU"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>GPU</h2><code>objects-ai-gpu</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-cpu.svg" alt="CPU"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>CPU</h2><code>objects-ai-cpu</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-machine-learning-model.svg" alt="Machine learning model"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>Machine learning model</h2><code>objects-ai-machine-learning-model</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-deep-learning-layers.svg" alt="Deep learning layers"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>Deep learning layers</h2><code>objects-ai-deep-learning-layers</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-ai-robot.svg" alt="AI robot"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>AI robot</h2><code>objects-ai-ai-robot</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-robotic-hand.svg" alt="Robotic hand"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>Robotic hand</h2><code>objects-ai-robotic-hand</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-ai-assistant-hologram.svg" alt="AI assistant hologram"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>AI assistant hologram</h2><code>objects-ai-ai-assistant-hologram</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-data-training-blocks.svg" alt="Data training blocks"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>Data training blocks</h2><code>objects-ai-data-training-blocks</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-dataset-visualization.svg" alt="Dataset visualization"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>Dataset visualization</h2><code>objects-ai-dataset-visualization</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-ai-tokens.svg" alt="AI tokens"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>AI tokens</h2><code>objects-ai-ai-tokens</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-transformer-architecture.svg" alt="Transformer architecture"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>Transformer architecture</h2><code>objects-ai-transformer-architecture</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-computer-vision-eye.svg" alt="Computer vision eye"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>Computer vision eye</h2><code>objects-ai-computer-vision-eye</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-speech-recognition-waveform.svg" alt="Speech recognition waveform"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>Speech recognition waveform</h2><code>objects-ai-speech-recognition-waveform</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-generative-ai-visualization.svg" alt="Generative AI visualization"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>Generative AI visualization</h2><code>objects-ai-generative-ai-visualization</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-ai-server.svg" alt="AI server"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>AI server</h2><code>objects-ai-ai-server</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-ai-circuit-board.svg" alt="AI circuit board"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>AI circuit board</h2><code>objects-ai-ai-circuit-board</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/AI">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/AI/objects-ai-ai-network-nodes.svg" alt="AI network nodes"></div>
+    <div class="meta"><span class="type">OBJECTS/AI</span><h2>AI network nodes</h2><code>objects-ai-ai-network-nodes</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-digital-padlock.svg" alt="Digital padlock"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Digital padlock</h2><code>objects-cybersecurity-digital-padlock</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-security-shield.svg" alt="Security shield"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Security shield</h2><code>objects-cybersecurity-security-shield</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-firewall.svg" alt="Firewall"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Firewall</h2><code>objects-cybersecurity-firewall</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-malware-file.svg" alt="Malware file"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Malware file</h2><code>objects-cybersecurity-malware-file</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-ransomware-visualization.svg" alt="Ransomware visualization"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Ransomware visualization</h2><code>objects-cybersecurity-ransomware-visualization</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-phishing-email.svg" alt="Phishing email"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Phishing email</h2><code>objects-cybersecurity-phishing-email</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-password-key.svg" alt="Password key"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Password key</h2><code>objects-cybersecurity-password-key</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-fingerprint-scanner.svg" alt="Fingerprint scanner"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Fingerprint scanner</h2><code>objects-cybersecurity-fingerprint-scanner</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-biometric-scanner.svg" alt="Biometric scanner"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Biometric scanner</h2><code>objects-cybersecurity-biometric-scanner</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-security-camera.svg" alt="Security camera"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Security camera</h2><code>objects-cybersecurity-security-camera</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-anonymous-mask.svg" alt="Anonymous mask"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Anonymous mask</h2><code>objects-cybersecurity-anonymous-mask</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-vulnerability-symbol.svg" alt="Vulnerability symbol"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Vulnerability symbol</h2><code>objects-cybersecurity-vulnerability-symbol</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-encrypted-data.svg" alt="Encrypted data"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Encrypted data</h2><code>objects-cybersecurity-encrypted-data</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-decryption-key.svg" alt="Decryption key"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Decryption key</h2><code>objects-cybersecurity-decryption-key</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-digital-warning.svg" alt="Digital warning"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Digital warning</h2><code>objects-cybersecurity-digital-warning</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-intrusion-alert.svg" alt="Intrusion alert"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Intrusion alert</h2><code>objects-cybersecurity-intrusion-alert</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-network-attack-visualization.svg" alt="Network attack visualization"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Network attack visualization</h2><code>objects-cybersecurity-network-attack-visualization</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-antivirus-scanner.svg" alt="Antivirus scanner"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Antivirus scanner</h2><code>objects-cybersecurity-antivirus-scanner</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-security-terminal.svg" alt="Security terminal"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Security terminal</h2><code>objects-cybersecurity-security-terminal</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CYBERSECURITY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CYBERSECURITY/objects-cybersecurity-digital-forensic-evidence.svg" alt="Digital forensic evidence"></div>
+    <div class="meta"><span class="type">OBJECTS/CYBERSECURITY</span><h2>Digital forensic evidence</h2><code>objects-cybersecurity-digital-forensic-evidence</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-code-editor.svg" alt="Code editor"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Code editor</h2><code>objects-coding-code-editor</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-terminal-window.svg" alt="Terminal window"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Terminal window</h2><code>objects-coding-terminal-window</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-command-prompt.svg" alt="Command prompt"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Command prompt</h2><code>objects-coding-command-prompt</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-html-symbol.svg" alt="HTML symbol"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>HTML symbol</h2><code>objects-coding-html-symbol</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-css-symbol.svg" alt="CSS symbol"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>CSS symbol</h2><code>objects-coding-css-symbol</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-javascript-symbol.svg" alt="JavaScript symbol"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>JavaScript symbol</h2><code>objects-coding-javascript-symbol</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-python-symbol.svg" alt="Python symbol"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Python symbol</h2><code>objects-coding-python-symbol</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-node-js-symbol.svg" alt="Node.js symbol"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Node.js symbol</h2><code>objects-coding-node-js-symbol</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-git-symbol.svg" alt="Git symbol"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Git symbol</h2><code>objects-coding-git-symbol</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-github-symbol.svg" alt="GitHub symbol"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>GitHub symbol</h2><code>objects-coding-github-symbol</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-bug-object.svg" alt="Bug object"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Bug object</h2><code>objects-coding-bug-object</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-debugging-magnifier.svg" alt="Debugging magnifier"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Debugging magnifier</h2><code>objects-coding-debugging-magnifier</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-api-connection.svg" alt="API connection"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>API connection</h2><code>objects-coding-api-connection</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-database-cylinder.svg" alt="Database cylinder"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Database cylinder</h2><code>objects-coding-database-cylinder</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-server-architecture.svg" alt="Server architecture"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Server architecture</h2><code>objects-coding-server-architecture</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-cloud-computing.svg" alt="Cloud computing"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Cloud computing</h2><code>objects-coding-cloud-computing</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-file-structure.svg" alt="File structure"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>File structure</h2><code>objects-coding-file-structure</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-code-brackets.svg" alt="Code brackets"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Code brackets</h2><code>objects-coding-code-brackets</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-software-interface.svg" alt="Software interface"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>Software interface</h2><code>objects-coding-software-interface</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/CODING">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/CODING/objects-coding-app-development-screen.svg" alt="App development screen"></div>
+    <div class="meta"><span class="type">OBJECTS/CODING</span><h2>App development screen</h2><code>objects-coding-app-development-screen</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-smartphone.svg" alt="Smartphone"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Smartphone</h2><code>objects-privacy-smartphone</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-digital-fingerprint.svg" alt="Digital fingerprint"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Digital fingerprint</h2><code>objects-privacy-digital-fingerprint</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-user-profile-card.svg" alt="User profile card"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>User profile card</h2><code>objects-privacy-user-profile-card</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-browser-window.svg" alt="Browser window"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Browser window</h2><code>objects-privacy-browser-window</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-browser-cookies.svg" alt="Browser cookies"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Browser cookies</h2><code>objects-privacy-browser-cookies</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-location-pin.svg" alt="Location pin"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Location pin</h2><code>objects-privacy-location-pin</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-tracking-eye.svg" alt="Tracking eye"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Tracking eye</h2><code>objects-privacy-tracking-eye</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-data-collection-nodes.svg" alt="Data collection nodes"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Data collection nodes</h2><code>objects-privacy-data-collection-nodes</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-metadata-card.svg" alt="Metadata card"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Metadata card</h2><code>objects-privacy-metadata-card</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-personal-data-folder.svg" alt="Personal data folder"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Personal data folder</h2><code>objects-privacy-personal-data-folder</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-social-media-interface.svg" alt="Social media interface"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Social media interface</h2><code>objects-privacy-social-media-interface</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-search-history.svg" alt="Search history"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Search history</h2><code>objects-privacy-search-history</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-digital-identity.svg" alt="Digital identity"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Digital identity</h2><code>objects-privacy-digital-identity</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-cloud-storage.svg" alt="Cloud storage"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Cloud storage</h2><code>objects-privacy-cloud-storage</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-gps-satellite.svg" alt="GPS satellite"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>GPS satellite</h2><code>objects-privacy-gps-satellite</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-online-activity-visualization.svg" alt="Online activity visualization"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Online activity visualization</h2><code>objects-privacy-online-activity-visualization</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-data-trail.svg" alt="Data trail"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Data trail</h2><code>objects-privacy-data-trail</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-privacy-shield.svg" alt="Privacy shield"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Privacy shield</h2><code>objects-privacy-privacy-shield</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-user-tracking-map.svg" alt="User tracking map"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>User tracking map</h2><code>objects-privacy-user-tracking-map</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/PRIVACY">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/PRIVACY/objects-privacy-digital-footprint-visualization.svg" alt="Digital footprint visualization"></div>
+    <div class="meta"><span class="type">OBJECTS/PRIVACY</span><h2>Digital footprint visualization</h2><code>objects-privacy-digital-footprint-visualization</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-internet-iceberg.svg" alt="Internet iceberg"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Internet iceberg</h2><code>objects-internet-mysteries-internet-iceberg</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-dark-web-visualization.svg" alt="Dark web visualization"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Dark web visualization</h2><code>objects-internet-mysteries-dark-web-visualization</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-hidden-network.svg" alt="Hidden network"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Hidden network</h2><code>objects-internet-mysteries-hidden-network</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-anonymous-forum.svg" alt="Anonymous forum"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Anonymous forum</h2><code>objects-internet-mysteries-anonymous-forum</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-mysterious-server.svg" alt="Mysterious server"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Mysterious server</h2><code>objects-internet-mysteries-mysterious-server</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-underground-server-room.svg" alt="Underground server room"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Underground server room</h2><code>objects-internet-mysteries-underground-server-room</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-encrypted-portal.svg" alt="Encrypted portal"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Encrypted portal</h2><code>objects-internet-mysteries-encrypted-portal</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-unknown-signal.svg" alt="Unknown signal"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Unknown signal</h2><code>objects-internet-mysteries-unknown-signal</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-satellite-transmission.svg" alt="Satellite transmission"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Satellite transmission</h2><code>objects-internet-mysteries-satellite-transmission</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-undersea-internet-cable.svg" alt="Undersea internet cable"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Undersea internet cable</h2><code>objects-internet-mysteries-undersea-internet-cable</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-global-network-map.svg" alt="Global network map"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Global network map</h2><code>objects-internet-mysteries-global-network-map</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-digital-tunnel.svg" alt="Digital tunnel"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Digital tunnel</h2><code>objects-internet-mysteries-digital-tunnel</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-glitch-object.svg" alt="Glitch object"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Glitch object</h2><code>objects-internet-mysteries-glitch-object</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-unknown-file.svg" alt="Unknown file"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Unknown file</h2><code>objects-internet-mysteries-unknown-file</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-hidden-data.svg" alt="Hidden data"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Hidden data</h2><code>objects-internet-mysteries-hidden-data</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-secret-database.svg" alt="Secret database"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Secret database</h2><code>objects-internet-mysteries-secret-database</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-mysterious-computer.svg" alt="Mysterious computer"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Mysterious computer</h2><code>objects-internet-mysteries-mysterious-computer</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-digital-shadow.svg" alt="Digital shadow"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Digital shadow</h2><code>objects-internet-mysteries-digital-shadow</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-network-nodes-map.svg" alt="Network nodes map"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Network nodes map</h2><code>objects-internet-mysteries-network-nodes-map</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/INTERNET-MYSTERIES">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/INTERNET-MYSTERIES/objects-internet-mysteries-unknown-device.svg" alt="Unknown device"></div>
+    <div class="meta"><span class="type">OBJECTS/INTERNET-MYSTERIES</span><h2>Unknown device</h2><code>objects-internet-mysteries-unknown-device</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-quantum-computer.svg" alt="Quantum computer"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Quantum computer</h2><code>objects-future-tech-quantum-computer</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-semiconductor-wafer.svg" alt="Semiconductor wafer"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Semiconductor wafer</h2><code>objects-future-tech-semiconductor-wafer</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-humanoid-robot.svg" alt="Humanoid robot"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Humanoid robot</h2><code>objects-future-tech-humanoid-robot</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-autonomous-drone.svg" alt="Autonomous drone"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Autonomous drone</h2><code>objects-future-tech-autonomous-drone</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-smart-glasses.svg" alt="Smart glasses"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Smart glasses</h2><code>objects-future-tech-smart-glasses</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-brain-computer-interface.svg" alt="Brain computer interface"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Brain computer interface</h2><code>objects-future-tech-brain-computer-interface</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-holographic-display.svg" alt="Holographic display"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Holographic display</h2><code>objects-future-tech-holographic-display</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-nanotechnology-visualization.svg" alt="Nanotechnology visualization"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Nanotechnology visualization</h2><code>objects-future-tech-nanotechnology-visualization</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-fusion-reactor.svg" alt="Fusion reactor"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Fusion reactor</h2><code>objects-future-tech-fusion-reactor</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-space-satellite.svg" alt="Space satellite"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Space satellite</h2><code>objects-future-tech-space-satellite</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-robotics-arm.svg" alt="Robotics arm"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Robotics arm</h2><code>objects-future-tech-robotics-arm</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-autonomous-vehicle.svg" alt="Autonomous vehicle"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Autonomous vehicle</h2><code>objects-future-tech-autonomous-vehicle</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-smart-city.svg" alt="Smart city"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Smart city</h2><code>objects-future-tech-smart-city</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-quantum-chip.svg" alt="Quantum chip"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Quantum chip</h2><code>objects-future-tech-quantum-chip</code></div>
+  </article>
+  <article class="card" data-category="OBJECTS/FUTURE-TECH">
+    <div class="preview"><img loading="lazy" src="VISUAL/OBJECTS/FUTURE-TECH/objects-future-tech-advanced-processor.svg" alt="Advanced processor"></div>
+    <div class="meta"><span class="type">OBJECTS/FUTURE-TECH</span><h2>Advanced processor</h2><code>objects-future-tech-advanced-processor</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-bedroom.svg" alt="Bedroom"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Bedroom</h2><code>environments-bedroom</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-developer-desk.svg" alt="Developer desk"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Developer desk</h2><code>environments-developer-desk</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-server-room.svg" alt="Server room"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Server room</h2><code>environments-server-room</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-cybersecurity-laboratory.svg" alt="Cybersecurity laboratory"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Cybersecurity laboratory</h2><code>environments-cybersecurity-laboratory</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-ai-laboratory.svg" alt="AI laboratory"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>AI laboratory</h2><code>environments-ai-laboratory</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-computer-classroom.svg" alt="Computer classroom"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Computer classroom</h2><code>environments-computer-classroom</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-modern-office.svg" alt="Modern office"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Modern office</h2><code>environments-modern-office</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-underground-facility.svg" alt="Underground facility"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Underground facility</h2><code>environments-underground-facility</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-futuristic-city.svg" alt="Futuristic city"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Futuristic city</h2><code>environments-futuristic-city</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-dark-forest.svg" alt="Dark forest"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Dark forest</h2><code>environments-dark-forest</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-technology-control-room.svg" alt="Technology control room"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Technology control room</h2><code>environments-technology-control-room</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-data-center-corridor.svg" alt="Data center corridor"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Data center corridor</h2><code>environments-data-center-corridor</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-computer-workstation.svg" alt="Computer workstation"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Computer workstation</h2><code>environments-computer-workstation</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-research-laboratory.svg" alt="Research laboratory"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Research laboratory</h2><code>environments-research-laboratory</code></div>
+  </article>
+  <article class="card" data-category="ENVIRONMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/ENVIRONMENTS/environments-abstract-digital-environment.svg" alt="Abstract digital environment"></div>
+    <div class="meta"><span class="type">ENVIRONMENTS</span><h2>Abstract digital environment</h2><code>environments-abstract-digital-environment</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-terminal-popup.svg" alt="Terminal popup"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Terminal popup</h2><code>ui-elements-terminal-popup</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-browser-popup.svg" alt="Browser popup"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Browser popup</h2><code>ui-elements-browser-popup</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-notification-popup.svg" alt="Notification popup"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Notification popup</h2><code>ui-elements-notification-popup</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-warning-popup.svg" alt="Warning popup"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Warning popup</h2><code>ui-elements-warning-popup</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-error-popup.svg" alt="Error popup"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Error popup</h2><code>ui-elements-error-popup</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-success-popup.svg" alt="Success popup"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Success popup</h2><code>ui-elements-success-popup</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-loading-indicator.svg" alt="Loading indicator"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Loading indicator</h2><code>ui-elements-loading-indicator</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-progress-bar.svg" alt="Progress bar"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Progress bar</h2><code>ui-elements-progress-bar</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-data-chart.svg" alt="Data chart"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Data chart</h2><code>ui-elements-data-chart</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-network-diagram.svg" alt="Network diagram"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Network diagram</h2><code>ui-elements-network-diagram</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-world-map-interface.svg" alt="World map interface"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>World map interface</h2><code>ui-elements-world-map-interface</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-scan-frame.svg" alt="Scan frame"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Scan frame</h2><code>ui-elements-scan-frame</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-targeting-frame.svg" alt="Targeting frame"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Targeting frame</h2><code>ui-elements-targeting-frame</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-hud-interface.svg" alt="HUD interface"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>HUD interface</h2><code>ui-elements-hud-interface</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-file-manager.svg" alt="File manager"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>File manager</h2><code>ui-elements-file-manager</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-folder-window.svg" alt="Folder window"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Folder window</h2><code>ui-elements-folder-window</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-code-snippet-card.svg" alt="Code snippet card"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Code snippet card</h2><code>ui-elements-code-snippet-card</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-dashboard.svg" alt="Dashboard"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Dashboard</h2><code>ui-elements-dashboard</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-login-interface.svg" alt="Login interface"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>Login interface</h2><code>ui-elements-login-interface</code></div>
+  </article>
+  <article class="card" data-category="UI-ELEMENTS">
+    <div class="preview"><img loading="lazy" src="VISUAL/UI-ELEMENTS/ui-elements-system-alert.svg" alt="System alert"></div>
+    <div class="meta"><span class="type">UI-ELEMENTS</span><h2>System alert</h2><code>ui-elements-system-alert</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-digital-particles.svg" alt="Digital particles"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Digital particles</h2><code>motion-assets-digital-particles</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-data-streams.svg" alt="Data streams"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Data streams</h2><code>motion-assets-data-streams</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-connection-lines.svg" alt="Connection lines"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Connection lines</h2><code>motion-assets-connection-lines</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-glitch-overlay.svg" alt="Glitch overlay"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Glitch overlay</h2><code>motion-assets-glitch-overlay</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-scanlines.svg" alt="Scanlines"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Scanlines</h2><code>motion-assets-scanlines</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-light-streaks.svg" alt="Light streaks"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Light streaks</h2><code>motion-assets-light-streaks</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-energy-rings.svg" alt="Energy rings"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Energy rings</h2><code>motion-assets-energy-rings</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-perspective-grid.svg" alt="Perspective grid"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Perspective grid</h2><code>motion-assets-perspective-grid</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-waveform.svg" alt="Waveform"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Waveform</h2><code>motion-assets-waveform</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-digital-dust.svg" alt="Digital dust"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Digital dust</h2><code>motion-assets-digital-dust</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-geometric-shapes.svg" alt="Geometric shapes"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Geometric shapes</h2><code>motion-assets-geometric-shapes</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-holographic-circles.svg" alt="Holographic circles"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Holographic circles</h2><code>motion-assets-holographic-circles</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-circuit-patterns.svg" alt="Circuit patterns"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Circuit patterns</h2><code>motion-assets-circuit-patterns</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-binary-numbers.svg" alt="Binary numbers"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Binary numbers</h2><code>motion-assets-binary-numbers</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-hexadecimal-numbers.svg" alt="Hexadecimal numbers"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Hexadecimal numbers</h2><code>motion-assets-hexadecimal-numbers</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-noise-texture.svg" alt="Noise texture"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Noise texture</h2><code>motion-assets-noise-texture</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-distortion-overlay.svg" alt="Distortion overlay"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Distortion overlay</h2><code>motion-assets-distortion-overlay</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-digital-transition.svg" alt="Digital transition"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Digital transition</h2><code>motion-assets-digital-transition</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-signal-waves.svg" alt="Signal waves"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Signal waves</h2><code>motion-assets-signal-waves</code></div>
+  </article>
+  <article class="card" data-category="MOTION-ASSETS">
+    <div class="preview"><img loading="lazy" src="VISUAL/MOTION-ASSETS/motion-assets-abstract-technology-patterns.svg" alt="Abstract technology patterns"></div>
+    <div class="meta"><span class="type">MOTION-ASSETS</span><h2>Abstract technology patterns</h2><code>motion-assets-abstract-technology-patterns</code></div>
+  </article>
+  <article class="card" data-category="BACKGROUNDS">
+    <div class="preview"><img loading="lazy" src="VISUAL/BACKGROUNDS/backgrounds-pure-black-studio.svg" alt="Pure black studio"></div>
+    <div class="meta"><span class="type">BACKGROUNDS</span><h2>Pure black studio</h2><code>backgrounds-pure-black-studio</code></div>
+  </article>
+  <article class="card" data-category="BACKGROUNDS">
+    <div class="preview"><img loading="lazy" src="VISUAL/BACKGROUNDS/backgrounds-dark-navy-gradient.svg" alt="Dark navy gradient"></div>
+    <div class="meta"><span class="type">BACKGROUNDS</span><h2>Dark navy gradient</h2><code>backgrounds-dark-navy-gradient</code></div>
+  </article>
+  <article class="card" data-category="BACKGROUNDS">
+    <div class="preview"><img loading="lazy" src="VISUAL/BACKGROUNDS/backgrounds-subtle-cyan-grid.svg" alt="Subtle cyan grid"></div>
+    <div class="meta"><span class="type">BACKGROUNDS</span><h2>Subtle cyan grid</h2><code>backgrounds-subtle-cyan-grid</code></div>
+  </article>
+  <article class="card" data-category="BACKGROUNDS">
+    <div class="preview"><img loading="lazy" src="VISUAL/BACKGROUNDS/backgrounds-neon-green-grid.svg" alt="Neon green grid"></div>
+    <div class="meta"><span class="type">BACKGROUNDS</span><h2>Neon green grid</h2><code>backgrounds-neon-green-grid</code></div>
+  </article>
+  <article class="card" data-category="BACKGROUNDS">
+    <div class="preview"><img loading="lazy" src="VISUAL/BACKGROUNDS/backgrounds-abstract-dark-particles.svg" alt="Abstract dark particles"></div>
+    <div class="meta"><span class="type">BACKGROUNDS</span><h2>Abstract dark particles</h2><code>backgrounds-abstract-dark-particles</code></div>
+  </article>
+  <article class="card" data-category="BACKGROUNDS">
+    <div class="preview"><img loading="lazy" src="VISUAL/BACKGROUNDS/backgrounds-digital-network-background.svg" alt="Digital network background"></div>
+    <div class="meta"><span class="type">BACKGROUNDS</span><h2>Digital network background</h2><code>backgrounds-digital-network-background</code></div>
+  </article>
+  <article class="card" data-category="BACKGROUNDS">
+    <div class="preview"><img loading="lazy" src="VISUAL/BACKGROUNDS/backgrounds-dark-circuit-background.svg" alt="Dark circuit background"></div>
+    <div class="meta"><span class="type">BACKGROUNDS</span><h2>Dark circuit background</h2><code>backgrounds-dark-circuit-background</code></div>
+  </article>
+  <article class="card" data-category="BACKGROUNDS">
+    <div class="preview"><img loading="lazy" src="VISUAL/BACKGROUNDS/backgrounds-soft-radial-spotlight.svg" alt="Soft radial spotlight"></div>
+    <div class="meta"><span class="type">BACKGROUNDS</span><h2>Soft radial spotlight</h2><code>backgrounds-soft-radial-spotlight</code></div>
+  </article>
+  <article class="card" data-category="BACKGROUNDS">
+    <div class="preview"><img loading="lazy" src="VISUAL/BACKGROUNDS/backgrounds-glitch-dark-background.svg" alt="Glitch dark background"></div>
+    <div class="meta"><span class="type">BACKGROUNDS</span><h2>Glitch dark background</h2><code>backgrounds-glitch-dark-background</code></div>
+  </article>
+  <article class="card" data-category="BACKGROUNDS">
+    <div class="preview"><img loading="lazy" src="VISUAL/BACKGROUNDS/backgrounds-minimal-dark-gradient.svg" alt="Minimal dark gradient"></div>
+    <div class="meta"><span class="type">BACKGROUNDS</span><h2>Minimal dark gradient</h2><code>backgrounds-minimal-dark-gradient</code></div>
+  </article></section><div class="empty" id="empty">Tidak ada aset yang cocok.</div></main>
+<script>
+const search=document.querySelector('#search'),category=document.querySelector('#category'),cards=[...document.querySelectorAll('.card')],stats=document.querySelector('#stats'),empty=document.querySelector('#empty');
+function update(){const q=search.value.toLowerCase();let n=0;for(const card of cards){const matchText=card.textContent.toLowerCase().includes(q);const matchCategory=!category.value||card.dataset.category===category.value;const show=matchText&&matchCategory;card.hidden=!show;if(show)n++;}stats.textContent='Menampilkan '+n+' dari '+cards.length+' aset';empty.style.display=n?'none':'block';}
+search.addEventListener('input',update);category.addEventListener('change',update);
+</script></body></html>
