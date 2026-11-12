@@ -1,0 +1,73 @@
+Font pengujian terdaftar: /home/runner/work/NAZE-VIDEO-MACHINE/NAZE-VIDEO-MACHINE/FONTS/GOOGLE/SANS/plusjakartasans.ttf
+PASS font pengujian menggambar glyph
+PASS wrapping max 2 baris
+PASS measureBlock > 0
+PASS estimasi bubble > 0
+PASS estimasi chat proporsional
+PASS unit vertikal
+PASS format landscape
+PASS format persegi
+PASS safe area bawah TikTok/Reels
+PASS clampToSafe menjaga tepi
+PASS kandidat above-anchor + alternatif
+PASS solver mengembalikan penempatan
+PASS tidak menutupi wajah
+PASS memilih alternatif otomatis
+PASS alternatif posisi lain tersedia
+PASS anti-tumpukan antar caption
+PASS solver jatuh ke bawah bila bebas
+PASS anchor klasik subjek
+PASS anchor klasik objek
+PASS region wajah karakter
+PASS anchor layer compositor
+PASS tepat 20 preset
+PASS 20 preset: masuk-penuh-keluar
+PASS timing kata monoton
+PASS kata aktif terdeteksi
+PASS sebelum mulai -> -1
+PASS akhir -> kata terakhir
+PASS reveal progress valid
+PASS kalimat terpisah
+PASS reading floor > 0
+PASS timing kalimat monoton
+PASS timing kalimat menutup rentang
+PASS parser SRT round-trip
+PASS parser VTT round-trip
+PASS parser menolak timestamp hilang
+PASS parser menolak timestamp invalid
+PASS parser melewati blok kosong
+PASS parser VTT cue settings diabaikan
+PASS parser menormalisasi tumpang tindih
+PASS validateCues cue sehat
+PASS validateCues deteksi tumpang tindih
+PASS validateCues deteksi teks kosong
+PASS validateCues deteksi waktu terbalik
+PASS validateCues deteksi waktu non-finite
+PASS buildCuesFromDurations menolak durasi negatif
+PASS palet non-biru lolos
+PASS dominasi biru -> pelanggaran
+[POLICY] Explicit user override applied (reason: Permintaan eksplisit pengguna untuk palet biru.).
+PASS override eksplisit menembus dominasi biru
+PASS kutipan -> speech-bubble
+PASS CHAT -> chat
+PASS bingung -> thought-bubble
+PASS angka -> data-caption
+PASS teknologi -> annotation
+PASS langkah -> instruction
+PASS caps -> kinetic
+PASS seru pendek -> impact
+PASS pertanyaan -> emphasis
+PASS panjang -> editorial
+PASS default -> subtitle varian
+PASS render smoke 17 tipe
+PASS kinetic varian tracking/rotate/blur/mask
+PASS render deterministik
+PASS mode klasik -> null
+PASS mode adaptive -> engine
+PASS loadTimeline memetakan cue
+PASS API show/chat terdaftar
+PASS API annotate bekerja
+FAIL engine.render per-frame -> t=0.8: inflate is not defined
+PASS hide imperatif
+
+Total: 68 lulus, 1 gagal dari 69 asersi.
