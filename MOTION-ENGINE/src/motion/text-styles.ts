@@ -63,8 +63,7 @@ export interface TextStyleDef {
 
 const T = (
   id: string,
-  name
-: string,
+  name: string,
   fontFamily: string,
   weight: string,
   letterSpacing: number,
@@ -83,8 +82,7 @@ export const TEXT_STYLES: TextStyleDef[] = [
   T("gold-sheen", "Kilau Emas", "NazeDMSans", "700", 4, {"case":"upper","gradient":["accent","primary"],"shadow":{"color":"background","blur":18,"alpha":0.8},"mode":"maskReveal"}),
   T("data-counter", "Data Presisi", "NazeDMSans", "700", 1, {"case":"upper","mode":"stacked","enter":{"type":"rise"},"idle":{"floatY":4}}),
   T("neon-pulse", "Neon Berdenyut", "NazeUrbanist", "800", 3, {"case":"upper","fill":"accent","shadow":{"color":"accent","blur":45,"alpha":0.9},"mode":"oversized","enter":{"type":"pop"},"idle":{"pulse":0.03}}),
-  T("retro-chrome", "Chrome Retro
-", "NazeUrbanist", "900", 2, {"case":"upper","gradient":["text","secondary"],"shadow":{"color":"background","blur":16,"offsetY":6,"alpha":0.8},"mode":"perspective"}),
+  T("retro-chrome", "Chrome Retro", "NazeUrbanist", "900", 2, {"case":"upper","gradient":["text","secondary"],"shadow":{"color":"background","blur":16,"offsetY":6,"alpha":0.8},"mode":"perspective"}),
   T("scan-tech", "Teknologi Pindai", "NazeUrbanist", "700", 4, {"case":"upper","fill":"secondary","shadow":{"color":"text","blur":12,"alpha":0.6},"mode":"stacked","enter":{"type":"slideR"}}),
   T("holo-flick", "Hologram", "NazeUrbanist", "800", 2, {"case":"upper","gradient":["accent","text"],"mode":"perspective","enter":{"type":"pop"},"idle":{"pulse":0.02}}),
   T("pop-slam", "Pop Stamp", "NazeOutfit", "900", -1, {"case":"upper","mode":"collage","enter":{"type":"pop"}}),
@@ -95,8 +93,7 @@ export const TEXT_STYLES: TextStyleDef[] = [
   T("bold-statement", "Pernyataan Berani", "NazePoppins", "900", -1.5, {"case":"upper","mode":"oversized","enter":{"type":"rise"}}),
   T("hand-note", "Catatan Tangan", "NazeFigtree", "700", 0, {"mode":"stacked","enter":{"type":"rise"},"idle":{"sway":0.8}}),
   T("sketch-wiggle", "Sketsa Goyang", "NazeFigtree", "800", 0, {"case":"upper","mode":"splitWords","enter":{"type":"pop"},"idle":{"floatX":5,"sway":1.2}}),
-  T("paper-layer", "Lapisan Kertas", "NazeMulish", "800", 0, {"case":"upper","shadow":{"color":"background","blur":16,"offsetY":6,"alpha":0.7},"mode":"stacked","enter":{"type":"
-rise"},"idle":{"floatY":5}}),
+  T("paper-layer", "Lapisan Kertas", "NazeMulish", "800", 0, {"case":"upper","shadow":{"color":"background","blur":16,"offsetY":6,"alpha":0.7},"mode":"stacked","enter":{"type":"rise"},"idle":{"floatY":5}}),
   T("craft-soft", "Craft Lembut", "NazeMulish", "700", 1, {"fill":"primary","mode":"oversized","enter":{"type":"rise"},"idle":{"pulse":0.012}}),
   T("clay-chunky", "Clay Tebal", "NazeNunito", "900", 0, {"case":"upper","shadow":{"color":"primary","offsetX":4,"offsetY":4,"alpha":0.85},"mode":"oversized","enter":{"type":"pop"},"idle":{"pulse":0.02}}),
   T("friendly-round", "Ramah Bulat", "NazeNunito", "800", 1, {"fill":"primary","shadow":{"color":"background","blur":14,"alpha":0.7},"mode":"splitWords","enter":{"type":"rise"}}),
@@ -109,8 +106,7 @@ rise"},"idle":{"floatY":5}}),
   T("quote-italic", "Kutipan Miring", "NazeFigtree", "italic 600", 0, {"mode":"maskReveal","enter":{"type":"rise"}}),
   T("whisper-low", "Bisikan Rendah", "NazeFigtree", "500", 2, {"case":"lower","fill":"secondary","mode":"oversized","enter":{"type":"wipe"},"idle":{"floatY":3}}),
   T("shout-upper", "Teriakan Besar", "NazeJakarta", "900", -2, {"case":"upper","shadow":{"color":"primary","offsetX":6,"offsetY":6,"alpha":0.9},"mode":"stacked","enter":{"type":"pop"}}),
-  T("accent-strike", 
-"Aksen Coretan", "NazeRubik", "800", 0, {"case":"upper","underline":true,"mode":"oversized","enter":{"type":"wipe"}}),
+  T("accent-strike", "Aksen Coretan", "NazeRubik", "800", 0, {"case":"upper","underline":true,"mode":"oversized","enter":{"type":"wipe"}}),
   T("rubber-stamp", "Stempel Karet", "NazeRubik", "900", 2, {"case":"upper","fill":"accent","mode":"collage","enter":{"type":"pop"},"idle":{"sway":1}}),
   T("tape-label", "Label Kertas", "NazeMulish", "700", 3, {"case":"upper","shadow":{"color":"background","blur":10,"offsetY":4,"alpha":0.7},"mode":"stacked","enter":{"type":"slideR"}}),
   T("dash-split", "Belah Kabin", "NazePoppins", "800", 1, {"case":"upper","mode":"splitWords","enter":{"type":"slideL"},"idle":{"floatX":4}}),
@@ -123,8 +119,7 @@ rise"},"idle":{"floatY":5}}),
   T("iris-open", "Iris Terbuka", "NazeNunito", "800", 0, {"case":"upper","mode":"maskReveal","enter":{"type":"pop"},"idle":{"pulse":0.01}}),
   T("split-jump", "Lompat Terpisah", "NazeOutfit", "900", 0, {"case":"upper","mode":"splitWords","enter":{"type":"pop"},"idle":{"floatY":12,"speed":1.4}}),
   T("chill-drift", "Drift Tenang", "NazeMulish", "600", 1.5, {"case":"lower","fill":"primary","mode":"oversized","enter":{"type":"rise","dur":1},"idle":{"floatX":8,"floatY":5}}),
-  T("double-tone", "Nada Gan
-da", "NazeRubik", "800", 1, {"case":"upper","gradient":["text","accent"],"mode":"stacked","enter":{"type":"wipe"}}),
+  T("double-tone", "Nada Ganda", "NazeRubik", "800", 1, {"case":"upper","gradient":["text","accent"],"mode":"stacked","enter":{"type":"wipe"}}),
   T("final-cut", "Potongan Final", "NazeBarlow", "900", -2, {"case":"upper","shadow":{"color":"accent","offsetX":5,"offsetY":5,"alpha":0.9},"underline":true,"mode":"oversized","enter":{"type":"rise"},"idle":{"pulse":0.01}}),
 
   // Arah visual: editorial brutalism (tipe solid, tanpa bayangan/glow).
@@ -232,8 +227,7 @@ export function drawStyledTypography(
       letterSpacing: base.style.typography.letterSpacing,
       scale: base.scale,
     };
-    drawEditorialTypography(ctx, layer, bo
-xW, boxH, enter, t, fill, typoKit);
+    drawEditorialTypography(ctx, layer, boxW, boxH, enter, t, fill, typoKit);
     return;
   }
   const typoKit: TypographyKit = {

@@ -245,11 +245,7 @@ const STALE_SECONDS = 1.5;
 const FACE_OVERLAP_LIMIT = 0.02;
 /** Tabrakan subjek memicu re-anchor (fraksi area CC). */
 const SUBJECT_OVERLAP_LIMIT = 0.35;
-/**
- * Tabrakan headline (region grafis berbobot tinggi, mis. tipografi besar)
- * memicu re-anchor bila menutupi separuh area CC; di bawah ambang itu
- * penalti skor solver yang menangani agar tidak osilasi.
- */
+/** Tabrakan headline (grafis berat) memicu re-anchor (fraksi area CC). */
 const HEADLINE_OVERLAP_LIMIT = 0.5;
 /** Batas kecepatan perpindahan CC (fraksi tinggi frame per detik). */
 const MAX_SPEED_H_PER_S = 2.5;

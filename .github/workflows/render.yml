@@ -81,8 +81,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             PROJECTS="${{ inputs.project }}"
           else
-            PROJECTS
-="HIDDEN-INTERNET-HIGHWAY"
+            PROJECTS="HIDDEN-INTERNET-HIGHWAY"
           fi
 
           PROFILE="${{ github.event_name == 'workflow_dispatch' && inputs.profile || 'vertical-1080' }}"
@@ -140,8 +139,7 @@ jobs:
           AUTH="Authorization: Bearer $GH_TOKEN"
           ACCEPT="Accept: application/vnd.github+json"
 
-          HTTP=$(curl -s -o /dev/null
- -w "%{http_code}" -X POST \
+          HTTP=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
             -H "$AUTH" -H "$ACCEPT" -H "Content-Type: application/json" \
             "$API/git/refs" \
             -d "{\"ref\":\"refs/heads/$BRANCH\",\"sha\":\"${{ github.sha }}\"}")
@@ -201,8 +199,7 @@ jobs:
           node -e '
           const fs = require("fs");
 
-      
-    for (const project of "${{ steps.cfg.outputs.projects }}".split(/\s+/).filter(Boolean)) {
+          for (const project of "${{ steps.cfg.outputs.projects }}".split(/\s+/).filter(Boolean)) {
             const reportPath = `dist/${project}/render-report.json`;
             const report = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
             const failed = report.validation.checks.filter((c) => !c.pass);

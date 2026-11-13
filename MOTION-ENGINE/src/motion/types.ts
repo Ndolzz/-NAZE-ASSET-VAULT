@@ -75,8 +75,7 @@ export interface LayerSpec {
   /** Display text (kind "typography"). */
   text?: string;
   mode?: TypographyMode;
-  /** Parent layer id; children inherit the parent transform (null objects). *
-/
+  /** Parent layer id; children inherit the parent transform (null objects). */
   parent?: string;
   /** Anchor point as fractions of the box (default [0.5, 0.5]). */
   anchor?: AnchorSpec;

@@ -52,8 +52,7 @@ interface LayerCenter {
 }
 
 function layerCenterNormalized(layer: LayerSpec, w: number, h: number, t: number): LayerCenter {
-  const box = layer.b
-ox ?? [0.1, 0.1, 0.8, 0.8];
+  const box = layer.box ?? [0.1, 0.1, 0.8, 0.8];
   const tr = layer.transform ?? {};
   const ox = sampleOptional(tr.x, t, 0);
   const oy = sampleOptional(tr.y, t, 0);
@@ -123,7 +122,6 @@ function drawMask(ctx: any, shape: string, x: number, y: number, w: number, h: n
   } else if (shape === "band") {
     ctx.rect(x + ix, y, w - ix * 2, h);
   } else {
-
     ctx.rect(x + ix, y + iy, w - ix * 2, h - iy * 2);
   }
   ctx.clip();
@@ -197,8 +195,7 @@ function drawLayerTree(
       t
     );
   } else if (layer.kind !== "null") {
-    drawEditorialElement(ctx
-, layer, { x: lx, y: ly, w: bw, h: bh }, enter, t, fill, { palette: kit.palette, style: kit.style, scale: s }, kit.__scene?.subjects ?? []);
+    drawEditorialElement(ctx, layer, { x: lx, y: ly, w: bw, h: bh }, enter, t, fill, { palette: kit.palette, style: kit.style, scale: s }, kit.__scene?.subjects ?? []);
   }
 
   if (transform.blur > 0 && typeof (ctx as any).filter === "string") {
@@ -261,8 +258,7 @@ function autoLayersForScene(scene: any): LayerSpec[] {
 
 /**
  * Gate: a scene renders through the layered compositor when its style opts
- * into the editorial-kinetic motion system, or when
- it defines layers/camera.
+ * into the editorial-kinetic motion system, or when it defines layers/camera.
  */
 export function isEditorialKineticScene(style: any, scene: any): boolean {
   if (scene && Array.isArray(scene.layers) && scene.layers.length > 0) return true;

@@ -59,8 +59,7 @@ export interface RenderVideoOptions {
   captionEngine?: CaptionEngine;
 }
 
-export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: number; durati
-on: number }> {
+export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: number; duration: number }> {
   const { profile, timeline, style } = opts;
   const fps = timeline.fps;
   const duration = timeline.duration;
@@ -117,8 +116,7 @@ on: number }> {
   const ctxMain = canvasMain.getContext("2d");
   const canvasPrev = createCanvas(w, h);
   const ctxPrev = canvasPrev.getContext("2d");
-  let 
-cachedPrevIndex = -1;
+  let cachedPrevIndex = -1;
 
   const t0 = Date.now();
   const logEvery = Math.max(1, Math.floor(totalFrames / 20));
@@ -164,8 +162,7 @@ function writeFrame(ffmpeg: any, ctx: any, w: number, h: number): Promise<void> 
     if (ffmpeg.exitCode === 0) return Promise.resolve();
     return Promise.reject(new Error(`ffmpeg exited with code ${ffmpeg.exitCode} while encoding.`));
   }
-  const pixel
-s = ctx.getImageData(0, 0, w, h).data;
+  const pixels = ctx.getImageData(0, 0, w, h).data;
   const view = Buffer.from(pixels.buffer, pixels.byteOffset, pixels.byteLength);
   const stdin = ffmpeg.stdin;
   if (stdin.write(view)) return Promise.resolve();

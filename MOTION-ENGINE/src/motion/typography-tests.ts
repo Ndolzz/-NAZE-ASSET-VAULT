@@ -1,22 +1,17 @@
 /**
- * Pengujian mesin tipografi editorial & pustaka preset teks (tsx + @napi-rs/canvas).
- * Mencakup: keunikan id preset, ketersediaan file font vault untuk setiap
- * keluarga preset, registrasi font, smoke render seluruh mode dan preset,
- * prioritas applyTextStyleDefaults, dan kepatuhan warna pada peran palet.
- * Exit 1 bila ada asersi gagal.
+ * Pengujian mandiri mesin tipografi & pustaka preset teks (tsx + @napi-rs/canvas).
+ * Mencakup: keunikan id preset, peta font vault, keberadaan berkas font,
+ * registrasi GlobalFonts, smoke render 11 mode x 3 fase enter, smoke render
+ * seluruh preset, aturan prioritas applyTextStyleDefaults, dan kepatuhan
+ * warna (peran palet atau #hex saja). Exit 1 bila ada asersi gagal.
  */
 import { createCanvas, GlobalFonts } from "@napi-rs/canvas";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import {
-  TEXT_STYLES,
-  TEXT_STYLE_IDS,
-  TEXT_STYLE_FONT_FILES,
-  applyTextStyleDefaults,
-  drawStyledTypography,
-} from "./text-styles";
-import { drawEditorialTypography } from "./typography";
-import { TypographyMode } from "./types";
+import { TEXT_STYLES, TEXT_STYLE_IDS, TEXT_STYLE_FONT_FILES, applyTextStyleDefaults, drawStyledTypography } from "./text-styles";
+import { drawEditorialTypography, TypographyKit } from "./typography";
+import { TypographyMode, LayerSpec } from "./types";
+import { Palette } from "../color/palette";
 
 let passed = 0;
 let failed = 0;
@@ -30,186 +25,258 @@ function check(name: string, cond: boolean, detail = ""): void {
   }
 }
 
-function repoRoot(): string {
-  const candidates = [
+function resolveRepoRoot(): string {
+  const roots = [
     process.env.NAZE_REPO_ROOT,
     path.resolve(process.cwd(), ".."),
     process.cwd(),
     path.resolve(process.cwd(), "../.."),
   ].filter((p): p is string => typeof p === "string" && p.length > 0);
-  for (const root of candidates) {
-    if (fs.existsSync(path.join(root, "FONTS"))) return root;
+  for (const root of roots) {
+    if (fs.existsSync(path.resolve(root, "FONTS/GOOGLE/SANS/plusjakartasans.ttf"))) return root;
   }
-  return candidates[0] ?? process.cwd();
+  return path.resolve(process.cwd(), "..");
 }
 
-const ROOT = repoRoot();
+const REPO_ROOT = resolveRepoRoot();
 
-const palette: any = {
-  id: "test-ink",
-  name: "Test Ink",
-  background: "#F2F0EB",
-  primary: "#111111",
-  secondary: "#2E2E2E",
-  accent: "#E63B2E",
-  text: "#0A0A0A",
-  dark: false,
+const palette: Palette = {
+  id: "test-warm",
+  name: "Test Warm",
+  background: "#161210",
+  primary: "#F2E9DC",
+  secondary: "#E63B2E",
+  accent: "#F5C518",
+  text: "#F7F4EF",
+  dark: true,
 };
 
 const style: any = {
-  id: "editorial-kinetic",
-  name: "Editorial Kinetic Motion",
-  typography: {
-    fontFiles: ["FONTS/GOOGLE/CONDENSED/barlowcondensed.ttf"],
-    fontFamily: "NazeBarlow",
-    titleCase: "upper",
-    titleWeight: "900",
-    bodyWeight: "700",
-    letterSpacing: -1,
-    titleScale: 1,
-  },
+  id: "test-style",
+  typography: { fontFamily: "NazeJakarta", titleWeight: "800", letterSpacing: 0 },
 };
 
-function main(): void {
-  // 1. Id preset unik.
-  check(
-    "id preset textStyle unik",
-    new Set(TEXT_STYLE_IDS).size === TEXT_STYLES.length,
-    "ids=" + TEXT_STYLES.length + " unik=" + new Set(TEXT_STYLE_IDS).size
-  );
-  check("jumlah preset minimal 66", TEXT_STYLES.length >= 66, "n=" + TEXT_STYLES.length);
+function makeKit(fontFamily: string): TypographyKit {
+  return { palette, fontFamily, weight: "800", letterSpacing: 0, scale: 1 };
+}
 
-  // 2. Setiap keluarga font preset terdaftar di peta file vault.
-  const missingMap = TEXT_STYLES.filter((s) => !TEXT_STYLE_FONT_FILES[s.fontFamily]);
-  check(
-    "setiap preset punya pemetaan file font vault",
-    missingMap.length === 0,
-    missingMap.map((s) => s.id + ":" + s.fontFamily).join(", ")
-  );
+function framePixels(ctx: any, w: number, h: number): Uint8ClampedArray {
+  return ctx.getImageData(0, 0, w, h).data;
+}
+function countChanged(a: Uint8ClampedArray, b: Uint8ClampedArray): number {
+  let n = 0;
+  for (let i = 0; i < a.length; i += 40) if (Math.abs(a[i] - b[i]) > 8) n++;
+  return n;
+}
 
-  // 3. File font vault benar-benar ada.
-  const missingFiles = Object.entries(TEXT_STYLE_FONT_FILES).filter(
-    ([, rel]) => !fs.existsSync(path.join(ROOT, rel))
-  );
-  check(
-    "semua file font vault ada",
-    missingFiles.length === 0,
-    missingFiles.map(([fam, rel]) => fam + ":" + rel).join(", ")
-  );
+function freshCtx(w = 540, h = 960): any {
+  const canvas = createCanvas(w, h);
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = palette.background;
+  ctx.fillRect(0, 0, w, h);
+  return ctx;
+}
 
-  // 4. Registrasi GlobalFonts berhasil untuk semua keluarga preset.
-  let registered = 0;
-  const regFails: string[] = [];
+const ALL_MODES: TypographyMode[] = [
+  "oversized",
+  "stacked",
+  "splitWords",
+  "rotating",
+  "perspective",
+  "maskReveal",
+  "collage",
+  "brutalist",
+  "cinematic",
+  "outline",
+  "highlight",
+];
+
+const ROLES = ["text", "primary", "secondary", "accent", "background", "invert"];
+function isRoleOrHex(color: string): boolean {
+  return ROLES.includes(color) || /^#[0-9a-fA-F]{6}$/.test(color);
+}
+
+async function run(): Promise<void> {
+  // ---- Katalog preset ----
+  check("tepat 66 preset", TEXT_STYLES.length === 66, "n=" + TEXT_STYLES.length);
+  const ids = new Set(TEXT_STYLE_IDS);
+  check("id preset unik", ids.size === TEXT_STYLES.length, "unik=" + ids.size);
+
+  // ---- Peta font preset -> vault ----
+  const families = new Set(TEXT_STYLES.map((s) => s.fontFamily));
+  const unmapped = [...families].filter((f) => !(f in TEXT_STYLE_FONT_FILES));
+  check("semua keluarga preset terpetakan", unmapped.length === 0, JSON.stringify(unmapped));
+  check("peta font tepat 28 keluarga", Object.keys(TEXT_STYLE_FONT_FILES).length === 28, "n=" + Object.keys(TEXT_STYLE_FONT_FILES).length);
+
+  // ---- Berkas font ada di vault ----
+  const missing = Object.entries(TEXT_STYLE_FONT_FILES)
+    .filter(([, rel]) => !fs.existsSync(path.resolve(REPO_ROOT, rel)))
+    .map(([f, rel]) => f + "=" + rel);
+  check("semua berkas font ada di vault", missing.length === 0, JSON.stringify(missing));
+
+  // ---- Registrasi GlobalFonts ----
+  let registeredOk = true;
+  let regDetail = "";
   for (const [family, rel] of Object.entries(TEXT_STYLE_FONT_FILES)) {
-    const abs = path.join(ROOT, rel);
+    const abs = path.resolve(REPO_ROOT, rel);
     if (!fs.existsSync(abs)) continue;
+    let ok = false;
     try {
-      if (GlobalFonts.registerFromPath(abs, family)) registered++;
-      else regFails.push(family);
+      ok = GlobalFonts.registerFromPath(abs, family) === true;
     } catch (e: any) {
-      regFails.push(family + ":" + String(e && e.message));
+      regDetail = family + ": " + String(e && e.message);
+    }
+    if (!ok) {
+      registeredOk = false;
+      if (!regDetail) regDetail = family + " gagal registrasi";
     }
   }
-  check(
-    "registrasi GlobalFonts sukses",
-    registered === Object.keys(TEXT_STYLE_FONT_FILES).length && regFails.length === 0,
-    "terdaftar=" + registered + " gagal=" + regFails.join(", ")
-  );
+  check("registrasi GlobalFonts sukses", registeredOk, regDetail);
 
-  // 5. Smoke render seluruh mode tipografi (termasuk mode baru).
-  const modes: TypographyMode[] = [
-    "oversized", "stacked", "splitWords", "rotating", "perspective",
-    "maskReveal", "collage", "brutalist", "cinematic", "outline", "highlight",
-  ];
-  const canvas = createCanvas(540, 960);
-  const ctx: any = canvas.getContext("2d");
-  const kit = { palette, fontFamily: "NazeBarlow", weight: "900", letterSpacing: -1, scale: 0.5 };
+  // ---- Smoke render 11 mode x 3 fase enter ----
+  const enters = [0, 0.5, 1];
   let modeOk = true;
   let modeDetail = "";
-  for (const mode of modes) {
-    for (const enter of [0, 0.5, 1]) {
+  for (const mode of ALL_MODES) {
+    for (const enter of enters) {
+      const ctx = freshCtx();
+      const before = framePixels(ctx, 540, 960);
+      const layer: LayerSpec = {
+        id: "mode-" + mode,
+        kind: "typography",
+        text: "ANCAMAN DIGITAL",
+        mode,
+        box: [0.05, 0.3, 0.9, 0.3],
+      };
       try {
-        ctx.fillStyle = palette.background;
-        ctx.fillRect(0, 0, 540, 960);
-        drawEditorialTypography(
-          ctx,
-          { id: "t-" + mode, kind: "typography", mode, text: "NAZE TES 2026" } as any,
-          460,
-          300,
-          enter,
-          1.0,
-          palette.text,
-          kit
-        );
+        drawEditorialTypography(ctx, layer, 540 * 0.9, 960 * 0.3, enter, 1.0, palette.text, makeKit("NazeJakarta"));
       } catch (e: any) {
         modeOk = false;
         modeDetail = mode + " enter=" + enter + ": " + String(e && e.message);
         break;
       }
+      if (enter > 0 && countChanged(before, framePixels(ctx, 540, 960)) < 5) {
+        modeOk = false;
+        modeDetail = mode + " enter=" + enter + ": tidak menggambar piksel";
+        break;
+      }
     }
     if (!modeOk) break;
   }
-  check("smoke render 11 mode tipografi", modeOk, modeDetail);
+  check("smoke render 11 mode x 3 enter", modeOk, modeDetail);
 
-  // 6. Smoke render seluruh preset textStyle (bayangan, gradien, idle, case).
+  // ---- Smoke render seluruh 66 preset ----
   let presetOk = true;
   let presetDetail = "";
   for (const def of TEXT_STYLES) {
+    const ctx = freshCtx();
+    const before = framePixels(ctx, 540, 960);
+    const layer: LayerSpec = {
+      id: "preset-" + def.id,
+      kind: "typography",
+      text: "ANCAMAN DIGITAL",
+      textStyle: def.id,
+      box: [0.05, 0.3, 0.9, 0.3],
+    };
     try {
-      ctx.fillStyle = palette.background;
-      ctx.fillRect(0, 0, 540, 960);
-      drawStyledTypography(
-        ctx,
-        { id: "p-" + def.id, kind: "typography", text: "Sinyal Digital", textStyle: def.id } as any,
-        { palette, style, fontFamily: "NazeBarlow", scale: 0.5 },
-        palette.text,
-        460,
-        300,
-        0.6,
-        1.3
-      );
+      drawStyledTypography(ctx, layer, { palette, style, fontFamily: "NazeJakarta", scale: 1 }, palette.text, 540 * 0.9, 960 * 0.3, 1, 1.0);
     } catch (e: any) {
       presetOk = false;
       presetDetail = def.id + ": " + String(e && e.message);
       break;
     }
+    if (countChanged(before, framePixels(ctx, 540, 960)) < 5) {
+      presetOk = false;
+      presetDetail = def.id + ": tidak menggambar piksel";
+      break;
+    }
   }
-  check("smoke render " + TEXT_STYLES.length + " preset textStyle", presetOk, presetDetail);
+  check("smoke render 66 preset", presetOk, presetDetail);
 
-  // 7. Prioritas applyTextStyleDefaults.
-  const explicit = applyTextStyleDefaults({
-    id: "l1", kind: "typography", text: "X", textStyle: "ink-slam", mode: "stacked", enter: { type: "spin" },
-  } as any);
-  check("mode eksplisit layer menang", explicit.mode === "stacked", "mode=" + explicit.mode);
-  check("enter eksplisit layer menang", explicit.enter?.type === "spin", "enter=" + JSON.stringify(explicit.enter));
-  const empty = applyTextStyleDefaults({ id: "l2", kind: "typography", text: "Y", textStyle: "ink-slam" } as any);
-  check("preset mengisi mode kosong", empty.mode === "oversized", "mode=" + empty.mode);
-  const noStyle = applyTextStyleDefaults({ id: "l3", kind: "typography", text: "Z" } as any);
-  check("layer tanpa textStyle tidak berubah", noStyle.mode === undefined && (noStyle as any).enter === undefined);
-  const unknown = applyTextStyleDefaults({ id: "l4", kind: "typography", text: "W", textStyle: "id-palsu" } as any);
-  check("id tak dikenal aman (layer utuh)", unknown.id === "l4" && (unknown as any).mode === undefined);
+  // ---- Prioritas applyTextStyleDefaults ----
+  {
+    const base: LayerSpec = { id: "l1", kind: "typography", text: "UJI", textStyle: "ink-slam" };
+    const filled = applyTextStyleDefaults(base);
+    check("preset mengisi mode", filled.mode === "oversized", "mode=" + filled.mode);
+    check("preset mengisi enter", filled.enter !== undefined && filled.enter.type === "pop", JSON.stringify(filled.enter));
+    check("preset mengisi underline", filled.underline === undefined, "underline=" + filled.underline);
 
-  // 8. Kepatuhan warna: fill/shadow hanya peran palet atau #hex (tanpa warna keras di luar palet).
-  const roles = new Set(["text", "primary", "secondary", "accent", "background", "invert"]);
-  const badColors: string[] = [];
-  for (const def of TEXT_STYLES) {
-    if (def.fill !== undefined && !roles.has(def.fill) && !/^#[0-9a-fA-F]{6}$/.test(def.fill)) {
-      badColors.push(def.id + ".fill=" + def.fill);
+    const explicit: LayerSpec = {
+      id: "l2",
+      kind: "typography",
+      text: "UJI",
+      textStyle: "ink-slam",
+      mode: "stacked",
+      enter: { type: "wipe" },
+      underline: true,
+    };
+    const kept = applyTextStyleDefaults(explicit);
+    check("nilai eksplisit layer menang (mode)", kept.mode === "stacked", "mode=" + kept.mode);
+    check("nilai eksplisit layer menang (enter)", kept.enter !== undefined && kept.enter.type === "wipe", JSON.stringify(kept.enter));
+    check("nilai eksplisit layer menang (underline)", kept.underline === true, "underline=" + kept.underline);
+
+    const unknown: LayerSpec = { id: "l3", kind: "typography", text: "UJI", textStyle: "id-tak-ada" };
+    const untouched = applyTextStyleDefaults(unknown);
+    check("id tak dikenal aman", untouched.mode === undefined && untouched.enter === undefined, JSON.stringify(untouched));
+
+    const nonTypo: LayerSpec = { id: "l4", kind: "panel" };
+    check("layer non-typografi diabaikan", applyTextStyleDefaults(nonTypo) === nonTypo);
+  }
+
+  // ---- Kepatuhan warna: peran palet atau #hex saja ----
+  {
+    const bad: string[] = [];
+    for (const def of TEXT_STYLES) {
+      if (def.fill !== undefined && !isRoleOrHex(def.fill)) bad.push(def.id + ".fill=" + def.fill);
+      if (def.gradient) {
+        for (const g of def.gradient) {
+          if (!isRoleOrHex(g)) bad.push(def.id + ".gradient=" + g);
+        }
+      }
+      if (def.shadow && !isRoleOrHex(def.shadow.color)) bad.push(def.id + ".shadow=" + def.shadow.color);
     }
-    if (def.shadow && !roles.has(def.shadow.color) && !/^#[0-9a-fA-F]{6}$/.test(def.shadow.color)) {
-      badColors.push(def.id + ".shadow=" + def.shadow.color);
-    }
-    if (def.gradient) {
-      for (const g of def.gradient) {
-        if (!roles.has(g) && !/^#[0-9a-fA-F]{6}$/.test(g)) badColors.push(def.id + ".gradient=" + g);
+    check("warna preset memakai peran palet atau #hex", bad.length === 0, JSON.stringify(bad.slice(0, 5)));
+  }
+
+  // ---- Mode baru benar-benar berbeda secara visual ----
+  {
+    const draw = (mode: TypographyMode): Uint8ClampedArray => {
+      const ctx = freshCtx();
+      const layer: LayerSpec = {
+        id: "diff-" + mode,
+        kind: "typography",
+        text: "ANCAMAN DIGITAL",
+        mode,
+        box: [0.05, 0.3, 0.9, 0.3],
+      };
+      drawEditorialTypography(ctx, layer, 540 * 0.9, 960 * 0.3, 1, 1.0, palette.text, makeKit("NazeJakarta"));
+      return framePixels(ctx, 540, 960);
+    };
+    const pairs: Array<[TypographyMode, TypographyMode]> = [
+      ["brutalist", "stacked"],
+      ["cinematic", "oversized"],
+      ["outline", "oversized"],
+      ["highlight", "stacked"],
+    ];
+    let diffOk = true;
+    let diffDetail = "";
+    for (const [a, b] of pairs) {
+      const changed = countChanged(draw(a), draw(b));
+      if (changed < 5) {
+        diffOk = false;
+        diffDetail = a + " vs " + b + ": piksel berubah=" + changed;
+        break;
       }
     }
+    check("mode baru berbeda dari mode lama", diffOk, diffDetail);
   }
-  check("warna preset hanya peran palet atau #hex", badColors.length === 0, badColors.join(", "));
 
   console.log("");
   console.log("Total: " + passed + " lulus, " + failed + " gagal dari " + (passed + failed) + " asersi.");
   if (failed > 0) process.exit(1);
 }
 
-main();
+run().catch((e) => {
+  console.error("Kesalahan pengujian:", e);
+  process.exit(1);
+});

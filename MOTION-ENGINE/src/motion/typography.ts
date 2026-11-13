@@ -69,8 +69,7 @@ export function drawEditorialTypography(
   const text = (layer.text ?? "").trim();
   if (!text) return;
   const mode: TypographyMode = layer.mode ?? "oversized";
-  const
- o: DrawOpts = { ctx, layer, boxW, boxH, enter, t, fill, kit };
+  const o: DrawOpts = { ctx, layer, boxW, boxH, enter, t, fill, kit };
 
   switch (mode) {
     case "oversized":
@@ -144,8 +143,7 @@ function drawStacked(o: DrawOpts): void {
   const fontPx = Math.max(18, Math.min(widthFit, heightFit));
   const lineHeight = fontPx * 0.92;
   setFont(ctx, kit, fontPx);
-  ctx.
-textAlign = "center";
+  ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillStyle = fill;
   const savedAlpha = ctx.globalAlpha;
@@ -194,8 +192,7 @@ function drawSplitWords(o: DrawOpts): void {
 }
 
 /** Continuous rotation with a breathing scale pulse. */
-function drawRotating(o: DrawOpts): voi
-d {
+function drawRotating(o: DrawOpts): void {
   const { ctx, boxW, boxH } = o;
   ctx.save();
   ctx.rotate(o.t * (o.layer.spinSpeed ?? 0.35));
@@ -258,8 +255,7 @@ function drawCollage(o: DrawOpts): void {
   const seed = hashString(layer.id + (layer.text ?? ""));
   const rng = mulberry32(layer.seed ?? seed);
   const copies = 6;
-  f
-or (let i = 0; i < copies - 1; i++) {
+  for (let i = 0; i < copies - 1; i++) {
     const copyEnter = clamp01(enter * copies * 1.1 - i);
     if (copyEnter <= 0) continue;
     const e = applyEasing("easeOutBack", copyEnter);
