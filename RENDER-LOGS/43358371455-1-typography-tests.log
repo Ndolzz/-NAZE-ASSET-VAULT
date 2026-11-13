@@ -1,0 +1,20 @@
+PASS tepat 66 preset
+PASS id preset unik
+PASS semua keluarga preset terpetakan
+PASS peta font tepat 28 keluarga
+PASS semua berkas font ada di vault
+FAIL registrasi GlobalFonts sukses -> NazeJakarta gagal registrasi
+PASS smoke render 11 mode x 3 enter
+PASS smoke render 66 preset
+PASS preset mengisi mode
+PASS preset mengisi enter
+PASS preset mengisi underline
+PASS nilai eksplisit layer menang (mode)
+PASS nilai eksplisit layer menang (enter)
+PASS nilai eksplisit layer menang (underline)
+PASS id tak dikenal aman
+PASS layer non-typografi diabaikan
+PASS warna preset memakai peran palet atau #hex
+PASS mode baru berbeda dari mode lama
+
+Total: 17 lulus, 1 gagal dari 18 asersi.
