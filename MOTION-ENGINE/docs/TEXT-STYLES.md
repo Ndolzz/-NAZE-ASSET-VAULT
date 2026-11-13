@@ -1,9 +1,19 @@
 # Pustaka Gaya Teks NAZE
 
-50 preset tipografi reusable untuk layer `kind: "typography"` pada jalur
+66 preset tipografi reusable untuk layer `kind: "typography"` pada jalur
 komposisi editorial-kinetic. Setiap preset memaketkan keluarga font, bobot,
 jarak huruf, kapitalisasi, perlakuan warna (peran palet, gradien dua warna,
 bayangan/glow), mode tipografi, keyframe entrance, dan gerak idle.
+
+## Registrasi font preset
+
+Sejak perbaikan mesin tipografi, `registerFonts` (render/renderer.ts)
+mendaftarkan setiap keluarga font preset dari peta `TEXT_STYLE_FONT_FILES`
+(motion/text-styles.ts) di bawah aliasnya sendiri, sehingga preset selalu
+dirender dengan face aslinya pada style apa pun. Keluarga yang sama dengan
+`fontFamily` style dilewati agar perilaku style yang sudah berjalan tidak
+berubah. Sebelum perbaikan ini, preset dengan keluarga di luar font style
+jatuh diam-diam ke fallback sans-serif generik.
 
 ## Penggunaan
 
@@ -37,7 +47,8 @@ tipografi default.
 | 11 | `neon-pulse` | Neon Berdenyut | NazeUrbanist 800 | oversized | pop |
 | 12 | `retro-chrome` | Chrome Retro | NazeUrbanist 900 | perspective | - |
 | 13 | `scan-tech` | Teknologi Pindai | NazeUrbanist 700 | stacked | slideR |
-| 14 | `holo-flick` | Hologram | NazeUrbanist 800 | perspective | pop |
+| 14 | `holo-flick` | Hologram | NazeUrbanist 8
+00 | perspective | pop |
 | 15 | `pop-slam` | Pop Stamp | NazeOutfit 900 | collage | pop |
 | 16 | `bubble-fun` | Gelembung Fun | NazeOutfit 800 | splitWords | pop |
 | 17 | `comic-burst` | Ledakan Komik | NazeBarlow 900 | oversized | spin |
@@ -64,7 +75,8 @@ tipografi default.
 | 38 | `tape-label` | Label Kertas | NazeMulish 700 | stacked | slideR |
 | 39 | `dash-split` | Belah Kabin | NazePoppins 800 | splitWords | slideL |
 | 40 | `focus-spot` | Sorot Fokus | NazeDMSans 800 | maskReveal | wipe |
-| 41 | `rise-mist` | Naik Kabut | NazeUrbanist 600 | stacked | rise |
+| 41 | `rise-mis
+t` | Naik Kabut | NazeUrbanist 600 | stacked | rise |
 | 42 | `stamp-red` | Stempel Merah | NazeBarlow 900 | oversized | pop |
 | 43 | `mirror-depth` | Cermin Kedalaman | NazePoppins 900 | perspective | rise |
 | 44 | `orbit-spin` | Orbit Berputar | NazeOutfit 800 | rotating | pop |
@@ -74,6 +86,50 @@ tipografi default.
 | 48 | `chill-drift` | Drift Tenang | NazeMulish 600 | oversized | rise |
 | 49 | `double-tone` | Nada Ganda | NazeRubik 800 | stacked | wipe |
 | 50 | `final-cut` | Potongan Final | NazeBarlow 900 | oversized | rise |
+| 51 | `brutal-stack` | Tumpukan Brutal | NazeArchivo 900 | brutalist | pop |
+| 52 | `brutal-invert` | Invert Brutal | NazeAnton 800 | brutalist | rise |
+| 53 | `press-condensed` | Cetak Rapat | NazeBarlowCond 700 | stacked | wipe |
+| 54 | `tall-poster` | Poster Tinggi | NazeTeko 700 | stacked | rise |
+| 55 | `bebas-poster` | Poster Bebas | NazeBebas 800 | stacked | wipe |
+| 56 | `state-poster` | Poster Negara | NazeStaatliches 800 | oversized | wipe |
+| 57 | `cine-letterbox` | Sinema Letterbox | NazeManrope 600 | cinematic | wipe |
+| 58 | `cine-epic` | Sinema Epik | NazeCinzel 700 | cinematic | wipe |
+| 59 | `docu-mono` | Dokumenter Mono | NazePlexMono 600 | stacked | slideL |
+| 60 | `docu-terminal` | Terminal Dokumenter | NazeShareTechMono 700 | stacked | slideL |
+| 61 | `tech-outline` | Kerangka Tekno | NazeChakra 700 | outline | pop |
+| 62 | `orbit-outline` | Orbit Garis | NazeOrbitron 700 | outline | wipe |
+| 63 | `michroma-wide` | Michroma Lebar | NazeMichroma 800 | oversized | wipe |
+| 64 | `rajdhani-stamp` | Stempel Rajdhani | NazeRajdhani 700 | outline | spin |
+| 65 | `hero-highlight` | Sorot Hero | NazeLeagueSpartan 800 | highlight | pop |
+| 66 | `grotesk-highlight` | Sorot Grotesk | NazeSpaceGrotesk 700 | highlight | rise |
+
+## Mode tipografi (11)
+
+Mode klasik: `oversized`, `stacked`, `splitWords`, `rotating`, `perspective`,
+`maskReveal`, `collage`. Mode baru (perbaikan mesin tipografi):
+
+- `brutalist` - editorial brutalism: baris raksasa bertumpuk dengan alignment
+  bergantian (kiri/kanan/tengah) dan satu kata inverted pada blok solid.
+  Tanpa bayangan, tanpa glow, tanpa gradien.
+- `cinematic` - judul sinematik: tracking lebar, dua rule tipis aksen di atas
+  dan bawah, satu pass offset warna background sebagai depth terkontrol.
+- `outline` - stamp garis: blok offset solid pada peran `secondary` plus face
+  stroke (strokeText) pada warna fill; depth lewat offset, bukan glow.
+- `highlight` - marker editorial: setiap kata di-wipe di atas bar aksen solid,
+  teks di-knockout dengan warna background; stagger per kata.
+
+## Arah visual preset baru
+
+- Editorial brutalism: `brutal-stack`, `brutal-invert`, `press-condensed`,
+  `tall-poster`, `bebas-poster`, `state-poster` (font display vault:
+  Archivo Black, Anton, Barlow Condensed, Teko, Bebas Neue, Staatliches).
+- Cinematic: `cine-letterbox` (Manrope), `cine-epic` (Cinzel).
+- Modern technology documentary: `docu-mono` (IBM Plex Mono),
+  `docu-terminal` (Share Tech Mono), `tech-outline` (Chakra Petch),
+  `orbit-outline` (Orbitron), `michroma-wide` (Michroma),
+  `rajdhani-stamp` (Rajdhani).
+- Eksperimental: `hero-highlight` (League Spartan),
+  `grotesk-highlight` (Space Grotesk).
 
 ## Aturan desain
 

@@ -12,11 +12,15 @@ import { RenderProfile } from "./profiles";
 import { buildEncodeArgs, spawnFfmpeg } from "./encoder";
 import { ComposerKit, renderSceneFrame } from "./scene-composer";
 import { getTransition, TRANSITION_DURATION } from "../core/transitions";
+import { TEXT_STYLE_FONT_FILES } from "../motion/text-styles";
 import type { CaptionEngine } from "../captions/engine";
 
 /**
  * Registers the style's font files (vault paths, repository-relative) under
- * the style's family alias, with a generic sans-serif fallback.
+ * the style's family alias, with a generic sans-serif fallback. Font families
+ * referenced by text-style presets are registered under their own aliases so
+ * presets always render with their intended face; the style's own family is
+ * skipped to keep existing style rendering unchanged.
  */
 export function registerFonts(repoRoot: string, style: StyleDef): { fontFamily: string; registered: number } {
   let registered = 0;
@@ -24,6 +28,12 @@ export function registerFonts(repoRoot: string, style: StyleDef): { fontFamily: 
     const abs = path.join(repoRoot, rel);
     if (!fs.existsSync(abs)) continue;
     if (GlobalFonts.registerFromPath(abs, style.typography.fontFamily)) registered++;
+  }
+  for (const [family, rel] of Object.entries(TEXT_STYLE_FONT_FILES)) {
+    if (family === style.typography.fontFamily) continue;
+    const abs = path.join(repoRoot, rel);
+    if (!fs.existsSync(abs)) continue;
+    if (GlobalFonts.registerFromPath(abs, family)) registered++;
   }
   if (registered === 0) {
     console.warn(`[RENDER] No vault fonts registered for style "${style.id}"; using system fallback.`);
@@ -49,7 +59,8 @@ export interface RenderVideoOptions {
   captionEngine?: CaptionEngine;
 }
 
-export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: number; duration: number }> {
+export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: number; durati
+on: number }> {
   const { profile, timeline, style } = opts;
   const fps = timeline.fps;
   const duration = timeline.duration;
@@ -106,7 +117,8 @@ export async function renderVideo(opts: RenderVideoOptions): Promise<{ frames: n
   const ctxMain = canvasMain.getContext("2d");
   const canvasPrev = createCanvas(w, h);
   const ctxPrev = canvasPrev.getContext("2d");
-  let cachedPrevIndex = -1;
+  let 
+cachedPrevIndex = -1;
 
   const t0 = Date.now();
   const logEvery = Math.max(1, Math.floor(totalFrames / 20));
@@ -152,7 +164,8 @@ function writeFrame(ffmpeg: any, ctx: any, w: number, h: number): Promise<void> 
     if (ffmpeg.exitCode === 0) return Promise.resolve();
     return Promise.reject(new Error(`ffmpeg exited with code ${ffmpeg.exitCode} while encoding.`));
   }
-  const pixels = ctx.getImageData(0, 0, w, h).data;
+  const pixel
+s = ctx.getImageData(0, 0, w, h).data;
   const view = Buffer.from(pixels.buffer, pixels.byteOffset, pixels.byteLength);
   const stdin = ffmpeg.stdin;
   if (stdin.write(view)) return Promise.resolve();

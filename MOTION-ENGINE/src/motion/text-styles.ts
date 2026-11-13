@@ -1,5 +1,5 @@
 /**
- * Named text-style assets: 50 reusable typography presets (font, warna,
+ * Named text-style assets: 66 reusable typography presets (font, warna,
  * bayangan, mode, keyframe enter dan idle) untuk layer tipografi jalur
  * editorial-kinetic.
  *
@@ -63,7 +63,8 @@ export interface TextStyleDef {
 
 const T = (
   id: string,
-  name: string,
+  name
+: string,
   fontFamily: string,
   weight: string,
   letterSpacing: number,
@@ -82,7 +83,8 @@ export const TEXT_STYLES: TextStyleDef[] = [
   T("gold-sheen", "Kilau Emas", "NazeDMSans", "700", 4, {"case":"upper","gradient":["accent","primary"],"shadow":{"color":"background","blur":18,"alpha":0.8},"mode":"maskReveal"}),
   T("data-counter", "Data Presisi", "NazeDMSans", "700", 1, {"case":"upper","mode":"stacked","enter":{"type":"rise"},"idle":{"floatY":4}}),
   T("neon-pulse", "Neon Berdenyut", "NazeUrbanist", "800", 3, {"case":"upper","fill":"accent","shadow":{"color":"accent","blur":45,"alpha":0.9},"mode":"oversized","enter":{"type":"pop"},"idle":{"pulse":0.03}}),
-  T("retro-chrome", "Chrome Retro", "NazeUrbanist", "900", 2, {"case":"upper","gradient":["text","secondary"],"shadow":{"color":"background","blur":16,"offsetY":6,"alpha":0.8},"mode":"perspective"}),
+  T("retro-chrome", "Chrome Retro
+", "NazeUrbanist", "900", 2, {"case":"upper","gradient":["text","secondary"],"shadow":{"color":"background","blur":16,"offsetY":6,"alpha":0.8},"mode":"perspective"}),
   T("scan-tech", "Teknologi Pindai", "NazeUrbanist", "700", 4, {"case":"upper","fill":"secondary","shadow":{"color":"text","blur":12,"alpha":0.6},"mode":"stacked","enter":{"type":"slideR"}}),
   T("holo-flick", "Hologram", "NazeUrbanist", "800", 2, {"case":"upper","gradient":["accent","text"],"mode":"perspective","enter":{"type":"pop"},"idle":{"pulse":0.02}}),
   T("pop-slam", "Pop Stamp", "NazeOutfit", "900", -1, {"case":"upper","mode":"collage","enter":{"type":"pop"}}),
@@ -93,7 +95,8 @@ export const TEXT_STYLES: TextStyleDef[] = [
   T("bold-statement", "Pernyataan Berani", "NazePoppins", "900", -1.5, {"case":"upper","mode":"oversized","enter":{"type":"rise"}}),
   T("hand-note", "Catatan Tangan", "NazeFigtree", "700", 0, {"mode":"stacked","enter":{"type":"rise"},"idle":{"sway":0.8}}),
   T("sketch-wiggle", "Sketsa Goyang", "NazeFigtree", "800", 0, {"case":"upper","mode":"splitWords","enter":{"type":"pop"},"idle":{"floatX":5,"sway":1.2}}),
-  T("paper-layer", "Lapisan Kertas", "NazeMulish", "800", 0, {"case":"upper","shadow":{"color":"background","blur":16,"offsetY":6,"alpha":0.7},"mode":"stacked","enter":{"type":"rise"},"idle":{"floatY":5}}),
+  T("paper-layer", "Lapisan Kertas", "NazeMulish", "800", 0, {"case":"upper","shadow":{"color":"background","blur":16,"offsetY":6,"alpha":0.7},"mode":"stacked","enter":{"type":"
+rise"},"idle":{"floatY":5}}),
   T("craft-soft", "Craft Lembut", "NazeMulish", "700", 1, {"fill":"primary","mode":"oversized","enter":{"type":"rise"},"idle":{"pulse":0.012}}),
   T("clay-chunky", "Clay Tebal", "NazeNunito", "900", 0, {"case":"upper","shadow":{"color":"primary","offsetX":4,"offsetY":4,"alpha":0.85},"mode":"oversized","enter":{"type":"pop"},"idle":{"pulse":0.02}}),
   T("friendly-round", "Ramah Bulat", "NazeNunito", "800", 1, {"fill":"primary","shadow":{"color":"background","blur":14,"alpha":0.7},"mode":"splitWords","enter":{"type":"rise"}}),
@@ -106,7 +109,8 @@ export const TEXT_STYLES: TextStyleDef[] = [
   T("quote-italic", "Kutipan Miring", "NazeFigtree", "italic 600", 0, {"mode":"maskReveal","enter":{"type":"rise"}}),
   T("whisper-low", "Bisikan Rendah", "NazeFigtree", "500", 2, {"case":"lower","fill":"secondary","mode":"oversized","enter":{"type":"wipe"},"idle":{"floatY":3}}),
   T("shout-upper", "Teriakan Besar", "NazeJakarta", "900", -2, {"case":"upper","shadow":{"color":"primary","offsetX":6,"offsetY":6,"alpha":0.9},"mode":"stacked","enter":{"type":"pop"}}),
-  T("accent-strike", "Aksen Coretan", "NazeRubik", "800", 0, {"case":"upper","underline":true,"mode":"oversized","enter":{"type":"wipe"}}),
+  T("accent-strike", 
+"Aksen Coretan", "NazeRubik", "800", 0, {"case":"upper","underline":true,"mode":"oversized","enter":{"type":"wipe"}}),
   T("rubber-stamp", "Stempel Karet", "NazeRubik", "900", 2, {"case":"upper","fill":"accent","mode":"collage","enter":{"type":"pop"},"idle":{"sway":1}}),
   T("tape-label", "Label Kertas", "NazeMulish", "700", 3, {"case":"upper","shadow":{"color":"background","blur":10,"offsetY":4,"alpha":0.7},"mode":"stacked","enter":{"type":"slideR"}}),
   T("dash-split", "Belah Kabin", "NazePoppins", "800", 1, {"case":"upper","mode":"splitWords","enter":{"type":"slideL"},"idle":{"floatX":4}}),
@@ -119,11 +123,74 @@ export const TEXT_STYLES: TextStyleDef[] = [
   T("iris-open", "Iris Terbuka", "NazeNunito", "800", 0, {"case":"upper","mode":"maskReveal","enter":{"type":"pop"},"idle":{"pulse":0.01}}),
   T("split-jump", "Lompat Terpisah", "NazeOutfit", "900", 0, {"case":"upper","mode":"splitWords","enter":{"type":"pop"},"idle":{"floatY":12,"speed":1.4}}),
   T("chill-drift", "Drift Tenang", "NazeMulish", "600", 1.5, {"case":"lower","fill":"primary","mode":"oversized","enter":{"type":"rise","dur":1},"idle":{"floatX":8,"floatY":5}}),
-  T("double-tone", "Nada Ganda", "NazeRubik", "800", 1, {"case":"upper","gradient":["text","accent"],"mode":"stacked","enter":{"type":"wipe"}}),
+  T("double-tone", "Nada Gan
+da", "NazeRubik", "800", 1, {"case":"upper","gradient":["text","accent"],"mode":"stacked","enter":{"type":"wipe"}}),
   T("final-cut", "Potongan Final", "NazeBarlow", "900", -2, {"case":"upper","shadow":{"color":"accent","offsetX":5,"offsetY":5,"alpha":0.9},"underline":true,"mode":"oversized","enter":{"type":"rise"},"idle":{"pulse":0.01}}),
+
+  // Arah visual: editorial brutalism (tipe solid, tanpa bayangan/glow).
+  T("brutal-stack", "Tumpukan Brutal", "NazeArchivo", "900", -3, {"case":"upper","mode":"brutalist","enter":{"type":"pop","dur":0.45}}),
+  T("brutal-invert", "Invert Brutal", "NazeAnton", "800", 0, {"case":"upper","mode":"brutalist","enter":{"type":"rise"}}),
+  T("press-condensed", "Cetak Rapat", "NazeBarlowCond", "700", 2, {"case":"upper","mode":"stacked","enter":{"type":"wipe"}}),
+  T("tall-poster", "Poster Tinggi", "NazeTeko", "700", 1, {"case":"upper","mode":"stacked","enter":{"type":"rise"},"idle":{"floatY":3}}),
+  T("bebas-poster", "Poster Bebas", "NazeBebas", "800", 3, {"case":"upper","mode":"stacked","enter":{"type":"wipe"}}),
+  T("state-poster", "Poster Negara", "NazeStaatliches", "800", 2, {"case":"upper","mode":"oversized","underline":true,"enter":{"type":"wipe","dur":0.9}}),
+
+  // Arah visual: cinematic typography (tracking lebar, rule tipis, depth padat).
+  T("cine-letterbox", "Sinema Letterbox", "NazeManrope", "600", 8, {"case":"upper","mode":"cinematic","enter":{"type":"wipe","dur":1.1}}),
+  T("cine-epic", "Sinema Epik", "NazeCinzel", "700", 6, {"case":"upper","mode":"cinematic","enter":{"type":"wipe","dur":1.2}}),
+
+  // Arah visual: modern technology documentary (mono, techno, outline).
+  T("docu-mono", "Dokumenter Mono", "NazePlexMono", "600", 1, {"fill":"secondary","mode":"stacked","enter":{"type":"slideL"},"idle":{"floatY":2}}),
+  T("docu-terminal", "Terminal Dokumenter", "NazeShareTechMono", "700", 2, {"case":"upper","mode":"stacked","enter":{"type":"slideL"}}),
+  T("tech-outline", "Kerangka Tekno", "NazeChakra", "700", 3, {"case":"upper","mode":"outline","enter":{"type":"pop"}}),
+  T("orbit-outline", "Orbit Garis", "NazeOrbitron", "700", 4, {"case":"upper","mode":"outline","enter":{"type":"wipe"}}),
+  T("michroma-wide", "Michroma Lebar", "NazeMichroma", "800", 6, {"case":"upper","mode":"oversized","enter":{"type":"wipe","dur":1.2},"idle":{"pulse":0.008}}),
+  T("rajdhani-stamp", "Stempel Rajdhani", "NazeRajdhani", "700", 4, {"case":"upper","mode":"outline","enter":{"type":"spin"}}),
+
+  // Arah visual: eksperimental (highlight marker, karakter font kuat).
+  T("hero-highlight", "Sorot Hero", "NazeLeagueSpartan", "800", 0, {"case":"upper","mode":"highlight","enter":{"type":"pop"}}),
+  T("grotesk-highlight", "Sorot Grotesk", "NazeSpaceGrotesk", "700", 1, {"case":"upper","mode":"highlight","enter":{"type":"rise"}}),
 ];
 
 export const TEXT_STYLE_IDS: string[] = TEXT_STYLES.map((s) => s.id);
+
+/**
+ * Peta keluarga font preset -> file TTF vault (relatif terhadap root repo).
+ * registerFonts (render/renderer.ts) mendaftarkan setiap keluarga ini di bawah
+ * aliasnya sendiri sehingga preset selalu dirender dengan face aslinya, apa
+ * pun style proyek. Keluarga yang sama dengan fontFamily style dilewati agar
+ * perilaku style yang sudah berjalan tidak berubah.
+ */
+export const TEXT_STYLE_FONT_FILES: Record<string, string> = {
+  NazeJakarta: "FONTS/GOOGLE/SANS/plusjakartasans.ttf",
+  NazeOutfit: "FONTS/GOOGLE/SANS/outfit.ttf",
+  NazePoppins: "FONTS/GOOGLE/SANS/poppins.ttf",
+  NazeFigtree: "FONTS/GOOGLE/SANS/figtree.ttf",
+  NazeDMSans: "FONTS/GOOGLE/SANS/dmsans.ttf",
+  NazeUrbanist: "FONTS/GOOGLE/SANS/urbanist.ttf",
+  NazeMulish: "FONTS/GOOGLE/SANS/mulish.ttf",
+  NazeRubik: "FONTS/GOOGLE/SANS/rubik.ttf",
+  NazeNunito: "FONTS/GOOGLE/SANS/nunito.ttf",
+  NazeBarlow: "FONTS/GOOGLE/SANS/barlow.ttf",
+  NazeInter: "FONTS/GOOGLE/SANS/inter.ttf",
+  NazeManrope: "FONTS/GOOGLE/SANS/manrope.ttf",
+  NazeBarlowCond: "FONTS/GOOGLE/CONDENSED/barlowcondensed.ttf",
+  NazeArchivo: "FONTS/GOOGLE/DISPLAY/archivoblack.ttf",
+  NazeAnton: "FONTS/GOOGLE/DISPLAY/anton.ttf",
+  NazeBebas: "FONTS/GOOGLE/DISPLAY/bebasneue.ttf",
+  NazeOswald: "FONTS/GOOGLE/DISPLAY/oswald.ttf",
+  NazeTeko: "FONTS/GOOGLE/DISPLAY/teko.ttf",
+  NazeStaatliches: "FONTS/GOOGLE/DISPLAY/staatliches.ttf",
+  NazeLeagueSpartan: "FONTS/GOOGLE/DISPLAY/leaguespartan.ttf",
+  NazeCinzel: "FONTS/GOOGLE/DISPLAY/cinzel.ttf",
+  NazeSpaceGrotesk: "FONTS/GOOGLE/TECHNO/spacegrotesk.ttf",
+  NazeChakra: "FONTS/GOOGLE/TECHNO/chakrapetch.ttf",
+  NazeOrbitron: "FONTS/GOOGLE/TECHNO/orbitron.ttf",
+  NazeMichroma: "FONTS/GOOGLE/TECHNO/michroma.ttf",
+  NazeRajdhani: "FONTS/GOOGLE/TECHNO/rajdhani.ttf",
+  NazeShareTechMono: "FONTS/GOOGLE/TECHNO/sharetechmono.ttf",
+  NazePlexMono: "FONTS/MONOSPACE/ibmplexmono/IBMPlexMono-Regular.ttf",
+};
 
 export function textStyleById(id: string): TextStyleDef | undefined {
   return TEXT_STYLES.find((s) => s.id === id);
@@ -165,7 +232,8 @@ export function drawStyledTypography(
       letterSpacing: base.style.typography.letterSpacing,
       scale: base.scale,
     };
-    drawEditorialTypography(ctx, layer, boxW, boxH, enter, t, fill, typoKit);
+    drawEditorialTypography(ctx, layer, bo
+xW, boxH, enter, t, fill, typoKit);
     return;
   }
   const typoKit: TypographyKit = {

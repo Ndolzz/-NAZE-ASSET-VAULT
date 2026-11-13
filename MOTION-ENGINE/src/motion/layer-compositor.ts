@@ -15,7 +15,7 @@ import { evaluateCamera } from "./camera";
 import { applyTextStyleDefaults, drawStyledTypography } from "./text-styles";
 import { drawEditorialElement, resolveFill } from "./editorial";
 import { sampleTrack, progress } from "../core/keyframes";
-import { applyEasing } from "../core/easing";
+import { applyEasing, hashString } from "../core/easing";
 import { Palette } from "../color/palette";
 import { StyleDef } from "../styles/types";
 import { SceneTiming } from "../core/timeline";
@@ -52,7 +52,8 @@ interface LayerCenter {
 }
 
 function layerCenterNormalized(layer: LayerSpec, w: number, h: number, t: number): LayerCenter {
-  const box = layer.box ?? [0.1, 0.1, 0.8, 0.8];
+  const box = layer.b
+ox ?? [0.1, 0.1, 0.8, 0.8];
   const tr = layer.transform ?? {};
   const ox = sampleOptional(tr.x, t, 0);
   const oy = sampleOptional(tr.y, t, 0);
@@ -122,6 +123,7 @@ function drawMask(ctx: any, shape: string, x: number, y: number, w: number, h: n
   } else if (shape === "band") {
     ctx.rect(x + ix, y, w - ix * 2, h);
   } else {
+
     ctx.rect(x + ix, y + iy, w - ix * 2, h - iy * 2);
   }
   ctx.clip();
@@ -195,7 +197,8 @@ function drawLayerTree(
       t
     );
   } else if (layer.kind !== "null") {
-    drawEditorialElement(ctx, layer, { x: lx, y: ly, w: bw, h: bh }, enter, t, fill, { palette: kit.palette, style: kit.style, scale: s }, kit.__scene?.subjects ?? []);
+    drawEditorialElement(ctx
+, layer, { x: lx, y: ly, w: bw, h: bh }, enter, t, fill, { palette: kit.palette, style: kit.style, scale: s }, kit.__scene?.subjects ?? []);
   }
 
   if (transform.blur > 0 && typeof (ctx as any).filter === "string") {
@@ -216,12 +219,27 @@ function drawLayerTree(
 function autoLayersForScene(scene: any): LayerSpec[] {
   const layers: LayerSpec[] = [];
   const subjects = Array.isArray(scene?.subjects) ? scene.subjects : [];
+  // Komposisi auto bervariasi per scene (seed dari id scene) agar tidak semua
+  // adegan berpusat sama: 0 tengah, 1 blok bawah + subjek atas, 2 headline atas.
+  const variant = hashString(String(scene?.id ?? "scene")) % 3;
+  const titleBox: [number, number, number, number] =
+    variant === 1 ? [0.06, 0.62, 0.88, 0.24] : variant === 2 ? [0.05, 0.1, 0.9, 0.26] : [0.05, 0.3, 0.9, 0.28];
+  const subjectY = variant === 1 ? 0.16 : 0.6;
   layers.push({ id: "auto-grid", kind: "grid", box: [0, 0, 1, 1], fill: "text", z: 0.8, enter: { type: "wipe" } });
   if (subjects.length > 0) {
     layers.push({ id: "auto-halftone", kind: "halftone", box: [0, 0.05, 1, 0.1], fill: "accent", z: 0.85, enter: { type: "wipe", at: 0.1 } });
   }
   if (typeof scene?.title === "string" && scene.title) {
-    layers.push({ id: "auto-title", kind: "typography", mode: "stacked", text: scene.title, box: [0.05, 0.3, 0.9, 0.28], fill: "primary", z: 1.1, enter: { type: "rise", at: 0.15 } });
+    layers.push({
+      id: "auto-title",
+      kind: "typography",
+      mode: variant === 1 ? "oversized" : "stacked",
+      text: scene.title,
+      box: titleBox,
+      fill: "primary",
+      z: 1.1,
+      enter: { type: "rise", at: 0.15 },
+    });
   }
   subjects.forEach((subject: any, i: number) => {
     const cols = Math.min(2, subjects.length);
@@ -233,7 +251,7 @@ function autoLayersForScene(scene: any): LayerSpec[] {
       id: `auto-subject-${i}`,
       kind: "subject",
       subjectIndex: i,
-      box: [0.1 + col * bw + 0.04, 0.6 + row * (bh + 0.03), bw - 0.08, bh],
+      box: [0.1 + col * bw + 0.04, subjectY + row * (bh + 0.03), bw - 0.08, bh],
       z: 1.2,
       enter: { type: "pop", at: 0.4 + i * 0.15 },
     });
@@ -243,7 +261,8 @@ function autoLayersForScene(scene: any): LayerSpec[] {
 
 /**
  * Gate: a scene renders through the layered compositor when its style opts
- * into the editorial-kinetic motion system, or when it defines layers/camera.
+ * into the editorial-kinetic motion system, or when
+ it defines layers/camera.
  */
 export function isEditorialKineticScene(style: any, scene: any): boolean {
   if (scene && Array.isArray(scene.layers) && scene.layers.length > 0) return true;

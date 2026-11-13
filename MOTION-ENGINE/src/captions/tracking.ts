@@ -245,6 +245,12 @@ const STALE_SECONDS = 1.5;
 const FACE_OVERLAP_LIMIT = 0.02;
 /** Tabrakan subjek memicu re-anchor (fraksi area CC). */
 const SUBJECT_OVERLAP_LIMIT = 0.35;
+/**
+ * Tabrakan headline (region grafis berbobot tinggi, mis. tipografi besar)
+ * memicu re-anchor bila menutupi separuh area CC; di bawah ambang itu
+ * penalti skor solver yang menangani agar tidak osilasi.
+ */
+const HEADLINE_OVERLAP_LIMIT = 0.5;
 /** Batas kecepatan perpindahan CC (fraksi tinggi frame per detik). */
 const MAX_SPEED_H_PER_S = 2.5;
 /** Bila proyeksi anchor tertarik lebih jauh dari ini, re-anchor. */
@@ -263,10 +269,11 @@ function conflictInfo(
   rect: RectPx,
   regions: ImportantRegion[],
   m: Metrics
-): { faceFrac: number; subjectFrac: number; score: number } {
+): { faceFrac: number; subjectFrac: number; headlineFrac: number; score: number } {
   const area = Math.max(1, rect.w * rect.h);
   let faceFrac = 0;
   let subjectFrac = 0;
+  let headlineFrac = 0;
   let score = 0;
   for (const region of regions) {
     const rpx = rectFromNormalized(region, m);
@@ -276,8 +283,9 @@ function conflictInfo(
     score += frac * region.weight;
     if (region.kind === "face") faceFrac = Math.max(faceFrac, frac);
     if (region.kind === "subject") subjectFrac = Math.max(subjectFrac, frac);
+    if (region.kind === "graphic" && region.weight >= 3) headlineFrac = Math.max(headlineFrac, frac);
   }
-  return { faceFrac, subjectFrac, score };
+  return { faceFrac, subjectFrac, headlineFrac, score };
 }
 
 export interface SolveArgs {
@@ -349,7 +357,11 @@ export class CaptionTracker {
       const pull = Math.hypot(rect.x + rect.w / 2 - p.x, rect.y + rect.h / 2 - p.y);
       if (pull <= PULL_LIMIT_H * m.h) {
         const conf = conflictInfo(rect, meta.regions, m);
-        if (conf.faceFrac <= FACE_OVERLAP_LIMIT && conf.subjectFrac <= SUBJECT_OVERLAP_LIMIT) {
+        if (
+          conf.faceFrac <= FACE_OVERLAP_LIMIT &&
+          conf.subjectFrac <= SUBJECT_OVERLAP_LIMIT &&
+          conf.headlineFrac <= HEADLINE_OVERLAP_LIMIT
+        ) {
           target = rect;
           mode = "scene";
           tracked = true;
@@ -370,7 +382,9 @@ export class CaptionTracker {
       const heldConf = st.drawn ? conflictInfo(st.drawn, meta.regions, m) : null;
       const mustMove =
         !!heldConf &&
-        (heldConf.faceFrac > FACE_OVERLAP_LIMIT || heldConf.subjectFrac > SUBJECT_OVERLAP_LIMIT);
+        (heldConf.faceFrac > FACE_OVERLAP_LIMIT ||
+          heldConf.subjectFrac > SUBJECT_OVERLAP_LIMIT ||
+          heldConf.headlineFrac > HEADLINE_OVERLAP_LIMIT);
       const cooldownOk = localT - st.lastReanchor >= REANCHOR_COOLDOWN;
       const sameZone = !!solved && st.placement !== null && solved.placement === st.placement;
       if (solved && (!st.drawn || cooldownOk || mustMove || sameZone)) {
