@@ -122,7 +122,10 @@ async function run(): Promise<void> {
     if (!fs.existsSync(abs)) continue;
     let ok = false;
     try {
-      ok = GlobalFonts.registerFromPath(abs, family) === true;
+      // Versi lama @napi-rs/canvas mengembalikan boolean true; versi 0.1.x
+      // terbaru mengembalikan FontKey (objek) atau null. Keduanya truthy saat
+      // registrasi berhasil, jadi asersi memakai truthiness, bukan === true.
+      ok = !!GlobalFonts.registerFromPath(abs, family);
     } catch (e: any) {
       regDetail = family + ": " + String(e && e.message);
     }
